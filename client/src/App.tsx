@@ -1,9 +1,23 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { useState } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import { increment, decrement } from './redux/reducers/countReducer';
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
+import { AppDispatch } from './redux/store/store';
+
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
+  const contador:number = useSelector((state: RootStateOrAny) => state.Contador.value);
+  const dispatch: AppDispatch = useDispatch();
+
+  const incrementValue = () => {
+    dispatch(increment(1))
+  }
+
+  const decrementValue = (value: number) => {
+    dispatch(decrement(value))
+  }
 
   return (
     <div className="App">
@@ -18,6 +32,10 @@ function App() {
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
+        <br/>
+        <p>Contador: {contador}</p>
+        <input type="button" onClick={incrementValue} value="+"/>
+        <input type="button" onClick={() => decrementValue(1)} value="-"/>
         <p>
           <a
             className="App-link"
@@ -27,7 +45,7 @@ function App() {
           >
             Learn React
           </a>
-          {" | "}
+          {' | '}
           <a
             className="App-link"
             href="https://vitejs.dev/guide/features.html"
@@ -39,7 +57,7 @@ function App() {
         </p>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
