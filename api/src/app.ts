@@ -1,9 +1,9 @@
 import express, { Application } from "express";
+import logger from "morgan";
+import dotenv from "dotenv";
+import cors from "cors";
 // importo los routes
-
-const logger = require("morgan");
-const dotenv = require("dotenv");
-const cors = require("cors");
+// inicializo app
 const app: Application = express();
 
 // middlewares
