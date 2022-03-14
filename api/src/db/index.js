@@ -1,8 +1,10 @@
-import modelUser from "../models/user";
-
+/* eslint-disable no-unused-vars */
+require("dotenv").config();
 const { Sequelize, Op } = require("sequelize");
 
-const { DB_NAME, DB_HOST, DB_USER, DB_PASSWORD } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+
+/* eslint-disable */
 const sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
@@ -35,8 +37,8 @@ const sequelize =
         }
       );
 
-modelUser(sequelize);
-
-const { User } = sequelize.models;
-
-module.exports = { sequelize, Op, ...sequelize.models };
+module.exports = {
+  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  sequelize, // para importart la conexión { conn } = require('./db.js');
+  Op, // para poder importar los operadores tales como ilike en las consultas a la database
+};
