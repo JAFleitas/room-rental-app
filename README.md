@@ -29,6 +29,6 @@ administrador, que se encargará de administrar la web y que se cumplan las pol�
 
 Las tecnologías que se usarán para crear dicha SPA son :  
 
-FrontEnd: Typescript - TailWind - StyledComponents - React - Redux 
+FrontEnd:  TailWind - StyledComponents - React - Redux 
 
-BackEnd: Typescript - Express - Sequelize - Postgress.
+BackEnd:   Express - Sequelize - Postgress.
