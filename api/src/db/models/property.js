@@ -11,43 +11,47 @@ module.exports = sequelize => {
     },
     name: {
       type: DataTypes.TEXT,
-      allownNull: false,
+      allowNull: false,
     },
     location: {
       type: DataTypes.TEXT,
-      allownNull: false,
+      allowNull: false,
     },
     price: {
       type: DataTypes.DOUBLE,
-      allownNull: false,
+      allowNull: false,
     },
     stock: {
       type: DataTypes.INTEGER,
-      allownNull: false,
+      allowNull: false,
     },
     numberOfRooms: {
       type: DataTypes.INTEGER,
-      allownNull: false,
+      allowNull: false,
     },
     maxNumberOfPeople: {
       type: DataTypes.INTEGER,
-      allownNull: false,
+      allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
-      allownNull: false,
+      allowNull: false,
     },
     rating: {
       type: DataTypes.DOUBLE,
-      allownNull: false,
+      allowNull: false,
     },
     numberOfReviews: {
       type: DataTypes.TEXT,
-      allownNull: false,
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: false,
     },
     userID: {
       type: DataTypes.STRING,
-      allownNull: false,
+      allowNull: false,
     },
   })
 }
