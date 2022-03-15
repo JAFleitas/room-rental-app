@@ -1,0 +1,34 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "standard",
+    "eslint-config-prettier",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "quotes": "off",
+    "indent": "off",
+    "no-tabs": "off",
+    "no-console": "warn",
+    "comma-dangle": ["error", "always-multiline"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

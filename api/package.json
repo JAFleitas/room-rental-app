@@ -5,7 +5,7 @@
   "main": "src",
   "scripts": {
     "start": "nodemon index.js",
-    "lint": "eslint ."
+    "lint": "eslint --fix . --ext .js,.jsx"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,12 @@
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0"
   }
 }

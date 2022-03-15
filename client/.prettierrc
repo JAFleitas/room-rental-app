@@ -1,0 +1,10 @@
+{
+  "useTabs": false,
+  "semi": false,
+  "arrowParens": "avoid",
+  "trailingComma": "all",
+  "bracketSameLine": true,
+  "bracketLine": false
+
+
+}

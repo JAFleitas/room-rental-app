@@ -3,7 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config();
-var cors = require("cors");
+const cors = require("cors");
 
 const app = express();
 app.use(cors());

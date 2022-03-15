@@ -1,0 +1,19 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["prettier", "standard", "eslint-config-prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "quotes": "off",
+    "indent": "off",
+    "no-tabs": "off",
+    "no-console": "warn",
+    "comma-dangle": ["error", "always-multiline"]
+  }
+}
