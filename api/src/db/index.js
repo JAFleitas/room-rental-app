@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
-require("dotenv").config();
-const { Sequelize, Op } = require("sequelize");
-
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+require("dotenv").config()
+const { Sequelize, Op } = require("sequelize")
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env
 
 /* eslint-disable */
 const sequelize =
@@ -34,11 +33,11 @@ const sequelize =
         {
           logging: false, // set to console.log to see the raw SQL queries
           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-        }
-      );
+        },
+      )
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   sequelize, // para importart la conexión { conn } = require('./db.js');
   Op, // para poder importar los operadores tales como ilike en las consultas a la database
-};
+}
