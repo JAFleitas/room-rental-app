@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 require("dotenv").config()
 const { Sequelize, Op } = require("sequelize")
+
 const fs = require("fs")
 const path = require("path")
+
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env
 
 /* eslint-disable */
@@ -37,6 +39,7 @@ const sequelize =
           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
         },
       )
+
 
 const basename = path.basename(__filename)
 
