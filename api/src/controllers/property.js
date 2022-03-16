@@ -10,46 +10,31 @@ const getAll = async (req, res, next) => {
       search,
       exclude,
     } = req.query
+    let options = {}
 
     // Definimos que atributos quiere traer o excluir
     if (attributes || exclude) {
-      attributes
-        ? (attributes = attributes.split(" "))
-        : (attributes = { exclude: exclude.split(" ") })
+      options.attributes = attributes
+        ? attributes.split(" ")
+        : { exclude: exclude.split(" ") }
     }
 
     // Definiendo el ordenamiendo: default por nombre ascendentemente
     orderBy = orderBy.split(" ")
     orderBy.push(order)
-    let ordenamiento = [orderBy]
+    options.order = [orderBy]
 
     // Definimos si hay un termino de búsqueda
     if (search) {
-      search = {
+      options.where = {
         name: {
           [Op.iLike]: `%${search}%`,
         },
       }
     }
 
-    let properties
-
-    if (search) {
-      properties = await Property.findAll({
-        attributes: attributes || {
-          exclude: ["description", "userID"],
-        },
-        order: ordenamiento,
-        where: search,
-      })
-    } else {
-      properties = await Property.findAll({
-        attributes: attributes || {
-          exclude: ["description", "userID"],
-        },
-        order: ordenamiento,
-      })
-    }
+    // console.log(options)
+    let properties = await Property.findAll(options)
 
     if (properties.length === 0) {
       return next({ message: "Properties not founded", status: 404 })
