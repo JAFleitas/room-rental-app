@@ -1,20 +1,13 @@
-import React from "react"
+import React, { StrictMode } from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./index.css"
 import App from "./App"
-import Details from "./pages/details-property/detailsProperty"
+import RouterApp from "./routes/RouterApp"
 
 ReactDOM.render(
-
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}></Route>
-    </Routes>
-  </BrowserRouter>,
-
- 
-  
-
+  <StrictMode>
+    <App />
+    <Rogit uterApp />
+  </StrictMode>,
   document.getElementById("root"),
 )
