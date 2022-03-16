@@ -18,6 +18,46 @@ const getPropertyById = async (req, res, next) => {
   }
 }
 
+const addProperty = async (req, res) => {
+  const {
+    name,
+    location,
+    price,
+    stock,
+    numberOfRooms,
+    maxNumberOfPeople,
+    description,
+    rating,
+    numberOfReviews,
+    userID,
+  } = req.body;
+  if(name) {
+    try{
+      const newProperty = await Property.create({
+        name,
+        location,
+        price,
+        stock,
+        numberOfRooms,
+        maxNumberOfPeople,
+        description,
+        rating,
+        numberOfReviews,
+        userID,
+      });
+      if(newProperty) res.status(201).json({message:"Created Property", data:newProperty});
+      else res.status(500).json({message:"Property not Created"});
+    }catch (e) {
+      res.status(500).json(e);
+    }
+  }else {
+    res.status(404).json({message:"Error Required Field not Found"})
+  }
+
+
+}
+
 module.exports = {
   getPropertyById,
+  addProperty,
 }
