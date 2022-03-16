@@ -4,7 +4,11 @@ const logger = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
+
 const propertyRouter = require("./routes/propiedad.routes");
+
+const routes = require("./routes/index.js");
+
 
 const app = express();
 app.use(cors());
@@ -18,9 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/properties", propertyRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res) {
-  res.sendStatus(404);
-});
+app.use("/", routes);
 // error handler
 app.use(function (err, req, res, next) {
   console.error(err);
