@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Viviana",
+    "lastname": "Calva",
+    "country": "Ecuador",
+    "email": "vivicalvat007@gmail.com",
+    "city": "Loja",
+    "password": "viviana12345",
+    "credit_card_number": "",
+    "rating": 4,
+    "status": "offline",
+    "id_type_user": ""
+  },
+  {
+    "name": "Maritza",
+    "lastname": "López",
+    "country": "Peru",
+    "email": "maritza.lopez@gmail.com",
+    "city": "Desconcida",
+    "password": "maritza12345",
+    "credit_card_number": "",
+    "rating": 3,
+    "status": "online",
+    "id_type_user": ""
+  },
+  {
+    "name": "Juan",
+    "lastname": "Perez",
+    "country": "Colombia",
+    "email": "juan.perez@gmail.com",
+    "city": "Barranquilla",
+    "password": "juan12345",
+    "credit_card_number": "",
+    "rating": 4,
+    "status": "online",
+    "id_type_user": ""
+  }
+]
