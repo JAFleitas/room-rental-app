@@ -10,12 +10,10 @@ export default function Nav() {
   return (
     <Navigator>
       <IconContainer>
-        <Icon src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAE7DUhq_4c&#x2F;view?embed"></Icon>
+        <Icon src="client\src\assets\Rental_App_Logo.png"></Icon>
         <Title>Rental App</Title>
       </IconContainer>
       <Button />
     </Navigator>
   )
 }
-
-//<Button icon={<AiOutlineMenu />} onClick={onClick} where="/home" />

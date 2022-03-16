@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Navigator = styled.nav`
-  background-color: #ce6a85;
+  background-color: #c96cff;
   display: grid;
   grid-template-columns: 25% 60% 15%;
   height: 10vh;
@@ -19,9 +19,9 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: space-around;
 
-  border-radius: 15px;
-  background: #ce6a85;
-  box-shadow: 6px 6px 15px #773d4d, -6px -6px 15px #ff97bd;
+  border-radius: 21px;
+  background: linear-gradient(145deg, #cb53ff, #ab46e6);
+  box-shadow: 6px 6px 12px #8938b8, -6px -6px 12px #f364ff;
 `
 
 export const Icon = styled.img`
