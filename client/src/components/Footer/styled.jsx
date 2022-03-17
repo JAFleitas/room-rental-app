@@ -5,8 +5,6 @@ export const FooterDiv = styled.footer`
   height: 25vh;
   width: 100vw;
   background-color: #e8c1ff;
-
-  position: fixed;
   bottom: 0px;
 `
 
