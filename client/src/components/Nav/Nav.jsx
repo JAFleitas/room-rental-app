@@ -1,6 +1,7 @@
 import React from "react"
 import Button from "../Button/Button"
-import { Navigator, IconContainer, Icon, Title } from "./styled"
+import { Navigator, IconContainer, Logo, Title, ToHome } from "./styled"
+import logo from "../../assets/Rental_App_Logo.png"
 
 export default function Nav() {
   function onClick(e) {
@@ -10,7 +11,9 @@ export default function Nav() {
   return (
     <Navigator>
       <IconContainer>
-        <Icon src="client\src\assets\Rental_App_Logo.png"></Icon>
+        <ToHome to="/">
+          <Logo src={logo}></Logo>
+        </ToHome>
         <Title>Rental App</Title>
       </IconContainer>
       <Button />

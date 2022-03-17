@@ -1,37 +1,36 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export const Navigator = styled.nav`
   background-color: #c96cff;
   display: grid;
   grid-template-columns: 25% 60% 15%;
-  height: 10vh;
+  height: 13vh;
 `
 
 export const IconContainer = styled.div`
-  height: 7vh;
-  width: 18vw;
+  height: 9vh;
+  width: 22vw;
   min-width: 250px;
   margin-left: 1.5vw;
-  margin-top: 1.5vh;
-  margin-bottom: 1.5vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   grid-column: 1/2;
 
   display: flex;
   justify-content: space-around;
 
-  border-radius: 21px;
-  background: linear-gradient(145deg, #cb53ff, #ab46e6);
-  box-shadow: 6px 6px 12px #8938b8, -6px -6px 12px #f364ff;
+  border-radius: 12px;
+  background: #e0aaff;
+  box-shadow: 5px 5px 11px #8b699e, -5px -5px 11px #ffebff;
 `
 
-export const Icon = styled.img`
-  height: 5.6vh;
+export const Logo = styled.img`
+  height: 8vh;
   min-height: 40px;
-  width: 2.5vw;
-  min-width: 40px;
-  margin-top: 0.7vh;
-  margin-left: 0.75vw;
-
+  width: 4vw;
+  min-width: 50px;
+  margin-top: 0.5vh;
   background-repeat: no-repeat;
   background-size: contain;
 `
@@ -43,8 +42,11 @@ export const Title = styled.div`
   font-size: 4vh;
   font-family: "Nunito", sans-serif;
   font-weight: 800;
-  color: black;
+  color: #13001e;
   border-radius: 17px;
-  margin-top: 0.7vh;
-  margin-left: -0.75vw;
+  margin-top: 1.5vh;
+  margin-right: -0.75vw;
+`
+export const ToHome = styled(Link)`
+  text-decoration: none;
 `

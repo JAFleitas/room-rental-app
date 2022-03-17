@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export const FooterDiv = styled.footer`
   height: 25vh;
@@ -34,7 +35,7 @@ export const SubDivFinal = styled.div`
   align-items: center;
 `
 
-export const TeamName = styled.a`
+export const TeamName = styled(Link)`
   text-decoration: none;
   font-size: 20px;
   padding: 8px;
