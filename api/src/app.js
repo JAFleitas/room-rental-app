@@ -5,8 +5,7 @@ const dotenv = require("dotenv")
 dotenv.config()
 const cors = require("cors")
 
-const propertyRouter = require("./routes/PropertyRoutes.js")
-
+// const propertyRouter = require("./routes/PropertyRoutes.js")
 const routes = require("./routes/index.js")
 
 const app = express()
@@ -18,10 +17,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Routes
-app.use("/properties", propertyRouter)
+app.use("/api", routes)
 
 // catch 404 and forward to error handler
-app.use("/", routes)
+app.use("*", (req, res, next) => {
+  next({status: 404, message: "Page not founded"});
+})
 // error handler
 app.use(function (err, req, res, next) {
   console.error(err)
