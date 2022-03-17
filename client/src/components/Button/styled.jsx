@@ -9,8 +9,7 @@ export const Container = styled.button`
   width: 5vw;
   min-width: 80px;
   min-height: 40px;
-  /* padding: 0.5vw; */
-  margin-top: 2vh;
+  margin-top: 3.5vh;
   margin-left: 1vw;
 
   border-radius: 21px;

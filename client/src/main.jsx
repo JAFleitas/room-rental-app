@@ -1,20 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./index.css"
 import App from "./App"
-import Details from "./pages/details-property/detailsProperty"
+import { BrowserRouter } from "react-router-dom"
 
 ReactDOM.render(
-
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}></Route>
-    </Routes>
+    <App />
   </BrowserRouter>,
-
- 
-  
 
   document.getElementById("root"),
 )
