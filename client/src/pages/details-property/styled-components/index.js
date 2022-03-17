@@ -7,6 +7,7 @@ export const ContainerPageDetails = styled.div`
   width: 100%;
   background-color: #f0f0f0;
   height: 2000px;
+
   @media screen and (max-width: 740px) {
     width: 100%;
   }
@@ -21,14 +22,13 @@ export const ContainerImages = styled.div`
   width: 80vw;
   height: 30vw;
 
-  min-height: 350px;
   border-radius: 16px;
   padding: 10px;
   @media screen and (max-width: 740px) {
     width: 100%;
     border-radius: 0;
     display: flex;
-    height: 60vh;
+    height: 50vw;
     box-shadow: none;
     background-color: transparent;
   }

@@ -7,7 +7,7 @@ import RouterApp from "./routes/RouterApp"
 ReactDOM.render(
   <StrictMode>
     <App />
-    <Rogit uterApp />
+    <RouterApp />
   </StrictMode>,
   document.getElementById("root"),
 )
