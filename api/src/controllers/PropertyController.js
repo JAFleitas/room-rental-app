@@ -1,5 +1,6 @@
 const { Property } = require("../db/index.js")
 const { Op } = require("sequelize")
+
 const getPropertyById = async (req, res, next) => {
   try {
     const id = req.params.id
@@ -64,8 +65,16 @@ const getAll = async (req, res, next) => {
       orderBy = "name",
       search,
       exclude,
+      minprice = null,
+      maxprice = null,
+      type, // id_type_property
+      location,
+      minrooms = null,
+      maxrooms = null,
+      maxpeople = null,
+      people = null,
     } = req.query
-    const options = {}
+    const options = { where: {} }
 
     // Definimos que atributos quiere traer o excluir
     if (attributes || exclude) {
@@ -79,6 +88,15 @@ const getAll = async (req, res, next) => {
     orderBy.push(order)
     options.order = [orderBy]
 
+    // Definimos si filtrado por locacion
+    if (location) {
+      options.where = {
+        location: {
+          [Op.iLike]: `%${location}%`,
+        },
+      }
+    }
+
     // Definimos si hay un termino de búsqueda
     if (search) {
       options.where = {
@@ -86,6 +104,55 @@ const getAll = async (req, res, next) => {
           [Op.iLike]: `%${search}%`,
         },
       }
+    }
+
+    // Defino si hay filtros por precio
+    if (minprice !== null && maxprice !== null) {
+      options.where.price = {
+        [Op.and]: [{ [Op.gte]: minprice }, { [Op.lte]: maxprice }],
+      }
+    } else if (minprice !== null || maxprice !== null) {
+      options.where.price =
+        minprice !== null
+          ? {
+              [Op.gte]: minprice,
+            }
+          : {
+              [Op.lte]: maxprice,
+            }
+    }
+
+    // Defino si hay filtros por numero de cuartos
+    if (minrooms !== null && maxrooms !== null) {
+      options.where.numberOfRooms = {
+        [Op.and]: [{ [Op.gte]: minrooms }, { [Op.lte]: maxrooms }],
+      }
+    } else if (minrooms !== null || maxrooms !== null) {
+      options.where.numberOfRooms =
+        minrooms !== null
+          ? {
+              [Op.gte]: minrooms,
+            }
+          : {
+              [Op.lte]: maxrooms,
+            }
+    }
+
+    // Defino si hay filtros por numero de personas permitido con rango
+    if (maxpeople !== null) {
+      options.where.maxNumberOfPeople = {
+         [Op.lte]: maxpeople, 
+      }
+      // Defino si hay filtros por numero de personas permitido de forma fija
+    } else if (people !== null) {
+      options.where.maxNumberOfPeople = {
+        [Op.eq]: people,
+      }
+    }
+
+    // Defino si hay filtros por typo de propiedad
+    if (type) {
+      options.where.id_type_property = type
     }
 
     // console.log(options)
