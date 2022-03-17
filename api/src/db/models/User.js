@@ -51,7 +51,8 @@ module.exports = sequelize => {
       },
       id_type_user: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: DataTypes.UUIDV4,
       },
     },
     { timestamps: false },

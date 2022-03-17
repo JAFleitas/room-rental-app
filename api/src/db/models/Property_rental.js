@@ -11,11 +11,11 @@ module.exports = sequelize => {
         primaryKey: true,
       },
       userID: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       porpertyID: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       final_price: {
@@ -23,7 +23,8 @@ module.exports = sequelize => {
         allowNull: false,
       },
       statusPropertyId: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
       },
       rental_dates: {

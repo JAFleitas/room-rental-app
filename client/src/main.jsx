@@ -2,6 +2,7 @@ import React, { StrictMode } from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import App from "./App"
+
 import RouterApp from "./routes/RouterApp"
 
 ReactDOM.render(
@@ -9,5 +10,7 @@ ReactDOM.render(
     <App />
     <RouterApp />
   </StrictMode>,
+
+
   document.getElementById("root"),
 )

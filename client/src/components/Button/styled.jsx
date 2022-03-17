@@ -6,16 +6,27 @@ export const Container = styled.button`
   justify-content: space-around;
   align-items: center;
   height: 6vh;
-  width: 7vw;
+  width: 5vw;
   min-width: 80px;
   min-height: 40px;
-  /* padding: 0.5vw; */
-  margin-top: 2vh;
+  margin-top: 3.5vh;
   margin-left: 1vw;
 
-  border-radius: 26px;
-  background: linear-gradient(145deg, #e17c97, #bd687f);
-  box-shadow: 5px 5px 10px #915061, -5px -5px 10px #ff98b9;
+  border-radius: 21px;
+  background: linear-gradient(145deg, #cb53ff, #ab46e6);
+  box-shadow: 6px 6px 12px #8938b8, -6px -6px 12px #f364ff;
+
+  &:hover {
+    border-radius: 21px;
+    background: linear-gradient(145deg, #ab46e6, #cb53ff);
+    box-shadow: 6px 6px 12px #8d3abd, -6px -6px 12px #ef62ff;
+  }
+
+  &:active {
+    border-radius: 21px;
+    background: #be4eff;
+    box-shadow: inset 6px 6px 12px #8d3abd, inset -6px -6px 12px #ef62ff;
+  }
 `
 
 export const Icon = styled.div`
