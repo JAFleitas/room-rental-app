@@ -7,7 +7,6 @@ export default function Reviews({ AiFillStarSt, numberOfReviews }) {
   return (
     <>
       <AiFillStarSt />
-
       <h5>4,5</h5>
       <h5>
         <a onClick={() => setModalShow(!modalShow)}>
