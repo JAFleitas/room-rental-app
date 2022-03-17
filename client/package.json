@@ -11,10 +11,13 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
     "react": "^17.0.2",
+    "react-datepicker": "^4.7.0",
+    "react-dater": "^1.6.0",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
-    "redux": "^4.1.2" 
+    "redux": "^4.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
