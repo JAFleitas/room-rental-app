@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize")
 
 module.exports = sequelize => {
-  sequelize.define("property", 
+  const Property = sequelize.define("property", 
   {
     id: {
       type: DataTypes.UUID,
@@ -50,12 +50,20 @@ module.exports = sequelize => {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
     },
-    userID: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-    },
+    // userID: {
+    //   type: DataTypes.UUID,
+    //   defaultValue: DataTypes.UUIDV4,
+    //   allowNull: false,
+    // },
   },                  
     { timestamps: false },
  )
+
+ Property.associate = models => {
+   // Relacionando Propiedad y Usuario
+   Property.belongsTo(models.User, {
+     sourceKey: "id",
+     foreignKey: "userID",
+   })
+ }
 }
