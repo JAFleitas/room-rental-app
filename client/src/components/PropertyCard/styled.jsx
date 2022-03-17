@@ -4,10 +4,10 @@ export const Container = styled.div`
   background-color: white;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4,1fr)
+  grid-template-rows: repeat(4,1fr);
   grid-gap: 10px;
   justify-content: space-evenly;
-  width: 50%;
+  width: 40%;
   height: 15%;
   margin-top: 8rem;
   border-radius: 15px;
