@@ -65,9 +65,17 @@ let capsEntries = entries.map(entry => [
 ])
 sequelize.models = Object.fromEntries(capsEntries)
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
-const { Property } = sequelize.models
+// DEFINIR LA FUNCION ASSOCIATE QUE RECIBE MODELS PARA REALIZAR LAS ASOCIACIONES ENTRA TABLAS
+// para realizar las asociaciones
+// console.log({ capsEntries })
+let models = Object.fromEntries(capsEntries)
+Object.keys(models).forEach(modelName => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models)
+  }
+})
+
+sequelize.models = models
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
