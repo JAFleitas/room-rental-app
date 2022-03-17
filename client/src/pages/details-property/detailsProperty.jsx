@@ -4,6 +4,7 @@
 import { IoChevronBackSharp } from "react-icons/io5"
 
 import { useNavigate } from "react-router-dom"
+import Images from "./components/images-detail/imagesDetail"
 
 import Reviews from "./components/review/reviews"
 import {
@@ -63,19 +64,7 @@ export default function Details() {
         </StarRating>
       </DescriptionContainer>
 
-      <ContainerImages>
-        <PrincipalImage>
-          <Img
-            src={property.arrayImage[0] ? property.arrayImage[0] : null}
-            alt="image Property"
-          />
-        </PrincipalImage>
-        <SecondaryImages>
-          {property.arrayImage.slice(1, 5).map((element, i) => (
-            <Img key={i} src={element} />
-          ))}
-        </SecondaryImages>
-      </ContainerImages>
+      <Images property={property} />
 
       <DescriptionContainer>
         <h1>What services does the place offer?</h1>

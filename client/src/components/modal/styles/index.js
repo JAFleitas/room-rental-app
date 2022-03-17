@@ -22,7 +22,7 @@ export const ContainerModal = styled.div`
   max-height: 100vh;
   background: #fff;
   position: relative;
-  border-radius: 8px;
+  border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: ${({ padding }) => padding ?? "20px"};
   overflow: auto;
@@ -39,13 +39,27 @@ export const CloseButton = styled.button`
   color: #1766dc;
   width: 24px;
   height: 24px;
+  z-index: 100;
 
   &:hover {
-    background: #f2f2f2;
+    background: #0a0a0a;
   }
 
   svg {
     width: 100%;
     height: 100%;
+  }
+`
+export const HeaderTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e8e8e8;
+  h3 {
+    font-weight: 500px;
+    font-size: 16px;
+    color: #1766dc;
   }
 `

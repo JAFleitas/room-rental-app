@@ -1,5 +1,5 @@
 import { IoCloseOutline } from "react-icons/io5"
-import { Overlay, ContainerModal, CloseButton } from "./styles"
+import { Overlay, ContainerModal, CloseButton, HeaderTitle } from "./styles"
 export default function Modal({
   children,
   modalShow,
@@ -9,6 +9,7 @@ export default function Modal({
   positionModalX,
   padding,
   width,
+  title,
 }) {
   return (
     <>
@@ -18,6 +19,11 @@ export default function Modal({
           positionModalY={positionModalY}
           positionModalX={positionModalX}>
           <ContainerModal padding={padding} width={width}>
+            {title && (
+              <HeaderTitle>
+                <h3>{title}</h3>
+              </HeaderTitle>
+            )}
             <CloseButton onClick={() => setModalShow(false)}>
               <IoCloseOutline />
             </CloseButton>
