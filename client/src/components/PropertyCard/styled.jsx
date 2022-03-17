@@ -2,13 +2,13 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   background-color: white;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4,1fr)
-  grid-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
   justify-content: space-evenly;
   width: 50%;
-  height: 15%;
+  height: 250px;
   margin-top: 8rem;
   border-radius: 15px;
   align-items:center;
@@ -24,12 +24,11 @@ export const Container = styled.div`
   }
 `
 export const ImageContainer = styled.div`
-  height: 15%px;
-  width: 35%px;
-  padding: 20px;
+  height: 100%;
+  width: 40%;
+  padding: 5px;
 
-  grid-column: 1;
-  grid-row: 1/5;
+
 `
 
 export const Image = styled.img`
@@ -38,37 +37,42 @@ export const Image = styled.img`
 `
 
 export const Title = styled.p`
-  grid-column: 2;
-  grid-row: 1;
-  margin-left: 20px;
-  margin-right: 20px;
+width: 50%;
+padding-left :5px;
+  padding-right :5px;
   color: black;
-  font-size: 13px;
+  font-size: x-large;
 `
 export const Info = styled.p`
-  grid-column: 2;
-  grid-row: 2/4;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 50%;
+  padding-left :5px;
+  padding-right :5px;
   color: black;
-  font-size: 10px;
-`
+  font-family: 'Times New Roman', Times, serif;
+  font-size: medium;
 
+`
+export const DivPyR =styled.div`
+display: flex;
+width: 40%;
+align-items: center;
+justify-content: center;
+gap:20%;
+
+
+
+
+`
 export const Price = styled.p`
-  grid-column: 2;
-  grid-row: 4;
+
   color: black;
   font-size: 13px;
-  justify-self:flex-end;
-  display:inline;
-  padding:1rem;
+
+  padding: 1rem;
 `
 export const Rating = styled.p`
-  grid-column: 2;
-  grid-row: 4;
   color: black;
-  justify-self:flex-start;
   font-size: 13px;
-  display:flex;
-  align-items:center;
+
+
 `
