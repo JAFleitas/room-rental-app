@@ -43,20 +43,23 @@ module.exports = sequelize => {
         type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: false,
       },
-      userID: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-      },
+      // userID: {
+      //   type: DataTypes.UUID,
+      //   defaultValue: DataTypes.UUIDV4,
+      //   allowNull: false,
+      // },
       coordinates: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 1,
       },
       flat: {
         type: DataTypes.INTEGER,
+        defaultValue: 1,
       },
       discount: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
       wifi: {
         type: DataTypes.BOOLEAN,

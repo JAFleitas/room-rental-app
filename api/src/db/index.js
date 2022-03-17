@@ -67,7 +67,7 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 // DEFINIR LA FUNCION ASSOCIATE QUE RECIBE MODELS PARA REALIZAR LAS ASOCIACIONES ENTRA TABLAS
 // para realizar las asociaciones
-console.log({ capsEntries })
+// console.log({ capsEntries })
 let models = Object.fromEntries(capsEntries)
 Object.keys(models).forEach(modelName => {
   if (models[modelName].associate) {
