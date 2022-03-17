@@ -42,8 +42,9 @@ module.exports = sequelize => {
       allowNull: false,
     },
     numberOfReviews: {
-      type: DataTypes.TEXT,
+      type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
     image: {
       type: DataTypes.ARRAY(DataTypes.JSON),
