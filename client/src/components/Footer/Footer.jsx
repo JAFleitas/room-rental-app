@@ -7,7 +7,6 @@ import {
   LinkGithubProject,
   FooterOptions,
 } from "./styled"
-
 import { BsGithub } from "react-icons/bs"
 
 export default function Footer() {
@@ -21,7 +20,7 @@ export default function Footer() {
       </SubDiv>
       <SubDivFinal>
         {/* Aca podriamos poner un Link a una subpagina con la info de todos los integrantes */}
-        <TeamName href="#">© Rental App Team</TeamName>
+        <TeamName to="/about-us">© Rental App Team</TeamName>
         <LinkGithubProject
           href="https://github.com/JAFleitas/room-rental-app"
           target="_blank">
