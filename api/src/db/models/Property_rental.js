@@ -23,7 +23,8 @@ module.exports = sequelize => {
         allowNull: false,
       },
       statusPropertyId: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
       },
       rental_dates: {
