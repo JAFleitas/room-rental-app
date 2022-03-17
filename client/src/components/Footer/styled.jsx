@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export const FooterDiv = styled.footer`
   height: 25vh;
-  width: 100vw;
+  width: 100%;
   background-color: #e8c1ff;
   bottom: 0px;
 `
