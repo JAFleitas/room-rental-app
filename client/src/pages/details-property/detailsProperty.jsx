@@ -1,7 +1,11 @@
 // #6f5fca
-
+// #27276b
+// #1766dc
 import { IoChevronBackSharp } from "react-icons/io5"
 
+import { useNavigate } from "react-router-dom"
+
+import Reviews from "./components/review/reviews"
 import {
   ContainerPageDetails,
   ContainerImages,
@@ -16,6 +20,7 @@ import {
   DivReview,
 } from "./styled-components"
 export default function Details() {
+  // obj e imagen de prueba .
   const imgSrc =
     "https://images.adsttc.com/media/images/5a33/42eb/b22e/3866/6000/00ac/large_jpg/45_Casa_Marindia_-_%C2%A9_Federico_Cairoli_(low).jpg?1513308897"
 
@@ -35,11 +40,14 @@ export default function Details() {
       hasTelevision: true,
     },
   }
+
+  const navigate = useNavigate()
+
   return (
     <ContainerPageDetails>
       <DescriptionContainer>
         <BotonBack>
-          <button>
+          <button onClick={() => navigate("/")}>
             <IoChevronBackSharp />
           </button>
         </BotonBack>
@@ -48,12 +56,10 @@ export default function Details() {
         </div>
 
         <StarRating>
-          <AiFillStarSt />
-
-          <h5>4,5</h5>
-          <h5>
-            {property.numberOfReviews} <a>reviews</a>
-          </h5>
+          <Reviews
+            AiFillStarSt={AiFillStarSt}
+            numberOfReviews={property.numberOfReviews}
+          />
         </StarRating>
       </DescriptionContainer>
 
