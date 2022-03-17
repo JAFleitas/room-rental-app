@@ -8,7 +8,7 @@
     "password": "viviana12345",
     "credit_card_number": 1234567890,
     "rating": 4,
-    "status": "offline"
+    "status": "enabled"
   },
   {
     "name": "Maritza",
@@ -19,7 +19,7 @@
     "password": "maritza12345",
     "credit_card_number": 1234567890,
     "rating": 3,
-    "status": "online"
+    "status": "enabled"
   },
   {
     "name": "Juan",
@@ -30,6 +30,6 @@
     "password": "juan12345",
     "credit_card_number": 1234567890,
     "rating": 4,
-    "status": "online"
+    "status": "enabled"
   }
 ]

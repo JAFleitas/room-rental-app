@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize")
 
 module.exports = (sequelize) => {
-    sequelize.define(
+    const Comment = sequelize.define(
         "comment",
         {
             id: {
@@ -30,4 +30,18 @@ module.exports = (sequelize) => {
         },
         { timestamps: false },
     )
+
+    Comment.associate = models => {
+      // Relacionando Comentario y Usuario
+      Comment.belongsTo(models.User, {
+        sourceKey: "id",
+        foreignKey: "userID",
+      })
+      
+      // Relacionando Comentario y Propiedad
+      Comment.belongsTo(models.Property, {
+        sourceKey: "id",
+        foreignKey: "propertyID",
+      })
+    }
 }

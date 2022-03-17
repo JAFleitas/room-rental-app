@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 const { hashSync } = require("bcrypt")
 
 module.exports = sequelize => {
-  sequelize.define(
+  const User = sequelize.define(
     "user",
     {
       id: {
@@ -43,18 +43,27 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
       },
       status: {
-        type: DataTypes.ENUM("online", "offline", "suspended", "banned"),
+        type: DataTypes.ENUM("enabled", "disabled"),
         allowNull: false,
       },
       rating: {
         type: DataTypes.INTEGER,
       },
-      id_type_user: {
-        type: DataTypes.UUID,
-        allowNull: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
+      // id_type_user: {
+      //   type: DataTypes.UUID,
+      //   allowNull: true,
+      //   defaultValue: DataTypes.UUIDV4,
+      // },
     },
     { timestamps: false },
   )
+
+  // user_type_ID
+  User.associate = models => {
+    // Relacionando un User con Categoría (1:m)
+    User.belongsTo(models.Type_user, {
+      sourceKey: "id",
+      foreignKey: "user_type_ID",
+    })
+  }
 }
