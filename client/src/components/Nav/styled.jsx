@@ -6,6 +6,7 @@ export const Navigator = styled.nav`
   display: grid;
   grid-template-columns: 25% 60% 15%;
   height: 13vh;
+  align-items: center;
 `
 
 export const IconContainer = styled.div`
