@@ -10,14 +10,6 @@ module.exports = sequelize => {
         allowNull: false,
         primaryKey: true,
       },
-      // userID: {
-      //   type: DataTypes.UUID,
-      //   allowNull: false,
-      // },
-      // porpertyID: {
-      //   type: DataTypes.UUID,
-      //   allowNull: false,
-      // },
       final_price: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -43,9 +35,6 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
       },
       discount: {
-        type: DataTypes.INTEGER,
-      },
-      discount_price: {
         type: DataTypes.INTEGER,
       },
     },
