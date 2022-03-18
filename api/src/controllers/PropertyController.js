@@ -71,8 +71,8 @@ const getAll = async (req, res, next) => {
       location,
       minrooms = null,
       maxrooms = null,
+      minpeople = null,
       maxpeople = null,
-      people = null,
     } = req.query
     const options = { where: {} }
 
@@ -139,15 +139,19 @@ const getAll = async (req, res, next) => {
     }
 
     // Defino si hay filtros por numero de personas permitido con rango
-    if (maxpeople !== null) {
+    if (minpeople !== null && maxpeople !== null) {
       options.where.maxNumberOfPeople = {
-         [Op.lte]: maxpeople, 
+        [Op.and]: [{ [Op.gte]: minpeople }, { [Op.lte]: maxpeople }],
       }
-      // Defino si hay filtros por numero de personas permitido de forma fija
-    } else if (people !== null) {
-      options.where.maxNumberOfPeople = {
-        [Op.eq]: people,
-      }
+    } else if (minpeople !== null || maxpeople !== null) {
+      options.where.maxNumberOfPeople =
+        minpeople !== null
+          ? {
+              [Op.gte]: minpeople,
+            }
+          : {
+              [Op.lte]: maxpeople,
+            }
     }
 
     // Defino si hay filtros por typo de propiedad
