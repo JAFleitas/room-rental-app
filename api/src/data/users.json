@@ -8,7 +8,8 @@
     "password": "viviana12345",
     "credit_card_number": 1234567890,
     "rating": 4,
-    "status": "enabled"
+    "status": "enabled",
+    "type": "ADMIN"
   },
   {
     "name": "Maritza",
@@ -30,6 +31,17 @@
     "password": "juan12345",
     "credit_card_number": 1234567890,
     "rating": 4,
+    "status": "enabled"
+  },
+  {
+    "name": "Julieta",
+    "lastname": "Gomez",
+    "country": "Colombia",
+    "email": "julieta@gmail.com",
+    "city": "Barranquilla",
+    "password": "julietaYromeo",
+    "credit_card_number": 1234567890,
+    "rating": 4.5,
     "status": "enabled"
   }
 ]
