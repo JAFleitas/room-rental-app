@@ -1,0 +1,42 @@
+[
+    {
+      "name": "Suite",
+      "id": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3"
+    },
+    {
+      "name": "Departamento",
+      "id": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    },
+    {
+      "name": "Alojamiento entero",
+      "id": "8a578534-2ef2-420c-b131-29152e707094"
+    },
+    {
+      "name": "Habitación privada",
+      "id": "61b7905b-d8c6-4db9-8fbe-b48fbaa9030a"
+    },
+    {
+      "name": "Habitación compartida",
+      "id": "285b8461-7952-4b59-b557-23f81eb22d1a"
+    },
+    {
+      "name": "Casa de campo",
+      "id": "ae0b942c-2c6b-4e2c-812d-c0af5d17adb1"
+    },
+    {
+      "name": "Habitación de hotel",
+      "id": "28eb4a9a-cc26-4332-b3b2-39088cec5f08"
+    },
+    {
+      "name": "Cabaña",
+      "id": "04ac1513-f849-4926-bee5-fc18f85418e1"
+    },
+    {
+      "name": "Casa de playa",
+      "id": "0e7d217c-8e11-440a-beed-56bbf1f88dd6"
+    },
+    {
+      "name": "Casa",
+      "id": "c3ff620e-904b-4090-baec-57d7a37f7e29"
+    }
+  ]
