@@ -60,12 +60,21 @@ export const Img = styled.img`
 
 export const ContainerModalImages = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 150px;
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-auto-rows: minmax(150px, auto);
+  grid-gap: 20px;
+  grid-auto-flow: dense;
 `
 export const ImageModal = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  @media screen and (min-width: 600px) {
+    grid-column: ${({ format }) => (format === "wide" ? "span 2" : null)};
+    grid-row: ${({ format }) => (format === "tall" ? "span 2" : null)};
+  } ;
 `

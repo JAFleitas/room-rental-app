@@ -1,6 +1,7 @@
 import { useState } from "react"
+
 import Modal from "../../../../components/modal/modal"
-import { ContainerModal } from "../../../../components/modal/styles"
+import formatImages from "../../../../utilities/formatImages"
 import {
   ContainerImages,
   PrincipalImage,
@@ -21,13 +22,13 @@ export default function Images({ property }) {
             onClick={() => setModal(true)}
             src={property.arrayImage[0] ? property.arrayImage[0] : null}
             alt="image Property"
-            filter={true}
+            filter={"true"}
           />
         </PrincipalImage>
         <SecondaryImages>
           {property.arrayImage.slice(1, 5).map((element, i) => (
             <Img
-              filter={true}
+              filter={"true"}
               onClick={() => setModal(true)}
               key={i}
               src={element}
@@ -37,15 +38,14 @@ export default function Images({ property }) {
       </ContainerImages>
 
       <Modal
-        width={"80%"}
-        padding={"40px"}
+        width={"90%"}
         modalShow={modal}
         setModalShow={setModal}
-        title={"images"}
+        title={property.name}
         overlayShow={true}>
         <ContainerModalImages>
           {property.arrayImage.map((e, i) => (
-            <ImageModal key={i} src={e} />
+            <ImageModal format={formatImages(i)} key={i} src={e} />
           ))}
         </ContainerModalImages>
       </Modal>

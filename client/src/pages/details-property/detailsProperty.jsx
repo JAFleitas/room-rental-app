@@ -2,17 +2,14 @@
 // #27276b
 // #1766dc
 import { IoChevronBackSharp } from "react-icons/io5"
+import { lazy, Suspense } from "react"
 
 import { useNavigate } from "react-router-dom"
-import Images from "./components/images-detail/imagesDetail"
+/* import Images from "./components/images-detail/imagesDetail" */
 
 import Reviews from "./components/review/reviews"
 import {
   ContainerPageDetails,
-  ContainerImages,
-  PrincipalImage,
-  SecondaryImages,
-  Img,
   DescriptionContainer,
   StarRating,
   AiFillStarSt,
@@ -20,13 +17,29 @@ import {
   ServicesSt,
   DivReview,
 } from "./styled-components"
+
+import { ContainerImages } from "./components/images-detail/styles"
+
+const Images = lazy(() => import("./components/images-detail/imagesDetail"))
+
 export default function Details() {
   // obj e imagen de prueba .
   const imgSrc =
     "https://images.adsttc.com/media/images/5a33/42eb/b22e/3866/6000/00ac/large_jpg/45_Casa_Marindia_-_%C2%A9_Federico_Cairoli_(low).jpg?1513308897"
 
   const property = {
-    arrayImage: [imgSrc, imgSrc, imgSrc, imgSrc, imgSrc],
+    arrayImage: [
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+      imgSrc,
+    ],
     name: "Fifth house located in Monte Grande",
     rating: 4.9,
     numberOfReviews: 239,
@@ -63,8 +76,9 @@ export default function Details() {
           />
         </StarRating>
       </DescriptionContainer>
-
-      <Images property={property} />
+      <Suspense fallback={<ContainerImages></ContainerImages>}>
+        <Images property={property} />
+      </Suspense>
 
       <DescriptionContainer>
         <h1>What services does the place offer?</h1>
