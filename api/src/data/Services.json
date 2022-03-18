@@ -1,0 +1,46 @@
+[
+    {
+    "id": "146496ca-55fe-4659-86c8-29e410063689",
+    "name": "air-conditioning"
+    },
+    {
+    "id": "1e3e04cb-e4ac-4576-a591-0fa9494d8f04",
+    "name": "pets"
+    },
+    {
+    "id": "b550e852-9e1b-4029-b2df-52c07d1fd6d6",
+    "name": "wifi"
+    },
+    {
+    "id": "5434ef59-38c6-4f72-bc52-644d3250840b",
+    "name": "pool"
+    },
+    {
+    "id": "24037b34-717b-4818-b022-033f40fd87ec",
+    "name": "private pool"
+    },
+    {
+    "id": "b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a",
+    "name": "parking"
+    },
+    {
+    "id": "112df14c-702b-46f8-a31a-34055ca5ad08",
+    "name": "jacuzzi"
+    },
+    {
+    "id": "5f96284c-b0ee-4c79-bdc2-73c228f8c695",
+    "name": "garden"
+    },
+    {
+    "id": "90fb37d8-3387-4136-923b-aea6b167087d",
+    "name": "grill"
+    },
+    {
+    "id": "8b7b10b1-229a-4123-833b-ef82cd5b3a8b",
+    "name": "smokers"
+    },
+    {
+    "id": "b8118944-05f8-41cb-9eca-0d4e9f4bd625",
+    "name": "elevator"
+    }
+]
