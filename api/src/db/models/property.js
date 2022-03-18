@@ -89,5 +89,11 @@ module.exports = sequelize => {
      sourceKey: "id",
      foreignKey: "userID",
    })
+
+  //  Relacionando Propiedad con Servicio (m:m)
+   Property.belongsToMany(models.Service, {
+     through: "PropertyServices",
+     timestamps: false,
+   })
  }
 }
