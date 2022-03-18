@@ -19,13 +19,18 @@ export const Overlay = styled.div`
 export const ContainerModal = styled.div`
   width: ${({ width }) => width ?? "500px"};
   min-height: 100px;
-  max-height: 100vh;
+  max-height: 90vh;
   background: #fff;
   position: relative;
-  border-radius: 8px;
+  border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: ${({ padding }) => padding ?? "20px"};
   overflow: auto;
+  @media screen and (max-width: 740px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `
 export const CloseButton = styled.button`
   position: absolute;
@@ -36,16 +41,32 @@ export const CloseButton = styled.button`
   cursor: pointer;
   transition: 0.3s easy all;
   border-radius: 5px;
-  color: #1766dc;
+  color: #1766dcaa;
   width: 24px;
   height: 24px;
+  z-index: 100;
+  margin-left: 10px;
 
   &:hover {
-    background: #f2f2f2;
+    background: #0a0a0aaa;
   }
 
   svg {
     width: 100%;
     height: 100%;
+  }
+`
+export const HeaderTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e8e8e8;
+  h3 {
+    font-weight: 500px;
+    font-size: 16px;
+    color: #1766dc;
+    margin-right: 10px;
   }
 `
