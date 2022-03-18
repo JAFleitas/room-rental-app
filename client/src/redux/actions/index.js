@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
 
-export function getAllCountries() {
+export function getAllProperties() {
   return async function (dispatch) {
     let response = await axios.get(
       `http://localhost:3005/api/properties/getProperties`,
