@@ -1,13 +1,13 @@
 import React from "react"
-import React from "react"
-import PropertyCard from "../PropertyCard/PropertyCard"
 
+import PropertyCard from "../PropertyCard/PropertyCard"
+import {Card} from "./styled"
 // aca hay que agregar el useEfect y además traernos las propiedades del estado
 //global a una variable (allPropierties) y mapearla para renderizar cada propiedad
 
 function AllPropertyCard() {
     return (
-      <Cards>
+      <Card>
         {
             allPropierties && allPropierties.map((property)=>{
                 return(
@@ -25,7 +25,7 @@ function AllPropertyCard() {
                 )
             })
         }
-      </Cards>
+      </Card>
     )
   }
   
