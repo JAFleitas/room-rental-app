@@ -43,11 +43,6 @@ module.exports = sequelize => {
         type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: false,
       },
-      // userID: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      //   allowNull: false,
-      // },
       coordinates: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -61,24 +56,6 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      wifi: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      air_conditioning: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      id_service: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-      },
-      id_type_property: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-      },
     },
     { timestamps: false },
   )
@@ -88,6 +65,12 @@ module.exports = sequelize => {
    Property.belongsTo(models.User, {
      sourceKey: "id",
      foreignKey: "userID",
+   })
+   
+   // Relacionando Propiedad y TypoPropiedad
+   Property.belongsTo(models.Type_property, {
+     sourceKey: "id",
+     foreignKey: "typePropertyID",
    })
 
   //  Relacionando Propiedad con Servicio (m:m)
