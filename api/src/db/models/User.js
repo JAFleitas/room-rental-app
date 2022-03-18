@@ -45,6 +45,7 @@ module.exports = sequelize => {
       status: {
         type: DataTypes.ENUM("enabled", "disabled"),
         allowNull: false,
+        defaultValue: "enabled",
       },
       rating: {
         type: DataTypes.INTEGER,

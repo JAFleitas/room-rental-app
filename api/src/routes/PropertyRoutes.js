@@ -1,4 +1,5 @@
 const { Router } = require("express")
+const getFiltersProperty = require("../middlewares/getFiltersProperty")
 
 const {
   getPropertyById,
@@ -12,6 +13,6 @@ router.get("/getPropertyById/:id", getPropertyById)
 
 router.post("/addProperty", addProperty)
 
-router.get("/getPropertys", getAll)
+router.get("/getPropertys", getFiltersProperty, getAll)
 
 module.exports = router
