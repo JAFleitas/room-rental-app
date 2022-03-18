@@ -6,16 +6,28 @@ import DropDown from "../DropDown/DropDown"
 
 export default function Button() {
   const [open, setOpen] = useState(false)
+  const [visibility, setVisibility] = useState(false)
+
+  function handleClick() {
+    if (open === false) {
+      setOpen(true)
+      setVisibility(true)
+    } else if (visibility === true) {
+      setVisibility(false)
+    } else if (visibility === false) {
+      setVisibility(true)
+    }
+  }
 
   return (
-    <Container onClick={() => setOpen(!open)}>
+    <Container onClick={handleClick}>
       <Icon>
         <AiOutlineMenu />
       </Icon>
       <ImageContainer>
         <FaRegUserCircle />
       </ImageContainer>
-      {open && <DropDown />}
+      {open && <DropDown visibility={visibility} />}
     </Container>
   )
 }
