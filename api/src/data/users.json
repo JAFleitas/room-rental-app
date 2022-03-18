@@ -20,7 +20,8 @@
     "password": "maritza12345",
     "credit_card_number": 1234567890,
     "rating": 3,
-    "status": "enabled"
+    "status": "enabled",
+    "type": "NORMAL"
   },
   {
     "name": "Juan",
@@ -31,7 +32,8 @@
     "password": "juan12345",
     "credit_card_number": 1234567890,
     "rating": 4,
-    "status": "enabled"
+    "status": "enabled",
+    "type": "NORMAL"
   },
   {
     "name": "Julieta",
@@ -42,6 +44,7 @@
     "password": "julietaYromeo",
     "credit_card_number": 1234567890,
     "rating": 4.5,
-    "status": "enabled"
+    "status": "enabled",
+    "type": "SUBADMIN"
   }
 ]
