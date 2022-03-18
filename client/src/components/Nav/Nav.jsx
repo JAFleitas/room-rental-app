@@ -1,5 +1,6 @@
 import React from "react"
 import Button from "../Button/Button"
+import SearchBar from "../SearchBar/SearchBar"
 import { Navigator, IconContainer, Logo, Title, ToHome } from "./styled"
 import logo from "../../assets/Rental_App_Logo.png"
 
@@ -16,6 +17,7 @@ export default function Nav() {
         </ToHome>
         <Title>Rental App</Title>
       </IconContainer>
+      <SearchBar></SearchBar>
       <Button />
     </Navigator>
   )
