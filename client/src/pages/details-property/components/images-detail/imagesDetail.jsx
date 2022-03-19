@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import { useSelector } from "react-redux"
 
 import Modal from "../../../../components/modal/modal"
 import formatImages from "../../../../utilities/formatImages"
@@ -11,7 +12,10 @@ import {
   ImageModal,
 } from "./styles"
 
-export default function Images({ image }) {
+export default function Images() {
+  const imagesPropertyDetails = useSelector(
+    state => state.detailsOfProperty.image,
+  )
   const [modal, setModal] = useState(false)
 
   return (
@@ -20,13 +24,15 @@ export default function Images({ image }) {
         <PrincipalImage>
           <Img
             onClick={() => setModal(true)}
-            src={image.length > 0 ? image[0] : null}
+            src={
+              imagesPropertyDetails.length > 0 ? imagesPropertyDetails[0] : null
+            }
             alt="image not found"
             filter={"true"}
           />
         </PrincipalImage>
         <SecondaryImages>
-          {image.slice(1, 5).map((element, i) => (
+          {imagesPropertyDetails.slice(1, 5).map((element, i) => (
             <Img
               filter={"true"}
               onClick={() => setModal(true)}
@@ -46,7 +52,7 @@ export default function Images({ image }) {
         overlayShow={true}
         outButton={"true"}>
         <ContainerModalImages>
-          {image.map((e, i) => (
+          {imagesPropertyDetails.map((e, i) => (
             <ImageModal
               format={formatImages(i)}
               key={i}
