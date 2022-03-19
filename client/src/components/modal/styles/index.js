@@ -22,10 +22,11 @@ export const ContainerModal = styled.div`
   max-height: 90vh;
   background: #fff;
   position: relative;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: ${({ padding }) => padding ?? "20px"};
   overflow: auto;
+
   @media screen and (max-width: 740px) {
     ::-webkit-scrollbar {
       display: none;
@@ -41,7 +42,7 @@ export const CloseButton = styled.button`
   cursor: pointer;
   transition: 0.3s easy all;
   border-radius: 5px;
-  color: #1766dcaa;
+  color: ${({ outButton }) => (outButton ? "#fafafa" : "#1766dcaa")};
   width: 24px;
   height: 24px;
   z-index: 100;
@@ -54,6 +55,8 @@ export const CloseButton = styled.button`
   svg {
     width: 100%;
     height: 100%;
+
+    color: ${({ outButton }) => (outButton ? "#fafafa" : "#1766dcaa")};
   }
 `
 export const HeaderTitle = styled.div`

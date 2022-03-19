@@ -9,9 +9,9 @@ const getPropertyById = async (req, res, next) => {
       },
     })
     if (propertyDB) {
-      return res.status(200).send(propertyDB)
+      return res.status(200).json(propertyDB)
     } else {
-      return res.status(404).send({ error: "propiedad no encontrada" })
+      return res.status(404).json({ error: "propiedad no encontrada" })
     }
   } catch (e) {
     res.status(500).send(e)
