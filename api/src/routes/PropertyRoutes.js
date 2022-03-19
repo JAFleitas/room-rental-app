@@ -17,6 +17,6 @@ router.get("/getPropertyById/:id", getPropertyById)
 
 router.post("/addProperty", addProperty)
 
-router.get("/getPropertys", getFiltersProperty, getAll)
+router.get("/getProperties", getFiltersProperty, getAll)
 
 module.exports = router
