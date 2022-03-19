@@ -9,9 +9,9 @@ const getPropertyById = async (req, res, next) => {
       },
     })
     if (propertyDB) {
-      return res.status(200).send(propertyDB)
+      return res.status(200).json(propertyDB)
     } else {
-      return res.status(404).send({ error: "propiedad no encontrada" })
+      return res.status(404).json({ error: "propiedad no encontrada" })
     }
   } catch (e) {
     res.status(500).send(e)
@@ -58,19 +58,19 @@ const addProperty = async (req, res) => {
 
 const getAll = async (req, res, next) => {
   try {
-      const options = req.options || { where: {}};
+    const options = req.options || { where: {} }
 
     // incluimos los servicios de la propiedad
     options.include = [
       {
         model: Service,
-        attributes: ["name","id"],
+        attributes: ["name", "id"],
         through: {
           attributes: [], // que atributos de aquí quiero o si está vacío me elimina el atributo Country anidado
         },
       },
     ]
-    
+
     // console.log(options)
     const properties = await Property.findAll(options)
 
