@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const DropDownMenu = styled.div`
   position: absolute;
   top: 13.5vh;
-  right: -0vw;
+  right: -2vw;
   width: 300px;
   transform: translateX(-45%);
   background-color: #240046;
@@ -46,11 +46,12 @@ export const ModalTitle = styled.h1`
 export const ModalField = styled.div`
   width: 90%;
   margin-left: 5%;
-  height: 30%;
-  margin-bottom: 5%;
-  padding: 5%;
-  padding-left: 2%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
 
+  height: 30%;
+  padding: 20px;
+  padding-bottom: 20px;
   border-radius: 10px;
   background: linear-gradient(145deg, #bf8ce6, #e3a6ff);
   display: grid;
@@ -59,22 +60,26 @@ export const ModalField = styled.div`
 `
 
 export const ModalForm = styled.form`
-  height: 300px;
   width: 100%;
   border-radius: 25px;
   background: #5d00a4;
   box-shadow: inset 21px 21px 42px #430076, inset -21px -21px 42px #7700d2;
   border-radius: 10px;
   padding-top: 10%;
+  padding-bottom: 10%;
+  display: flex;
+  flex-direction: column;
 `
 export const ModalInput = styled.input`
   grid-column: 2/3;
   grid-row: 1/2;
-  width: 10 0%;
+  width: 100%;
   height: 100%;
   border-radius: 5px;
   padding: 5px;
   padding-top: 10px;
+  padding-bottom: 10px;
+
   font-size: 20px;
 `
 

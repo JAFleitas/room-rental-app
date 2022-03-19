@@ -12,29 +12,32 @@ import Modal from "../modal/modal"
 
 export default function DropDown({ visibility }) {
   const [logInShow, setLogInShow] = useState(false)
-  const [visible, setVisible] = useState(visibility)
+  const [signUpShow, setSignUpShow] = useState(false)
 
+  const [visible, setVisible] = useState(visibility)
   useEffect(() => {
     if (logInShow === true) {
       setVisible(false)
     } else {
       setVisible(visibility)
-      console.log(visibility)
-      console.log(visible)
     }
   })
 
-  function handleClick(e) {
+  function handleLogIn() {
     console.log("clicked")
     setLogInShow(true)
-    console.log(logInShow)
+  }
+
+  function handleSignUp() {
+    console.log("clicked")
+    setSignUpShow(true)
   }
 
   return (
     <>
       <DropDownMenu visibility={visible}>
-        <DropDownItem onClick={handleClick}>Log In</DropDownItem>
-        <DropDownItem>Sign Up</DropDownItem>
+        <DropDownItem onClick={handleLogIn}>Log In</DropDownItem>
+        <DropDownItem onClick={handleSignUp}>Sign Up</DropDownItem>
         <DropDownItem>Profile</DropDownItem>
       </DropDownMenu>
       <Modal
@@ -42,7 +45,36 @@ export default function DropDown({ visibility }) {
         modalShow={logInShow}
         setModalShow={setLogInShow}>
         <ModalTitle>Log In</ModalTitle>
-        <ModalForm>
+        <ModalForm fields={2}>
+          <ModalField>
+            <ModalLabel>Email: </ModalLabel>
+            <ModalInput
+              type={"email"}
+              name="email"
+              placeholder="Email..."></ModalInput>
+          </ModalField>
+          <ModalField>
+            <ModalLabel>Password: </ModalLabel>
+            <ModalInput
+              type={"password"}
+              name="password"
+              placeholder="Password..."></ModalInput>
+          </ModalField>
+        </ModalForm>
+      </Modal>
+      <Modal
+        overlayShow={true}
+        modalShow={signUpShow}
+        setModalShow={setSignUpShow}>
+        <ModalTitle>Sign Up</ModalTitle>
+        <ModalForm fields={3}>
+          <ModalField>
+            <ModalLabel>Fullname: </ModalLabel>
+            <ModalInput
+              type={"fullname"}
+              name="fullname"
+              placeholder="Fullname..."></ModalInput>
+          </ModalField>
           <ModalField>
             <ModalLabel>Email: </ModalLabel>
             <ModalInput
