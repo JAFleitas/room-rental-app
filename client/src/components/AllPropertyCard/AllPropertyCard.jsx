@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getAllProperties } from "../../redux/actions"
 
 import PropertyCard from "../PropertyCard/PropertyCard"
@@ -8,11 +8,12 @@ import { Card } from "./styled"
 //global a una variable (allPropierties) y mapearla para renderizar cada propiedad
 
 function AllPropertyCard() {
+  const dispatch= useDispatch();
   useEffect(() => {
     dispatch(getAllProperties())
   }, [dispatch])
 
-  const allPropierties = useSelector(state.AllProperties)
+  const allPropierties = useSelector(state => state.AllProperties)
   return (
     <Card>
       {allPropierties &&
