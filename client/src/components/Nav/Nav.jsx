@@ -3,6 +3,7 @@ import Button from "../Button/Button"
 import SearchBar from "../SearchBar/SearchBar"
 import { Navigator, IconContainer, Logo, Title, ToHome } from "./styled"
 import logo from "../../assets/Rental_App_Logo.png"
+import { Link } from "react-router-dom"
 
 export default function Nav() {
   function onClick(e) {
@@ -19,6 +20,7 @@ export default function Nav() {
       </IconContainer>
       <SearchBar></SearchBar>
       <Button />
+      
     </Navigator>
   )
 }

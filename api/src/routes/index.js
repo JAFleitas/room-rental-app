@@ -14,4 +14,5 @@ router.use("/properties", PropertyRoutes)
 router.use("/rentals", rentalRoutes)
 router.use("/users", userRouter)
 
+
 module.exports = router

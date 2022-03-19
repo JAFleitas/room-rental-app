@@ -1,13 +1,13 @@
 import { useState } from "react"
 import Modal from "../../../../components/modal/modal"
 
-export default function Reviews({ AiFillStarSt, numberOfReviews }) {
+export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
   const [modalShow, setModalShow] = useState(false)
 
   return (
     <>
       <AiFillStarSt />
-      <h5>4,5</h5>
+      <h5>{rating}</h5>
       <h5>
         <a onClick={() => setModalShow(!modalShow)}>
           {numberOfReviews} reviews

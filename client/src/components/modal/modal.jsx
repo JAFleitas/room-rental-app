@@ -10,6 +10,7 @@ export default function Modal({
   padding,
   width,
   title,
+  outButton,
 }) {
   return (
     <>
@@ -18,15 +19,25 @@ export default function Modal({
           overlayShow={overlayShow}
           positionModalY={positionModalY}
           positionModalX={positionModalX}>
+          {outButton && (
+            <CloseButton
+              outButton={outButton}
+              onClick={() => setModalShow(false)}>
+              <IoCloseOutline />
+            </CloseButton>
+          )}
           <ContainerModal padding={padding} width={width}>
             {title && (
               <HeaderTitle>
                 <h3>{title}</h3>
               </HeaderTitle>
             )}
-            <CloseButton onClick={() => setModalShow(false)}>
-              <IoCloseOutline />
-            </CloseButton>
+            {!outButton && (
+              <CloseButton onClick={() => setModalShow(false)}>
+                <IoCloseOutline />
+              </CloseButton>
+            )}
+
             {children}
           </ContainerModal>
         </Overlay>

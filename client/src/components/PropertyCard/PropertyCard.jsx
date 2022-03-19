@@ -14,9 +14,10 @@ import {
 } from "./styled"
 
 import Slider from "react-slick"
-function PropertyCard({ property }) {
+function PropertyCard(props) {
   const settings = {
     dots: true,
+    fade: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -26,24 +27,26 @@ function PropertyCard({ property }) {
     <Container>
       <ImageContainer>
         <Slider {...settings}>
-          {property.images &&
-            property.images.map((image, i) => {
+          {props.image &&
+            props.image.map((image, i) => {
               return (
-                <div key={i}>
-                  <Image src={image}></Image>
-                </div>
+                
+                  <Image key={i} src={image}></Image>
+                
               )
             })}
         </Slider>
       </ImageContainer>
-            <Title>{property.title}</Title>
-      <Info>{property.info}</Info>
+            <Title>{props.name}</Title>
+      <Info>{`${props.location}`}</Info>
+      <Info>{` Rooms: ${props.numberOfRooms}`}</Info>
+      <Info>{`Guests: ${props.maxNumberOfPeople}`}</Info>
       <DivPyR>
 
-      <Price> Price: {property.price}/ night </Price>
+      <Price> Price: {props.price}/ night </Price>
       <Rating>
         <AiFillStar color="pink" />
-        {property.rating}
+        {props.rating}
       </Rating>
       </DivPyR>
     </Container>
