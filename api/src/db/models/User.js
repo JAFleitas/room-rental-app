@@ -37,7 +37,7 @@ module.exports = sequelize => {
       },
       photo: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
@@ -53,10 +53,6 @@ module.exports = sequelize => {
         type: DataTypes.ENUM("enabled", "disabled"),
         allowNull: false,
         defaultValue: "enabled",
-      },
-      userType: {
-        type: DataTypes.ENUM("user", "subAdmin", "Admin"),
-        allowNull: false,
       },
       type: {
         type: DataTypes.ENUM("NORMAL", "ADMIN", "SUBADMIN"),

@@ -34,7 +34,14 @@ module.exports = async () => {
   }
 
   try {
-    await User.bulkCreate(users, { validate: true })
+    await User.bulkCreate(
+      users.map(user => ({
+        ...user,
+        photo:
+          "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
+      })),
+      { validate: true },
+    )
     console.log("- Usuarios cargados en la DDBB") // eslint-disable-line no-console
   } catch (err) {
     console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
