@@ -28,7 +28,14 @@ module.exports = sequelize => {
         allowNull: false,
         unique: true,
       },
-      city: {
+      provider: {
+        type: DataTypes.STRING,
+      },
+      providerId: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
+      photo: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -39,15 +46,16 @@ module.exports = sequelize => {
           this.setDataValue("password", hashSync(value, 10))
         },
       },
-      credit_card_number: {
+      account_number: {
         type: DataTypes.INTEGER,
       },
       status: {
         type: DataTypes.ENUM("enabled", "disabled"),
         allowNull: false,
       },
-      rating: {
-        type: DataTypes.INTEGER,
+      userType: {
+        type: DataTypes.ENUM("user", "subAdmin", "Admin"),
+        allowNull: false,
       },
       // id_type_user: {
       //   type: DataTypes.UUID,
