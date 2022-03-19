@@ -98,7 +98,7 @@ module.exports = async (req, res, next) => {
 
   // Defino si hay filtros por typo de propiedad
   if (type) {
-    options.where.id_type_property = type
+    options.where.typePropertyID = type
   }
 
   // Añado las opciones de filtrado a la request

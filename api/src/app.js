@@ -42,6 +42,7 @@ app.use("*", (req, res, next) => {
 })
 // error handler
 app.use(function (err, req, res, next) {
+  console.log(err.name) // eslint-disable-line no-console
   if (err.message) return res.status(err.status || 500).send(err.message)
   res.sendStatus(500)
 })
