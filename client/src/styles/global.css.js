@@ -29,5 +29,11 @@ export const Globalcss = createGlobalStyle`
 *::-webkit-scrollbar-button {
     display: none;
 }
+body {
+    font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+	font-weight: lighter;
+	color: #242323dd;
+  }
 
 `

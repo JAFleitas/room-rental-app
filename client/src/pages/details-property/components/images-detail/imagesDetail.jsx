@@ -21,7 +21,7 @@ export default function Images({ image }) {
           <Img
             onClick={() => setModal(true)}
             src={image.length > 0 ? image[0] : null}
-            alt="image Property"
+            alt="image not found"
             filter={"true"}
           />
         </PrincipalImage>
@@ -32,6 +32,7 @@ export default function Images({ image }) {
               onClick={() => setModal(true)}
               key={i}
               src={element}
+              alt="image not found"
             />
           ))}
         </SecondaryImages>
@@ -46,7 +47,12 @@ export default function Images({ image }) {
         outButton={"true"}>
         <ContainerModalImages>
           {image.map((e, i) => (
-            <ImageModal format={formatImages(i)} key={i} src={e} />
+            <ImageModal
+              format={formatImages(i)}
+              key={i}
+              src={e}
+              alt="image not found"
+            />
           ))}
         </ContainerModalImages>
       </Modal>
