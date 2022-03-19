@@ -1,4 +1,4 @@
-/* import React from "react"
+/*
 import {
   FooterDiv,
   SubDiv,
@@ -62,13 +62,7 @@ export default function Footer() {
             <CardLink>Development</CardLink>
             <CardLink>Design</CardLink>
           </Card>
-          {/* <Card>
-            <CardTitle>CONTACT US</CardTitle>
-            <CardLink>United States</CardLink>
-            <CardLink>United Kingdom</CardLink>
-            <CardLink>Australia</CardLink>
-            <CardLink>Support</CardLink>
-          </Card> */}
+          
           <Card>
             <CardTitle>SOCIAL</CardTitle>
             <CardLink>Facebook</CardLink>
