@@ -23,12 +23,14 @@ const addProperty = async (req, res) => {
     name,
     location,
     price,
-    stock,
     numberOfRooms,
     maxNumberOfPeople,
     description,
-    rating,
-    numberOfReviews,
+    image,
+    coordinates,
+    flat,
+    services,
+    typePropertyID,
     userID,
   } = req.body
   if (name) {
@@ -37,14 +39,19 @@ const addProperty = async (req, res) => {
         name,
         location,
         price,
-        stock,
         numberOfRooms,
         maxNumberOfPeople,
         description,
-        rating,
-        numberOfReviews,
+        image,
+        coordinates,
+        flat,
+        typePropertyID,
         userID,
       })
+      await Promise.all(
+        services.map(async service => await newProperty.addService(service)),
+      )
+
       if (newProperty)
         res.status(201).json({ message: "Created Property", data: newProperty })
       else res.status(500).json({ message: "Property not Created" })
@@ -58,19 +65,19 @@ const addProperty = async (req, res) => {
 
 const getAll = async (req, res, next) => {
   try {
-      const options = req.options || { where: {}};
+    const options = req.options || { where: {} }
 
     // incluimos los servicios de la propiedad
     options.include = [
       {
         model: Service,
-        attributes: ["name","id"],
+        attributes: ["name", "id"],
         through: {
           attributes: [], // que atributos de aquí quiero o si está vacío me elimina el atributo Country anidado
         },
       },
     ]
-    
+
     // console.log(options)
     const properties = await Property.findAll(options)
 

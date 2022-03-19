@@ -1,14 +1,19 @@
-const properties = require("../data/properties.json");
-const users = require("../data/users.json");
-const services = require("../data/Services.json");
+const properties = require("../data/properties.json")
+const users = require("../data/users.json")
+const services = require("../data/Services.json")
 const typesProperty = require("../data/type_property.json")
-const { Property, User, Service, Type_property: TypeProperty } = require("../db");
+const {
+  Property,
+  User,
+  Service,
+  Type_property: TypeProperty,
+} = require("../db")
 const usersIds = [
   "b49a5948-21a0-44c3-92fc-20b626d94dc2",
   "3ae3b92c-af90-40b4-a5de-8d8f1bb4096e",
   "b2119946-a958-4744-ad61-f05ce92f7024",
   "79864a10-2446-42e5-ab6d-6867f08eca69",
-];
+]
 
 module.exports = async () => {
   console.log("Inicializando DDBB...") // eslint-disable-line no-console
@@ -53,6 +58,7 @@ module.exports = async () => {
           description,
           rating,
           image,
+          coordinates,
           // flat,
           services,
           typePropertyID,
@@ -69,6 +75,7 @@ module.exports = async () => {
           rating,
           image,
           // flat,
+          coordinates,
           typePropertyID,
           userID,
         })

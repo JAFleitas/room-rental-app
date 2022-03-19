@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize")
 
 module.exports = sequelize => {
-
   const Property = sequelize.define(
     "property",
     {
@@ -38,19 +37,18 @@ module.exports = sequelize => {
       rating: {
         type: DataTypes.DOUBLE,
         allowNull: false,
+        defaultValue: 0,
       },
       image: {
-        type: DataTypes.ARRAY(DataTypes.JSON),
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
       coordinates: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 1,
       },
       flat: {
-        type: DataTypes.INTEGER,
-        defaultValue: 1,
+        type: DataTypes.ARRAY(DataTypes.STRING),
       },
       discount: {
         type: DataTypes.INTEGER,
@@ -61,22 +59,22 @@ module.exports = sequelize => {
   )
 
   Property.associate = models => {
-   // Relacionando Propiedad y Usuario
-   Property.belongsTo(models.User, {
-     sourceKey: "id",
-     foreignKey: "userID",
-   })
-   
-   // Relacionando Propiedad y TypoPropiedad
-   Property.belongsTo(models.Type_property, {
-     sourceKey: "id",
-     foreignKey: "typePropertyID",
-   })
+    // Relacionando Propiedad y Usuario
+    Property.belongsTo(models.User, {
+      sourceKey: "id",
+      foreignKey: "userID",
+    })
 
-  //  Relacionando Propiedad con Servicio (m:m)
-   Property.belongsToMany(models.Service, {
-     through: "PropertyServices",
-     timestamps: false,
-   })
- }
+    // Relacionando Propiedad y TypoPropiedad
+    Property.belongsTo(models.Type_property, {
+      sourceKey: "id",
+      foreignKey: "typePropertyID",
+    })
+
+    //  Relacionando Propiedad con Servicio (m:m)
+    Property.belongsToMany(models.Service, {
+      through: "PropertyServices",
+      timestamps: false,
+    })
+  }
 }

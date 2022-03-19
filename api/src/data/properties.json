@@ -12,7 +12,8 @@
     "image": ["https://a0.muscache.com/im/pictures/be7acf45-eb75-43dc-a040-a96791412bd2.jpg?im_w=960"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3"
+    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3",
+    "coordinates": "19.40514897,-99.15021774"
   },
   {
     "id": "14f0d784-b2bf-4f9d-b058-90f222e00ee6",
@@ -27,7 +28,8 @@
     "image": ["https://a0.muscache.com/im/pictures/752f3e7d-6e21-4275-ad02-4d6f7bf81568.jpg?im_w=960"],
     "flat": [],
     "services": ["1e3e04cb-e4ac-4576-a591-0fa9494d8f04","b550e852-9e1b-4029-b2df-52c07d1fd6d6","5434ef59-38c6-4f72-bc52-644d3250840b","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3"
+    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3",
+    "coordinates": "19.40514897,-98.94796649"
   },
   {
     "id": "13eaa861-d3f1-43eb-b884-4ab396a82318",
@@ -42,7 +44,8 @@
     "image": ["https://a0.muscache.com/im/pictures/8cc8b7a8-f635-4803-8ff2-46d34c375b41.jpg?im_w=720", "https://a0.muscache.com/im/pictures/e59c3aa9-368a-4679-8393-d38825765cac.jpg?im_w=720", "https://a0.muscache.com/im/pictures/88b250fd-703a-49c0-83d1-35a941d716bf.jpg?im_w=720"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","5434ef59-38c6-4f72-bc52-644d3250840b","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","5f96284c-b0ee-4c79-bdc2-73c228f8c695"],
-    "typePropertyID": "c3ff620e-904b-4090-baec-57d7a37f7e29"
+    "typePropertyID": "c3ff620e-904b-4090-baec-57d7a37f7e29",
+    "coordinates": "40.75823715,-74.14945660"
   },
   {
     "id": "92812c35-12bb-49ad-9548-a74cf5b6e9ea",
@@ -57,7 +60,8 @@
     "image": ["https://a0.muscache.com/im/pictures/miso/Hosting-54039861/original/365dce2b-d648-4b6f-8b95-292a7ce660cd.jpeg?im_w=720"],
     "flat": [],
     "services": ["24037b34-717b-4818-b022-033f40fd87ec","b8118944-05f8-41cb-9eca-0d4e9f4bd625","8b7b10b1-229a-4123-833b-ef82cd5b3a8b","b550e852-9e1b-4029-b2df-52c07d1fd6d6","5434ef59-38c6-4f72-bc52-644d3250840b","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "0e7d217c-8e11-440a-beed-56bbf1f88dd6"
+    "typePropertyID": "0e7d217c-8e11-440a-beed-56bbf1f88dd6",
+    "coordinates": "40.73274668,-74.09211202"
   },
   {
     "id":"0012425b-8655-49d7-b838-184b6e58948e",
@@ -72,7 +76,8 @@
     "image": ["https://a0.muscache.com/im/pictures/b08a5c52-e32d-44ad-bd98-9d62ca6e43eb.jpg?im_w=960"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3"
+    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3",
+    "coordinates": "40.77227875,-74.04026153"
   },
   {
     "id": "0b1f9feb-d17a-4fd5-92bb-3286cd5dad47",
@@ -87,7 +92,8 @@
     "image": ["https://a0.muscache.com/im/pictures/c606065e-abf6-4d4b-a5b6-cdefbfe06523.jpg?im_w=1200","https://a0.muscache.com/im/pictures/475d15fb-9f48-4592-8e77-6806aa77dc52.jpg?im_w=1440","https://www.airbnb.com.ec/rooms/45034070/photos/1345953793?federated_search_id=b008342c-275b-43bb-8108-5f2e7ed20edb&source_impression_id=p3_1647463882_1hPlhYs5dFy9bMMC","https://www.airbnb.com.ec/rooms/45034070/photos/1057493530?federated_search_id=b008342c-275b-43bb-8108-5f2e7ed20edb&source_impression_id=p3_1647463882_1hPlhYs5dFy9bMMC"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a"],
-    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7",
+    "coordinates": "-12.07543452,-76.99209762"
   },
   {
     "id": "2e47c8f0-01a2-4c88-a333-43c944e1c93f",
@@ -102,7 +108,8 @@
     "image": ["https://a0.muscache.com/im/pictures/6922f517-a391-4759-b9a3-c84e6b1a2da5.jpg?im_w=1200"],
     "flat": [],
     "services": ["1e3e04cb-e4ac-4576-a591-0fa9494d8f04","b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7",
+    "coordinates": "-12.18754349,-76.94815695"
   },
   {
     "id": "0ec259b5-1ca1-4cc7-956f-04b2c2106c08",
@@ -117,7 +124,8 @@
     "image": ["https://a0.muscache.com/im/pictures/miso/Hosting-557091396182227251/original/b9d4d14e-7430-4cdc-816b-1b9f507f2cd8.jpeg?im_w=960"],
     "flat": [],
     "services": ["1e3e04cb-e4ac-4576-a591-0fa9494d8f04","b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a"],
-    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7",
+    "coordinates": "-2.90820157,-79.01091619"
   },
   {
     "id": "7c2c502a-a9e9-40de-86e0-2443f0915c3d",
@@ -132,7 +140,8 @@
     "image": ["https://a0.muscache.com/im/pictures/b434372a-639d-4950-aa55-ad9b20e1db4e.jpg?im_w=960"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a"],
-    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3"
+    "typePropertyID": "87dd23fd-53b1-4f2d-9dd3-0c8aeb3c49f3",
+    "coordinates": "-2.89105741,-78.97280093"
   },
   {
     "id": "78639637-07f5-4b59-9938-abaa6fa3001e",
@@ -147,7 +156,8 @@
     "image": ["https://a0.muscache.com/im/pictures/miso/Hosting-33659844/original/a02e4b0d-ee8c-4fb9-9093-79a70bcd01b7.jpeg?im_w=960"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","5f96284c-b0ee-4c79-bdc2-73c228f8c695"],
-    "typePropertyID": "c3ff620e-904b-4090-baec-57d7a37f7e29"
+    "typePropertyID": "c3ff620e-904b-4090-baec-57d7a37f7e29",
+    "coordinates": "-2.55662941,-78.93735578"
   },
   {
     "id": "3ee0c7b9-68f5-4c72-b565-9cba8127dc81",
@@ -162,7 +172,8 @@
     "image": ["https://a0.muscache.com/im/pictures/8a9975fd-4e50-4356-ae58-b92e21c144a6.jpg?im_w=960", "https://a0.muscache.com/im/pictures/0f2c3289-2b6c-4603-bc23-6d8af7f9086a.jpg?im_w=720", "https://a0.muscache.com/im/pictures/b1fc7751-628c-43f2-ab82-34f1a5becd1e.jpg?im_w=720"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7",
+    "coordinates": "-32.93475308,-68.84425983"
   },
   {
     "id": "4518fc2e-aee1-44ad-a1dc-23fedbdf1d29",
@@ -177,7 +188,8 @@
     "image": ["https://a0.muscache.com/im/pictures/3a85cc4e-8558-445f-8680-e1d2eb3a4c7a.jpg?im_w=960", "https://a0.muscache.com/im/pictures/d1ee84bd-76ce-4dbe-900e-195cedb4e46a.jpg?im_w=720", "https://a0.muscache.com/im/pictures/1c72ef79-186f-4436-ad96-042240d4d540.jpg?im_w=720"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","112df14c-702b-46f8-a31a-34055ca5ad08"],
-    "typePropertyID": "61b7905b-d8c6-4db9-8fbe-b48fbaa9030a"
+    "typePropertyID": "61b7905b-d8c6-4db9-8fbe-b48fbaa9030a",
+    "coordinates": "-32.94541389,-68.79052075"
   },
   {
     "id": "725dddcd-7731-4267-a146-ff366d5f3181",
@@ -192,7 +204,8 @@
     "image": ["https://a0.muscache.com/im/pictures/f71a171c-10c9-4dc8-a4cc-3e5b8c0d0d31.jpg?im_w=960", "https://a0.muscache.com/im/pictures/fc721afd-974d-48fa-af8d-ad681ca22379.jpg?im_w=720", "https://a0.muscache.com/im/pictures/fe6ecf63-8a8b-4d3e-92fb-dda39f95dfd1.jpg?im_w=720"],
     "flat": [],
     "services": ["1e3e04cb-e4ac-4576-a591-0fa9494d8f04","b550e852-9e1b-4029-b2df-52c07d1fd6d6","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a","5f96284c-b0ee-4c79-bdc2-73c228f8c695"],
-    "typePropertyID": "ae0b942c-2c6b-4e2c-812d-c0af5d17adb1"
+    "typePropertyID": "ae0b942c-2c6b-4e2c-812d-c0af5d17adb1",
+    "coordinates": "-32.92726093,-68.84134110"
   },
   {
     "id": "7b4939d8-ea31-4239-88c4-04f66b45132d",
@@ -207,7 +220,8 @@
     "image": ["https://a0.muscache.com/im/pictures/acbbcb76-9553-4e03-827c-aae8843699ec.jpg?im_w=960", "https://a0.muscache.com/im/pictures/24bf3c08-9857-4e4a-b1bb-8a54dd072460.jpg?im_w=720", "https://a0.muscache.com/im/pictures/634041fc-b90a-478f-ab9b-a1a0c0cef534.jpg?im_w=720"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a"],
-    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7",
+    "coordinates": "-32.93547345,-68.85988528"
   },
   {
     "id": "40438aed-7e2b-4a9d-ba59-6d179ce0e73f",
@@ -222,6 +236,7 @@
     "image": ["https://a0.muscache.com/im/pictures/f3c0d1ec-1db3-40e7-8435-81b66d6833a4.jpg?im_w=960", "https://a0.muscache.com/im/pictures/f155c472-7df5-45bb-8a29-e289479dae98.jpg?im_w=720", "https://a0.muscache.com/im/pictures/aa36e801-a37b-4eee-9343-db0ef0b310c4.jpg?im_w=720"],
     "flat": [],
     "services": ["b550e852-9e1b-4029-b2df-52c07d1fd6d6","5434ef59-38c6-4f72-bc52-644d3250840b","24037b34-717b-4818-b022-033f40fd87ec","146496ca-55fe-4659-86c8-29e410063689","b8ad76c4-1257-4752-a4eb-6fdc88e4ef3a"],
-    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7"
+    "typePropertyID": "1bb62325-bdb7-4452-af86-d9205253bbc7",
+    "coordinates": "-32.92726093,-68.84134110"
   }
 ]
