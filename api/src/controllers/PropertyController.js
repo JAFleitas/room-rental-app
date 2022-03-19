@@ -67,7 +67,7 @@ const getAll = async (req, res, next) => {
   try {
     const options = req.options || { where: {} }
 
-    const { page } = req.query
+    let { page } = req.query
 
     page = page ? page : 1
     const PropertyXpage = 6
