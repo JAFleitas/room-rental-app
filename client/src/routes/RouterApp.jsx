@@ -10,7 +10,7 @@ const RouterApp = () => {
   return (
     <Routes>
       {/* <Route path="/" element={<PropertyCard />} /> */}
-      <Route path="/property-info" element={<Details />} />
+      <Route path="/property-info/:id" element={<Details />} />
       <Route exact path="/" element={<Home />}></Route>
       <Route exact path="/about-us" element={<AboutUs />}></Route>
     </Routes>

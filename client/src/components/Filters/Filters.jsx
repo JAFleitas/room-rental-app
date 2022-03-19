@@ -20,6 +20,7 @@ export default function Filters() {
     e.preventDefault()
     console.log("clicked")
     setModalShow(!modalShow)
+    console.log(modalShow)
   }
 
   return (

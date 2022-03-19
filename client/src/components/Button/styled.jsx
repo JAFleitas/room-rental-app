@@ -5,11 +5,11 @@ export const Container = styled.button`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 6vh;
+  height: 20px;
   width: 5vw;
   min-width: 80px;
   min-height: 40px;
-  margin-top: 3.5vh;
+  margin-top: 1vh;
   margin-left: 1vw;
 
   border-radius: 21px;

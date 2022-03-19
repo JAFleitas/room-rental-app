@@ -9,6 +9,10 @@ const {
 
 const router = Router()
 
+router.get("/new", (req, res) => {
+  res.send("Hola")
+})
+
 router.get("/getPropertyById/:id", getPropertyById)
 
 router.post("/addProperty", addProperty)
