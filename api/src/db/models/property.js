@@ -44,7 +44,7 @@ module.exports = sequelize => {
         allowNull: false,
       },
       coordinates: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.DOUBLE),
         allowNull: false,
       },
       flat: {

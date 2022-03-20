@@ -13,7 +13,6 @@ export const ContainerMap = styled.div`
   width: 80%;
   max-width: 400px;
   height: 200px;
-  background-color: #000;
   border-radius: 4px;
   @media screen and (max-width: 550px) {
     width: 100%;

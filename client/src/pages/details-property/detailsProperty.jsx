@@ -8,6 +8,7 @@ import { lazy, Suspense, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import Reviews from "./components/review/reviews"
+import MapDetail from "./components/map/map"
 import {
   ContainerPageDetails,
   DescriptionContainer,
@@ -60,7 +61,11 @@ export default function Details() {
             />
           </StarRating>
         </DescriptionContainer>
-        <ContainerMap></ContainerMap>
+        {propertyDetails.coordinates && (
+          <ContainerMap>
+            <MapDetail />
+          </ContainerMap>
+        )}
       </ContainerMapAndTitle>
 
       <Suspense fallback={<ContainerImages></ContainerImages>}>
