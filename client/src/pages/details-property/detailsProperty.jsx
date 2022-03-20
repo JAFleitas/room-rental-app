@@ -17,6 +17,10 @@ import {
   ServicesSt,
   DivReview,
 } from "./styled-components"
+import {
+  ContainerMap,
+  ContainerMapAndTitle,
+} from "./styled-components/map.styles"
 
 import { ContainerImages } from "./components/images-detail/styles"
 
@@ -37,24 +41,27 @@ export default function Details() {
 
   return (
     <ContainerPageDetails>
-      <DescriptionContainer>
-        <BotonBack>
-          <button onClick={() => navigate("/")}>
-            <IoChevronBackSharp />
-          </button>
-        </BotonBack>
-        <div>
-          <h2>{propertyDetails.name}</h2>
-        </div>
+      <ContainerMapAndTitle>
+        <DescriptionContainer>
+          <BotonBack>
+            <button onClick={() => navigate("/")}>
+              <IoChevronBackSharp />
+            </button>
+          </BotonBack>
+          <div>
+            <h2>{propertyDetails.name}</h2>
+          </div>
 
-        <StarRating>
-          <Reviews
-            rating={propertyDetails.rating}
-            AiFillStarSt={AiFillStarSt}
-            numberOfReviews={239}
-          />
-        </StarRating>
-      </DescriptionContainer>
+          <StarRating>
+            <Reviews
+              rating={propertyDetails.rating}
+              AiFillStarSt={AiFillStarSt}
+              numberOfReviews={239}
+            />
+          </StarRating>
+        </DescriptionContainer>
+        <ContainerMap></ContainerMap>
+      </ContainerMapAndTitle>
 
       <Suspense fallback={<ContainerImages></ContainerImages>}>
         {propertyDetails.image && <Images />}
