@@ -43,6 +43,7 @@ app.use("*", (req, res, next) => {
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err.name) // eslint-disable-line no-console
+  if (err.parent?.code === "22P02") err.status = 400;
   if (err.message) return res.status(err.status || 500).send(err.message)
   res.sendStatus(500)
 })
