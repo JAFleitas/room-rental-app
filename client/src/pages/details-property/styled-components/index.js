@@ -77,6 +77,7 @@ export const BotonBack = styled.div`
     position: relative;
     width: 26px;
     height: 30px;
+    font-size: 20px;
     &:hover {
       left: -8px;
     }
