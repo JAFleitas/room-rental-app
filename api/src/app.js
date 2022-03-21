@@ -32,9 +32,9 @@ app.use(passport.session())
 app.use((req, res, next) => {
   logger.info(req.body)
   const oldSend = res.send
-  res.send = (data) => {
+  res.send = data => {
     logger.info(JSON.parse(data))
-    oldSend.apply(res, this.arguments)
+    oldSend.apply(res, arguments)
   }
   next()
 })
@@ -56,7 +56,7 @@ app.use("*", (req, res, next) => {
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err.name) // eslint-disable-line no-console
-  if (err.parent?.code === "22P02") err.status = 400;
+  if (err.parent?.code === "22P02") err.status = 400
   if (err.message) return res.status(err.status || 500).send(err.message)
   res.sendStatus(500)
 })
