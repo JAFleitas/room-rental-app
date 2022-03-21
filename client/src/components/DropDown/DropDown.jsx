@@ -9,6 +9,7 @@ import {
   ModalField,
 } from "./styled"
 import Modal from "../modal/modal"
+import { Link } from "react-router-dom"
 
 export default function DropDown({ visibility }) {
   const [logInShow, setLogInShow] = useState(false)
@@ -39,6 +40,10 @@ export default function DropDown({ visibility }) {
         <DropDownItem onClick={handleLogIn}>Log In</DropDownItem>
         <DropDownItem onClick={handleSignUp}>Sign Up</DropDownItem>
         <DropDownItem>Profile</DropDownItem>
+        <DropDownItem>
+          {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
+          <Link to="/form">Add Property</Link>
+        </DropDownItem>
       </DropDownMenu>
       <Modal
         overlayShow={true}

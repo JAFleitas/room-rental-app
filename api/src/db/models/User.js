@@ -45,6 +45,7 @@ module.exports = sequelize => {
         set(value) {
           this.setDataValue("password", hashSync(value, 10))
         },
+        get(){},
       },
       account_number: {
         type: DataTypes.INTEGER,
@@ -60,6 +61,5 @@ module.exports = sequelize => {
         defaultValue: "NORMAL",
       },
     },
-    { timestamps: false },
   )
 }
