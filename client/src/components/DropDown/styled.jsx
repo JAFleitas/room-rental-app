@@ -92,3 +92,9 @@ export const ModalLabel = styled.label`
   font-weight: bold;
   font-family: sans-serif;
 `
+export const ButtonSubmit = styled.button`
+  width: 20%;
+  height: 5%;
+  background-color: white;
+  border-radius: 10px;
+`

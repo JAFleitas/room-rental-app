@@ -1,9 +1,14 @@
-import { GET_ALL_PROPERTIES, GET_PROPERTY_BY_ID } from "../actions"
+import {
+  GET_ALL_PROPERTIES,
+  GET_PROPERTY_BY_ID,
+  POST_NEW_USER,
+} from "../actions"
 
 const initialState = {
   AllProperties: [],
   propertys2: [],
   detailsOfProperty: {},
+  user: {},
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -17,6 +22,11 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         detailsOfProperty: payload,
+      }
+    case POST_NEW_USER:
+      return {
+        ...state,
+        user: payload,
       }
     default:
       return state
