@@ -69,6 +69,7 @@ export const ModalForm = styled.form`
   padding-bottom: 10%;
   display: flex;
   flex-direction: column;
+  gap:0.3rem
 `
 export const ModalInput = styled.input`
   grid-column: 2/3;
@@ -91,4 +92,76 @@ export const ModalLabel = styled.label`
   font-size: large;
   font-weight: bold;
   font-family: sans-serif;
+`
+export const ModalButtonFacebook = styled.button`
+  display: flex;
+  color:#ffffff;
+  justify-self: center;
+  align-self: center;  
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27,31,36,0.1);
+  width: 50%;
+  min-height: 30px;
+  background-color: #1B74E4;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover{
+    background-color: #385898;
+    
+  }
+`
+export const ModalButtonGoogle = styled.button`
+display: flex;
+  color: black;
+  justify-self: center;
+  align-self: center;  
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27,31,36,0.1);
+  width: 50%;
+  min-height: 30px;
+  background-color: white;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover{
+    background-color: #e9ecef;
+    
+  }
+`
+export const ModalButton= styled.button`
+  color:#ffffff;
+  justify-self: center;
+  align-self: center;
+  text-justify:center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27,31,36,0.1);
+  width: 50%;
+  height: 30px;
+  background-color: #2da44e;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover{
+    background-color: #2c974b;
+    
+  }
 `
