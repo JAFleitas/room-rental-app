@@ -26,10 +26,13 @@ import {
 import { ContainerImages } from "./components/images-detail/styles"
 
 import { actionGetPropertyById } from "../../redux/actions"
+import CarouselReviews from "./components/reviewsCarousel/carouselDetails"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
 
 export default function Details() {
+  // ref
+
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -61,11 +64,10 @@ export default function Details() {
             />
           </StarRating>
         </DescriptionContainer>
-        {propertyDetails.coordinates && (
-          <ContainerMap>
-            <MapDetail />
-          </ContainerMap>
-        )}
+
+        <ContainerMap>
+          <MapDetail />
+        </ContainerMap>
       </ContainerMapAndTitle>
 
       <Suspense fallback={<ContainerImages></ContainerImages>}>
@@ -86,6 +88,7 @@ export default function Details() {
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
+        <CarouselReviews />
       </DescriptionContainer>
     </ContainerPageDetails>
   )
