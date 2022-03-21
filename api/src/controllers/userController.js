@@ -1,17 +1,15 @@
 const { User } = require("../db/index.js")
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = process.env
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt")
 const createUser = async (req, res, next) => {
-  const { name, lastname, country, email, city, password, credit_card_number } =
-    req.body
+  const { name, lastname, country, email, password } = req.body
 
-  if (!name || !lastname || !country || !email || !city || !password) {
+  if (!name || !lastname || !country || !email || !password) {
     return next({ status: 400, message: "All fields are required" })
   }
   try {
     let user = await User.findOne({ where: { email } })
-
     // Si el correo ya está registrado, devuelvo un error
     if (user) {
       return next({ status: 400, message: "User already exists" })
@@ -23,10 +21,7 @@ const createUser = async (req, res, next) => {
       lastname,
       country,
       email,
-      city,
       password,
-      credit_card_number,
-      status: "enabled",
     })
 
     // generamos el payload/body para generar el token
@@ -70,14 +65,16 @@ const login = async (req, res, next) => {
     // ningún usuario contiene ese correo
     if (!user) return next({ status: 400, message: "Invalid credentials" })
 
-    user = user.toJSON()
+    //Si la cuenta está desabilitada
+    if (user.dataValues.status === "disabled") {
+      return next({ status: 400, message: "Disabled Account" })
+    }
 
     // Teniedo el usuario, determinamos si la contraseña enviada es correcta
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.dataValues.password)
 
     // si la contraseña es incorreta
-    if (!isMatch)
-      return next({ status: 400, message: "Invalid credentials" })
+    if (!isMatch) return next({ status: 400, message: "Invalid credentials" })
 
     // si la contraseña y email son validos escribimos el payload/body
     const payload = {
@@ -103,16 +100,32 @@ const login = async (req, res, next) => {
 }
 
 const getUserDetail = async (req, res, next) => {
-  try{
-    const user = await User.findByPk(req.params.id);
-  
-    if(!user){
-      return next({status: 404, message: "User not found"});
+  try {
+    const user = await User.findByPk(req.params.id, {
+      attributes: {
+        exclude: [
+          "password",
+          "provider",
+          "providerId",
+          "type",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+    })
+
+    if (!user) {
+      return next({ status: 404, message: "User not found" })
     }
-  // console.log(user.dataValues.password)
-    res.json(user);
-  }catch(err){
-    next(err);
+
+    //Si la cuenta está desabilitada
+    if (user.dataValues.status === "disabled") {
+      return next({ status: 400, message: "Disabled Account" })
+    }
+
+    res.json(user)
+  } catch (err) {
+    next(err)
   }
 }
 
