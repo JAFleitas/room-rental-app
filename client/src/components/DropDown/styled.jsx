@@ -11,7 +11,6 @@ export const DropDownMenu = styled.div`
   padding: 1rem;
   overflow: hidden;
   color: white;
-
   ${({ visibility }) =>
     visibility
       ? `
@@ -19,7 +18,7 @@ export const DropDownMenu = styled.div`
     `
       : `
     visibility: hidden;
-    `}
+    `};
 `
 export const DropDownItem = styled.button`
   height: 50px;
