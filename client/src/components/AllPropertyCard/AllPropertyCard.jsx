@@ -16,10 +16,11 @@ function AllPropertyCard() {
   const allPropierties = useSelector(state => state.AllProperties)
   return (
     <Card>
-      {allPropierties &&
-        allPropierties.map(property => {
+      {allPropierties.properties &&
+        allPropierties.properties.map(property => {
           return (
             <PropertyCard
+              id={property.id}
               key={property.id}
               name={property.name}
               location={property.location}

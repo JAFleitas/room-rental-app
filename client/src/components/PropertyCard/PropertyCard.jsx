@@ -1,7 +1,9 @@
 import React from "react"
 import { AiFillStar } from "react-icons/ai"
+import { useNavigate } from 'react-router-dom';
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+
 import {
   Container,
   Image,
@@ -12,7 +14,7 @@ import {
   Rating,
   DivPyR,
 } from "./styled"
-import { Link } from "react-router-dom"
+
 
 import Slider from "react-slick"
 function PropertyCard(props) {
@@ -24,9 +26,17 @@ function PropertyCard(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
+  const navigateTo = useNavigate();
+
+  function handleClick(){
+    console.log(props.id)
+    let path=`/property-info/${props.id}`;
+    navigateTo(path);
+  }
+
   return (
-    <Link to={props.id ? `/property-info/${props.id}` : `/`}>
-      <Container>
+    
+      <Container onClick={()=>handleClick()}>
         <ImageContainer>
           <Slider {...settings}>
             {props.image &&
@@ -47,7 +57,6 @@ function PropertyCard(props) {
           </Rating>
         </DivPyR>
       </Container>
-    </Link>
   )
 }
 
