@@ -7,11 +7,18 @@ import {
   ModalLabel,
   ModalTitle,
   ModalField,
+  ModalButton,
+  ModalButtonFacebook,
+  ModalButtonGoogle,
 } from "./styled"
 import Modal from "../modal/modal"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { FcGoogle } from 'react-icons/fc';
+import { BsFacebook } from 'react-icons/bs';
 
 export default function DropDown({ visibility }) {
+  const dispatch= useDispatch;
   const [logInShow, setLogInShow] = useState(false)
   const [signUpShow, setSignUpShow] = useState(false)
 
@@ -29,9 +36,14 @@ export default function DropDown({ visibility }) {
     setLogInShow(true)
   }
 
+
   function handleSignUp() {
     console.log("clicked")
     setSignUpShow(true)
+  }
+
+  function handleLogin() {
+    dispatch()
   }
 
   return (
@@ -65,6 +77,9 @@ export default function DropDown({ visibility }) {
               name="password"
               placeholder="Password..."></ModalInput>
           </ModalField>
+          <ModalButton type="submit">Log in</ModalButton>
+          <ModalButtonFacebook><BsFacebook/>Log in with Facebook</ModalButtonFacebook>
+          <ModalButtonGoogle><FcGoogle/>Log in with Google</ModalButtonGoogle>
         </ModalForm>
       </Modal>
       <Modal
@@ -94,6 +109,9 @@ export default function DropDown({ visibility }) {
               name="password"
               placeholder="Password..."></ModalInput>
           </ModalField>
+          <ModalButton type="submit">Sign Up</ModalButton>
+          <ModalButtonFacebook><BsFacebook/>Sign Up with Facebook</ModalButtonFacebook>
+          <ModalButtonGoogle><FcGoogle/>Sign Up with Google</ModalButtonGoogle>
         </ModalForm>
       </Modal>
     </>
