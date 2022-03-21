@@ -23,3 +23,28 @@ export function actionGetPropertyById(id) {
     })
   }
 }
+
+export const POST_NEW_USER = "POST_NEW_USER"
+export function postNewUser({
+  name,
+  lastname,
+  country,
+  email,
+  city,
+  password,
+}) {
+  return async function (dispatch) {
+    let response = await axios.post(`${api}/users/register`, {
+      name,
+      lastname,
+      country,
+      email,
+      city,
+      password,
+    })
+    return dispatch({
+      type: POST_NEW_USER,
+      payload: response.data,
+    })
+  }
+}
