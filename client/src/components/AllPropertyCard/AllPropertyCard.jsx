@@ -8,18 +8,19 @@ import { Card } from "./styled"
 //global a una variable (allPropierties) y mapearla para renderizar cada propiedad
 
 function AllPropertyCard() {
-  const dispatch= useDispatch();
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllProperties())
   }, [dispatch])
 
-  const allPropierties = useSelector(state => state.AllProperties)
+  const allPropierties = useSelector(state => state.AllProperties.properties)
   return (
     <Card>
-      {allPropierties &&
-        allPropierties.map(property => {
+      {allPropierties.properties &&
+        allPropierties.properties.map(property => {
           return (
             <PropertyCard
+              id={property.id}
               key={property.id}
               name={property.name}
               location={property.location}

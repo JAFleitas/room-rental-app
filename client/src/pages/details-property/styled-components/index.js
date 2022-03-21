@@ -6,7 +6,8 @@ export const ContainerPageDetails = styled.div`
   align-items: center;
   width: 100%;
   background-color: #f0f0f0;
-  height: 2000px;
+  height: auto;
+  padding-top: 50px;
 
   @media screen and (max-width: 740px) {
     width: 100%;

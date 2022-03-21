@@ -3,23 +3,26 @@ import styled from "styled-components"
 export const Container = styled.button`
   grid-column: 3/4;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   height: 20px;
-  width: 5vw;
+  width: 100px;
   min-width: 80px;
   min-height: 40px;
   margin-top: 1vh;
   margin-left: 1vw;
+  padding: 4px;
+  z-index: 50;
 
   border-radius: 21px;
-  background: linear-gradient(145deg, #cb53ff, #ab46e6);
-  box-shadow: 6px 6px 12px #8938b8, -6px -6px 12px #f364ff;
-
+  background: #0f1111;
+  svg {
+    color: #ededed;
+  }
+  transition: all 1s;
   &:hover {
     border-radius: 21px;
-    background: linear-gradient(145deg, #ab46e6, #cb53ff);
-    box-shadow: 6px 6px 12px #8d3abd, -6px -6px 12px #ef62ff;
+    background: #24292f;
   }
 
   &:active {

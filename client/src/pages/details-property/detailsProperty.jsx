@@ -7,7 +7,7 @@ import { lazy, Suspense, useEffect } from "react"
 
 import { useNavigate, useParams } from "react-router-dom"
 
-import Reviews from "./components/review/reviews"
+import Reviews from "./components/reviewModal/reviews"
 import MapDetail from "./components/map/map"
 import {
   ContainerPageDetails,
@@ -26,6 +26,7 @@ import {
 import { ContainerImages } from "./components/images-detail/styles"
 
 import { actionGetPropertyById } from "../../redux/actions"
+import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
 
@@ -61,11 +62,10 @@ export default function Details() {
             />
           </StarRating>
         </DescriptionContainer>
-        {propertyDetails.coordinates && (
-          <ContainerMap>
-            <MapDetail />
-          </ContainerMap>
-        )}
+
+        <ContainerMap>
+          <MapDetail />
+        </ContainerMap>
       </ContainerMapAndTitle>
 
       <Suspense fallback={<ContainerImages></ContainerImages>}>
@@ -86,6 +86,7 @@ export default function Details() {
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
+        <ReviewContainer />
       </DescriptionContainer>
     </ContainerPageDetails>
   )
