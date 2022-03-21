@@ -47,7 +47,7 @@ module.exports = sequelize => {
         type: DataTypes.ARRAY(DataTypes.DOUBLE),
         allowNull: false,
       },
-      flat: {
+      floor: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
       discount: {
