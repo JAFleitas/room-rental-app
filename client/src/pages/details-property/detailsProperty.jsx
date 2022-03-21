@@ -7,7 +7,7 @@ import { lazy, Suspense, useEffect } from "react"
 
 import { useNavigate, useParams } from "react-router-dom"
 
-import Reviews from "./components/review/reviews"
+import Reviews from "./components/reviewModal/reviews"
 import MapDetail from "./components/map/map"
 import {
   ContainerPageDetails,
@@ -26,13 +26,11 @@ import {
 import { ContainerImages } from "./components/images-detail/styles"
 
 import { actionGetPropertyById } from "../../redux/actions"
-import CarouselReviews from "./components/reviewsCarousel/carouselDetails"
+import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
 
 export default function Details() {
-  // ref
-
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -88,7 +86,7 @@ export default function Details() {
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
-        <CarouselReviews />
+        <ReviewContainer />
       </DescriptionContainer>
     </ContainerPageDetails>
   )
