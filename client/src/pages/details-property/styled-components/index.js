@@ -7,6 +7,7 @@ export const ContainerPageDetails = styled.div`
   width: 100%;
   background-color: #f0f0f0;
   height: 2000px;
+  padding-top: 50px;
 
   @media screen and (max-width: 740px) {
     width: 100%;
