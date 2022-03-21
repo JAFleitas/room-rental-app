@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from "react";
 import { Link, } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import {Input,
+        Title,
+        Parrafo,
+        Boton,
+        Home} from"./styled"
 
 
 
@@ -35,6 +39,9 @@ function validate(input){
     if(!input.image){
         error.image="required field"
     }
+    if(!input.flat){
+        error.flat="required field"
+    }
        
     return error;   
         
@@ -50,7 +57,8 @@ function validate(input){
 
 export default function newRental(){
 
-    const dispatch= useDispatch()
+    // const dispatch = useDispatch()
+
     const [error, setError]= useState({})
     const [input,setInput]=useState({
         name:"",
@@ -60,7 +68,8 @@ export default function newRental(){
         maxNumberOfPeople:"",
         description:"",
         rating:"",
-        image:""
+        image:"",
+        flat:""
     })
 
     function handleChange(e){
@@ -75,9 +84,21 @@ export default function newRental(){
         }))
     };
 
-    function submit(){
-        
-    }
+    
+    // function handleSubmit(e){
+    //     e.preventDefault()
+    //     if(input.name.length>=2 &&
+    //         input.location.length>=2&&
+    //         input.price.length>0&&
+    //         input.numberOfRooms.length>=1&&
+    //         input.numberOfRooms.length<=6&&
+    //         input.maxNumberOfPeople.length>=1&&
+    //         input.description.length>1&&
+    //         input.image.length>=1
+    //         ){
+
+    //     }
+    // }
 
       
 
@@ -85,13 +106,13 @@ export default function newRental(){
     return(
         
         <div>
-            <h1> NEW RENTAL </h1>
+            <Title> NEW RENTAL </Title>
            <form>
                <div>
-                   <label> Name: </label>
-                   <input type="text"  name="name" value={input.name}  onChange={(e)=> handleChange(e)} ></input>
+                   <label> <b>Name:</b> </label>
+                   <Input type="text"  name="name" value={input.name}  onChange={(e)=> handleChange(e)} ></Input>
                    {error.name &&(
-                       <p> {error.name} </p>
+                       <Parrafo> {error.name} </Parrafo>
                    )}
                    
                  
@@ -100,7 +121,7 @@ export default function newRental(){
                    <label>Location:</label>
                    <input type="text" name="location" value={input.location}  onChange={(e)=> handleChange(e)}></input>
                    {error.location &&(
-                       <p> {error.location} </p>
+                       <Parrafo> {error.location} </Parrafo>
 
                    )}
                </div>
@@ -108,53 +129,70 @@ export default function newRental(){
                    <label>Price:</label>
                    <input type="number" min="0" defaultValue={input.price} name="price" onChange={(e)=> handleChange(e)} ></input>
                    {error.price &&(
-                       <p> {error.price} </p>
+                       <Parrafo> {error.price} </Parrafo>
                    )}
                </div>
                <div>
                    <label>Number of Room: </label>
                    <input type="number" min="1" defaultValue={input.numberOfRooms} name="numberOfRooms" onChange={(e)=> handleChange(e)} ></input>
                    {error.numberOfRooms &&(
-                       <p> {error.numberOfRooms} </p>
+                       <Parrafo> {error.numberOfRooms} </Parrafo>
                    )}
                </div>
                <div>
                    <label> Maxime number of People: </label>
                    <input type="number" defaultValue={input.maxNumberOfPeople} name="maxNumberOfPeople" onChange={(e)=> handleChange(e)} />
                    {error.maxNumberOfPeople &&(
-                       <p>{error.maxNumberOfPeople}</p>
+                       <Parrafo>{error.maxNumberOfPeople}</Parrafo>
                    )}
                </div>
                <div>
-                   <label > Description: </label>
+                   <label > <strong> Description:</strong>  </label>
                    <input type="text" defaultValue={input.description} name="description" onChange={(e)=> handleChange(e)} ></input>
                    {error.description &&(
-                       <p>{error.description} </p>
+                       <Parrafo>{error.description} </Parrafo>
                    ) }
                </div>
                <div>
-                   <label>Rating: </label>
-                   <input type="number" min="0" max="5" defaultValue={input.rating} name="rating " onChange={(e)=> handleChange(e)} ></input>
-                   {error.rating &&(
-                       <p>{error.rating}</p>
+                   <label >Pets:</label>
+                   <select > 
+                       <option>---</option>
+                       <option > Yes </option>
+                       <option > No </option>
+                   </select>
+               </div>
+               <div>
+                   <label > WiFi: </label>
+                   <select>
+                       <option>---</option>
+                       <option>Yes</option>
+                       <option>No</option>
+                   </select>
+               </div>
+               <div>
+                   <label > Flat: </label>
+                   <input type="number" min="0" name="flat" onChange={(e)=> handleChange(e)} />
+                   {error.flat &&(
+                       <Parrafo>{error.flat}</Parrafo>
                    )}
                </div>
+            
                <div>
                    <label> Image: </label>
                    <input type="url" defaultValue={input.image} name="image" onChange={(e)=> handleChange(e)} />
                    {error.image && (
-                       <p> {error.image} </p> 
+                       <Parrafo> {error.image} </Parrafo> 
                    )}
 
                </div>
                <div>
-                   <button>
+                   <Boton>
                        CREATE
-                   </button>
+                   </Boton>
                </div>
                <div>
                    <Link to="/">
-                       <button> Home </button>
+                       <Home> Home </Home>
                    </Link>
                </div>
                
