@@ -26,6 +26,19 @@ app.use(session({ secret: process.env.APP_RENTAL }))
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+//Middleware interceptor
+
+app.use((req, res, next) => {
+  logger.info(req.body)
+  const oldSend = res.send
+  res.send = (data) => {
+    logger.info(JSON.parse(data))
+    oldSend.apply(res, this.arguments)
+  }
+  next()
+})
+
 // Routes
 app.use("/api", routes)
 app.get("/auth/facebook", passport.authenticate("facebook"))
