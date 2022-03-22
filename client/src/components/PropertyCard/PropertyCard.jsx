@@ -33,7 +33,7 @@ function PropertyCard(props) {
     let path = `/property-info/${props.id}`
     navigateTo(path)
   }
-
+  // propertyCard
   return (
     <Container onClick={() => handleClick()}>
       <ImageContainer>
