@@ -1,7 +1,11 @@
 import axios from "axios"
 import getPropertyById from "../../utilities/getPropertyById"
 
-export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
+export const LOG_IN = "LOG_IN" 
+export const GET_PROPERTY_BY_ID = "GET_PROPERTY_BY_ID"
+export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"  
+export const POST_NEW_USER = "POST_NEW_USER"
+
 const api = import.meta.env.VITE_APP_API_URL
 export function getAllProperties() {
   return async function (dispatch) {
@@ -13,7 +17,7 @@ export function getAllProperties() {
   }
 }
 
-export const GET_PROPERTY_BY_ID = "GET_PROPERTY_BY_ID"
+
 export function actionGetPropertyById(id) {
   return async dispatch => {
     const response = await getPropertyById(id)
@@ -24,7 +28,17 @@ export function actionGetPropertyById(id) {
   }
 }
 
-export const POST_NEW_USER = "POST_NEW_USER"
+export function logIn(data) {
+  return async function (dispatch) {
+    let response = await axios.post(`${api}/users/login`, data)
+    return dispatch({
+      type: LOG_IN,
+      payload: response.data,
+    })
+  }
+}
+
+
 export function postNewUser({
   name,
   lastname,
