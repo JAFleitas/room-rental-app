@@ -3,17 +3,17 @@ import { Link } from "react-router-dom"
 
 export const Navigator = styled.nav`
   background-color: #0f1111;
-  display: grid;
-  grid-template-columns: 15% 70% 15%;
+  display: flex;
+  flex-direction: row;
+
   height: 150px;
-  justify-items: center;
+  justify-content: space-between;
   align-items: center;
 `
 
 export const IconContainer = styled.div`
   height: 9vh;
-  width: 80%;
-  min-width: 250px;
+  width: 80px;
   margin-left: 1.5vw;
   margin-top: 2vh;
   margin-bottom: 2vh;
