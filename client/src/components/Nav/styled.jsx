@@ -5,7 +5,9 @@ export const Navigator = styled.nav`
   background-color: #0f1111;
   display: flex;
   flex-direction: row;
-
+  top: 0;
+  left: 0;
+  right: 0;
   height: 150px;
   justify-content: space-between;
   align-items: center;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getAllProperties, setOptionFilters } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
+import { Container, LabelSt, SelectSt } from "./styles/index.sort"
 
 const sortByTypes = [
   { title: "Name", value: "name" },
@@ -27,9 +28,9 @@ const Sorters = () => {
   }
 
   return (
-    <div>
-      <label>Sort by</label>
-      <select
+    <Container>
+      <LabelSt>Sort by:</LabelSt>
+      <SelectSt
         title="orderBy"
         name={"orderBy"}
         id={"orderBy"}
@@ -40,8 +41,8 @@ const Sorters = () => {
             {order.title}
           </option>
         ))}
-      </select>
-      <select
+      </SelectSt>
+      <SelectSt
         title="order"
         name={"order"}
         id={"order"}
@@ -53,8 +54,8 @@ const Sorters = () => {
         <option value={"DESC"} key={"DESC"}>
           {"Descendent"}
         </option>
-      </select>
-    </div>
+      </SelectSt>
+    </Container>
   )
 }
 
