@@ -9,7 +9,10 @@ export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
   return (
     <>
       <AiFillStarSt />
-      <h5>{rating}</h5>
+      <h5>
+        {rating}
+        {rating % 1 === 0 ? ".0" : null}
+      </h5>
       <h5>
         <a onClick={() => setModalShow(!modalShow)}>
           {numberOfReviews} reviews
