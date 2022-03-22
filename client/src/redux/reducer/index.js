@@ -2,7 +2,9 @@ import {
   GET_ALL_PROPERTIES,
   GET_PROPERTY_BY_ID,
   POST_NEW_USER,
-  LOG_IN
+  LOG_IN,
+  USER_LOADED,
+  AUTH_ERROR,
 } from "../actions"
 
 const initialState = {
@@ -10,7 +12,7 @@ const initialState = {
   propertys2: [],
   detailsOfProperty: {},
   user: {},
-  token:{}
+  token: {},
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -26,17 +28,22 @@ function rootReducer(state = initialState, { type, payload }) {
         detailsOfProperty: payload,
       }
     case POST_NEW_USER:
+    case LOG_IN:
       localStorage.setItem("tokenRentalApp", payload)
       return {
         ...state,
         token: payload,
       }
-    case LOG_IN:
-      localStorage.setItem("tokenRentalApp", payload)
-      return{
+    case USER_LOADED:
+      return {
         ...state,
-        token: payload,
-        
+        user: payload,
+      }
+    case AUTH_ERROR:
+      localStorage.removeItem("tokenRentalApp")
+      return {
+        ...state,
+        token: null,
       }
     default:
       return state
