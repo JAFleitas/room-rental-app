@@ -21,7 +21,7 @@ export default function Nav() {
           <Logo src={logo}></Logo>
         </ToHome>
       </IconContainer>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Button />
     </Navigator>
   )

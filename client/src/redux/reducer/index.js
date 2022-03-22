@@ -3,9 +3,13 @@ import {
   GET_PROPERTY_BY_ID,
   POST_NEW_USER,
   LOG_IN,
+
   USER_LOADED,
   AUTH_ERROR,
   ADD_PROPERTY
+  SET_OPTION_FILTERS,
+  GET_ALL_CATEGORIES,
+  GET_ALL_SERVICES,
 } from "../actions"
 
 const initialState = {
@@ -14,10 +18,44 @@ const initialState = {
   detailsOfProperty: {},
   user: {},
   token: {},
+
+  filters: {
+    minrooms: "",
+    maxrooms: "",
+    minpeople: "",
+    maxpeople: "",
+    sort: "ASC",
+    sortBy: "name",
+    minprice: "",
+    maxprice: "",
+    type: "", //tipo de propiedad
+  },
+  currentPage: 1,
+  categories: [],
+  services: [],
+
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
+      }
+    case GET_ALL_SERVICES:
+      return {
+        ...state,
+        services: payload,
+      }
+    case SET_OPTION_FILTERS:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          ...payload,
+        },
+      }
     case GET_ALL_PROPERTIES:
       return {
         ...state,
@@ -40,6 +78,7 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         token: payload,
       }
+
     case USER_LOADED:
       return {
         ...state,
