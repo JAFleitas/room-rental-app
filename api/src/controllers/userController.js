@@ -26,7 +26,7 @@ const createUser = async (req, res, next) => {
 
     // generamos el payload/body para generar el token
     const payload = {
-      usuario: {
+      user: {
         id: user.id,
       },
     }
@@ -101,7 +101,7 @@ const login = async (req, res, next) => {
 
 const getUserDetail = async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id, {
+    const user = await User.findByPk(req.user.id, {
       attributes: {
         exclude: [
           "password",
