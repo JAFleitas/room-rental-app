@@ -1,12 +1,14 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import AllPropertyCard from "../../components/AllPropertyCard/AllPropertyCard"
 
+import { Link } from "react-router-dom"
+
+import SearchBar from "../../components/SearchBar/SearchBar"
+import{New} from "./styled"
 export default function Home() {
   return (
     <div>
-      <AllPropertyCard />
-      {/*  <Link to="/form"> <button> new rental </button> </Link> */}
+      <SearchBar />
+      <Link to="/form"> <New> New Rental </New> </Link>
+
     </div>
   )
 }
