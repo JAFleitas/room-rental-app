@@ -4,6 +4,7 @@ const { Router } = require("express")
 const PropertyRoutes = require("./PropertyRoutes")
 const rentalRoutes = require("./rentalRoutes")
 const userRouter = require("./userRoutes")
+const servicesRoutes = require("./servicesRoutes")
 
 const router = Router()
 
@@ -13,6 +14,6 @@ const router = Router()
 router.use("/properties", PropertyRoutes)
 router.use("/rentals", rentalRoutes)
 router.use("/users", userRouter)
-
+router.use("/services", servicesRoutes)
 
 module.exports = router
