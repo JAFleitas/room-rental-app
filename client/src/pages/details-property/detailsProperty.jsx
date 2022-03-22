@@ -1,13 +1,14 @@
 // #6f5fca
 // #27276b
 // #1766dc
+import { useDispatch, useSelector } from "react-redux"
 import { IoChevronBackSharp } from "react-icons/io5"
-import { lazy, Suspense, useEffect, useState } from "react"
+import { lazy, Suspense, useEffect } from "react"
 
 import { useNavigate, useParams } from "react-router-dom"
-/* import Images from "./components/images-detail/imagesDetail" */
 
-import Reviews from "./components/review/reviews"
+import Reviews from "./components/reviewModal/reviews"
+import MapDetail from "./components/map/map"
 import {
   ContainerPageDetails,
   DescriptionContainer,
@@ -17,44 +18,58 @@ import {
   ServicesSt,
   DivReview,
 } from "./styled-components"
+import {
+  ContainerMap,
+  ContainerMapAndTitle,
+} from "./styled-components/map.styles"
 
 import { ContainerImages } from "./components/images-detail/styles"
-import getPropertyById from "../../utilities/getPropertyById"
+
+import { actionGetPropertyById } from "../../redux/actions"
+import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
 
 export default function Details() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [property, setProperty] = useState({})
 
+  //dispatch
+  const dispatch = useDispatch()
+  const propertyDetails = useSelector(state => state.detailsOfProperty)
   useEffect(() => {
-    getPropertyById(id).then(res => setProperty(res[0]))
+    dispatch(actionGetPropertyById(id))
   }, [])
 
   return (
     <ContainerPageDetails>
-      <DescriptionContainer>
-        <BotonBack>
-          <button onClick={() => navigate("/")}>
-            <IoChevronBackSharp />
-          </button>
-        </BotonBack>
-        <div>
-          <h2>{property.name}</h2>
-        </div>
+      <ContainerMapAndTitle>
+        <DescriptionContainer>
+          <BotonBack>
+            <button onClick={() => navigate("/")}>
+              <IoChevronBackSharp />
+            </button>
+          </BotonBack>
+          <div>
+            <h2>{propertyDetails.name}</h2>
+          </div>
 
-        <StarRating>
-          <Reviews
-            rating={property.rating}
-            AiFillStarSt={AiFillStarSt}
-            numberOfReviews={239}
-          />
-        </StarRating>
-      </DescriptionContainer>
+          <StarRating>
+            <Reviews
+              rating={propertyDetails.rating}
+              AiFillStarSt={AiFillStarSt}
+              numberOfReviews={239}
+            />
+          </StarRating>
+        </DescriptionContainer>
+
+        <ContainerMap>
+          <MapDetail />
+        </ContainerMap>
+      </ContainerMapAndTitle>
 
       <Suspense fallback={<ContainerImages></ContainerImages>}>
-        {property.image && <Images image={property.image} />}
+        {propertyDetails.image && <Images />}
       </Suspense>
 
       <DescriptionContainer>
@@ -64,13 +79,14 @@ export default function Details() {
 
       <DescriptionContainer>
         <h1>Description</h1>
-        <p>{property.description}</p>
+        <p>{propertyDetails.description}</p>
       </DescriptionContainer>
       <DescriptionContainer>
         <DivReview>
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
+        <ReviewContainer />
       </DescriptionContainer>
     </ContainerPageDetails>
   )

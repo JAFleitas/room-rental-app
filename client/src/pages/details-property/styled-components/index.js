@@ -6,7 +6,8 @@ export const ContainerPageDetails = styled.div`
   align-items: center;
   width: 100%;
   background-color: #f0f0f0;
-  height: 2000px;
+  height: auto;
+  padding-top: 50px;
 
   @media screen and (max-width: 740px) {
     width: 100%;
@@ -77,6 +78,7 @@ export const BotonBack = styled.div`
     position: relative;
     width: 26px;
     height: 30px;
+    font-size: 20px;
     &:hover {
       left: -8px;
     }

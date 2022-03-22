@@ -34,7 +34,9 @@ export const ImageContainer = styled.div`
 `
 
 export const Image = styled.img`
-  object-fit: contain;
+  width:100%;
+  height:200px;
+
   border-radius: 1rem;
 `
 
@@ -43,15 +45,16 @@ width: 50%;
 padding-left :5px;
   padding-right :5px;
   color: black;
-  font-size: x-large;
+  font-size: medium;
+  font-weight:bold;
 `
 export const Info = styled.p`
-  width: 50%;
+  width: 40%;
   padding-left :5px;
   padding-right :5px;
   color: black;
   font-family: 'Times New Roman', Times, serif;
-  font-size: medium;
+  font-size: small;
 
 `
 export const DivPyR =styled.div`
@@ -68,13 +71,13 @@ gap:20%;
 export const Price = styled.p`
 
   color: black;
-  font-size: 13px;
+  font-size: small;
 
   padding: 1rem;
 `
 export const Rating = styled.p`
   color: black;
-  font-size: 13px;
+  font-size: small;
 
 
 `

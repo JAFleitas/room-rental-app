@@ -28,7 +28,8 @@ const addProperty = async (req, res) => {
     description,
     image,
     coordinates,
-    flat,
+    floor,
+    discount,
     services,
     typePropertyID,
     userID,
@@ -44,7 +45,9 @@ const addProperty = async (req, res) => {
         description,
         image,
         coordinates,
-        flat,
+        floor,
+        discount,
+        services,
         typePropertyID,
         userID,
       })
@@ -67,6 +70,11 @@ const getAll = async (req, res, next) => {
   try {
     const options = req.options || { where: {} }
 
+    let { page } = req.query
+
+    page = page ? page : 1
+    const PropertyXpage = 6
+
     // incluimos los servicios de la propiedad
     options.include = [
       {
@@ -85,7 +93,16 @@ const getAll = async (req, res, next) => {
       return next({ message: "Properties not founded", status: 404 })
     }
 
-    res.json(properties)
+    //Paginación
+    const PropertyWithPagination = properties.slice(
+      PropertyXpage * (page - 1),
+      PropertyXpage * (page - 1) + PropertyXpage,
+    )
+
+    res.json({
+      totalPages: Math.ceil(properties.length / PropertyXpage),
+      properties: PropertyWithPagination,
+    })
   } catch (error) {
     next(error)
   }

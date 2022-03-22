@@ -19,7 +19,7 @@ function App() {
 
   // }
   return (
-    <div className="App">
+    <div >
       <Nav />
          <RouterApp/>
       <Footer />

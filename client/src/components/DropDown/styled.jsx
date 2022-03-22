@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const DropDownMenu = styled.div`
   position: absolute;
   top: 13.5vh;
-  right: -0vw;
+  right: -2vw;
   width: 300px;
   transform: translateX(-45%);
   background-color: #240046;
@@ -11,7 +11,6 @@ export const DropDownMenu = styled.div`
   padding: 1rem;
   overflow: hidden;
   color: white;
-
   ${({ visibility }) =>
     visibility
       ? `
@@ -19,7 +18,7 @@ export const DropDownMenu = styled.div`
     `
       : `
     visibility: hidden;
-    `}
+    `};
 `
 export const DropDownItem = styled.button`
   height: 50px;
@@ -46,11 +45,12 @@ export const ModalTitle = styled.h1`
 export const ModalField = styled.div`
   width: 90%;
   margin-left: 5%;
-  height: 30%;
-  margin-bottom: 5%;
-  padding: 5%;
-  padding-left: 2%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
 
+  height: 30%;
+  padding: 20px;
+  padding-bottom: 20px;
   border-radius: 10px;
   background: linear-gradient(145deg, #bf8ce6, #e3a6ff);
   display: grid;
@@ -59,22 +59,27 @@ export const ModalField = styled.div`
 `
 
 export const ModalForm = styled.form`
-  height: 300px;
   width: 100%;
   border-radius: 25px;
   background: #5d00a4;
   box-shadow: inset 21px 21px 42px #430076, inset -21px -21px 42px #7700d2;
   border-radius: 10px;
   padding-top: 10%;
+  padding-bottom: 10%;
+  display: flex;
+  flex-direction: column;
+  gap:0.3rem
 `
 export const ModalInput = styled.input`
   grid-column: 2/3;
   grid-row: 1/2;
-  width: 10 0%;
+  width: 100%;
   height: 100%;
   border-radius: 5px;
   padding: 5px;
   padding-top: 10px;
+  padding-bottom: 10px;
+
   font-size: 20px;
 `
 
@@ -86,4 +91,76 @@ export const ModalLabel = styled.label`
   font-size: large;
   font-weight: bold;
   font-family: sans-serif;
+`
+export const ModalButtonFacebook = styled.button`
+  display: flex;
+  color:#ffffff;
+  justify-self: center;
+  align-self: center;  
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27,31,36,0.1);
+  width: 50%;
+  min-height: 30px;
+  background-color: #1B74E4;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover{
+    background-color: #385898;
+    
+  }
+`
+export const ModalButtonGoogle = styled.button`
+display: flex;
+  color: black;
+  justify-self: center;
+  align-self: center;  
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27,31,36,0.1);
+  width: 50%;
+  min-height: 30px;
+  background-color: white;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover{
+    background-color: #e9ecef;
+    
+  }
+`
+export const ModalButton= styled.button`
+  color:#ffffff;
+  justify-self: center;
+  align-self: center;
+  text-justify:center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27,31,36,0.1);
+  width: 50%;
+  height: 30px;
+  background-color: #2da44e;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover{
+    background-color: #2c974b;
+    
+  }
 `

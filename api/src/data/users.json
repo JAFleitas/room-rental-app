@@ -7,7 +7,7 @@
     "email": "vivicalvat007@gmail.com",
     "city": "Loja",
     "password": "viviana12345",
-    "credit_card_number": 1234567890,
+    "account_number": 1234567890,
     "rating": 4,
     "status": "enabled",
     "type": "ADMIN"
@@ -20,7 +20,7 @@
     "email": "maritza.lopez@gmail.com",
     "city": "Desconcida",
     "password": "maritza12345",
-    "credit_card_number": 1234567890,
+    "account_number": 1234567890,
     "rating": 3,
     "status": "enabled"
   },
@@ -32,7 +32,7 @@
     "email": "juan.perez@gmail.com",
     "city": "Barranquilla",
     "password": "juan12345",
-    "credit_card_number": 1234567890,
+    "account_number": 1234567890,
     "rating": 4,
     "status": "enabled"
   },
@@ -44,7 +44,7 @@
     "email": "julieta@gmail.com",
     "city": "Barranquilla",
     "password": "julietaYromeo",
-    "credit_card_number": 1234567890,
+    "account_number": 1234567890,
     "rating": 4.5,
     "status": "enabled"
   }
