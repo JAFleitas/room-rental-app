@@ -26,6 +26,18 @@ app.use(session({ secret: process.env.APP_RENTAL }))
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Middleware interceptor
+
+// app.use((req, res, next) => {
+//   logger.info(req.body)
+//   const oldSend = res.send
+//   res.send = data => {
+//     logger.info(JSON.parse(data))
+//     oldSend.apply(res, arguments)
+//   }
+//   next()
+// })
 // Routes
 app.use("/api", routes)
 app.get("/auth/facebook", passport.authenticate("facebook"))
@@ -52,7 +64,7 @@ app.use("*", (req, res, next) => {
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err.name) // eslint-disable-line no-console
-  if (err.parent?.code === "22P02") err.status = 400;
+  if (err.parent?.code === "22P02") err.status = 400
   if (err.message) return res.status(err.status || 500).send(err.message)
   res.sendStatus(500)
 })
