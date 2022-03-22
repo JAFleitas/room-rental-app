@@ -1,5 +1,6 @@
 import "./App.css"
 import Nav from "./components/Nav/Nav"
+import Sorters from "./components/Filters/Sorters"
 import Footer from "./components/Footer/Footer"
 import RouterApp from "./routes/RouterApp"
 
@@ -21,6 +22,7 @@ function App() {
   return (
     <div >
       <Nav />
+      <Sorters/>
          <RouterApp/>
       <Footer />
     </div>
