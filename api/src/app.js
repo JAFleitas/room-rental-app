@@ -29,15 +29,15 @@ app.use(passport.session())
 
 // Middleware interceptor
 
-app.use((req, res, next) => {
-  logger.info(req.body)
-  const oldSend = res.send
-  res.send = data => {
-    logger.info(JSON.parse(data))
-    oldSend.apply(res, arguments)
-  }
-  next()
-})
+// app.use((req, res, next) => {
+//   logger.info(req.body)
+//   const oldSend = res.send
+//   res.send = data => {
+//     logger.info(JSON.parse(data))
+//     oldSend.apply(res, arguments)
+//   }
+//   next()
+// })
 // Routes
 app.use("/api", routes)
 app.get("/auth/facebook", passport.authenticate("facebook"))
