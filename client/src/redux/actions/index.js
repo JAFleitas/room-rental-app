@@ -52,7 +52,7 @@ export function getAllServices() {
   }
 }
 
-export function getAllProperties(filters) {
+export function getAllProperties(filters, page = 1) {
   let queries = ""
   console.log(filters)
   if (filters) {
@@ -78,8 +78,8 @@ export function getAllProperties(filters) {
   return async function (dispatch) {
     let response = await axios.get(
       queries
-        ? `${api}/properties/getProperties?${queries}`
-        : `${api}/properties/getProperties`,
+        ? `${api}/properties/getProperties?${queries}&page=${page}`
+        : `${api}/properties/getProperties?page=${page}`,
     )
     return dispatch({
       type: GET_ALL_PROPERTIES,
@@ -169,5 +169,14 @@ export function postNewUser({
       console.log(err.response)
       alert("no se pudo crear el usuario")
     }
+  }
+}
+
+export const CHANGE_PAGE = "CHANGE_PAGE"
+
+export function actionChangePage(payload) {
+  return {
+    type: CHANGE_PAGE,
+    payload,
   }
 }

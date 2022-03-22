@@ -17,7 +17,10 @@ export default function ReviewContainer() {
         <ContainerAll>
           <ContainerRating>
             <DivStar>
-              <h1>{rating}</h1>
+              <h1>
+                {rating}
+                {rating % 1 === 0 ? ".0" : null}
+              </h1>
               <Star />
             </DivStar>
           </ContainerRating>

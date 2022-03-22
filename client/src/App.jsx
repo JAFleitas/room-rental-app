@@ -1,11 +1,9 @@
 import "./App.css"
 import Nav from "./components/Nav/Nav"
-import Sorters from "./components/Filters/Sorters"
 import Footer from "./components/Footer/Footer"
 import RouterApp from "./routes/RouterApp"
 
 function App() {
-
   // const house={
   //   price:15,
   //   title:"casa frente al mar",
@@ -14,16 +12,14 @@ function App() {
   //   images:["https://decoraideas.com/wp-content/uploads/2019/08/04-4-768x536.jpg",
   //   "https://decoraideas.com/wp-content/uploads/2019/08/04-4-768x536.jpg",
   //   "https://decoraideas.com/wp-content/uploads/2019/08/04-4-768x536.jpg",
-    
 
   // ]
 
   // }
   return (
-    <div >
+    <div>
       <Nav />
-      <Sorters/>
-         <RouterApp/>
+      <RouterApp />
       <Footer />
     </div>
   )
