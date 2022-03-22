@@ -14,11 +14,12 @@ const Sorters = () => {
   const [options, setOptions] = useState({ order: "ASC", orderBy: "name" })
   const dispatch = useDispatch()
   const currentOptions = useSelector(state => state.filters)
+  const page = useSelector(state => state.page)
 
   useEffect(() => {
     setOptions({ order: currentOptions.order, orderBy: currentOptions.orderBy })
-    dispatch(getAllProperties(currentOptions))
-  }, [currentOptions.order, currentOptions.orderBy])
+    dispatch(getAllProperties(currentOptions, page))
+  }, [currentOptions.order, currentOptions.orderBy, page])
 
   const handleChange = e => {
     const { name, value } = e.target

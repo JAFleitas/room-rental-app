@@ -9,6 +9,7 @@ import {
   SET_OPTION_FILTERS,
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
+  CHANGE_PAGE,
 } from "../actions"
 
 const initialState = {
@@ -29,7 +30,7 @@ const initialState = {
     maxprice: "",
     type: "", //tipo de propiedad
   },
-  currentPage: 1,
+  page: 1,
   categories: [],
   services: [],
 }
@@ -88,6 +89,11 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         token: null,
         MyProperties: [],
+      }
+    case CHANGE_PAGE:
+      return {
+        ...state,
+        page: payload,
       }
     default:
       return state
