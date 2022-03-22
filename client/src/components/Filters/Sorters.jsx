@@ -11,14 +11,14 @@ const sortByTypes = [
 ]
 
 const Sorters = () => {
-  const [options, setOptions] = useState({sort: "ASC", sortBy: "name"});
+  const [options, setOptions] = useState({ order: "ASC", orderBy: "name" })
   const dispatch = useDispatch()
   const currentOptions = useSelector(state => state.filters)
 
   useEffect(() => {
-    setOptions({ sort: currentOptions.sort, sortBy: currentOptions.sortBy })
+    setOptions({ order: currentOptions.order, orderBy: currentOptions.orderBy })
     dispatch(getAllProperties(currentOptions))
-  }, [currentOptions.sort, currentOptions.sortBy])
+  }, [currentOptions.order, currentOptions.orderBy])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -30,23 +30,23 @@ const Sorters = () => {
     <div>
       <label>Sort by</label>
       <select
-        title="sortBy"
-        name={"sortBy"}
-        id={"sortBy"}
+        title="orderBy"
+        name={"orderBy"}
+        id={"orderBy"}
         onChange={handleChange}
-        value={options.sortBy}>
-        {sortByTypes.map(sort => (
-          <option value={sort.value} key={sort.value}>
-            {sort.title}
+        value={options.orderBy}>
+        {sortByTypes.map(order => (
+          <option value={order.value} key={order.value}>
+            {order.title}
           </option>
         ))}
       </select>
       <select
-        title="sort"
-        name={"sort"}
-        id={"sort"}
+        title="order"
+        name={"order"}
+        id={"order"}
         onChange={handleChange}
-        value={options.sort}>
+        value={options.order}>
         <option value={"ASC"} key={"ASC"}>
           {"Ascendent"}
         </option>

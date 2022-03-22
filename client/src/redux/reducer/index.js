@@ -3,10 +3,9 @@ import {
   GET_PROPERTY_BY_ID,
   POST_NEW_USER,
   LOG_IN,
-
   USER_LOADED,
   AUTH_ERROR,
-  ADD_PROPERTY
+  ADD_PROPERTY,
   SET_OPTION_FILTERS,
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
@@ -24,8 +23,8 @@ const initialState = {
     maxrooms: "",
     minpeople: "",
     maxpeople: "",
-    sort: "ASC",
-    sortBy: "name",
+    order: "ASC",
+    orderBy: "name",
     minprice: "",
     maxprice: "",
     type: "", //tipo de propiedad
@@ -33,7 +32,6 @@ const initialState = {
   currentPage: 1,
   categories: [],
   services: [],
-
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -67,9 +65,9 @@ function rootReducer(state = initialState, { type, payload }) {
         detailsOfProperty: payload,
       }
     case ADD_PROPERTY:
-      return{
+      return {
         ...state,
-        MyProperties:[...payload],
+        MyProperties: [...payload],
       }
     case POST_NEW_USER:
     case LOG_IN:
@@ -89,7 +87,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         token: null,
-        MyProperties:[],
+        MyProperties: [],
       }
     default:
       return state

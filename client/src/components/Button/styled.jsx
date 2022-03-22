@@ -1,18 +1,18 @@
 import styled from "styled-components"
 
 export const Container = styled.button`
-  grid-column: 3/4;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   height: 20px;
-  width: 100px;
+  width: 120px;
   min-width: 80px;
   min-height: 40px;
   margin-top: 1vh;
   margin-left: 1vw;
   padding: 4px;
   z-index: 50;
+  margin-right: 10px;
 
   border-radius: 21px;
   background: #0f1111;
