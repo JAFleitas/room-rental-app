@@ -3,6 +3,10 @@ import {
   GET_PROPERTY_BY_ID,
   POST_NEW_USER,
   LOG_IN,
+
+  USER_LOADED,
+  AUTH_ERROR,
+  ADD_PROPERTY
   SET_OPTION_FILTERS,
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
@@ -10,10 +14,11 @@ import {
 
 const initialState = {
   AllProperties: [],
-  propertys2: [],
+  MyProperties: [],
   detailsOfProperty: {},
   user: {},
   token: {},
+
   filters: {
     minrooms: "",
     maxrooms: "",
@@ -28,6 +33,7 @@ const initialState = {
   currentPage: 1,
   categories: [],
   services: [],
+
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -60,17 +66,30 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         detailsOfProperty: payload,
       }
-    case POST_NEW_USER:
-      localStorage.setItem("tokenRentalApp", payload)
-      return {
+    case ADD_PROPERTY:
+      return{
         ...state,
-        token: payload,
+        MyProperties:[...payload],
       }
+    case POST_NEW_USER:
     case LOG_IN:
       localStorage.setItem("tokenRentalApp", payload)
       return {
         ...state,
         token: payload,
+      }
+
+    case USER_LOADED:
+      return {
+        ...state,
+        user: payload,
+      }
+    case AUTH_ERROR:
+      localStorage.removeItem("tokenRentalApp")
+      return {
+        ...state,
+        token: null,
+        MyProperties:[],
       }
     default:
       return state

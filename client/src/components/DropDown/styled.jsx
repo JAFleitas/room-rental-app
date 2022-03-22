@@ -68,7 +68,7 @@ export const ModalForm = styled.form`
   padding-bottom: 10%;
   display: flex;
   flex-direction: column;
-  gap:0.3rem
+  gap:0.3rem;
 `
 export const ModalInput = styled.input`
   grid-column: 2/3;
