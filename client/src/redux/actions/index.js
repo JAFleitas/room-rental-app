@@ -6,9 +6,6 @@ export const LOG_IN = "LOG_IN"
 export const USER_LOADED = "USER_LOADED"
 export const AUTH_ERROR = "AUTH_ERROR"
 export const ADD_PROPERTY = "ADD_PROPERTY"
-
-
-export const LOG_IN = "LOG_IN"
 export const GET_PROPERTY_BY_ID = "GET_PROPERTY_BY_ID"
 export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
@@ -25,7 +22,7 @@ export function setOptionFilters(newOptions) {
   return { type: SET_OPTION_FILTERS, payload: newOptions }
 }
 
-export function getAllCategories(){
+export function getAllCategories() {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${api}/categories/getAllCategories`)
@@ -38,9 +35,9 @@ export function getAllCategories(){
       console.log(error.response)
     }
   }
-} 
+}
 
-export function getAllServices(){
+export function getAllServices() {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${api}/services/getAllServices`)
@@ -53,7 +50,7 @@ export function getAllServices(){
       console.log(error.response)
     }
   }
-} 
+}
 
 export function getAllProperties(filters) {
   let queries = ""
@@ -101,10 +98,9 @@ export function actionGetPropertyById(id) {
   }
 }
 
-
-export const addProperty = (data) => async dispatch => {
+export const addProperty = data => async dispatch => {
   try {
-    const res = await axios.post(`${api}/properties/addProperty`, data )
+    const res = await axios.post(`${api}/properties/addProperty`, data)
     dispatch({
       type: ADD_PROPERTY,
       payload: res.data,
@@ -128,7 +124,6 @@ export const loadUser = () => async dispatch => {
     })
   }
 }
-
 
 export const logIn = data => async dispatch => {
   try {

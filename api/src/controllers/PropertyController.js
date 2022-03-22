@@ -72,7 +72,7 @@ const getAll = async (req, res, next) => {
 
     let { page } = req.query
 
-    page = page ? page : 1
+    page = page ?? 1
     const PropertyXpage = 6
 
     // incluimos los servicios de la propiedad
@@ -93,7 +93,7 @@ const getAll = async (req, res, next) => {
       return next({ message: "Properties not founded", status: 404 })
     }
 
-    //Paginación
+    // Paginación
     const PropertyWithPagination = properties.slice(
       PropertyXpage * (page - 1),
       PropertyXpage * (page - 1) + PropertyXpage,
