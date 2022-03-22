@@ -5,6 +5,7 @@ import getHeaderToken from "../../utilities/getHeadertoken"
 export const LOG_IN = "LOG_IN"
 export const USER_LOADED = "USER_LOADED"
 export const AUTH_ERROR = "AUTH_ERROR"
+export const ADD_PROPERTY = "ADD_PROPERTY"
 
 export const GET_PROPERTY_BY_ID = "GET_PROPERTY_BY_ID"
 export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
@@ -31,6 +32,18 @@ export function actionGetPropertyById(id) {
   }
 }
 
+
+export const addProperty = (data) => async dispatch => {
+  try {
+    const res = await axios.post(`${api}/properties/addProperty`, data )
+    dispatch({
+      type: ADD_PROPERTY,
+      payload: res.data,
+    })
+  } catch (error) {
+    console.log(error.response)
+  }
+}
 export const loadUser = () => async dispatch => {
   const config = getHeaderToken()
   try {

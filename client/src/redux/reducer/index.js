@@ -5,11 +5,12 @@ import {
   LOG_IN,
   USER_LOADED,
   AUTH_ERROR,
+  ADD_PROPERTY
 } from "../actions"
 
 const initialState = {
   AllProperties: [],
-  propertys2: [],
+  MyProperties: [],
   detailsOfProperty: {},
   user: {},
   token: {},
@@ -26,6 +27,11 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         detailsOfProperty: payload,
+      }
+    case ADD_PROPERTY:
+      return{
+        ...state,
+        MyProperties:[...payload],
       }
     case POST_NEW_USER:
     case LOG_IN:
@@ -44,6 +50,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         token: null,
+        MyProperties:[],
       }
     default:
       return state

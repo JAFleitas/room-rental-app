@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import {
   Container,
@@ -11,6 +10,7 @@ import {
   PropertyTitle,
   PropertyButton,
 } from "./styled"
+import { addProperty } from "../../redux/actions"
 
 function validate(input) {
   let error = {}
@@ -48,20 +48,20 @@ function validate(input) {
 }
 
 export default function newRental() {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const logedUserId = useSelector(state => state.user.id)
   const [error, setError] = useState({})
   const [input, setInput] = useState({
     userId: logedUserId,
     name: "",
     location: "",
-    price: null,
-    numberOfRooms: null,
-    maxNumberOfPeople: null,
+    price: 0,
+    numberOfRooms: 0,
+    maxNumberOfPeople: 0,
     description: "",
-    rating: null,
+    rating: 0,
     image: "",
-    coordinates: [],
+    coordinates: [0, 0],
   })
 
   function handleChange(e) {
@@ -69,6 +69,7 @@ export default function newRental() {
       ...input,
       [e.target.name]: e.target.value,
     })
+    console.log
 
     setError(
       validate({
@@ -80,20 +81,29 @@ export default function newRental() {
 
   function handleSubmit(e) {
     e.preventDefault()
+
     if (
-      input.name.length >= 2 &&
-      input.location.length >= 2 &&
+      input.name.length >= 0 &&
+      input.location.length >= 0 &&
       input.price.length > 0 &&
-      typeof input.price === "number" &&
-      input.numberOfRooms.length >= 1 &&
-      typeof numberOfRooms === "number" &&
-      input.maxNumberOfPeople.length >= 1 &&
-      typeof maxNumberOfPeople === "number" &&
+      input.numberOfRooms > 0 &&
+      input.maxNumberOfPeople> 0 &&
       input.description.length > 1 &&
-      input.image.length >= 1 &&
-      input.coordinates.length > 1
+      input.image.length >= 1
     ) {
-      dispatch(addProperty())
+      dispatch(addProperty(input))
+      setInput({
+        userId: logedUserId,
+        name: "",
+        location: "",
+        price: 0,
+        numberOfRooms: 0,
+        maxNumberOfPeople: 0,
+        description: "",
+        rating: 0,
+        image: "",
+        coordinates: [0, 0],
+      })
     }
   }
 
@@ -183,7 +193,7 @@ export default function newRental() {
         <PropertyField>
           <PropertyLabel>Image:</PropertyLabel>
           <PropertyInput
-            type="url"
+            type="text"
             value={input.image}
             name="image"
             onChange={e => handleChange(e)}></PropertyInput>
@@ -212,7 +222,9 @@ export default function newRental() {
         {error.coordinates && (
           <PropertyError>{error.coordinates}</PropertyError>
         )}
-        <PropertyButton>Add Property</PropertyButton>
+        <PropertyButton onClick={e => handleSubmit(e)}>
+          Add Property
+        </PropertyButton>
       </PropertyForm>
     </Container>
   )
