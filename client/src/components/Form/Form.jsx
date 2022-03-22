@@ -189,6 +189,9 @@ export default function newRental(){
                    <Boton>
                        CREATE
                    </Boton>
+                   {
+                       
+                   }
                </div>
                <div>
                    <Link to="/">
