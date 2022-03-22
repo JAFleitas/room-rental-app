@@ -23,7 +23,7 @@ export const ButtonPage = styled.button`
   border-left: ${({ left }) => (left ? left : "none")};
   border-right: ${({ right }) => (right ? right : "none")};
   &:hover {
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? null : "pointer")};
     background: ${({ disabled }) =>
       disabled ? null : "linear-gradient(to bottom, #b5b4b832, #ddd)"};
   }
