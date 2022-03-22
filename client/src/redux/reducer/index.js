@@ -2,6 +2,7 @@ import {
   GET_ALL_PROPERTIES,
   GET_PROPERTY_BY_ID,
   POST_NEW_USER,
+  LOG_IN
 } from "../actions"
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
   propertys2: [],
   detailsOfProperty: {},
   user: {},
+  token:{}
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -24,9 +26,17 @@ function rootReducer(state = initialState, { type, payload }) {
         detailsOfProperty: payload,
       }
     case POST_NEW_USER:
+      localStorage.setItem("tokenRentalApp", payload)
       return {
         ...state,
-        user: payload,
+        token: payload,
+      }
+    case LOG_IN:
+      localStorage.setItem("tokenRentalApp", payload)
+      return{
+        ...state,
+        token: payload,
+        
       }
     default:
       return state

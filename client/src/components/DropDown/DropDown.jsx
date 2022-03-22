@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
-import { postNewUser } from "../../redux/actions/index"
+import { postNewUser, logIn } from "../../redux/actions/index"
 import {
   DropDownMenu,
   DropDownItem,
@@ -20,19 +19,22 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 
 export default function DropDown({ visibility }) {
-  const dispatch= useDispatch;
   const [logInShow, setLogInShow] = useState(false)
   const [signUpShow, setSignUpShow] = useState(false)
   const [signUpForm, setSignUpForm] = useState({
     name: "",
-    lastName: "",
+    lastname: "",
     country: "",
     city: "",
     email: "",
     password: "",
   })
+  const [logInForm, setLogInForm] = useState({
+    email: "",
+    password: "",
+  })
 
-  let dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const [visible, setVisible] = useState(visibility)
   useEffect(() => {
@@ -58,17 +60,17 @@ export default function DropDown({ visibility }) {
     const change = { ...signUpForm }
     change[e.target.name] = e.target.value
     setSignUpForm(change)
-    console.log(e.target.name)
-    console.log(e.target.value)
-    console.log(change)
-    console.log(signUpForm)
+  }
+  function handleChangeLogIn(e) {
+    e.preventDefault();
+    setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  function handleSubmitSignUp(e) {
     e.preventDefault()
     if (
       !signUpForm.name ||
-      !signUpForm.lastName ||
+      !signUpForm.lastname ||
       !signUpForm.country ||
       !signUpForm.email ||
       !signUpForm.city ||
@@ -79,6 +81,22 @@ export default function DropDown({ visibility }) {
       dispatch(postNewUser(signUpForm))
       alert(`User ${signUpForm.name}created succesfully`)
     }
+
+  //function handleLogin() {
+    //dispatch()
+  }
+  function handleSubmitLogIn(e) {
+    e.preventDefault()
+    if (
+      !logInForm.email ||
+      !logInForm.password
+    ) {
+      alert("Missing fields, please try again")
+    } else {
+      dispatch(logIn(logInForm))
+      alert(`Log In succesfully`)
+    }
+
 
   //function handleLogin() {
     //dispatch()
@@ -100,22 +118,26 @@ export default function DropDown({ visibility }) {
         modalShow={logInShow}
         setModalShow={setLogInShow}>
         <ModalTitle>Log In</ModalTitle>
-        <ModalForm fields={2}>
+        <ModalForm fields={2} >
           <ModalField>
             <ModalLabel>Email: </ModalLabel>
             <ModalInput
-              type={"email"}
+              type="text"
               name="email"
-              placeholder="Email..."></ModalInput>
+              value={logInForm.email}
+              onChange={handleChangeLogIn}
+              placeholder="Email"></ModalInput>
           </ModalField>
           <ModalField>
             <ModalLabel>Password: </ModalLabel>
             <ModalInput
-              type={"password"}
+              type="text"
               name="password"
-              placeholder="Password..."></ModalInput>
+              value={logInForm.password}
+              onChange={handleChangeLogIn}
+              placeholder="Password"></ModalInput>
           </ModalField>
-          <ModalButton type="submit">Log in</ModalButton>
+          <ModalButton type="submit" onClick={handleSubmitLogIn}>Log in</ModalButton>
           <ModalButtonFacebook><BsFacebook/>Log in with Facebook</ModalButtonFacebook>
           <ModalButtonGoogle><FcGoogle/>Log in with Google</ModalButtonGoogle>
         </ModalForm>
@@ -139,8 +161,8 @@ export default function DropDown({ visibility }) {
             <ModalLabel>Last Name: </ModalLabel>
             <ModalInput
               type="text"
-              name="lastName"
-              value={signUpForm.lastName}
+              name="lastname"
+              value={signUpForm.lastname}
               onChange={handleChanges}
               placeholder="Last Name..."></ModalInput>
           </ModalField>
@@ -181,7 +203,7 @@ export default function DropDown({ visibility }) {
               placeholder="Password..."></ModalInput>
           </ModalField>
 
-          <ModalButton type="submit" onClick={handleSubmit}>Sign Up</ModalButton>
+          <ModalButton type="submit" onClick={handleSubmitSignUp}>Sign Up</ModalButton>
           <ModalButtonFacebook><BsFacebook/>Sign Up with Facebook</ModalButtonFacebook>
           <ModalButtonGoogle><FcGoogle/>Sign Up with Google</ModalButtonGoogle>
         </ModalForm>

@@ -36,6 +36,15 @@ app.get(
     failureRedirect: "/login",
   }),
 )
+
+app.get("/auth/google", passport.authenticate("google"))
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  }),
+)
 // catch 404 and forward to error handler
 app.use("*", (req, res, next) => {
   next({ status: 404, message: "Page not found" })
