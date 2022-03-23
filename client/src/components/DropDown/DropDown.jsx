@@ -15,8 +15,8 @@ import {
 import Modal from "../modal/modal"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { FcGoogle } from 'react-icons/fc';
-import { BsFacebook } from 'react-icons/bs';
+import { FcGoogle } from "react-icons/fc"
+import { BsFacebook } from "react-icons/bs"
 
 export default function DropDown({ visibility }) {
   const [logInShow, setLogInShow] = useState(false)
@@ -50,7 +50,6 @@ export default function DropDown({ visibility }) {
     setLogInShow(true)
   }
 
-
   function handleSignUp() {
     console.log("clicked")
     setSignUpShow(true)
@@ -62,7 +61,7 @@ export default function DropDown({ visibility }) {
     setSignUpForm(change)
   }
   function handleChangeLogIn(e) {
-    e.preventDefault();
+    e.preventDefault()
     setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
 
@@ -82,23 +81,19 @@ export default function DropDown({ visibility }) {
       alert(`User ${signUpForm.name}created succesfully`)
     }
 
-  //function handleLogin() {
+    //function handleLogin() {
     //dispatch()
   }
   function handleSubmitLogIn(e) {
     e.preventDefault()
-    if (
-      !logInForm.email ||
-      !logInForm.password
-    ) {
+    if (!logInForm.email || !logInForm.password) {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
       alert(`Log In succesfully`)
     }
 
-
-  //function handleLogin() {
+    //function handleLogin() {
     //dispatch()
   }
 
@@ -107,7 +102,9 @@ export default function DropDown({ visibility }) {
       <DropDownMenu visibility={visible}>
         <DropDownItem onClick={handleLogIn}>Log In</DropDownItem>
         <DropDownItem onClick={handleSignUp}>Sign Up</DropDownItem>
-        <DropDownItem>Profile</DropDownItem>
+        <Link to="/profile">
+          <DropDownItem>Profile</DropDownItem>
+        </Link>
         <DropDownItem>
           {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
           <Link to="/form">Add Property</Link>
@@ -118,7 +115,7 @@ export default function DropDown({ visibility }) {
         modalShow={logInShow}
         setModalShow={setLogInShow}>
         <ModalTitle>Log In</ModalTitle>
-        <ModalForm fields={2} >
+        <ModalForm fields={2}>
           <ModalField>
             <ModalLabel>Email: </ModalLabel>
             <ModalInput
@@ -137,9 +134,17 @@ export default function DropDown({ visibility }) {
               onChange={handleChangeLogIn}
               placeholder="Password"></ModalInput>
           </ModalField>
-          <ModalButton type="submit" onClick={handleSubmitLogIn}>Log in</ModalButton>
-          <ModalButtonFacebook><BsFacebook/>Log in with Facebook</ModalButtonFacebook>
-          <ModalButtonGoogle><FcGoogle/>Log in with Google</ModalButtonGoogle>
+          <ModalButton type="submit" onClick={handleSubmitLogIn}>
+            Log in
+          </ModalButton>
+          <ModalButtonFacebook>
+            <BsFacebook />
+            Log in with Facebook
+          </ModalButtonFacebook>
+          <ModalButtonGoogle>
+            <FcGoogle />
+            Log in with Google
+          </ModalButtonGoogle>
         </ModalForm>
       </Modal>
       <Modal
@@ -203,9 +208,17 @@ export default function DropDown({ visibility }) {
               placeholder="Password..."></ModalInput>
           </ModalField>
 
-          <ModalButton type="submit" onClick={handleSubmitSignUp}>Sign Up</ModalButton>
-          <ModalButtonFacebook><BsFacebook/>Sign Up with Facebook</ModalButtonFacebook>
-          <ModalButtonGoogle><FcGoogle/>Sign Up with Google</ModalButtonGoogle>
+          <ModalButton type="submit" onClick={handleSubmitSignUp}>
+            Sign Up
+          </ModalButton>
+          <ModalButtonFacebook>
+            <BsFacebook />
+            Sign Up with Facebook
+          </ModalButtonFacebook>
+          <ModalButtonGoogle>
+            <FcGoogle />
+            Sign Up with Google
+          </ModalButtonGoogle>
         </ModalForm>
       </Modal>
     </>
