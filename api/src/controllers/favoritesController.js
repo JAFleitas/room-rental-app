@@ -67,18 +67,21 @@ const addProperty = async (req, res, next) => {
       // console.log(err);
       next(err);
     }
+  }else{
+    next({status: 400, message: "property field is required"});    
   }
-
-  next({status: 400, message: "property field is required"});
 }
 
 const removePropertyItem = async (req, res, next) => {
-  const {propertyFavoriteId} = req.params;
+  const { favoriteId } = req.params;
+  const { property: propertyId} = req.body
 
   try {
-    await FavoriteProperty.destroy(propertyFavoriteId);
+    await FavoriteProperty.destroy({
+      where: { favoriteId, propertyId },
+    })
 
-    res.status(203).end()
+    res.status(204).end()
   }catch(err){
     // console.log(err);
     next(err);

@@ -11,7 +11,7 @@ favoriteRouter.post("/", auth, createFavorite);
 
 favoriteRouter.put("/add/:favoriteId", auth, addProperty)
 
-favoriteRouter.put("/remove/:propertyFavoriteId", auth, removePropertyItem)
+favoriteRouter.put("/remove/:favoriteId", auth, removePropertyItem)
 
 
 module.exports = favoriteRouter
