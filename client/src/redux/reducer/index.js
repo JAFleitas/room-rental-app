@@ -10,6 +10,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
   CHANGE_PAGE,
+  LOGOUT,
 } from "../actions"
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
   detailsOfProperty: {},
   user: {},
   token: {},
-
+  auth: false,
   filters: {
     minrooms: "",
     maxrooms: "",
@@ -76,6 +77,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         token: payload,
+        auth: true,
       }
 
     case USER_LOADED:
@@ -84,11 +86,13 @@ function rootReducer(state = initialState, { type, payload }) {
         user: payload,
       }
     case AUTH_ERROR:
-      localStorage.removeItem("tokenRentalApp")
+    case LOGOUT:
       return {
         ...state,
         token: null,
         MyProperties: [],
+        user: {},
+        auth: false,
       }
     case CHANGE_PAGE:
       return {
