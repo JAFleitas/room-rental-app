@@ -14,8 +14,9 @@ const addCategories = async (req, res) => {
   const { name } = req.body
   try {
     const [row, created] = await Type_property.findOrCreate({ where: { name } })
+    // console.log({row, created})
     if (created) {
-      res.json({ message: "successfully created" })
+      res.json({ message: "successfully created", data: row })
     } else {
       res.json({ message: "The category already exists" })
     }

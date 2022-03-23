@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 const { hashSync } = require("bcrypt")
 
 module.exports = sequelize => {
-  sequelize.define("user", {
+  const User = sequelize.define("user", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -61,4 +61,9 @@ module.exports = sequelize => {
       defaultValue: "NORMAL",
     },
   })
+
+  User.associate = models => {
+    // Relacionando con la lista de favoritos 1:1
+    User.hasOne(models.Favorite)
+  }
 }
