@@ -3,6 +3,7 @@ import getPropertyById from "../../utilities/getPropertyById"
 import getHeaderToken from "../../utilities/getHeadertoken"
 
 export const LOG_IN = "LOG_IN"
+export const LOGOUT = "LOGOUT"
 export const USER_LOADED = "USER_LOADED"
 export const AUTH_ERROR = "AUTH_ERROR"
 export const ADD_PROPERTY = "ADD_PROPERTY"
@@ -178,5 +179,11 @@ export function actionChangePage(payload) {
   return {
     type: CHANGE_PAGE,
     payload,
+  }
+}
+
+export const logout = () => {
+  return {
+    type: LOGOUT,
   }
 }

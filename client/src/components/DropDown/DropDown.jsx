@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { postNewUser, logIn } from "../../redux/actions/index"
+import { postNewUser, logIn, logout } from "../../redux/actions/index"
 import {
   DropDownMenu,
   DropDownItem,
@@ -13,12 +13,14 @@ import {
   ModalButtonGoogle,
 } from "./styled"
 import Modal from "../modal/modal"
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import { FcGoogle } from "react-icons/fc"
 import { BsFacebook } from "react-icons/bs"
 
 export default function DropDown({ visibility }) {
+  const auth = useSelector(state => state.auth)
+  const navigate = useNavigate()
   const [logInShow, setLogInShow] = useState(false)
   const [signUpShow, setSignUpShow] = useState(false)
   const [signUpForm, setSignUpForm] = useState({
@@ -100,16 +102,33 @@ export default function DropDown({ visibility }) {
   return (
     <>
       <DropDownMenu visibility={visible}>
-        <DropDownItem onClick={handleLogIn}>Log In</DropDownItem>
-        <DropDownItem onClick={handleSignUp}>Sign Up</DropDownItem>
-        <Link to="/profile">
-          <DropDownItem>Profile</DropDownItem>
-        </Link>
-        <DropDownItem>
-          {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
-          <Link to="/form">Add Property</Link>
-        </DropDownItem>
+        {auth ? (
+          <>
+            <Link to="/profile">
+              <DropDownItem>Profile</DropDownItem>
+            </Link>
+            <DropDownItem>
+              {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
+              <Link to="/form">Add Property</Link>
+            </DropDownItem>
+            <hr />
+            <DropDownItem>
+              <span onClick={() => {
+                dispatch(logout())
+                navigate("/");
+              }}>
+                Logout
+              </span>
+            </DropDownItem>
+          </>
+        ) : (
+          <>
+            <DropDownItem onClick={handleLogIn}>Log In</DropDownItem>
+            <DropDownItem onClick={handleSignUp}>Sign Up</DropDownItem>
+          </>
+        )}
       </DropDownMenu>
+      {/* Login */}
       <Modal
         overlayShow={true}
         modalShow={logInShow}
@@ -147,6 +166,7 @@ export default function DropDown({ visibility }) {
           </ModalButtonGoogle>
         </ModalForm>
       </Modal>
+      {/* Register */}
       <Modal
         overlayShow={true}
         modalShow={signUpShow}
