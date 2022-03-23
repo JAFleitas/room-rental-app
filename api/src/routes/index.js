@@ -6,6 +6,7 @@ const rentalRoutes = require("./rentalRoutes")
 const userRouter = require("./userRoutes")
 const servicesRoutes = require("./servicesRoutes")
 const categoriesRoutes = require("./categoriesRoutes")
+const favoriteRouter = require("./favoriteRoutes")
 
 const router = Router()
 
@@ -17,5 +18,6 @@ router.use("/rentals", rentalRoutes)
 router.use("/users", userRouter)
 router.use("/services", servicesRoutes)
 router.use("/categories", categoriesRoutes)
+router.use("/favorites", favoriteRouter)
 
 module.exports = router
