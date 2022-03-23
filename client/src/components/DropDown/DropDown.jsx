@@ -78,7 +78,6 @@ export default function DropDown({ visibility }) {
       alert("Missing fields, please try again")
     } else {
       dispatch(postNewUser(signUpForm))
-      alert(`User ${signUpForm.name}created succesfully`)
     }
 
     //function handleLogin() {
@@ -90,7 +89,6 @@ export default function DropDown({ visibility }) {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-      alert(`Log In succesfully`)
     }
 
     //function handleLogin() {

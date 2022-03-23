@@ -5,7 +5,7 @@ export const PageContainer = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 30% 70%;
-  grid-template-rows: repeat(5, 20%);
+  grid-template-rows: 50% 50%;
   min-width: 500px;
 
   @media (max-width: 1120px) {
@@ -18,71 +18,13 @@ export const PageContainer = styled.div`
     grid-template-rows: repeat(8, 20vh);
   }
 `
-
-export const FullName = styled.h1`
-  grid-column: 2/3;
-  grid-row: 1/2;
-  width: 90%;
-  height: 70%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 2.5%;
-  margin-bottom: 2.5%;
-  font-size: 2.5rem;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border-radius: 15px;
-  text-align: center;
-
-  @media (max-width: 720px) {
-    grid-row: 1/2;
-    grid-column: 1/2;
-  }
-`
-export const ProfileImageContainer = styled.div`
-  margin-left: 15%;
-  margin-top: 2.5%;
-  margin-bottom: 2.5%;
-  height: 55%;
-  width: 70%;
-  border-radius: 999px;
-  border: 2px black solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* @media (max-width: 1020px) {
-    height: 50%;
-  } */
-
-  @media (max-width: 720px) {
-    align-self: center;
-    width: 150px;
-    height: 220px;
-    min-width: 0;
-    margin-top: 5%;
-    margin-left: 5%;
-    grid-row: 1/2;
-  }
-`
-// `height=width`:`height=height`
-export const ProfileImage = styled.img`
-  background-size: contain;
-  font-size: small;
-`
-export const InfoContainer = styled.div`
+export const MenuContainer = styled.div`
   grid-column: 1/2;
-  grid-row: 1/7;
+  grid-row: 1/3;
   width: 90%;
   min-width: 300px;
-  height: 70%;
-  margin-top: 22.5%;
+  height: 90%;
+  margin-top: 7%;
   margin-bottom: 22%;
   margin-left: 5%;
   padding: 10px;
@@ -100,18 +42,64 @@ export const InfoContainer = styled.div`
 
   @media (max-width: 720px) {
     height: 90%;
+    width: 90%;
+    margin-left: 5%;
     grid-column: 1/2;
-    grid-row: 2/5;
-    margin-top: 3%;
+    grid-row: 1/4;
+    margin-top: 10%;
     align-content: space-between;
+    flex-direction: row;
   }
 `
-export const Info = styled.h3`
-  font-size: 1.5rem;
-  margin: 10px;
-  @media (max-width: 1120px) {
-    font-size: 1.25rem;
+export const MenuOptions = styled.div`
+  height: 40%;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+`
+export const MenuOption = styled.h3`
+  font-size: 1rem;
+  width: 50%;
+  color: black;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  border-bottom: 2px solid #d0a6ff;
+  &:hover {
+    background-color: #d0a6ff;
+    border-bottom: 2px solid #be86ff;
+    transition: 500ms;
   }
+`
+export const ProfileImageContainer = styled.div`
+  margin-left: 15%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  height: 45%;
+  width: 70%;
+  border-radius: 999px;
+  border: 2px black solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* @media (max-width: 1020px) {
+    height: 50%;
+  } */
+
+  @media (max-width: 720px) {
+    align-self: center;
+    width: 350px;
+    height: 200px;
+    min-width: 0;
+    margin-top: 5%;
+    margin-left: 5%;
+    grid-row: 1/2;
+  }
+`
+export const ProfileImage = styled.img`
+  background-size: contain;
+  font-size: small;
 `
 
 export const RentHistory = styled.div`
