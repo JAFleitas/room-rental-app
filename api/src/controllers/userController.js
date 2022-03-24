@@ -167,6 +167,41 @@ const disableUser = async (req, res) => {
   }
 }
 
+const enableUser = async (req, res) => {
+  const { id } = req.body
+  try {
+    const user = await User.findByPk(id)
+    if (!user) {
+      res.json({ message: "This User doesnt exists" })
+    } else if (user.dataValues.status === "disabled") {
+      try {
+        const updateStatus = await User.update(
+          {
+            ...user.dataValues,
+            status: "enabled",
+          },
+          {
+            where: {
+              id: user.dataValues.id,
+            },
+          },
+        )
+        if (updateStatus) {
+          res.status(200).json({ message: "Acoount enabled correctly" })
+        } else {
+          res.status(400).json({ message: "Couldnt enable User" })
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    } else if (user.dataValues.status === "enabled") {
+      res.json({ status: 400, message: "This account is already enabled " })
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const forgotPassword = async (req, res, next) => {
   const { email } = req.body
 
@@ -254,4 +289,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   updateUser,
+  enableUser,
 }
