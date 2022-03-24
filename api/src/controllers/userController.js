@@ -129,8 +129,36 @@ const getUserDetail = async (req, res, next) => {
   }
 }
 
+const disableUser = async (req, res) => {
+  const { id } = req.body
+  const user = await User.findByPk(id)
+  if (!user) {
+    res.json({ message: "This User doesnt exists" })
+  } else if (user.dataValues.status === "enabled") {
+    const updateStatus = await User.update(
+      {
+        ...user.dataValues,
+        status: "disabled",
+      },
+      {
+        where: {
+          id: user.dataValues.id,
+        },
+      },
+    )
+    if (updateStatus) {
+      res.status(200).json({ message: "Acoount disabled correctly" })
+    } else {
+      res.status(400).json({ message: "Couldnt disbale User" })
+    }
+  } else if (user.dataValues.status === "disabled") {
+    res.json({ status: 400, message: "This account is already Disabled " })
+  }
+}
+
 module.exports = {
   createUser,
   login,
   getUserDetail,
+  disableUser,
 }
