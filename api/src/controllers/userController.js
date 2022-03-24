@@ -132,6 +132,41 @@ const getUserDetail = async (req, res, next) => {
   }
 }
 
+const disableUser = async (req, res) => {
+  const { id } = req.body
+  try {
+    const user = await User.findByPk(id)
+    if (!user) {
+      res.json({ message: "This User doesnt exists" })
+    } else if (user.dataValues.status === "enabled") {
+      try {
+        const updateStatus = await User.update(
+          {
+            ...user.dataValues,
+            status: "disabled",
+          },
+          {
+            where: {
+              id: user.dataValues.id,
+            },
+          },
+        )
+        if (updateStatus) {
+          res.status(200).json({ message: "Acoount disabled correctly" })
+        } else {
+          res.status(400).json({ message: "Couldnt disbale User" })
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    } else if (user.dataValues.status === "disabled") {
+      res.json({ status: 400, message: "This account is already Disabled " })
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const forgotPassword = async (req, res, next) => {
   const { email } = req.body
 
@@ -144,9 +179,9 @@ const forgotPassword = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { email } })
 
-    if(user){
+    if (user) {
       try {
-        await User.update({password: temporalPassword}, {where: {email}});
+        await User.update({ password: temporalPassword }, { where: { email } })
         await sendEmail(
           "Recuperación de contraseña",
           "",
@@ -156,28 +191,33 @@ const forgotPassword = async (req, res, next) => {
         )
       } catch (error) {
         // console.log(error);
-        return next({status: 500, message: "Intentelo más tarde"});
+        return next({ status: 500, message: "Intentelo más tarde" })
       }
     }
 
-    res.json({message: "Si el email proporcionado es correcto, le enviaremos un email"});
+    res.json({
+      message: "Si el email proporcionado es correcto, le enviaremos un email",
+    })
   } catch (error) {
     next(error)
   }
 }
 
 const resetPassword = async (req, res, next) => {
-  const { newPassword, oldPassword } = req.body; 
-  
+  const { newPassword, oldPassword } = req.body
+
   try {
-    const user = await User.findByPk(req.user.id);
+    const user = await User.findByPk(req.user.id)
     const isMatch = await bcrypt.compare(oldPassword, user.dataValues.password)
 
-    if(!isMatch){
-      return next({status: 400, message: "Invalid old password"});
+    if (!isMatch) {
+      return next({ status: 400, message: "Invalid old password" })
     }
 
-    await User.update({password: newPassword}, {where: {email: user.dataValues.email}});
+    await User.update(
+      { password: newPassword },
+      { where: { email: user.dataValues.email } },
+    )
 
     res.end()
   } catch (error) {
@@ -186,23 +226,23 @@ const resetPassword = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
-  const { name, lastname, country, photo, account_number, email } = req.body;
+  const { name, lastname, country, photo, account_number, email } = req.body
 
-  const newInfo = {};
+  const newInfo = {}
 
-  if (name) newInfo.name = name;
-  if (lastname) newInfo.lastname = lastname;
-  if (country) newInfo.country = country;
-  if (photo) newInfo.photo = photo;
-  if (account_number) newInfo.account_number = account_number;
-  if (email) newInfo.email = email;
+  if (name) newInfo.name = name
+  if (lastname) newInfo.lastname = lastname
+  if (country) newInfo.country = country
+  if (photo) newInfo.photo = photo
+  if (account_number) newInfo.account_number = account_number
+  if (email) newInfo.email = email
 
   try {
-    await User.update(newInfo, {where: {id: req.user.id}});
+    await User.update(newInfo, { where: { id: req.user.id } })
 
-    res.end();
+    res.end()
   } catch (error) {
-    next(error);
+    next(error)
   }
 }
 
@@ -210,7 +250,8 @@ module.exports = {
   createUser,
   login,
   getUserDetail,
-  forgotPassword, 
+  disableUser,
+  forgotPassword,
   resetPassword,
-  updateUser
+  updateUser,
 }

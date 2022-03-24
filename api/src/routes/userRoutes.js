@@ -5,6 +5,7 @@ const {
   createUser,
   login,
   getUserDetail,
+  disableUser,
   resetPassword,
   forgotPassword,
   updateUser,
@@ -21,10 +22,12 @@ userRouter.get("/", auth, getUserDetail)
 
 userRouter.put("/", auth, updateUser)
 
-userRouter.put("/reset-password", auth,resetPassword)
+userRouter.put("/reset-password", auth, resetPassword)
 
 userRouter.post("/forgot-password", forgotPassword)
 
 userRouter.post("/loginGoogle", login)
+
+userRouter.put("/disableUser", auth, disableUser)
 
 module.exports = userRouter
