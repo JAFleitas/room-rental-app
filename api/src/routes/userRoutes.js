@@ -6,6 +6,9 @@ const {
   login,
   getUserDetail,
   disableUser,
+  resetPassword,
+  forgotPassword,
+  updateUser,
 } = require("../controllers/userController")
 
 const userRouter = Router()
@@ -17,8 +20,14 @@ userRouter.post("/login", login)
 
 userRouter.get("/", auth, getUserDetail)
 
+userRouter.put("/", auth, updateUser)
+
+userRouter.put("/reset-password", auth, resetPassword)
+
+userRouter.post("/forgot-password", forgotPassword)
+
 userRouter.post("/loginGoogle", login)
 
-userRouter.put("/disableUser", disableUser)
+userRouter.put("/disableUser", auth, disableUser)
 
 module.exports = userRouter
