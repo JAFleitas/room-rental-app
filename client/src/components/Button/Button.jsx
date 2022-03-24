@@ -27,7 +27,7 @@ export default function Button() {
       <ImageContainer>
         <FaRegUserCircle />
       </ImageContainer>
-      {open && <DropDown visibility={visibility} />}
+      {open && <DropDown visibility={visibility} setOpen={setOpen} />}
     </Container>
   )
 }

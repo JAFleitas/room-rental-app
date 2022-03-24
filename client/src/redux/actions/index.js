@@ -241,7 +241,7 @@ export function postNewUser({
       })
       dispatch(loadUser())
     } catch (error) {
-      console.log(err.response)
+      console.log(error.response)
       alert("no se pudo crear el usuario")
     }
   }
