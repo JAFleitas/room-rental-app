@@ -6,7 +6,7 @@ import {
   MenuOptions,
   MenuOption,
 } from "./styled"
-import OptionalMenu from "./OptionalMenu/OptionalMenu"
+import Routes from "./MenuRoutes/MenuRoutes"
 import { Link } from "react-router-dom"
 export default function Profile() {
   return (
@@ -33,7 +33,7 @@ export default function Profile() {
           </Link>
         </MenuOptions>
       </MenuContainer>
-      <OptionalMenu />
+      <Routes />
     </PageContainer>
   )
 }

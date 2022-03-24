@@ -2,7 +2,7 @@ import React from "react"
 import { SubMenu, FullName, Info, InfoContainer } from "./styled"
 import { useSelector } from "react-redux"
 
-export default function InfoSubMenu() {
+export default function ProfileInfo() {
   const user = useSelector(state => state.user)
 
   return (
