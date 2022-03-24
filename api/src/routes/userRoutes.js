@@ -5,6 +5,9 @@ const {
   createUser,
   login,
   getUserDetail,
+  resetPassword,
+  forgotPassword,
+  updateUser,
 } = require("../controllers/userController")
 
 const userRouter = Router()
@@ -15,6 +18,12 @@ userRouter.post("/register", createUser)
 userRouter.post("/login", login)
 
 userRouter.get("/", auth, getUserDetail)
+
+userRouter.put("/", auth, updateUser)
+
+userRouter.put("/reset-password", auth,resetPassword)
+
+userRouter.post("/forgot-password", forgotPassword)
 
 userRouter.post("/loginGoogle", login)
 
