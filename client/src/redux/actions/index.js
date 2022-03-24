@@ -187,18 +187,6 @@ export const loadUser = () => async dispatch => {
     })
   }
 }
-export const changePassword = (password) => async dispatch => {
-  const config = getHeaderToken()
-  try {
-    const res = await axios.post(`${api}/users/password`,password, config)
-    dispatch({
-      type: CHANGE_PASSWORD,
-      payload: res.data,
-    })
-  } catch (error) {
-    console.log(error.response)
-  }
-}
 
 export const logIn = data => async dispatch => {
   try {

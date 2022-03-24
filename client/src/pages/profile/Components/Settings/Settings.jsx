@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { changePassword } from "../../../../redux/actions";
+import { changePassword } from "../../../../utilities/changePassword";
 import { SubMenu, Title, Input, Button, ChangePassword,PasswordError } from "./styled"
 
 
@@ -25,7 +25,7 @@ export default function Settings() {
         e.preventDefault()
         if(input.newPassword===compare){
 
-            dispatch(changePassword(input))
+            changePassword(input)
             setInput({
                 oldPassword:"",
                 newPassword:""
