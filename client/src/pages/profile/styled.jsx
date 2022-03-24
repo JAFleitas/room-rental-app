@@ -2,28 +2,20 @@ import styled from "styled-components"
 
 export const PageContainer = styled.div`
   width: 100%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 50% 50%;
+  display: flex;
   min-width: 500px;
 
-  @media (max-width: 1120px) {
-    grid-template-columns: 45% 55%;
-  }
+   
+  
 
   @media (max-width: 720px) {
-    height: 180vh;
-    grid-template-columns: 100%;
-    grid-template-rows: repeat(9, 20vh);
+    flex-direction:column;
+    align-items: center;
   }
 `
 export const MenuContainer = styled.div`
-  grid-column: 1/2;
-  grid-row: 1/3;
-  width: 90%;
-  min-width: 300px;
-  height: 90%;
+  display: flex;
+  width: 300px;
   margin-top: 7%;
   margin-bottom: 22%;
   margin-left: 5%;
@@ -37,22 +29,17 @@ export const MenuContainer = styled.div`
     rgba(244, 235, 255, 1) 100%
   );
   border-radius: 15px;
-  display: flex;
   flex-direction: column;
 
   @media (max-width: 720px) {
-    height: 90%;
-    width: 90%;
-    margin-left: 5%;
-    grid-column: 1/2;
-    grid-row: 1/4;
+
+    width: 70%;
     margin-top: 10%;
     align-content: space-between;
     flex-direction: row;
   }
 `
 export const MenuOptions = styled.div`
-  height: 40%;
   width: 80%;
   margin-left: 10%;
   margin-top: 10%;
@@ -75,26 +62,20 @@ export const ProfileImageContainer = styled.div`
   margin-left: 15%;
   margin-top: 2.5%;
   margin-bottom: 2.5%;
-  height: 45%;
-  width: 70%;
-  border-radius: 999px;
+  height: 200px;
+  width: 200px;
+  border-radius: 9999px;
   border: 2px black solid;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  /* @media (max-width: 1020px) {
-    height: 50%;
-  } */
 
   @media (max-width: 720px) {
     align-self: center;
-    width: 350px;
-    height: 200px;
     min-width: 0;
     margin-top: 5%;
     margin-left: 5%;
-    grid-row: 1/2;
   }
 `
 export const ProfileImage = styled.img`
@@ -103,8 +84,6 @@ export const ProfileImage = styled.img`
 `
 
 export const RentHistory = styled.div`
-  grid-column: 2/3;
-  grid-row: 2/4;
   width: 80%;
   margin-left: 10%;
   height: 80%;
@@ -124,8 +103,6 @@ export const RentHistory = styled.div`
     width: 90%;
     margin-left: 5%;
     font-size: 1rem;
-    grid-column: 1/2;
-    grid-row: 5/7;
   }
 `
 
@@ -144,8 +121,7 @@ export const Settings = styled.button`
 `
 
 export const UserProperties = styled.div`
-  grid-column: 2/3;
-  grid-row: 4/6;
+  display: flex;
   width: 80%;
   margin-left: 10%;
   height: 80%;
@@ -165,8 +141,5 @@ export const UserProperties = styled.div`
     width: 90%;
     margin-left: 5%;
     font-size: 1rem;
-    grid-column: 1/5;
-
-    grid-row: 7/9;
   }
 `
