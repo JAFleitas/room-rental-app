@@ -4,7 +4,7 @@ import Footer from "./components/Footer/Footer"
 import RouterApp from "./routes/RouterApp"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getFavorites, loadUser } from "./redux/actions"
+import { getAllCategories, getAllProperties, getAllServices, getFavorites, loadUser } from "./redux/actions"
 
 function App() {
   const dispatch = useDispatch();
@@ -12,6 +12,9 @@ function App() {
 
   useEffect(() => {
     localStorage.tokenRentalApp && dispatch(loadUser());
+    dispatch(getAllProperties())
+    dispatch(getAllCategories())
+    dispatch(getAllServices())
   }, []);
 
   useEffect(() => {
