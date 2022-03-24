@@ -11,6 +11,9 @@ import {
   GET_ALL_SERVICES,
   CHANGE_PAGE,
   LOGOUT,
+  GET_LIST_FAVORITES,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
 } from "../actions"
 
 const initialState = {
@@ -34,10 +37,31 @@ const initialState = {
   page: 1,
   categories: [],
   services: [],
+  listFavorites: {}
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_LIST_FAVORITES:
+      return {...state, listFavorites: payload};
+    case ADD_FAVORITE:
+      return {
+        ...state,
+        listFavorites: {
+          ...state.listFavorites,
+          FavoriteProperties: [...state.listFavorites.FavoriteProperties, payload],
+        },
+      }
+    case REMOVE_FAVORITE:
+      return {
+        ...state,
+        listFavorites: {
+          ...state.listFavorites,
+          FavoriteProperties: state.listFavorites.FavoriteProperties.filter(
+            property => property.propertyId !== payload,
+          ),
+        },
+      }
     case GET_ALL_CATEGORIES:
       return {
         ...state,
@@ -84,6 +108,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         user: payload,
+        auth: true
       }
     case AUTH_ERROR:
     case LOGOUT:

@@ -2,20 +2,27 @@ import "./App.css"
 import Nav from "./components/Nav/Nav"
 import Footer from "./components/Footer/Footer"
 import RouterApp from "./routes/RouterApp"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllCategories, getAllProperties, getAllServices, getFavorites, loadUser } from "./redux/actions"
 
 function App() {
-  // const house={
-  //   price:15,
-  //   title:"casa frente al mar",
-  //   info:"3baños,2habitaciones,comedor, cocina, desayuno",
-  //   rating:4.5,
-  //   images:["https://decoraideas.com/wp-content/uploads/2019/08/04-4-768x536.jpg",
-  //   "https://decoraideas.com/wp-content/uploads/2019/08/04-4-768x536.jpg",
-  //   "https://decoraideas.com/wp-content/uploads/2019/08/04-4-768x536.jpg",
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
 
-  // ]
+  useEffect(() => {
+    localStorage.tokenRentalApp && dispatch(loadUser());
+    dispatch(getAllProperties())
+    dispatch(getAllCategories())
+    dispatch(getAllServices())
+  }, []);
 
-  // }
+  useEffect(() => {
+    if(auth){
+      dispatch(getFavorites());
+    }
+  }, [auth]);
+
   return (
     <div>
       <Nav />

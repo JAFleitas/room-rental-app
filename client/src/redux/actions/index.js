@@ -16,7 +16,67 @@ export const POST_NEW_USER = "POST_NEW_USER"
 export const SEARCH_PROPERTY = "SEARCH_PROPERTY"
 export const SET_OPTION_FILTERS = "SET_OPTION_FILTERS"
 
+export const ADD_FAVORITE = "ADD_FAVORITE"; 
+export const GET_LIST_FAVORITES = "GET_LIST_FAVORITES" 
+export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
+
 const api = import.meta.env.VITE_APP_API_URL
+
+export function getFavorites() {
+  return async function (dispatch) {
+    try {
+      let response = await axios.get(
+        `${api}/favorites/user-favorites`,
+        getHeaderToken(),
+      )
+      // console.log(response)
+      return dispatch({
+        type: GET_LIST_FAVORITES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function addFavorite(idProperty, idListFavorites) {
+  return async function (dispatch) {
+    try {
+      await axios.put(
+        `${api}/favorites/add/${idListFavorites}`,
+        {property: idProperty},
+        getHeaderToken(),
+      )
+      // console.log(response)
+      return dispatch({
+        type: ADD_FAVORITE,
+        payload: {propertyId: idProperty},
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function removeFavorite(idProperty, idListFavorites) {
+  return async function (dispatch) {
+    try {
+      await axios.put(
+        `${api}/favorites/remove/${idListFavorites}`,
+        {property: idProperty},
+        getHeaderToken(),
+      )
+      // console.log(response)
+      return dispatch({
+        type: REMOVE_FAVORITE,
+        payload: idProperty,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
 
 export function setOptionFilters(newOptions) {
   console.log(newOptions)
