@@ -4,6 +4,11 @@ const { Favorite, FavoriteProperty, Op } = require("../db/index.js")
 const getFavoriteList = async (req, res, next) => {
 
   try {
+    // Si no existe lo creo
+    await Favorite.findOrCreate({
+      where: { userId: req.user.id },
+    })
+
     const list = await Favorite.findOne({
       where: {
         userId: req.user.id,
