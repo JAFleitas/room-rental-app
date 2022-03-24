@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { AiFillStar } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import "slick-carousel/slick/slick.css"
@@ -16,6 +16,9 @@ import {
 } from "./styled"
 
 import Slider from "react-slick"
+import Heart from "./Heart"
+import { useSelector } from "react-redux"
+
 function PropertyCard(props) {
   const settings = {
     dots: true,
@@ -28,15 +31,25 @@ function PropertyCard(props) {
     slidesToScroll: 1,
   }
   const navigateTo = useNavigate()
+  const favorites =
+    useSelector(state => state.listFavorites)
+  const auth = useSelector(state => state.auth)
+  const [liked, setLiked] = useState(false)
 
   function handleClick() {
-    let path = `/property-info/${props.id}`
-    navigateTo(path)
+    navigateTo(`/property-info/${props.id}`)
   }
-  // propertyCard
+
+  useEffect(() => {
+    let properties = favorites.FavoriteProperties?.map(e => e.propertyId);
+    console.log(properties) || [];
+    setLiked(auth===true && properties?.includes(props.id))
+  }, [favorites]);
+
+  
   return (
-    <Container onClick={() => handleClick()}>
-      <ImageContainer>
+    <Container>
+      <ImageContainer onClick={() => handleClick()}>
         <Slider {...settings}>
           {props.image &&
             props.image.map((image, i) => {
@@ -44,17 +57,18 @@ function PropertyCard(props) {
             })}
         </Slider>
       </ImageContainer>
-      <Title>{props.name}</Title>
+      <Title onClick={() => handleClick()}>{props.name}</Title>
       <Info>{`${props.location}`}</Info>
       <Info>{` Rooms: ${props.numberOfRooms}`}</Info>
-      <Info>{`Guests: ${props.maxNumberOfPeople}`}</Info>
+      {/* <Info>{`Guests: ${props.maxNumberOfPeople}`}</Info> */}
       <DivPyR>
-        <Price> Price: {props.price}/ night </Price>
+        <Price>{props.price}$/ night </Price>
         <Rating>
           <AiFillStar color="pink" />
           {props.rating}
         </Rating>
       </DivPyR>
+      <Heart id={props.id} liked={liked}/>
     </Container>
   )
 }
