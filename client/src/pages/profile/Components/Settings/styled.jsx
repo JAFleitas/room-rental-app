@@ -88,6 +88,7 @@ export const Input = styled.input`
     border-color: #0969da;
     outline: none;
     background-color: white;
+    color: black;
     box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3);
   }
 `
@@ -112,4 +113,12 @@ export const Button = styled.button`
   &:hover {
     background-color: #2c974b;
   }
+`
+export const PasswordError = styled.label`
+ font-family: cursive;
+ font-size: small;
+ color: #6d6875;
+ align-self: start;
+ margin-left: 15px;
+
 `

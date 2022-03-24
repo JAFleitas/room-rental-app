@@ -5,12 +5,14 @@ import getHeaderToken from "../../utilities/getHeadertoken"
 export const LOG_IN = "LOG_IN"
 export const LOGOUT = "LOGOUT"
 export const USER_LOADED = "USER_LOADED"
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD"
 export const AUTH_ERROR = "AUTH_ERROR"
 export const ADD_PROPERTY = "ADD_PROPERTY"
 export const GET_PROPERTY_BY_ID = "GET_PROPERTY_BY_ID"
 export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
+
 
 export const POST_NEW_USER = "POST_NEW_USER"
 export const SEARCH_PROPERTY = "SEARCH_PROPERTY"
@@ -123,6 +125,18 @@ export const loadUser = () => async dispatch => {
     dispatch({
       type: AUTH_ERROR,
     })
+  }
+}
+export const changePassword = (password) => async dispatch => {
+  const config = getHeaderToken()
+  try {
+    const res = await axios.post(`${api}/users/password`,password, config)
+    dispatch({
+      type: CHANGE_PASSWORD,
+      payload: res.data,
+    })
+  } catch (error) {
+    console.log(error.response)
   }
 }
 
