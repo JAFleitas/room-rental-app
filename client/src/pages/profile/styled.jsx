@@ -13,9 +13,9 @@ export const PageContainer = styled.div`
   }
 
   @media (max-width: 720px) {
-    height: 160vh;
+    height: 180vh;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(8, 20vh);
+    grid-template-rows: repeat(9, 20vh);
   }
 `
 export const MenuContainer = styled.div`

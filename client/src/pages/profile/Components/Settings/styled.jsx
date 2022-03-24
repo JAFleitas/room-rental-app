@@ -22,7 +22,7 @@ export const SubMenu = styled.div`
   grid-template-rows: 1fr 1fr 1fr;
 
   @media (max-width: 720px) {
-    grid-row: 5/9;
+    grid-row: 5/10;
     grid-column: 1/2;
   }
 `
@@ -114,6 +114,7 @@ export const Button = styled.button`
     background-color: #2c974b;
   }
 `
+
 export const PasswordError = styled.label`
  font-family: cursive;
  font-size: small;

@@ -11,6 +11,7 @@ import {
   ModalButton,
   ModalButtonFacebook,
   ModalButtonGoogle,
+  RedButton,
 } from "./styled"
 import Modal from "../modal/modal"
 import { Link, useNavigate } from "react-router-dom"
@@ -18,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FcGoogle } from "react-icons/fc"
 import { BsFacebook } from "react-icons/bs"
 
-export default function DropDown({ visibility }) {
+export default function DropDown({ visibility, setOpen }) {
   const auth = useSelector(state => state.auth)
   const navigate = useNavigate()
   const [logInShow, setLogInShow] = useState(false)
@@ -49,12 +50,12 @@ export default function DropDown({ visibility }) {
 
   function handleLogIn() {
     console.log("clicked")
-    setLogInShow(true)
+    setLogInShow(!logInShow)
   }
 
   function handleSignUp() {
     console.log("clicked")
-    setSignUpShow(true)
+    setSignUpShow(!logInShow)
   }
 
   function handleChanges(e) {
@@ -80,6 +81,7 @@ export default function DropDown({ visibility }) {
       alert("Missing fields, please try again")
     } else {
       dispatch(postNewUser(signUpForm))
+      setOpen(false)
     }
 
     //function handleLogin() {
@@ -87,10 +89,12 @@ export default function DropDown({ visibility }) {
   }
   function handleSubmitLogIn(e) {
     e.preventDefault()
+    console.log("submited")
     if (!logInForm.email || !logInForm.password) {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
+      setOpen(false)
     }
 
     //function handleLogin() {
@@ -151,7 +155,7 @@ export default function DropDown({ visibility }) {
               onChange={handleChangeLogIn}
               placeholder="Password"></ModalInput>
           </ModalField>
-          <ModalButton type="submit" onClick={handleSubmitLogIn}>
+          <ModalButton onClick={(e)=>handleSubmitLogIn(e)}>
             Log in
           </ModalButton>
           <ModalButtonFacebook>
@@ -163,6 +167,7 @@ export default function DropDown({ visibility }) {
             Log in with Google
           </ModalButtonGoogle>
         </ModalForm>
+          <RedButton  to="/users/newPassword">I forgot my password</RedButton>
       </Modal>
       {/* Register */}
       <Modal
