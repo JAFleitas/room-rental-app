@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addFavorite, removeFavorite } from '../../redux/actions';
 import styles from "./styles/Heart.module.css"
 
 const Heart = ({id, liked=false}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const auth = useSelector(state => state.auth)
   const listFavoritesId = useSelector(state => state.listFavorites?.id)
 
@@ -14,7 +16,7 @@ const Heart = ({id, liked=false}) => {
         ? dispatch(removeFavorite(id, listFavoritesId))
         : dispatch(addFavorite(id, listFavoritesId))
     }else{
-      alert("Registrese para poder guardar favoritos");
+      navigate("/login");
     }
   }
 
