@@ -10,6 +10,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
   CHANGE_PAGE,
+  SET_COORDINATES,
 } from "../actions"
 
 const initialState = {
@@ -33,6 +34,7 @@ const initialState = {
   page: 1,
   categories: [],
   services: [],
+  coordinates: [],
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -94,6 +96,11 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         page: payload,
+      }
+    case SET_COORDINATES:
+      return {
+        ...state,
+        coordinates: payload,
       }
     default:
       return state

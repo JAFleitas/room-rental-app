@@ -17,11 +17,11 @@ function App() {
 
   // }
   return (
-    <div>
+    <>
       <Nav />
       <RouterApp />
       <Footer />
-    </div>
+    </>
   )
 }
 

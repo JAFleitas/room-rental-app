@@ -14,6 +14,7 @@ export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const POST_NEW_USER = "POST_NEW_USER"
 export const SEARCH_PROPERTY = "SEARCH_PROPERTY"
 export const SET_OPTION_FILTERS = "SET_OPTION_FILTERS"
+export const SET_COORDINATES = "SET_COORDINATES"
 
 const api = import.meta.env.VITE_APP_API_URL
 
@@ -177,6 +178,13 @@ export const CHANGE_PAGE = "CHANGE_PAGE"
 export function actionChangePage(payload) {
   return {
     type: CHANGE_PAGE,
+    payload,
+  }
+}
+
+export function actionSetCoordinates(payload) {
+  return {
+    type: SET_COORDINATES,
     payload,
   }
 }

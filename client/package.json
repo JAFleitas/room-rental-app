@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
     "leaflet": "^1.7.1",
+    "leaflet-control-geocoder": "^2.4.0",
     "react": "^17.0.2",
     "react-datepicker": "^4.7.0",
     "react-dater": "^1.6.0",
