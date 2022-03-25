@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import { Link } from "react-router-dom"
 export const DropDownMenu = styled.div`
   position: absolute;
   top: 13.5vh;
@@ -162,5 +162,28 @@ export const ModalButton= styled.button`
   &:hover{
     background-color: #2c974b;
     
+  }
+`
+export const RedButton = styled(Link)`
+  margin-left: 15px;
+  color: #ffffff;
+  justify-self: center;
+  align-self: start;
+  text-justify: center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 50%;
+  min-height: 30px;
+  background-color: #cf222e;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #ffffff;
+    color:#cf222e;
   }
 `

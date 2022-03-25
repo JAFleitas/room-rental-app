@@ -10,7 +10,14 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
   CHANGE_PAGE,
+
   SET_COORDINATES,
+
+  LOGOUT,
+  GET_LIST_FAVORITES,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
+
 } from "../actions"
 
 const initialState = {
@@ -19,7 +26,7 @@ const initialState = {
   detailsOfProperty: {},
   user: {},
   token: {},
-
+  auth: false,
   filters: {
     minrooms: "",
     maxrooms: "",
@@ -34,11 +41,35 @@ const initialState = {
   page: 1,
   categories: [],
   services: [],
+
   coordinates: [],
+
+  listFavorites: {}
+
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_LIST_FAVORITES:
+      return {...state, listFavorites: payload};
+    case ADD_FAVORITE:
+      return {
+        ...state,
+        listFavorites: {
+          ...state.listFavorites,
+          FavoriteProperties: [...state.listFavorites.FavoriteProperties, payload],
+        },
+      }
+    case REMOVE_FAVORITE:
+      return {
+        ...state,
+        listFavorites: {
+          ...state.listFavorites,
+          FavoriteProperties: state.listFavorites.FavoriteProperties.filter(
+            property => property.propertyId !== payload,
+          ),
+        },
+      }
     case GET_ALL_CATEGORIES:
       return {
         ...state,
@@ -78,19 +109,23 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         token: payload,
+        auth: true,
       }
 
     case USER_LOADED:
       return {
         ...state,
         user: payload,
+        auth: true
       }
     case AUTH_ERROR:
-      localStorage.removeItem("tokenRentalApp")
+    case LOGOUT:
       return {
         ...state,
         token: null,
         MyProperties: [],
+        user: {},
+        auth: false,
       }
     case CHANGE_PAGE:
       return {

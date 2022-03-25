@@ -25,7 +25,7 @@ export const SelectSt = styled.select`
 `
 
 export const LabelSt = styled.label`
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 900;
   margin-right: 4px;
   font-family: "Times New Roman", Times, serif;

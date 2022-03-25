@@ -8,7 +8,7 @@ export default function MapDetail() {
   return (
     <>
       {coordinates && (
-        <MapContainer zoom={12} maxZoom={20} center={coordinates}>
+        <MapContainer zoom={0} maxZoom={20} center={coordinates}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
