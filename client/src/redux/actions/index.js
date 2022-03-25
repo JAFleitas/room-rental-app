@@ -188,6 +188,21 @@ export const loadUser = () => async dispatch => {
     })
   }
 }
+export const deleteUser = (id) => async dispatch => {
+  const config = getHeaderToken()
+  try {
+    const res = await axios.put(`${api}/users/disableUser`,id ,  config)
+    dispatch({
+      type: LOGOUT,
+      payload: res.data
+    })
+  } catch (error) {
+    console.log(error.response)
+    dispatch({
+        type: AUTH_ERROR,
+      })
+  }
+}
 
 export const logIn = data => async dispatch => {
   try {
