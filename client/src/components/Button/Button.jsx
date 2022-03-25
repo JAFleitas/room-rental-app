@@ -6,17 +6,11 @@ import DropDown from "../DropDown/DropDown"
 
 export default function Button() {
   const [open, setOpen] = useState(false)
-  const [visibility, setVisibility] = useState(false)
 
   function handleClick() {
-    if (open === false) {
-      setOpen(true)
-      setVisibility(true)
-    } else if (visibility === true) {
-      setVisibility(false)
-    } else if (visibility === false) {
-      setVisibility(true)
-    }
+    
+      setOpen(!open)
+  
   }
 
   return (
@@ -27,7 +21,7 @@ export default function Button() {
       <ImageContainer>
         <FaRegUserCircle />
       </ImageContainer>
-      {open && <DropDown visibility={visibility} setOpen={setOpen} />}
+      {open && <DropDown open={open} />}
     </Container>
   )
 }

@@ -35,14 +35,31 @@ export const DropDownItem = styled.button`
     color: black;
   }
 `
+export const Container = styled.div`
+  margin: auto auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding:"20px";
+  margin-bottom: 2rem;
+  @media (max-width: 500px) {
+  width:100%
+  }
+`
 
-export const ModalTitle = styled.h1`
+
+export const Title = styled.h1`
   font-size: 36px;
   color: #1f0037;
   margin-bottom: 2.5%;
 `
 
-export const ModalField = styled.div`
+export const Field = styled.div`
   width: 90%;
   margin-left: 5%;
   margin-top: 2.5%;
@@ -53,12 +70,9 @@ export const ModalField = styled.div`
   padding-bottom: 20px;
   border-radius: 10px;
   background: linear-gradient(145deg, #bf8ce6, #e3a6ff);
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 100%;
 `
 
-export const ModalForm = styled.form`
+export const Form = styled.form`
   width: 100%;
   border-radius: 25px;
   background: #5d00a4;
@@ -70,7 +84,7 @@ export const ModalForm = styled.form`
   flex-direction: column;
   gap:0.3rem;
 `
-export const ModalInput = styled.input`
+export const Input = styled.input`
   grid-column: 2/3;
   grid-row: 1/2;
   width: 100%;
@@ -83,7 +97,7 @@ export const ModalInput = styled.input`
   font-size: 20px;
 `
 
-export const ModalLabel = styled.label`
+export const Label = styled.label`
   grid-column: 1/2;
   grid-row: 1/2;
   text-align: left;
@@ -92,7 +106,7 @@ export const ModalLabel = styled.label`
   font-weight: bold;
   font-family: sans-serif;
 `
-export const ModalButtonFacebook = styled.button`
+export const ButtonFacebook = styled.button`
   display: flex;
   color:#ffffff;
   justify-self: center;
@@ -117,7 +131,7 @@ export const ModalButtonFacebook = styled.button`
     
   }
 `
-export const ModalButtonGoogle = styled.button`
+export const ButtonGoogle = styled.button`
 display: flex;
   color: black;
   justify-self: center;
@@ -142,7 +156,7 @@ display: flex;
     
   }
 `
-export const ModalButton= styled.button`
+export const SendButton= styled.button`
   color:#ffffff;
   justify-self: center;
   align-self: center;
@@ -164,11 +178,10 @@ export const ModalButton= styled.button`
     
   }
 `
-export const RedButton = styled(Link)`
-  margin-left: 15px;
+export const RedButton = styled.button`
   color: #ffffff;
   justify-self: center;
-  align-self: start;
+  align-self: center;
   text-justify: center;
   border: 1px solid black;
   border-radius: 0.5rem;
