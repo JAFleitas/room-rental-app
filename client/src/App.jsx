@@ -24,11 +24,11 @@ function App() {
   }, [auth]);
 
   return (
-    <div>
+    <>
       <Nav />
       <RouterApp />
       <Footer />
-    </div>
+    </>
   )
 }
 

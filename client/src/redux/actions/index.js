@@ -17,6 +17,7 @@ export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const POST_NEW_USER = "POST_NEW_USER"
 export const SEARCH_PROPERTY = "SEARCH_PROPERTY"
 export const SET_OPTION_FILTERS = "SET_OPTION_FILTERS"
+export const SET_COORDINATES = "SET_COORDINATES"
 
 export const ADD_FAVORITE = "ADD_FAVORITE"; 
 export const GET_LIST_FAVORITES = "GET_LIST_FAVORITES" 
@@ -244,8 +245,17 @@ export function actionChangePage(payload) {
   }
 }
 
+
+export function actionSetCoordinates(payload) {
+  return {
+    type: SET_COORDINATES,
+    payload,
+  }
+}
+
 export const logout = () => {
   return {
     type: LOGOUT,
   }
 }
+
