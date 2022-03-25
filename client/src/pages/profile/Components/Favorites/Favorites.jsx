@@ -10,6 +10,7 @@ export default function Favoritos() {
   const [cards, setCards] = useState([])
   const dispatch = useDispatch()
 
+
   let cardsArray = []
   async function gettingsCards() {
     for (let i = 0; i < favorites.length; i++) {
@@ -27,7 +28,7 @@ export default function Favoritos() {
     //si en el array de abajo se pone cards pasan dos cosas:
     //1: Tu PC explota por que se carga infinitamente el componente...
     //2: Si se "deslikea" una propiedad dentro de la pagina profile, inmediatamente se elimina esa propiedad.
-  }, [])
+  }, [favorites])
 
   return (
     <SubMenu>
