@@ -9,6 +9,8 @@ import Profile from "../pages/profile/profile.jsx"
 import Error404 from "../pages/404/Error404.jsx"
 import SignUp from "../components/DropDown/SignUp.jsx"
 import Login from "../components/DropDown/Login.jsx"
+import Favorites from "../pages/favorites/Favorites"
+
 const RouterApp = () => {
   return (
     <Routes>
@@ -20,7 +22,8 @@ const RouterApp = () => {
       <Route exact path="/logIn" element={<Login />}></Route>
       <Route exact path="/signUp" element={<SignUp/>}></Route>
       <Route exact path="/profile/*" element={<Profile />}></Route>
-      <Route path="/*" element={<Error404/>}></Route>
+      <Route path="/*" element={<Error404 />}></Route>
+      {/* <Route exact path="favorites" element={<Favorites />}></Route> */}
     </Routes>
   )
 }
