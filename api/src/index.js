@@ -1,9 +1,7 @@
 const initDB = require("./utilities/initDB")
 const app = require("./app")
 const { sequelize } = require("./db/index.js")
-const dotenv = require("dotenv")
-
-dotenv()
+require("dotenv").config()
 
 const PORT = process.env.PORT || 3001
 // Syncing all the models at once.

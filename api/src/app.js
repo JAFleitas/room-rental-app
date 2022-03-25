@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 const express = require("express")
 const logger = require("morgan")
-const dotenv = require("dotenv")
-dotenv.config()
+require("dotenv").config()
 const cors = require("cors")
 const session = require("express-session")
 
