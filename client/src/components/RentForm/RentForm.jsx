@@ -8,25 +8,16 @@ import {
   Form,
   FormField,
   FormSelect,
-  FormInput,
   FormLabel,
-  DateManager,
   SubmitButton,
 } from "./styled"
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
+import Calendar from "./Calendar"
 
 export default function RentForm(props) {
-  const [dateRange, setDateRange] = useState([null, null])
-  const [startDate, endDate] = dateRange
-
-  console.log(dateRange)
   props = props.props
-  //   const onChange = dates => {
-  //     const [start, end] = dates
-  //     setStartDate(start)
-  //     setEndDate(end)
-  //   }
+  console.log(Calendar)
+
+  function handleClick() {}
 
   return (
     <Container>
@@ -50,30 +41,10 @@ export default function RentForm(props) {
           </FormSelect>
         </FormField>
         <FormField>
-          <DateManager
-            selectsRange={true}
-            startDate={startDate}
-            endDate={endDate}
-            onChange={update => {
-              setDateRange(update)
-            }}
-            isClearable={true}
-          />
+          <Calendar props={{ price: props.price ? props.price : null }} />
         </FormField>
-        <SubmitButton>Reservar</SubmitButton>
+        <SubmitButton onClick={handleClick}>Reservar</SubmitButton>
       </Form>
     </Container>
   )
 }
-
-// () => {
-// 	const [startDate, setStartDate] = useState(new Date());
-// 	return (
-// 	  <DatePicker
-// 		selected={startDate}
-// 		onChange={date => setStartDate(date)}
-// 		excludeDateIntervals={[{start: subDays(new Date('03/10/2022'), 0), end: addDays(new Date('03/10/2022'), 5) }]}
-// 		placeholderText="Select a date other than the interval from 5 days ago to 5 days in the future"
-// 	  />
-// 	);
-//   };
