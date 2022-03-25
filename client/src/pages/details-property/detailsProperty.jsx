@@ -27,6 +27,7 @@ import { ContainerImages } from "./components/images-detail/styles"
 
 import { actionGetPropertyById } from "../../redux/actions"
 import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
+import RentForm from "../../components/RentForm/RentForm"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
 
@@ -37,6 +38,7 @@ export default function Details() {
   //dispatch
   const dispatch = useDispatch()
   const propertyDetails = useSelector(state => state.detailsOfProperty)
+  console.log(propertyDetails)
   useEffect(() => {
     dispatch(actionGetPropertyById(id))
   }, [])
@@ -88,6 +90,9 @@ export default function Details() {
         </DivReview>
         <ReviewContainer />
       </DescriptionContainer>
+      <RentForm
+        props={{ price: propertyDetails.price, rating: propertyDetails.rating }}
+      />
     </ContainerPageDetails>
   )
 }
