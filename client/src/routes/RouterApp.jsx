@@ -7,6 +7,7 @@ import Home from "../pages/home/Home.jsx"
 import Form from "../components/Form/Form.jsx"
 import Profile from "../pages/profile/profile.jsx"
 import Error404 from "../pages/404/Error404.jsx"
+import Favorites from "../pages/favorites/Favorites"
 const RouterApp = () => {
   return (
     <Routes>
@@ -16,7 +17,8 @@ const RouterApp = () => {
       <Route exact path="/about-us" element={<AboutUs />}></Route>
       <Route exact path="/form" element={<Form />}></Route>
       <Route exact path="/profile/*" element={<Profile />}></Route>
-      <Route path="/*" element={<Error404/>}></Route>
+      <Route path="/*" element={<Error404 />}></Route>
+      {/* <Route exact path="favorites" element={<Favorites />}></Route> */}
     </Routes>
   )
 }
