@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker"
 
 export const Container = styled.div`
   width: 50%;
+  min-width: 800px;
   background: rgb(226, 200, 255);
   background: linear-gradient(
     330deg,
@@ -17,6 +18,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5%;
+
+  @media (max-width: 700px) {
+    min-width: 500px;
+  }
 `
 
 export const Header = styled.span`
@@ -48,22 +53,24 @@ export const Stars = styled.h3`
   align-items: center;
 `
 export const Form = styled.div`
-  width: 80%;
+  width: 95%;
   padding: 20px;
-  border: 1px solid #d722fc;
+  /* border: 1px solid #d722fc; */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-end;
   margin-bottom: 5%;
   margin-top: 2%;
+  padding-left: 3%;
 `
 
 export const FormField = styled.div`
   width: 90%;
   display: flex;
   justify-content: flex-start;
-  margin: 2%;
+  margin-bottom: 2%;
 `
 
 export const FormSelect = styled.select`
@@ -98,6 +105,7 @@ export const SubmitButton = styled.button`
   border-radius: 15px;
   border: 1px solid transparent;
   color: white;
+  margin-left: -5px;
 
   &:hover {
     border-radius: 16.5px;
