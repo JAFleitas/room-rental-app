@@ -5,7 +5,7 @@ const dotenv = require("dotenv")
 
 dotenv()
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 // Syncing all the models at once.
 sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, async () => {
