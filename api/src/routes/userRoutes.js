@@ -9,6 +9,7 @@ const {
   resetPassword,
   forgotPassword,
   updateUser,
+  enableUser,
 } = require("../controllers/userController")
 
 const userRouter = Router()
@@ -29,5 +30,7 @@ userRouter.post("/forgot-password", forgotPassword)
 userRouter.post("/loginGoogle", login)
 
 userRouter.put("/disableUser", auth, disableUser)
+
+userRouter.put("/enableUser", auth, enableUser)
 
 module.exports = userRouter
