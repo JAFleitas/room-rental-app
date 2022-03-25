@@ -22,6 +22,9 @@ export default function Profile() {
           <Link to="/profile/settings">
             <MenuOption>Settings</MenuOption>
           </Link>
+          <Link to="/profile/account">
+            <MenuOption>Acount</MenuOption>
+          </Link>
           <Link to="/profile/properties">
             <MenuOption>Properties</MenuOption>
           </Link>
