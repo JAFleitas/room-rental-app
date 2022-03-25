@@ -13,10 +13,12 @@ import Slider from "react-slick"
 import Heart from "./Heart"
 import { useSelector } from "react-redux"
 import { IoLocationOutline } from "react-icons/io5"
+import { useNavigate } from "react-router-dom"
 
 const FavoriteCard = ({property})=> {
   const { name, location, id, price, image } = property || {};
   const [liked, setLiked] = useState(false)
+  const navigate = useNavigate();
   const auth = useSelector(state => state.auth)
   const favorites =
     useSelector(state => state.listFavorites)
@@ -32,7 +34,7 @@ const FavoriteCard = ({property})=> {
   }
 
   const handleClick =() => {
-    navigateTo(`/property-info/${id}`)
+    navigate(`/property-info/${id}`)
   }
 
   useEffect(() => {
