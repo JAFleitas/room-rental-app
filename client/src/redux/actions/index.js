@@ -277,7 +277,7 @@ export function addRental({
   userID,
   propertyID,
   final_price,
-  statusPropertyId,
+  // statusPropertyId,
   rental_dates,
   start_date,
   final_date,
@@ -288,10 +288,12 @@ export function addRental({
         userID,
         propertyID,
         final_price,
-        statusPropertyId,
+        // statusPropertyId,
         rental_dates,
         start_date,
         final_date,
+        flat: 1,
+        discount: 0,
       })
       dispatch({
         type: ADD_RENTAL,
