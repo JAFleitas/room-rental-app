@@ -16,6 +16,7 @@ import {
   ADD_FAVORITE,
   REMOVE_FAVORITE,
   ADD_RENTAL,
+  CHANGE_PASSWORD
 } from "../actions"
 
 const initialState = {
@@ -117,6 +118,10 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         user: payload,
         auth: true,
+      }
+    case CHANGE_PASSWORD:
+      return{
+        ...state
       }
     case AUTH_ERROR:
     case LOGOUT:

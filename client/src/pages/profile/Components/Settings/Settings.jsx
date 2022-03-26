@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { changePassword } from "../../../../utilities/changePassword";
+import { changePassword } from "../../../../redux/actions";
+
 import { SubMenu, Title, Input, Button, ChangePassword,PasswordError } from "./styled"
 
 
@@ -17,15 +18,18 @@ export default function Settings() {
           ...input,
           [e.target.name]: e.target.value,
         })
+        
       }
     function handleChangeCompare(e){
         setCompare(e.target.value)
+        
+      
     }
     function handleSubmit(e){
         e.preventDefault()
         if(input.newPassword===compare){
 
-            changePassword(input)
+            dispatch(changePassword(input))
             setInput({
                 oldPassword:"",
                 newPassword:""
@@ -54,7 +58,7 @@ export default function Settings() {
       onChange={e => handleChange(e)}></Input>
       <Input
       placeholder="New Password"
-      value={compare.newPassword}
+      value={compare}
       onChange={e => handleChangeCompare(e)}></Input>
       {error && <PasswordError>{error}</PasswordError>}
       <Button onClick={(e)=>handleSubmit(e)}>Update Password</Button>
