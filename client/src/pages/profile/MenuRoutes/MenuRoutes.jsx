@@ -1,6 +1,6 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
-import Account from "../Components/Acount/Acount"
+import Account from "../Components/Acount/acount"
 import ProfileInfo from "../Components/ProfileInfo/ProfileInfo"
 import Settings from "../Components/Settings/Settings"
 import History from "../Components/History/History"
@@ -14,8 +14,7 @@ const MenuRoutes = () => {
       <Route exact path="/history" element={<History />}></Route>
       <Route exact path="/favorites" element={<Favorites />}></Route>
 
-      <Route exact path="/account" element={<Account/>}></Route>
-
+      <Route exact path="/account" element={<Account />}></Route>
 
       <Route exact path="/properties" element={<h1>properties</h1>}></Route>
     </Routes>

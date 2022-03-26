@@ -10,14 +10,12 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
   CHANGE_PAGE,
-
   SET_COORDINATES,
-
   LOGOUT,
   GET_LIST_FAVORITES,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
-
+  ADD_RENTAL,
 } from "../actions"
 
 const initialState = {
@@ -44,20 +42,22 @@ const initialState = {
 
   coordinates: [],
 
-  listFavorites: {}
-
+  listFavorites: {},
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_LIST_FAVORITES:
-      return {...state, listFavorites: payload};
+      return { ...state, listFavorites: payload }
     case ADD_FAVORITE:
       return {
         ...state,
         listFavorites: {
           ...state.listFavorites,
-          FavoriteProperties: [...state.listFavorites.FavoriteProperties, payload],
+          FavoriteProperties: [
+            ...state.listFavorites.FavoriteProperties,
+            payload,
+          ],
         },
       }
     case REMOVE_FAVORITE:
@@ -116,7 +116,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         user: payload,
-        auth: true
+        auth: true,
       }
     case AUTH_ERROR:
     case LOGOUT:
@@ -136,6 +136,10 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         coordinates: payload,
+      }
+    case ADD_RENTAL:
+      return {
+        ...state,
       }
     default:
       return state

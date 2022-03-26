@@ -8,7 +8,6 @@ export const ContainerPageDetails = styled.div`
   background-color: #f0f0f0;
   height: auto;
   padding-top: 50px;
-
   @media screen and (max-width: 740px) {
     width: 100%;
   }
