@@ -56,8 +56,8 @@ function LeafletControlGeocoder() {
       .on("markgeocode", function (e) {
         let latlng = e.geocode.center
         setCoordenadas(latlng)
-        console.log(coordenadas)
-        console.log(latlng)
+        // console.log(coordenadas)
+        // console.log(latlng)
         L.marker(latlng, { icon })
           .addTo(map)
           .bindPopup(e.geocode.name)

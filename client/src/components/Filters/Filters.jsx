@@ -81,9 +81,9 @@ export default function Filters() {
 
   const handleClick = (e) => {
     e.preventDefault()
-    console.log("clicked")
+    // console.log("clicked")
     setModalShow(!modalShow)
-    console.log(modalShow)
+    // console.log(modalShow)
   }
 
   useEffect(() => {

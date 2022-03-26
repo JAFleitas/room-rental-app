@@ -60,8 +60,8 @@ export default function RentForm(props) {
 
   function handleClick() {
     const finalPrice = restaFechas(dates.from, dates.to) * props.price
-    console.log("precio: " + finalPrice)
-    console.log(props)
+    // console.log("precio: " + finalPrice)
+    // console.log(props)
     let form = {
       userID: userId,
       propertyID: props.id,
@@ -71,7 +71,7 @@ export default function RentForm(props) {
       start_date: dates.from !== undefined?.toLocaleDateString(),
       final_date: dates.to !== undefined?.to.toLocaleDateString(),
     }
-    console.log(form)
+    // console.log(form)
     // dispatch(addRental(form))
   }
 
