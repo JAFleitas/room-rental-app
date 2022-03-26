@@ -15,7 +15,7 @@ export default function DropDown({ open }) {
 
   return (
     <>
-      <DropDownMenu visibility={open}>
+      <DropDownMenu visibility={open ? "true": "false"}>
         {auth ? (
           <>
             <Link to="/profile">
@@ -41,6 +41,7 @@ export default function DropDown({ open }) {
             <DropDownItem onClick={()=>navigate("/signUp")}>Sign Up</DropDownItem>
           </>
         )}
+        <DropDownItem onClick={()=>navigate("/help")}>Help</DropDownItem>
       </DropDownMenu>     
     </>
   )

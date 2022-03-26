@@ -76,7 +76,6 @@ export default function RentForm(props) {
     end = convertDateFormat(end)
     console.log(inicio)
     console.log(end)
-
     let form = {
       userID: userId,
       propertyID: props.id,
@@ -86,7 +85,7 @@ export default function RentForm(props) {
       start_date: dates.from.toLocaleDateString(),
       final_date: dates.to.toLocaleDateString(),
     }
-    console.log(form)
+    // console.log(form)
     // dispatch(addRental(form))
     setDiasOcupados([
       ...diasOcupados,

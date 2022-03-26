@@ -38,7 +38,7 @@ export default function Details() {
   //dispatch
   const dispatch = useDispatch()
   const propertyDetails = useSelector(state => state.detailsOfProperty)
-  console.log(propertyDetails)
+  // console.log(propertyDetails)
   useEffect(() => {
     dispatch(actionGetPropertyById(id))
   }, [])
