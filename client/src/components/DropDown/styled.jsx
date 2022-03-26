@@ -21,7 +21,7 @@ export const DropDownMenu = styled.div`
     visibility: hidden;
     `};
 `
-export const DropDownItem = styled.button`
+export const DropDownItem = styled.span`
   height: 50px;
   width: 90%;
   display: flex;

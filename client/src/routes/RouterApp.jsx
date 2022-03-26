@@ -9,6 +9,7 @@ import SignUp from "../components/DropDown/SignUp.jsx"
 import Login from "../components/DropDown/Login.jsx"
 import FormPaymentMethod from "../pages/profile/Components/FormPaymentMethod/FormPaymentMethod.jsx"
 import Forgotpassword from "../pages/ForgotPassword/ForgotPassword.jsx"
+import Help from "../pages/Help/Help.jsx"
 
 const RouterApp = () => {
   return (
@@ -22,6 +23,7 @@ const RouterApp = () => {
       <Route path="/add/payment-method" element={<FormPaymentMethod />}></Route>
       <Route path="/edit/payment-method/:id" element={<FormPaymentMethod edit={true} />}></Route>
       <Route path="/forgot-password" element={<Forgotpassword/>}></Route>
+      <Route path="/help" element={<Help/>}></Route>
       <Route path="/*" element={<Error404 />}></Route>
     </Routes>
   )

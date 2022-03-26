@@ -38,9 +38,15 @@
   font-weight: bold;
 }
 
-.form input{
+.form input, 
+.form textarea{
   height: 35px;
   border: 2px solid slategray;
   border-radius: 6px;
   padding: 5px;
+}
+
+.form textarea{
+  height: 120px;
+  resize: none;
 }
