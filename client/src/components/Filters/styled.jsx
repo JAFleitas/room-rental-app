@@ -15,24 +15,56 @@ export const FiltersButton = styled.button`
   &:hover {
     background-color: pink;
     border-color: black;
-    color: white;
+    color: black;
+  }
+`
+
+export const Filter = styled.button`
+  font-size: x-large;
+  border-style: solid;
+  border-color: #e3bdca;
+  border-width: 2px;
+  background-color: #e3bdca;
+  color: black;
+  align-self: center;
+  margin: 10px;
+  padding-bottom: 5px;
+  border-radius: 9999px;
+
+  &:hover {
+    background-color: black;
+    border-color: black;
+    color: #e3bdca;
   }
 `
 
 export const FilterForm = styled.form`
-  height: 500px;
+  height: 700px;
   width: 100%;
+  color: white;
   border-radius: 25px;
-  background: #5d00a4;
-  box-shadow: inset 21px 21px 42px #430076, inset -21px -21px 42px #7700d2;
+  background: #283593;
+  box-shadow: inset -5px -20px 1021px 100px #6A1B9A;
   border-radius: 10px;
   padding-top: 10%;
 `
 
 export const ModalTitle = styled.h1`
+  display:flex;
+  text-align:center;
+  justify-content:center;
   font-size: 36px;
   color: #1f0037;
   margin-bottom: 2.5%;
+`
+export const ModalSubtitle = styled.h2`
+  font-size: 25px;
+  color: white;
+  margin-bottom: 2.5%;
+`
+export const ModalTexto = styled.h3`
+  padding-left: 5px;
+  color: black;
 `
 
 export const ModalField = styled.div`
@@ -51,26 +83,29 @@ export const ModalField = styled.div`
 `
 
 export const ModalLabel = styled.label`
-  grid-column: 1/2;
-  grid-row: 1/2;
-  text-align: left;
+  color: black;
+  grid-column: 1;
+  grid-row: 1;
+  text-align: center;
   padding-left: 5%;
-  font-size: large;
+  font-size: 80%;
   font-weight: bold;
   font-family: sans-serif;
+  border-radius: 0.5rem;
 `
 export const ModalSelect = styled.select`
+  color:black;
   grid-column: 2/3;
   grid-row: 1/2;
   border-radius: 0.5rem;
-  border-color: black;
   border-width: 1px;
   padding: 0.2rem 0.2rem;
-  width: 50px;
+  width: 200px;
 `
 
 export const CheckBoxWrapper = styled.div`
   position: relative;
+
 `
 
 export const CheckBoxLabel = styled.label`
@@ -85,7 +120,7 @@ export const CheckBoxLabel = styled.label`
   &::after {
     content: "";
     display: block;
-    border-radius: 50%;
+    border-radius: 50px;
     width: 18px;
     height: 18px;
     margin: 3px;
@@ -96,13 +131,13 @@ export const CheckBoxLabel = styled.label`
 `
 
 export const CheckBox = styled.input`
-  opacity: 0;
+  text-align:center;
+  color: black;
   z-index: 1;
-  border-radius: 15px;
-  width: 42px;
-  height: 26px;
+  border-radius: 5px;
+  width: 50px;
+  height: 20px;
   &:checked + ${CheckBoxLabel} {
-    background: #4fbe79;
     &::after {
       content: "";
       display: block;
