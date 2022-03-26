@@ -1,5 +1,5 @@
 import React from "react"
-import { SubMenu, FullName, Info, InfoContainer } from "./styled"
+import { SubMenu, FullName, Info, InfoContainer, Label } from "./styled"
 import { useSelector } from "react-redux"
 
 export default function ProfileInfo() {
@@ -9,11 +9,14 @@ export default function ProfileInfo() {
     <SubMenu>
       <FullName>{user.name ? user.name : "Name"}</FullName>
       <InfoContainer>
-        <Info>{user.email ? user.email : "Email"}</Info>
-        <Info>
-          {user.country ? user.country + ", " : "Country, "}
-          {user.city ? user.city : "city"}
-        </Info>
+        <Label>Name</Label>
+        <Info>{user.name ? user.name : "Incomplete"}</Info>
+        <Label>Lastname</Label>
+        <Info>{user.lastname ? user.lastname : "Incomplete"}</Info>
+        <Label>Email</Label>
+        <Info>{user.email ? user.email : "Incomplete"}</Info>
+        <Label>Country</Label>
+        <Info>{user.country || "Incomplete"}</Info>
       </InfoContainer>
     </SubMenu>
   )

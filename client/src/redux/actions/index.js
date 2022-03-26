@@ -13,6 +13,9 @@ export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const ADD_RENTAL = "ADD_RENTAL"
+export const GET_ALL_PAYMENT_METHODS = "GET_ALL_PAYMENT_METHODS"
+export const ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD"
+export const DELETE_PAYMENT_METHOD = "DELETE_PAYMENT_METHOD"
 
 export const POST_NEW_USER = "POST_NEW_USER"
 export const SEARCH_PROPERTY = "SEARCH_PROPERTY"
@@ -24,6 +27,25 @@ export const GET_LIST_FAVORITES = "GET_LIST_FAVORITES"
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function getAllPaymentMethod() {
+  return async function (dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/payment-method`, getHeaderToken())
+      // console.log(data)
+      return dispatch({
+        type: GET_ALL_PAYMENT_METHODS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function addPaymentMethod(newMethod) {
+  return { type: ADD_PAYMENT_METHOD, payload: newMethod }
+}
 
 export function getFavorites() {
   return async function (dispatch) {

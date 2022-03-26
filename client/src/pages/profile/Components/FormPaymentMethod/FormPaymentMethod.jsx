@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import styles from "./styles.module.css";
-import { GrClose } from "react-icons/gr";
-import visa from "../../../../assets/bg-tarjeta/logos/visa.png";
-import mastercard from "../../../../assets/bg-tarjeta/logos/mastercard.png";
-import chip from "../../../../assets/bg-tarjeta/chip-tarjeta.png";
-import { useDispatch } from "react-redux";
+import styles from "./styles.module.css"
+import { GrClose } from "react-icons/gr"
+import { useDispatch } from "react-redux"
+import Creditcard from "../../../../components/CreditCard/CreditCard"
+import axios from "axios";
+import getHeaderToken from "../../../../utilities/getHeadertoken"
+const api = import.meta.env.VITE_APP_API_URL
 
 const initialForm = {
   cardNumber: "",
@@ -15,96 +16,97 @@ const initialForm = {
 }
 
 const FormPaymentMethod = () => {
-  const [frontal, setFrontal] = useState(true);
-  const [form, setForm] = useState(initialForm);
-  const [openForm, setOpenForm] = useState(false);
-  const [isVisa, setIsVisa] = useState(true);
-  const dispatch = useDispatch();
+  const [isVisa, setIsVisa] = useState(true)
+  const [form, setForm] = useState(initialForm)
+  const [openForm, setOpenForm] = useState(false)
+  const [frontal, setFrontal] = useState(true)
+  const [errors, setErrors] = useState({})
+  const dispatch = useDispatch()
 
   const handleClickCard = () => {
-    setFrontal(!frontal);
-  } 
-  
+    setFrontal(!frontal)
+  }
+
   const handleClickButton = () => {
-    setOpenForm(!openForm);
-  } 
+    setOpenForm(!openForm)
+  }
 
-  const handleChange = (e) => {
-    const {name, value} = e.target;
+  const validateForm = form => {
+    const { cardNumber, fullName } = form
+    const errors = {}
 
-    setFrontal(name !== "ccv");
+    if (cardNumber[0] !== "4" && cardNumber[0] !== "5")
+      errors.cardNumber = "Debe comenzar con 4 o 5"
+    if (fullName.split(" ").length < 2)
+      errors.fullName = "Debe contener mas de una palabra"
 
-    if(name === "cardNumber"){
-      if(form.cardNumber[0] === "4") setIsVisa(true)
-      else setIsVisa(false);
+    return errors
+  }
+
+  const handleChange = e => {
+    let { name, value } = e.target
+
+    setFrontal(name !== "ccv")
+
+    if (name === "cardNumber") {
+      if (form.cardNumber[0] === "4") setIsVisa(true)
+      else setIsVisa(false)
     }
 
-    setForm({...form, [name]: value});
+    if (name === "cardNumber" || name === "ccv") {
+      value = value
+        .replace(/\s/g, "")
+        // Eliminar las letras
+        .replace(/\D/g, "")
+    }
+
+    if(name === "fullName"){
+      value = value.replace(/[0-9]/g, "")
+    }
+
+    const newForm = { ...form, [name]: value }
+    setForm(newForm)
+    setErrors(validateForm(newForm))
   }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      const {data} = await axios.post(
+        `${api}/payment-method`, 
+        form,
+        getHeaderToken()
+        );
+        dispatch(addPaymentMethod(data));
+    } catch (error) {
+      console.log(error.response.data);
+      alert("No ha sido posible añadir el nuevo método");
+    }
+
+  }
+
+  let currentYear = new Date().getFullYear()
 
   return (
     <div className={styles["contenedor"]}>
-      <section
-        onClick={handleClickCard}
-        className={`${styles["tarjeta"]} ${!frontal && styles["active"]}`}>
-        <div className={styles["delantera"]}>
-          <div className={styles["logo-marca"]}>
-            <img src={isVisa ? visa : mastercard} alt="" />
-          </div>
-          <img src={chip} className={styles["chip"]} />
-          <div className={styles["datos"]}>
-            <div className={styles["grupo"]} id="numero">
-              <p className={styles["label"]}>Card Number</p>
-              <p className={styles["numero"]}>#### #### #### ####</p>
-            </div>
-            <div className={styles["flexbox"]}>
-              <div className={styles["grupo"]} id="nombre">
-                <p className={styles["label"]}>Fullname</p>
-                <p className={styles["nombre"]}>Jhon Doe</p>
-              </div>
-
-              <div className={styles["grupo"]} id="expiracion">
-                <p className={styles["label"]}>Expiration</p>
-                <p className={styles["expiracion"]}>
-                  <span className={styles["mes"]}>MM</span> /{" "}
-                  <span className={styles["year"]}>YY</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles["trasera"]}>
-          <div className={styles["barra-magnetica"]}></div>
-          <div className={styles["datos"]}>
-            <div
-              className={`${styles["grupo"]} ${styles["id-firma"]}`}
-              id="firma">
-              <p className={styles["label"]}>Signature</p>
-              <div className={styles["firma"]}>
-                <p></p>
-              </div>
-            </div>
-            <div className={`${styles["grupo"]} ${styles["id-ccv"]}`} id="ccv">
-              <p className={styles["label"]}>CCV</p>
-              <p className={styles["ccv"]}></p>
-            </div>
-          </div>
-          <p className={styles["leyenda"]}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-            exercitationem, voluptates illo.
-          </p>
-          <a href="#" className={styles["link-banco"]}>
-            www.yourbank.com
-          </a>
-        </div>
-      </section>
+      <Creditcard
+        isVisa={isVisa}
+        frontal={frontal}
+        handleClickCard={handleClickCard}
+        cardNumber={form.cardNumber}
+        fullName={form.fullName}
+        expirationMonth={form.expirationMonth}
+        expirationYear={form.expirationYear}
+        ccv={form.ccv}
+      />
 
       {/* <!-- Contenedor Boton Abrir Formulario --> */}
       <div className={styles["contenedor-btn"]}>
         <button
           onClick={handleClickButton}
-          className={`${styles["btn-abrir-formulario"]} ${openForm && styles["active"]}`}
+          className={`${styles["btn-abrir-formulario"]} ${
+            openForm && styles["active"]
+          }`}
           id="btn-abrir-formulario">
           <GrClose />
         </button>
@@ -112,7 +114,7 @@ const FormPaymentMethod = () => {
 
       {/* <!-- Formulario --> */}
       <form
-        action=""
+        onSubmit={handleSubmit}
         id="formulario-tarjeta"
         className={`${styles["formulario-tarjeta"]} ${
           openForm && styles["active"]
@@ -120,19 +122,25 @@ const FormPaymentMethod = () => {
         <div className={styles["grupo"]}>
           <label htmlFor="inputNumero">Card Number</label>
           <input
+            name="cardNumber"
+            value={form.cardNumber}
+            onChange={handleChange}
             type="text"
-            id="inputNumero"
-            maxLength="19"
+            maxLength="16"
             autoComplete="off"
+            className={errors.cardNumber && form.cardNumber && styles.error}
           />
         </div>
         <div className={styles["grupo"]}>
           <label htmlFor="inputNombre">Fullname</label>
           <input
+            name="fullName"
+            value={form.fullName}
+            onChange={handleChange}
             type="text"
-            id="inputNombre"
-            maxLength="19"
+            maxLength="25"
             autoComplete="off"
+            className={errors.fullName && form.fullName && styles.error}
           />
         </div>
         <div className={styles["flexbox"]}>
@@ -140,27 +148,53 @@ const FormPaymentMethod = () => {
             <label htmlFor="selectMes">Expiration</label>
             <div className={styles["flexbox"]}>
               <div className={styles["grupo-select"]}>
-                <select name="mes" id="selectMes">
-                  <option disabled selected>
-                    Month
-                  </option>
+                <select
+                  className={
+                    errors.expirationMonth &&
+                    form.expirationMonth &&
+                    styles.error
+                  }
+                  onChange={handleChange}
+                  name="expirationMonth"
+                  value={form.expirationMonth}>
+                  <option value={""}>Month</option>
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(month => (
+                    <option value={month} key={month}>
+                      {month}
+                    </option>
+                  ))}
                 </select>
-                <i className={styles["fas fa-angle-down"]}></i>
               </div>
               <div className={styles["grupo-select"]}>
-                <select name="year" id="selectYear">
-                  <option disabled selected>
-                    Year
-                  </option>
+                <select
+                  className={
+                    errors.expirationYear && form.expirationYear && styles.error
+                  }
+                  onChange={handleChange}
+                  name="expirationYear"
+                  value={form.expirationYear}>
+                  <option value={""}>Year</option>
+                  {[0, 1, 2, 3, 4, 5].map(year => (
+                    <option
+                      value={currentYear + year - 2000}
+                      key={currentYear + year}>
+                      {currentYear + year}
+                    </option>
+                  ))}
                 </select>
-                <i className={styles["fas fa-angle-down"]}></i>
               </div>
             </div>
           </div>
 
           <div className={styles["grupo ccv"]}>
             <label htmlFor="inputCCV">CCV</label>
-            <input type="text" id="inputCCV" maxLength="3" />
+            <input
+              type="text"
+              value={form.ccv}
+              onChange={handleChange}
+              name="ccv"
+              maxLength="3"
+            />
           </div>
         </div>
         <button type="submit" className={styles["btn-enviar"]}>

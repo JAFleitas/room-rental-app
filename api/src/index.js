@@ -10,6 +10,6 @@ sequelize.sync({ force: false }).then(() => {
     console.log(`Server running on port ${PORT}`) // eslint-disable-line no-console
 
     // Inicializamos la DDBB
-    await initDB()
+    // await initDB()
   })
 })

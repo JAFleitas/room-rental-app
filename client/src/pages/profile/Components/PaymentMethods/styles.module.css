@@ -1,0 +1,19 @@
+.contenedor {
+	width: 100%;
+	padding: 20px 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title{
+  font-size: 18px;
+}
+
+.btn{
+  background-color: darkviolet;
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}

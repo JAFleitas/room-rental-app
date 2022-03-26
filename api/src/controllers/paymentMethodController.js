@@ -3,7 +3,8 @@ const { PaymentMethod } = require("../db/index.js")
 const getAllPaymentMethodsByUser = async (req, res, next) => {
   try {
     const methods = await PaymentMethod.findAll({
-      where: { userId: req.user.dataValues.id },
+      attributes: {exclude: ['userId']},
+      where: { userId: req.user.id },
     })
 
     res.json(methods)
