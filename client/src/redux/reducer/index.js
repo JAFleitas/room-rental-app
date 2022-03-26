@@ -137,6 +137,7 @@ function rootReducer(state = initialState, { type, payload }) {
       }
     case AUTH_ERROR:
     case LOGOUT:
+      localStorage.removeItem("tokenRentalApp");
       return {
         ...state,
         token: null,
