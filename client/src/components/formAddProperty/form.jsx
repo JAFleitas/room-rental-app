@@ -17,6 +17,9 @@ import {
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
 
+// volejap676@jo6s.com
+// Cheboludo$1
+
 export default function FormAddProperty() {
   useEffect(() => {
     dispatch(getAllCategories())
@@ -32,13 +35,11 @@ export default function FormAddProperty() {
     name: "",
     location: "",
     price: "",
-    maxNumberOfPeople: "",
-    numberOfRooms: "",
+    numberOfRooms: 0,
     image: [],
     services: [],
     description: "",
-    floor: "",
-    discount: "",
+    discount: 0,
     typePropertyID: "",
     coordinates: [],
     userID: "b49a5948-21a0-44c3-92fc-20b626d94dc2",
@@ -85,6 +86,24 @@ export default function FormAddProperty() {
       }
     })
   }, [coordinates])
+
+  const [fileState, setFileState] = useState("")
+  const handleFileChange = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append("file", files[0])
+    data.append("upload_preset", "rentApp")
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dye9d3vzy/image/upload",
+      {
+        method: "POST",
+        body: data,
+      },
+    )
+    const file = await res.json()
+    setFileState(file.secure_url)
+  }
+
   return (
     <>
       <TitleSt>
@@ -119,35 +138,17 @@ export default function FormAddProperty() {
           {errors.price && <LabelSt error={true}>{errors.price}</LabelSt>}
 
           <LabelSt>Number of rooms</LabelSt>
-          <InputSt
-            type={"number"}
+          <input
+            type="range"
+            max="10"
+            min="1"
+            step="1"
+            style={{ width: "40%" }}
             name="numberOfRooms"
             value={formData.numberOfRooms}
             onChange={handleInputChange}
           />
-          {errors.numberOfRooms && (
-            <LabelSt error={true}>{errors.numberOfRooms}</LabelSt>
-          )}
-
-          <LabelSt>Max people</LabelSt>
-          <InputSt
-            type={"number"}
-            name="maxNumberOfPeople"
-            value={formData.maxNumberOfPeople}
-            onChange={handleInputChange}
-          />
-          {errors.maxNumberOfPeople && (
-            <LabelSt error={true}>{errors.maxNumberOfPeople}</LabelSt>
-          )}
-
-          <LabelSt>Floor</LabelSt>
-          <InputSt
-            type={"number"}
-            name="floor"
-            value={formData.floor}
-            onChange={handleInputChange}
-          />
-          {errors.floor && <LabelSt error={true}>{errors.floor}</LabelSt>}
+          <label>{formData.numberOfRooms}</label>
 
           <LabelSt>Description</LabelSt>
           <TextDescription
@@ -160,12 +161,17 @@ export default function FormAddProperty() {
           )}
 
           <LabelSt>Discount</LabelSt>
-          <InputSt
-            type={"text"}
+          <input
+            type="range"
+            max="30"
+            min="0"
+            step="5"
+            style={{ width: "40%" }}
             name="discount"
             value={formData.discount}
             onChange={handleInputChange}
           />
+          <label>{formData.discount} %</label>
           {errors.discount && <LabelSt error={true}>{errors.discount}</LabelSt>}
         </FormContainer>
         <ContainerImgAndMap>
@@ -185,16 +191,13 @@ export default function FormAddProperty() {
 
           <FormContainer>
             <LabelSt>Images</LabelSt>
-            <TextDescription
-              onChange={e =>
-                setFormData(prev => {
-                  return {
-                    ...prev,
-                    image: e.target.value.split(","),
-                  }
-                })
-              }
+            <img
+              src={fileState}
+              style={{ width: "30%", height: "30%" }}
+              alt="not found"
             />
+            <input type="file" name="file" onChange={handleFileChange} />
+
             <LabelSt>Type of property</LabelSt>
             <SelectSt name="typePropertyID" onChange={handleInputChange}>
               <option></option>
@@ -212,6 +215,13 @@ export default function FormAddProperty() {
           </FormContainer>
           <FormContainer>
             <LabelSt>Services</LabelSt>
+            {servicesData &&
+              servicesData.map((elem, index) => (
+                <label key={index}>
+                  <input type="checkbox" id={elem.id} value={elem.id} />
+                  {elem.name}
+                </label>
+              ))}
             <SelectSt onChange={e => setService(e.target.value)}>
               <option></option>
               {servicesData &&
