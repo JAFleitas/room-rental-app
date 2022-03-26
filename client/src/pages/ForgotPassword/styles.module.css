@@ -1,0 +1,46 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  max-width: 550px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: whitesmoke;
+  border-radius: 15px;
+}
+
+.title{
+  color: #64075cdd;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 1rem auto;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form button{
+  width: 90%;
+  background-color: #64075cdd;
+  color: white;
+  border-radius: 10px;
+  align-self: center;
+  margin: 1rem;
+  height: 30px;
+}
+
+.form label{
+  margin-top: 1rem;
+  font-size: 14px;
+  color: #64075cdd;
+  font-weight: bold;
+}
+
+.form input{
+  height: 35px;
+  border: 2px solid slategray;
+  border-radius: 6px;
+  padding: 5px;
+}
