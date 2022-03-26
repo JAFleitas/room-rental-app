@@ -19,6 +19,7 @@ import {
   GET_ALL_PAYMENT_METHODS,
   ADD_PAYMENT_METHOD,
   DELETE_PAYMENT_METHOD,
+  EDIT_PAYMENT_METHOD,
 } from "../actions"
 
 const initialState = {
@@ -57,6 +58,12 @@ function rootReducer(state = initialState, { type, payload }) {
     return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
     case DELETE_PAYMENT_METHOD: 
     return {...state, paymenthMethods: state.paymenthMethods.filter(method => method.id !== payload)};
+    case EDIT_PAYMENT_METHOD:
+      let newMethods = state.paymenthMethods.filter(
+        method => method.id + "" !== payload.id + "",
+      )
+      newMethods.push(payload);
+      return {...state, paymenthMethods: newMethods};
     case GET_LIST_FAVORITES:
       return { ...state, listFavorites: payload }
     case ADD_FAVORITE:

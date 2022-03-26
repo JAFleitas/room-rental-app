@@ -20,6 +20,7 @@ const RouterApp = () => {
       <Route exact path="/profile/*" element={<Profile />}></Route>
       <Route path="/*" element={<Error404 />}></Route>
       <Route path="/add/payment-method" element={<FormPaymentMethod />}></Route>
+      <Route path="/edit/payment-method/:id" element={<FormPaymentMethod edit={true} />}></Route>
 
     </Routes>
   )

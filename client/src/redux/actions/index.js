@@ -15,6 +15,7 @@ export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const ADD_RENTAL = "ADD_RENTAL"
 export const GET_ALL_PAYMENT_METHODS = "GET_ALL_PAYMENT_METHODS"
 export const ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD"
+export const EDIT_PAYMENT_METHOD = "EDIT_PAYMENT_METHOD"
 export const DELETE_PAYMENT_METHOD = "DELETE_PAYMENT_METHOD"
 
 export const POST_NEW_USER = "POST_NEW_USER"
@@ -45,6 +46,14 @@ export function getAllPaymentMethod() {
 
 export function addPaymentMethod(newMethod) {
   return { type: ADD_PAYMENT_METHOD, payload: newMethod }
+}
+
+export function deletePaymentMethod(id) {
+  return { type: DELETE_PAYMENT_METHOD, payload: id }
+}
+
+export function editPaymentMethod(editMethod) {
+  return { type: EDIT_PAYMENT_METHOD, payload: editMethod }
 }
 
 export function getFavorites() {

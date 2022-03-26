@@ -1,19 +1,39 @@
 .contenedor {
-	width: 100%;
-	padding: 20px 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  width: 100%;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.title{
+.title {
   font-size: 18px;
 }
 
-.btn{
+.btn {
   background-color: darkviolet;
   color: white;
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
+}
+
+.containerButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn-delete,
+.btn-edit {
+  background-color: tomato;
+  color: black;
+  border-radius: 10px;
+  padding: 5px;
+  width: 90px;
+  text-align: center;
+  margin: 5px 10px;
+}
+
+.btn-edit {
+  background-color: skyblue;
 }
