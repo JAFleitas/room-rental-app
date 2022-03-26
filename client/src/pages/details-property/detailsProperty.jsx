@@ -90,9 +90,7 @@ export default function Details() {
         </DivReview>
         <ReviewContainer />
       </DescriptionContainer>
-      <RentForm
-        props={{ price: propertyDetails.price, rating: propertyDetails.rating }}
-      />
+      <RentForm props={propertyDetails} />
     </ContainerPageDetails>
   )
 }
