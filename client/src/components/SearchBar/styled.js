@@ -19,9 +19,9 @@ export const Text = styled.span`
 
 export const Icon = styled.span`
   border-style: solid;
-  border-color: pink;
+  border-color: #24292f;
   background-color: white;
-  color: pink;
+  color: #24292f;
   margin-left: 0.5rem;
   padding: 0.3rem;
   border-radius: 9999px;
@@ -36,7 +36,7 @@ export const Container = styled.form`
   justify-content: center;
   align-items: center;
 
-  background-color: #24292f;
+  background-color: #0f1111;
   border-radius: 1rem;
   padding: 1rem;
   transition: 1s;
@@ -55,9 +55,9 @@ export const Box = styled.div`
   padding-right: 0.6rem;
   align-items: center;
   border-radius: 1rem;
-  transition: 0.3s;
+  transition: 0.5s;
   &:hover {
-    border: 1px solid white;
+    background-color: #24292f;
   }
 `
 
@@ -74,23 +74,26 @@ export const Input = styled.input`
   padding: 0.2rem 0.2rem;
   width: 100%;
   color: black;
+  outline: none;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 800;
 `
 
 export const SearchButton = styled.button`
   font-size: x-large;
   border-style: solid;
-  border-color: pink;
+  border-color: #6e5fcb;
   border-width: 2px;
   background-color: white;
-  color: pink;
+  color: #6e5fcb;
   align-self: center;
   margin-left: 0.5rem;
   padding: 0.3rem;
   border-radius: 9999px;
 
   &:hover {
-    background-color: pink;
+    background-color: #6e5fcb;
     border-color: black;
-    color: white;
+    color: #000;
   }
 `
