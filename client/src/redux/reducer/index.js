@@ -16,6 +16,10 @@ import {
   ADD_FAVORITE,
   REMOVE_FAVORITE,
   ADD_RENTAL,
+  GET_ALL_PAYMENT_METHODS,
+  ADD_PAYMENT_METHOD,
+  DELETE_PAYMENT_METHOD,
+  EDIT_PAYMENT_METHOD,
 } from "../actions"
 
 const initialState = {
@@ -43,10 +47,23 @@ const initialState = {
   coordinates: [],
 
   listFavorites: {},
+  paymenthMethods: [],
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_PAYMENT_METHODS:
+      return {...state, paymenthMethods: payload};
+    case ADD_PAYMENT_METHOD: 
+    return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
+    case DELETE_PAYMENT_METHOD: 
+    return {...state, paymenthMethods: state.paymenthMethods.filter(method => method.id !== payload)};
+    case EDIT_PAYMENT_METHOD:
+      let newMethods = state.paymenthMethods.filter(
+        method => method.id + "" !== payload.id + "",
+      )
+      newMethods.push(payload);
+      return {...state, paymenthMethods: newMethods};
     case GET_LIST_FAVORITES:
       return { ...state, listFavorites: payload }
     case ADD_FAVORITE:
@@ -126,6 +143,8 @@ function rootReducer(state = initialState, { type, payload }) {
         MyProperties: [],
         user: {},
         auth: false,
+        listFavorites: {},
+        paymenthMethods: []
       }
     case CHANGE_PAGE:
       return {
