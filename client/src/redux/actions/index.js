@@ -113,7 +113,7 @@ export function removeFavorite(idProperty, idListFavorites) {
 }
 
 export function setOptionFilters(newOptions) {
-  console.log(newOptions)
+  // console.log(newOptions)
   return { type: SET_OPTION_FILTERS, payload: newOptions }
 }
 
@@ -121,7 +121,7 @@ export function getAllCategories() {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${api}/categories/getAllCategories`)
-      console.log(response)
+      // console.log(response)
       return dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
@@ -136,7 +136,7 @@ export function getAllServices() {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${api}/services/getAllServices`)
-      console.log(response)
+      // console.log(response)
       return dispatch({
         type: GET_ALL_SERVICES,
         payload: response.data,
@@ -149,16 +149,16 @@ export function getAllServices() {
 
 export function getAllProperties(filters, page = 1) {
   let queries = ""
-  console.log(filters)
+  // console.log(filters)
   if (filters) {
     let filtersQueries = []
 
     filtersQueries = Object.getOwnPropertyNames(filters)
-    console.log({ filtersQueries })
+    // console.log({ filtersQueries })
     if (filtersQueries.services)
       filtersQueries.services = filtersQueries.services.join("%20")
-    console.log("cambio")
-    console.log({ filtersQueries })
+    // console.log("cambio")
+    // console.log({ filtersQueries })
     filtersQueries = filtersQueries.map(query =>
       filters[query]
         ? query === "services"
@@ -168,7 +168,7 @@ export function getAllProperties(filters, page = 1) {
     )
     filtersQueries = filtersQueries.filter(exists => exists)
     queries = filtersQueries.join("&")
-    console.log({ filtersQueries })
+    // console.log({ filtersQueries })
   }
   return async function (dispatch) {
     let response = await axios.get(

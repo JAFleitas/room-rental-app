@@ -32,7 +32,7 @@ const Login = () => {
 
   function handleSubmitLogIn(e) {
     e.preventDefault()
-    console.log("submited")
+    // console.log("submited")
     if (!logInForm.email || !logInForm.password) {
       alert("Missing fields, please try again")
     } else {
