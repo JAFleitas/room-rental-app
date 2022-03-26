@@ -73,7 +73,7 @@ export default function FormAddProperty() {
     e.preventDefault()
     await axios
       .post(`${api}/properties/addProperty`, { ...formData })
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log(err))
   }
   useEffect(() => {

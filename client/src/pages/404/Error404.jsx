@@ -3,7 +3,7 @@
 export default function Error404() {
   return (
     <div>
-      <img src={gif} alt="loading..." />
+      <img style={{width: "100%",maxWidth: "500px"}} src={gif} alt="loading..." />
     </div>
   )
 }

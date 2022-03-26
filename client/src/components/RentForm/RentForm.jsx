@@ -25,6 +25,7 @@ export default function RentForm(props) {
     from: undefined,
     to: undefined,
   })
+  const [diasOcupados, setDiasOcupados] = useState([])
   function handleDayClick(day) {
     const range = DateUtils.addDayToRange(day, dates)
     setDates(range)
@@ -60,19 +61,36 @@ export default function RentForm(props) {
 
   function handleClick() {
     const finalPrice = restaFechas(dates.from, dates.to) * props.price
-    console.log("precio: " + finalPrice)
-    console.log(props)
+    if (dates.from === undefined || dates.to === undefined) {
+      return
+    }
+    // '01/02/2022' '->' '2022/02/01';
+    function convertDateFormat(string) {
+      let date = string.split("/")
+      let fecha = date[2] + "," + date[1] + "," + date[0]
+      return fecha
+    }
+    let inicio = dates.from.toLocaleDateString()
+    let end = dates.to.toLocaleDateString()
+    inicio = convertDateFormat(inicio)
+    end = convertDateFormat(end)
+    console.log(inicio)
+    console.log(end)
     let form = {
       userID: userId,
       propertyID: props.id,
       final_price: finalPrice,
-      statusPropertyId: props.typePropertyID,
+      // statusPropertyId: props.typePropertyID,
       rental_dates: dates,
-      start_date: dates.from !== undefined?.toLocaleDateString(),
-      final_date: dates.to !== undefined?.to.toLocaleDateString(),
+      start_date: dates.from.toLocaleDateString(),
+      final_date: dates.to.toLocaleDateString(),
     }
-    console.log(form)
+    // console.log(form)
     // dispatch(addRental(form))
+    setDiasOcupados([
+      ...diasOcupados,
+      { after: new Date(inicio), before: new Date(end) },
+    ])
   }
 
   return (
@@ -117,6 +135,7 @@ export default function RentForm(props) {
               selectedDays={[dates.from, dates]}
               modifiers={modifiers}
               onDayClick={handleDayClick}
+              disabledDays={[diasOcupados]}
             />
             {restaFechas(dates.from, dates.to) >= 1 ? (
               <h3 className={styles.Total}>
@@ -132,3 +151,11 @@ export default function RentForm(props) {
     </Container>
   )
 }
+
+//Formato para deshabilitar dias
+// ;[
+//   {
+//     after: new Date("2022,2,20"),
+//     before: new Date("2022,2,25"),
+//   },
+// ]
