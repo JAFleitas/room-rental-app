@@ -3,9 +3,11 @@ import styles from "./styles.module.css"
 import { GrClose } from "react-icons/gr"
 import { useDispatch } from "react-redux"
 import Creditcard from "../../../../components/CreditCard/CreditCard"
-import axios from "axios";
+import axios from "axios"
 import getHeaderToken from "../../../../utilities/getHeadertoken"
 const api = import.meta.env.VITE_APP_API_URL
+import { useNavigate } from "react-router-dom"
+import { addPaymentMethod } from "../../../../redux/actions"
 
 const initialForm = {
   cardNumber: "",
@@ -22,6 +24,7 @@ const FormPaymentMethod = () => {
   const [frontal, setFrontal] = useState(true)
   const [errors, setErrors] = useState({})
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleClickCard = () => {
     setFrontal(!frontal)
@@ -32,13 +35,17 @@ const FormPaymentMethod = () => {
   }
 
   const validateForm = form => {
-    const { cardNumber, fullName } = form
+    const { cardNumber, fullName, expirationMonth, expirationYear, ccv } = form
     const errors = {}
 
     if (cardNumber[0] !== "4" && cardNumber[0] !== "5")
       errors.cardNumber = "Debe comenzar con 4 o 5"
     if (fullName.split(" ").length < 2)
       errors.fullName = "Debe contener mas de una palabra"
+
+    if(!expirationMonth || !expirationYear || !ccv){
+      errors.general ="All fields are required";
+    }
 
     return errors
   }
@@ -60,7 +67,7 @@ const FormPaymentMethod = () => {
         .replace(/\D/g, "")
     }
 
-    if(name === "fullName"){
+    if (name === "fullName") {
       value = value.replace(/[0-9]/g, "")
     }
 
@@ -71,18 +78,31 @@ const FormPaymentMethod = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    try {
-      const {data} = await axios.post(
-        `${api}/payment-method`, 
-        form,
-        getHeaderToken()
-        );
-        dispatch(addPaymentMethod(data));
-    } catch (error) {
-      console.log(error.response.data);
-      alert("No ha sido posible añadir el nuevo método");
-    }
 
+    const errors = validateForm(form);
+    setErrors(errors);
+
+    if(Object.keys(errors).length > 0){
+      alert("Check all fields");
+    }else{
+      try {
+        const {data} = await axios.post(
+          `${api}/payment-method`,
+          form,
+          getHeaderToken(),
+        )
+        dispatch(addPaymentMethod(data))
+        navigate("/profile/payment-methods")
+        return;
+      } catch (error) {
+        console.log(error?.response)
+        alert(
+          (typeof error?.response?.data === "string"
+            ? error.response.data
+            : error.response.data?.message) || "Something went wrong :(",
+        )
+      }
+    }
   }
 
   let currentYear = new Date().getFullYear()

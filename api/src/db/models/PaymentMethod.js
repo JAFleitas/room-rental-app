@@ -10,9 +10,10 @@ module.exports = sequelize => {
       cardNumber: {
         type: DataTypes.STRING,
         required: true,
-        validate: {
-          isCreditCard: true,
-        },
+        unique: true,
+        // validate: {
+        //   isCreditCard: true,
+        // },
         get() {},
       },
       type: {

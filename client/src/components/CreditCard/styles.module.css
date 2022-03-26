@@ -9,6 +9,7 @@
 	transform-style: preserve-3d;
 	cursor: pointer;
 	z-index: 2;
+	margin: 1rem;
 }
 
 .tarjeta.active {
