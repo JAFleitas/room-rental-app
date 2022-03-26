@@ -7,6 +7,7 @@ import Profile from "../pages/profile/profile.jsx"
 import Error404 from "../pages/404/Error404.jsx"
 import SignUp from "../components/DropDown/SignUp.jsx"
 import Login from "../components/DropDown/Login.jsx"
+import FormPaymentMethod from "../pages/profile/Components/FormPaymentMethod/FormPaymentMethod.jsx"
 
 const RouterApp = () => {
   return (
@@ -18,6 +19,7 @@ const RouterApp = () => {
       <Route exact path="/signUp" element={<SignUp/>}></Route>
       <Route exact path="/profile/*" element={<Profile />}></Route>
       <Route path="/*" element={<Error404 />}></Route>
+      <Route path="/add/payment-method" element={<FormPaymentMethod />}></Route>
 
     </Routes>
   )
