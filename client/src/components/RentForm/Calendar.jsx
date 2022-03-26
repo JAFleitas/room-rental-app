@@ -21,13 +21,13 @@ export default function Calendar(props) {
   const modifiers = { start: dates.from, end: dates.to }
   // Función para calcular los días transcurridos entre dos fechas
   function restaFechas(f1, f2) {
-    if (dates.from === dates.to) {
-      return 1
-    }
-
     if (f1 !== undefined && f2 !== undefined && f1 !== null && f2 !== null) {
       f1 = f1.toLocaleDateString()
       f2 = f2.toLocaleDateString()
+
+      if (f1 !== undefined && f1 == f2) {
+        return 1
+      }
 
       var aFecha1 = f1.split("/")
       var aFecha2 = f2.split("/")
@@ -63,7 +63,7 @@ export default function Calendar(props) {
         modifiers={modifiers}
         onDayClick={handleDayClick}
       />
-      {restaFechas(dates.from, dates.to) > 0 ? (
+      {restaFechas(dates.from, dates.to) >= 1 ? (
         <h3 className={styles.Total}>
           El total es: {restaFechas(dates.from, dates.to) * props.props.price}$
         </h3>
