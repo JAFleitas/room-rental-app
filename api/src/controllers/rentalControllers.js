@@ -4,7 +4,7 @@ const addRental = async (req, res) => {
   const userID = req.user.id
   const { propertyID, final_price, start_date, final_date, paymenthMethodId } =
     req.body
-  if (userID) {
+  if (userID && final_price && final_date && start_date && paymenthMethodId) {
     const newRental = await PropertyRental.create({
       userID,
       propertyID,
