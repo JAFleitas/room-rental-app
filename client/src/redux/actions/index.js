@@ -330,6 +330,11 @@ export function addRental(form) {
         payload: response.data,
       })
     } catch (error) {
+      alert(
+        (typeof error?.response?.data === "string"
+          ? error.response.data
+          : error.response.data?.message) || "Something went wrong :(",
+      )
       console.log(error.response.data)
     }
   }
