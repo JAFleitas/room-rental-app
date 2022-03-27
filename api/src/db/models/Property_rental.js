@@ -14,6 +14,10 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      paymenthMethodId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       start_date: {
         //  YYYY-MM-DD
         type: DataTypes.DATEONLY,

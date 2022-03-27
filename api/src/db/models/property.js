@@ -47,9 +47,9 @@ module.exports = sequelize => {
         type: DataTypes.ARRAY(DataTypes.DOUBLE),
         allowNull: false,
       },
-      floor: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-      },
+      // floor: {
+      //   type: DataTypes.ARRAY(DataTypes.STRING),
+      // },
       discount: {
         type: DataTypes.INTEGER,
         defaultValue: 0,

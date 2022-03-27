@@ -13,6 +13,10 @@ export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const ADD_RENTAL = "ADD_RENTAL"
+export const GET_ALL_PAYMENT_METHODS = "GET_ALL_PAYMENT_METHODS"
+export const ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD"
+export const EDIT_PAYMENT_METHOD = "EDIT_PAYMENT_METHOD"
+export const DELETE_PAYMENT_METHOD = "DELETE_PAYMENT_METHOD"
 
 export const POST_NEW_USER = "POST_NEW_USER"
 export const SEARCH_PROPERTY = "SEARCH_PROPERTY"
@@ -24,6 +28,33 @@ export const GET_LIST_FAVORITES = "GET_LIST_FAVORITES"
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function getAllPaymentMethod() {
+  return async function (dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/payment-method`, getHeaderToken())
+      // console.log(data)
+      return dispatch({
+        type: GET_ALL_PAYMENT_METHODS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function addPaymentMethod(newMethod) {
+  return { type: ADD_PAYMENT_METHOD, payload: newMethod }
+}
+
+export function deletePaymentMethod(id) {
+  return { type: DELETE_PAYMENT_METHOD, payload: id }
+}
+
+export function editPaymentMethod(editMethod) {
+  return { type: EDIT_PAYMENT_METHOD, payload: editMethod }
+}
 
 export function getFavorites() {
   return async function (dispatch) {
@@ -42,6 +73,7 @@ export function getFavorites() {
     }
   }
 }
+
 
 export function addFavorite(idProperty, idListFavorites) {
   return async function (dispatch) {
@@ -82,7 +114,7 @@ export function removeFavorite(idProperty, idListFavorites) {
 }
 
 export function setOptionFilters(newOptions) {
-  console.log(newOptions)
+  // console.log(newOptions)
   return { type: SET_OPTION_FILTERS, payload: newOptions }
 }
 
@@ -90,7 +122,7 @@ export function getAllCategories() {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${api}/categories/getAllCategories`)
-      console.log(response)
+      // console.log(response)
       return dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
@@ -118,16 +150,16 @@ export function getAllServices() {
 
 export function getAllProperties(filters, page = 1) {
   let queries = ""
-  console.log(filters)
+  // console.log(filters)
   if (filters) {
     let filtersQueries = []
 
     filtersQueries = Object.getOwnPropertyNames(filters)
-    console.log({ filtersQueries })
+    // console.log({ filtersQueries })
     if (filtersQueries.services)
       filtersQueries.services = filtersQueries.services.join("%20")
-    console.log("cambio")
-    console.log({ filtersQueries })
+    // console.log("cambio")
+    // console.log({ filtersQueries })
     filtersQueries = filtersQueries.map(query =>
       filters[query]
         ? query === "services"
@@ -137,7 +169,7 @@ export function getAllProperties(filters, page = 1) {
     )
     filtersQueries = filtersQueries.filter(exists => exists)
     queries = filtersQueries.join("&")
-    console.log({ filtersQueries })
+    // console.log({ filtersQueries })
   }
   return async function (dispatch) {
     let response = await axios.get(
@@ -203,6 +235,21 @@ export const deleteUser = id => async dispatch => {
     })
   }
 }
+
+export const changePassword = (data)=> async dispatch => {
+    const config = getHeaderToken()
+    try {
+      const res= await axios.put(`${api}/users/reset-password`,data, config)
+      dispatch({
+        type: CHANGE_PASSWORD,
+        payload: res.data,
+      })
+      alert ("Password changed")
+    } catch (error) {
+      console.log(error.response.data)
+      alert ("password is wrong")
+    }
+  }
 
 export const logIn = data => async dispatch => {
   try {
