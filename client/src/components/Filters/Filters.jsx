@@ -242,7 +242,7 @@ export default function Filters() {
               ))}
             </div>
           </div>
-          <button onClick={handleApplyFilters}>Aplicar filtros</button>
+          <Filter onClick={handleApplyFilters}>Aplicar filtros</Filter>
           {/*  <ModalField>
             <ModalLabel>Max-Capacity:</ModalLabel>
             <ModalSelect name="MaxPersonas">
