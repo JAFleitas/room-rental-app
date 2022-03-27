@@ -1,22 +1,13 @@
-const { Property_rental } = require("../db/index.js")
+const { PropertyRental } = require("../db/index.js")
 
 const addRental = async (req, res) => {
-  const {
-    userID,
-    propertyID,
-    final_price,
-    // statusPropertyId,
-    rental_dates,
-    start_date,
-    final_date,
-  } = req.body
+  const userID = req.user.id
+  const { propertyID, final_price, start_date, final_date } = req.body
   if (userID) {
-    const newRental = await Property_rental.create({
+    const newRental = await PropertyRental.create({
       userID,
       propertyID,
       final_price,
-      // statusPropertyId,
-      rental_dates,
       start_date,
       final_date,
     })

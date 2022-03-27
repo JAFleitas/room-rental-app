@@ -105,7 +105,7 @@ export function getAllServices() {
   return async function (dispatch) {
     try {
       let response = await axios.get(`${api}/services/getAllServices`)
-      console.log(response)
+      // console.log(response)
       return dispatch({
         type: GET_ALL_SERVICES,
         payload: response.data,
@@ -273,34 +273,17 @@ export const logout = () => {
   }
 }
 
-export function addRental({
-  userID,
-  propertyID,
-  final_price,
-  // statusPropertyId,
-  rental_dates,
-  start_date,
-  final_date,
-}) {
+export function addRental(form) {
   return async function (dispatch) {
+    const config = getHeaderToken()
     try {
-      let response = await axios.post(`${api}/rentals/addRental`, {
-        userID,
-        propertyID,
-        final_price,
-        // statusPropertyId,
-        rental_dates,
-        start_date,
-        final_date,
-        flat: 1,
-        discount: 0,
-      })
+      let response = await axios.post(`${api}/rentals/addRental`, form, config)
       dispatch({
         type: ADD_RENTAL,
         payload: response.data,
       })
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response.data)
     }
   }
 }

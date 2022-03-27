@@ -54,9 +54,8 @@ export default function RentForm(props) {
       var dif = fFecha2 - fFecha1
       var dias = Math.floor(dif / (1000 * 60 * 60 * 24))
       return dias
-    } else {
-      console.log("falta poner fechas")
     }
+    return
   }
 
   function handleClick() {
@@ -78,16 +77,13 @@ export default function RentForm(props) {
     console.log(end)
 
     let form = {
-      userID: userId,
       propertyID: props.id,
       final_price: finalPrice,
-      // statusPropertyId: props.typePropertyID,
-      rental_dates: dates,
       start_date: dates.from.toLocaleDateString(),
       final_date: dates.to.toLocaleDateString(),
     }
     console.log(form)
-    // dispatch(addRental(form))
+    dispatch(addRental(form))
     setDiasOcupados([
       ...diasOcupados,
       { after: new Date(inicio), before: new Date(end) },
