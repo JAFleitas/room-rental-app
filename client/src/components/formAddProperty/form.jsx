@@ -17,7 +17,7 @@ import {
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
 import getHeaderToken from "../../utilities/getHeadertoken"
-const api = import.meta.VITE_APP_API_URL
+const api = import.meta.env.VITE_APP_API_URL
 
 const initialStateForm = {
   name: "",
@@ -40,6 +40,8 @@ export default function FormAddProperty() {
   const coordinates = useSelector(state => state.coordinates)
   const [formData, setFormData] = useState(initialStateForm)
   const [errors, setErrors] = useState({})
+
+  console.log(api);
 
   const handleInputChange = e => {
     const { name, value } = e.target
