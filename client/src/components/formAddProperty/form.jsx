@@ -16,47 +16,44 @@ import {
 } from "./styles"
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
+import getHeaderToken from "../../utilities/getHeadertoken"
+const api = import.meta.env.VITE_APP_API_URL
+
+const initialStateForm = {
+  name: "",
+  location: "",
+  price: "",
+  numberOfRooms: 1,
+  maxNumberOfPeople: 1,
+  image: [],
+  services: [],
+  description: "",
+  discount: 0,
+  typePropertyID: "",
+  coordinates: [],
+}
 
 export default function FormAddProperty() {
-  useEffect(() => {
-    dispatch(getAllCategories())
-    dispatch(getAllServices())
-  }, [])
   const dispatch = useDispatch()
   const typeProperty = useSelector(state => state.categories)
   const servicesData = useSelector(state => state.services)
   const coordinates = useSelector(state => state.coordinates)
-
-  const initialStateForm = {
-    name: "",
-    location: "",
-    price: "",
-    numberOfRooms: 1,
-    maxNumberOfPeople: 1,
-    image: [],
-    services: [],
-    description: "",
-    discount: 0,
-    typePropertyID: "",
-    coordinates: [],
-  }
-
-  // data
   const [formData, setFormData] = useState(initialStateForm)
-  // errors
   const [errors, setErrors] = useState({})
-  useEffect(() => {
-    setErrors(validateFormAddProperty(formData))
-  }, [formData])
 
-  const handleInputChange = e =>
+  console.log(api);
+
+  const handleInputChange = e => {
+    const { name, value } = e.target
+
     setFormData(prev => {
       return {
         ...prev,
-        [e.target.name]: e.target.value,
+        [name]: value,
       }
     })
-  const api = import.meta.VITE_APP_API_URL
+  }
+
   const sendData = async e => {
     e.preventDefault()
     if (localStorage.getItem("tokenRentalApp")) {
@@ -64,11 +61,7 @@ export default function FormAddProperty() {
         .post(
           `${api}/properties/addProperty`,
           { data: formData },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("tokenRentalApp")}`,
-            },
-          },
+          getHeaderToken(),
         )
         .then(res => {
           setFormData(initialStateForm)
@@ -78,15 +71,7 @@ export default function FormAddProperty() {
     } else {
       console.log("Not found token")
     }
-  useEffect(() => {
-    if (coordinates[0] === undefined) return
-    setFormData(prev => {
-      return {
-        ...prev,
-        coordinates: coordinates,
-      }
-    })
-  }, [coordinates])
+  }
 
   const handleFileChange = async e => {
     const files = e.target.files
@@ -138,6 +123,25 @@ export default function FormAddProperty() {
       }
     })
   }
+
+  useEffect(() => {
+    dispatch(getAllCategories())
+    dispatch(getAllServices())
+  }, [])
+
+  useEffect(() => {
+    if (coordinates[0] === undefined) return
+    setFormData(prev => {
+      return {
+        ...prev,
+        coordinates: coordinates,
+      }
+    })
+  }, [coordinates])
+
+  useEffect(() => {
+    setErrors(validateFormAddProperty(formData))
+  }, [formData])
 
   return (
     <>
