@@ -43,6 +43,7 @@ const initialState = {
     minprice: "",
     maxprice: "",
     type: "", //tipo de propiedad
+    location: ""
   },
   page: 1,
   categories: [],
