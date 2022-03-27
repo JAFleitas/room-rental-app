@@ -26,8 +26,8 @@ module.exports = sequelize => {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
-      } 
+        isEmail: true,
+      },
     },
     provider: {
       type: DataTypes.STRING,
@@ -39,7 +39,8 @@ module.exports = sequelize => {
     photo: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "https://image.emojipng.com/346/10131346.jpg",
+      defaultValue:
+        "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
     },
     password: {
       type: DataTypes.STRING,
