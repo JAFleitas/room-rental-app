@@ -74,6 +74,7 @@ export function getFavorites() {
   }
 }
 
+
 export function addFavorite(idProperty, idListFavorites) {
   return async function (dispatch) {
     try {
@@ -234,6 +235,21 @@ export const deleteUser = id => async dispatch => {
     })
   }
 }
+
+export const changePassword = (data)=> async dispatch => {
+    const config = getHeaderToken()
+    try {
+      const res= await axios.put(`${api}/users/reset-password`,data, config)
+      dispatch({
+        type: CHANGE_PASSWORD,
+        payload: res.data,
+      })
+      alert ("Password changed")
+    } catch (error) {
+      console.log(error.response.data)
+      alert ("password is wrong")
+    }
+  }
 
 export const logIn = data => async dispatch => {
   try {

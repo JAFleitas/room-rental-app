@@ -16,10 +16,14 @@ import {
   ADD_FAVORITE,
   REMOVE_FAVORITE,
   ADD_RENTAL,
+
+  CHANGE_PASSWORD,
+
   GET_ALL_PAYMENT_METHODS,
   ADD_PAYMENT_METHOD,
   DELETE_PAYMENT_METHOD,
   EDIT_PAYMENT_METHOD,
+
 } from "../actions"
 
 const initialState = {
@@ -134,6 +138,10 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         user: payload,
         auth: true,
+      }
+    case CHANGE_PASSWORD:
+      return{
+        ...state
       }
     case AUTH_ERROR:
     case LOGOUT:
