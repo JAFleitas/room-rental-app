@@ -1,4 +1,5 @@
-const { Property, Service } = require("../db/index.js")
+const { Property, Service, PropertyRental } = require("../db/index.js")
+// const { Property_rental } = require("../db/index.js")
 
 const getPropertyById = async (req, res, next) => {
   try {
@@ -7,7 +8,11 @@ const getPropertyById = async (req, res, next) => {
       where: {
         id: id,
       },
+      // include: {
+      //   model: PropertyRental,
+      // },
     })
+    console.log(propertyDB)
     if (propertyDB) {
       return res.status(200).json(propertyDB)
     } else {
