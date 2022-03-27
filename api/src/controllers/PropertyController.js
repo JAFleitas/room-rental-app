@@ -7,7 +7,7 @@ const getPropertyById = async (req, res, next) => {
       where: {
         id,
       },
-      attributes: {exclude: ["userID"]},
+      attributes: { exclude: ["userID"] },
       include: [
         {
           model: Comment,

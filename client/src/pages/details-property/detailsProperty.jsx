@@ -43,6 +43,8 @@ export default function Details() {
     dispatch(actionGetPropertyById(id))
   }, [])
 
+  console.log(propertyDetails)
+
   return (
     <ContainerPageDetails>
       <ContainerMapAndTitle>

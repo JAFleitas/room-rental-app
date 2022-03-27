@@ -87,10 +87,16 @@ module.exports = sequelize => {
       through: "PropertyServices",
       timestamps: false,
     })
-    
+
     Property.hasMany(models.Comment, {
       sourceKey: "id",
       foreignKey: "propertyId",
+    })
+
+    //  Relacionando Propiedad con PropertyRental (m:m)
+    Property.hasMany(models.PropertyRental, {
+      sourceKey: "id",
+      foreignKey: "propertyID",
     })
   }
 }

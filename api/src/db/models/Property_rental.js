@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 
 module.exports = sequelize => {
   const PropertyRental = sequelize.define(
-    "property_rental",
+    "PropertyRental",
     {
       id: {
         type: DataTypes.UUID,
@@ -14,25 +14,20 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      // statusPropertyId: {
-      //   type: DataTypes.ARRAY(DataTypes.DATE),
-      //   allowNull: false,
-      // },
-      rental_dates: {
-        type: DataTypes.DATE,
-        allownull: false,
+      paymenthMethodId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       start_date: {
-        type: DataTypes.DATE,
+        //  YYYY-MM-DD
+        type: DataTypes.DATEONLY,
         allownull: false,
       },
       final_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
-      // flat: {
-      //   type: DataTypes.INTEGER,
-      // },
+
       discount: {
         type: DataTypes.INTEGER,
       },
