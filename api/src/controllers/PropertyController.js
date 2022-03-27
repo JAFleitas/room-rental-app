@@ -31,8 +31,9 @@ const addProperty = async (req, res) => {
     discount,
     services,
     typePropertyID,
-    userID,
-  } = req.body
+  } = req.body.data
+  const { id } = req.user
+  console.log(id)
   if (name) {
     try {
       const newProperty = await Property.create({
@@ -47,7 +48,7 @@ const addProperty = async (req, res) => {
         discount,
         services,
         typePropertyID,
-        userID,
+        userID: id,
       })
       await Promise.all(
         services.map(async service => await newProperty.addService(service)),
