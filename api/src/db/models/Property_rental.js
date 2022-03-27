@@ -30,9 +30,9 @@ module.exports = sequelize => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      flat: {
-        type: DataTypes.INTEGER,
-      },
+      // flat: {
+      //   type: DataTypes.INTEGER,
+      // },
       discount: {
         type: DataTypes.INTEGER,
       },
