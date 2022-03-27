@@ -8,9 +8,7 @@ export default function Button() {
   const [open, setOpen] = useState(false)
 
   function handleClick() {
-    
-      setOpen(!open)
-  
+    setOpen(!open)
   }
 
   return (
