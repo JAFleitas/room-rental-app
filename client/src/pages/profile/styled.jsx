@@ -5,9 +5,6 @@ export const PageContainer = styled.div`
   display: flex;
   min-width: 500px;
 
-   
-  
-
   @media (max-width: 720px) {
     flex-direction:column;
     align-items: center;
@@ -65,7 +62,7 @@ export const ProfileImageContainer = styled.div`
   height: 200px;
   width: 200px;
   border-radius: 9999px;
-  border: 2px black solid;
+  // border: 2px black solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,8 +76,9 @@ export const ProfileImageContainer = styled.div`
   }
 `
 export const ProfileImage = styled.img`
-  background-size: contain;
-  font-size: small;
+border-radius: 50%;
+  // background-size: contain;
+  // font-size: small;
 `
 
 export const RentHistory = styled.div`

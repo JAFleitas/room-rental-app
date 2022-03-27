@@ -4,7 +4,7 @@ import Footer from "./components/Footer/Footer"
 import RouterApp from "./routes/RouterApp"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllCategories, getAllProperties, getAllServices, getFavorites, loadUser } from "./redux/actions"
+import { getAllCategories, getAllPaymentMethod, getAllProperties, getAllServices, getFavorites, loadUser } from "./redux/actions"
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ function App() {
   useEffect(() => {
     if(auth){
       dispatch(getFavorites());
+      dispatch(getAllPaymentMethod())
     }
   }, [auth]);
 

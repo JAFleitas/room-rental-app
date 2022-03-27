@@ -10,13 +10,19 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERVICES,
   CHANGE_PAGE,
-
   SET_COORDINATES,
-
   LOGOUT,
   GET_LIST_FAVORITES,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
+  ADD_RENTAL,
+
+  CHANGE_PASSWORD,
+
+  GET_ALL_PAYMENT_METHODS,
+  ADD_PAYMENT_METHOD,
+  DELETE_PAYMENT_METHOD,
+  EDIT_PAYMENT_METHOD,
 
 } from "../actions"
 
@@ -44,20 +50,35 @@ const initialState = {
 
   coordinates: [],
 
-  listFavorites: {}
-
+  listFavorites: {},
+  paymenthMethods: [],
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_PAYMENT_METHODS:
+      return {...state, paymenthMethods: payload};
+    case ADD_PAYMENT_METHOD: 
+    return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
+    case DELETE_PAYMENT_METHOD: 
+    return {...state, paymenthMethods: state.paymenthMethods.filter(method => method.id !== payload)};
+    case EDIT_PAYMENT_METHOD:
+      let newMethods = state.paymenthMethods.filter(
+        method => method.id + "" !== payload.id + "",
+      )
+      newMethods.push(payload);
+      return {...state, paymenthMethods: newMethods};
     case GET_LIST_FAVORITES:
-      return {...state, listFavorites: payload};
+      return { ...state, listFavorites: payload }
     case ADD_FAVORITE:
       return {
         ...state,
         listFavorites: {
           ...state.listFavorites,
-          FavoriteProperties: [...state.listFavorites.FavoriteProperties, payload],
+          FavoriteProperties: [
+            ...state.listFavorites.FavoriteProperties,
+            payload,
+          ],
         },
       }
     case REMOVE_FAVORITE:
@@ -116,16 +137,23 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         user: payload,
-        auth: true
+        auth: true,
+      }
+    case CHANGE_PASSWORD:
+      return{
+        ...state
       }
     case AUTH_ERROR:
     case LOGOUT:
+      localStorage.removeItem("tokenRentalApp");
       return {
         ...state,
         token: null,
         MyProperties: [],
         user: {},
         auth: false,
+        listFavorites: {},
+        paymenthMethods: []
       }
     case CHANGE_PAGE:
       return {
@@ -136,6 +164,10 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         coordinates: payload,
+      }
+    case ADD_RENTAL:
+      return {
+        ...state,
       }
     default:
       return state

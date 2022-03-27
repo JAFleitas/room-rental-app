@@ -14,11 +14,10 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      statusPropertyId: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-      },
+      // statusPropertyId: {
+      //   type: DataTypes.ARRAY(DataTypes.DATE),
+      //   allowNull: false,
+      // },
       rental_dates: {
         type: DataTypes.DATE,
         allownull: false,

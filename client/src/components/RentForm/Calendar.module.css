@@ -1,0 +1,44 @@
+.link {
+  background-color: #d722fc;
+  padding: 5px;
+  color: white;
+  border-radius: 15px;
+}
+
+.RangeExample {
+  border: 1px #d722fc solid;
+  /* border-left: 1px #d722fc solid; */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.Total {
+  width: 40%;
+  margin-left: 30%;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  font-size: 25px;
+  background-color: white;
+  color: #d722fc;
+}
+
+.Selectable
+  .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f0f8ff !important;
+  color: #4a90e2;
+}
+.Selectable .DayPicker-Day {
+  border-radius: 0 !important;
+}
+.Selectable .DayPicker-Day--start {
+  border-top-left-radius: 50% !important;
+  border-bottom-left-radius: 50% !important;
+}
+.Selectable .DayPicker-Day--end {
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
+}

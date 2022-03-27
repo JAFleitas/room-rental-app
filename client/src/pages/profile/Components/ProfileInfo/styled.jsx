@@ -22,6 +22,12 @@ export const SubMenu = styled.div`
 
 `
 
+export const Label = styled.h3`
+  font-size: 17px;
+  font-weight: bold;
+  padding-left: 10px;
+`
+
 export const FullName = styled.h1`
   width: 90%;
   margin-left: 5%;
@@ -61,9 +67,6 @@ export const InfoContainer = styled.div`
 `
 
 export const Info = styled.h3`
-  font-size: 1.5rem;
-  margin: 10px;
-  @media (max-width: 1120px) {
-    font-size: 1.25rem;
-  }
+  font-size: 16px;
+  margin: 10px 20px;
 `

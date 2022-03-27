@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+
 export const DropDownMenu = styled.div`
   position: absolute;
   top: 13.5vh;
@@ -20,7 +21,7 @@ export const DropDownMenu = styled.div`
     visibility: hidden;
     `};
 `
-export const DropDownItem = styled.button`
+export const DropDownItem = styled.span`
   height: 50px;
   width: 90%;
   display: flex;

@@ -32,9 +32,10 @@ export const FavoriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin: 2rem;
+  margin: 1.5rem;
   justify-content: space-evenly;
   width: 40%;
+  min-width: 310px;
   height: 195px;
   border-radius: 15px;
   align-items: center;

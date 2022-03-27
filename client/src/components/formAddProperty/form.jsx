@@ -17,9 +17,6 @@ import {
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
 
-// volejap676@jo6s.com
-// Cheboludo$1
-
 export default function FormAddProperty() {
   useEffect(() => {
     dispatch(getAllCategories())
@@ -65,7 +62,7 @@ export default function FormAddProperty() {
     if (localStorage.getItem("tokenRentalApp")) {
       await axios
         .post(
-          `http://localhost:3001/api/properties/addProperty`,
+          `${api}/properties/addProperty`,
           { data: formData },
           {
             headers: {
@@ -81,7 +78,6 @@ export default function FormAddProperty() {
     } else {
       console.log("Not found token")
     }
-  }
   useEffect(() => {
     if (coordinates[0] === undefined) return
     setFormData(prev => {

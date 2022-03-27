@@ -25,6 +25,9 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true
+      } 
     },
     provider: {
       type: DataTypes.STRING,
@@ -64,6 +67,11 @@ module.exports = sequelize => {
 
   User.associate = models => {
     // Relacionando con la lista de favoritos 1:1
-    User.hasOne(models.Favorite)
+    User.hasOne(models.Favorite);
+
+    User.hasMany(models.PaymentMethod, {
+      sourceKey: "id",
+      foreignKey: "userId",
+    })
   }
 }

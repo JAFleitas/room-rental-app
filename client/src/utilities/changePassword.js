@@ -1,4 +1,5 @@
-export const changePassword = async (data) => {
+import getHeaderToken from "./getHeadertoken"
+export default changePassword = async (data) => {
     const config = getHeaderToken()
     try {
       await axios.post(`${api}/users/reset-password`,data, config)
