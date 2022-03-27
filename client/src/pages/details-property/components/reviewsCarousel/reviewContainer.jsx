@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux"
-import { reviewsObj } from "../../../../utilities/reviewsObjdemo"
+// import { reviewsObj } from "../../../../utilities/reviewsObjdemo"
 import ReviewCard from "../reviewCard/reviewCard"
 import {
   DivStar,
@@ -9,29 +8,21 @@ import {
   ContainerCards,
   ButtonSt,
 } from "./styles"
-export default function ReviewContainer() {
-  const rating = useSelector(state => state.detailsOfProperty.rating)
+
+export default function ReviewContainer({ comments, rating= 0 }) {
   return (
     <>
       {rating && (
         <ContainerAll>
           <ContainerRating>
             <DivStar>
-              <h1>
-                {rating}
-                {rating % 1 === 0 ? ".0" : null}
-              </h1>
+              <h1>{rating}</h1>
               <Star />
             </DivStar>
           </ContainerRating>
           <ContainerCards>
-            {reviewsObj.slice(0, 3).map((e, i) => (
-              <ReviewCard
-                key={i}
-                title={e.title}
-                rating={e.rating}
-                comment={e.comment}
-              />
+            {comments.slice(0, 3).map(comment => (
+              <ReviewCard key={comment.id} comment={comment} />
             ))}
             <div>
               <ButtonSt>See all reviews</ButtonSt>

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { AiFillStar } from "react-icons/ai"
+
 export const ContainerPageDetails = styled.div`
   display: flex;
   flex-direction: column;

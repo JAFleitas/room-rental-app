@@ -178,11 +178,11 @@ export default function RentForm(props) {
               )
             })
           ) : (
-            <AddPayment to="http://localhost:3000/profile/payment-methods">
+            <AddPayment to="/profile/payment-methods">
               Add payment method
             </AddPayment>
           )}
-          <AddPayment to="http://localhost:3000/profile/payment-methods">
+          <AddPayment to="/profile/payment-methods">
             Add payment method <IconPlus />
           </AddPayment>
         </PaymentMethodsContainer>

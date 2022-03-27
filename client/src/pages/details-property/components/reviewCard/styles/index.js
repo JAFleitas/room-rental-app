@@ -6,8 +6,7 @@ export const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 20px;
-  margin-top: 40px;
+  // margin-top: 40px;
 `
 export const ContainerStars = styled.div`
   display: flex;
@@ -30,6 +29,7 @@ export const Title = styled.h3`
 export const ContainerComment = styled.div`
   display: flex;
   width: 90%;
+  flex-direction: column;
   p {
     color: #aeaeae;
   }
