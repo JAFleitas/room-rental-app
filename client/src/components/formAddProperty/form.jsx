@@ -16,6 +16,7 @@ import {
 } from "./styles"
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
+import getHeaderToken from "../../utilities/getHeadertoken"
 const api = import.meta.VITE_APP_API_URL
 
 const initialStateForm = {
@@ -58,11 +59,7 @@ export default function FormAddProperty() {
         .post(
           `${api}/properties/addProperty`,
           { data: formData },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("tokenRentalApp")}`,
-            },
-          },
+          getHeaderToken(),
         )
         .then(res => {
           setFormData(initialStateForm)
