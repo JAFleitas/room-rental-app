@@ -1,25 +1,37 @@
-const { Property, Service, PropertyRental } = require("../db/index.js")
-// const { Property_rental } = require("../db/index.js")
+const { Property, Service, Comment, User } = require("../db/index.js")
 
 const getPropertyById = async (req, res, next) => {
   try {
     const id = req.params.id
-    const propertyDB = await Property.findAll({
+    const propertyDB = await Property.findOne({
       where: {
-        id: id,
+        id,
       },
-      // include: {
-      //   model: PropertyRental,
-      // },
+      attributes: { exclude: ["userID"] },
+      include: [
+        {
+          model: Comment,
+          include: {
+            model: User,
+            attributes: ["name", "lastname"],
+          },
+          attributes: { exclude: ["userId", "propertyId"] },
+        },
+        {
+          model: User,
+          attributes: ["name", "lastname"],
+        },
+      ],
     })
-    console.log(propertyDB)
+
     if (propertyDB) {
       return res.status(200).json(propertyDB)
     } else {
-      return res.status(404).json({ error: "propiedad no encontrada" })
+      return res.status(404).json({ error: "Property not found" })
     }
   } catch (e) {
-    res.status(500).send(e)
+    console.log(e)
+    next(e)
   }
 }
 
