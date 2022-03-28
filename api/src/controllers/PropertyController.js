@@ -147,21 +147,40 @@ const getPropertyByUser = async (req, res, next) => {
   }
 }
 
-const deleteProperty = async (req, res, next) => {
+const disabledProperty = async (req, res, next) => {
   try {
-    const { propertyId, userID } = req.body.form
+    const { id, userId } = req.body
     const propertyDB = await Property.findOne({
       where: {
-        id: propertyId,
+        id: id,
       },
     })
-    await propertyDB.destroy()
-    const properties = await Property.findAll({
-      where: {
-        userID: userID,
-      },
-    })
-    res.status(200).send("Property deleted succesfully" + properties)
+    if (!propertyDB) {
+      res.json({ message: "This Property doesnt exists" })
+    }
+    if (propertyDB.dataValues.status === "enabled") {
+      const updateProperty = await Property.update(
+        {
+          ...propertyDB.dataValues,
+          status: "disabled",
+        },
+        {
+          where: {
+            id: propertyDB.dataValues.id,
+          },
+        },
+      )
+      const properties = await Property.findAll({
+        where: {
+          userID: userId,
+        },
+      })
+      if (updateProperty) {
+        res.status(200).send("Property deleted succesfully" + properties)
+      }
+    } else if (propertyDB.dataValues.status === "disabled") {
+      res.json({ status: 400, message: "This property is already Disabled " })
+    }
   } catch (error) {
     next(error)
   }
@@ -172,5 +191,5 @@ module.exports = {
   addProperty,
   getAll,
   getPropertyByUser,
-  deleteProperty,
+  disabledProperty,
 }
