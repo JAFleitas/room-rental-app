@@ -287,6 +287,8 @@ const updateUser = async (req, res, next) => {
 const loginWithGoogle = async (req, res, next) => {
   const { email, name, lastname, photo } = req.body
 
+  const password = await bcrypt.hash(process.env.PASSWORD_GLOBAL_GOOGLE, 10)
+
   try {
     const [user, created] = await User.findOrCreate({
       where: {
@@ -296,6 +298,7 @@ const loginWithGoogle = async (req, res, next) => {
         name,
         lastname,
         photo,
+        password,
       },
     })
 
