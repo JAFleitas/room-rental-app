@@ -7,7 +7,7 @@ const {
   addProperty,
   getAll,
   getPropertyByUser,
-  deleteProperty,
+  disabledProperty,
 } = require("../controllers/PropertyController")
 
 const router = Router()
@@ -20,6 +20,6 @@ router.get("/getProperties", getFiltersProperty, getAll)
 
 router.get("/getPropertiesByUserId", auth, getPropertyByUser)
 
-router.delete("/deleteProperty", deleteProperty)
+router.put("/deleteProperty", disabledProperty)
 
 module.exports = router
