@@ -23,6 +23,7 @@ import {
   ADD_PAYMENT_METHOD,
   DELETE_PAYMENT_METHOD,
   EDIT_PAYMENT_METHOD,
+  GET_RENTAL,
 
 } from "../actions"
 
@@ -50,7 +51,7 @@ const initialState = {
   services: [],
 
   coordinates: [],
-
+  propertyRentals:[],
   listFavorites: {},
   paymenthMethods: [],
 }
@@ -170,6 +171,11 @@ function rootReducer(state = initialState, { type, payload }) {
     case ADD_RENTAL:
       return {
         ...state,
+      }
+    case GET_RENTAL:
+      return{
+        ...state,
+        propertyRentals:payload
       }
     default:
       return state
