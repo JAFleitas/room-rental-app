@@ -58,6 +58,7 @@ const initialState = {
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_ALL_PAYMENT_METHODS:
+
       return {...state, paymenthMethods: payload};
     case ADD_PAYMENT_METHOD: 
     return {...state, paymenthMethods: [...state.paymenthMethods, payload]};

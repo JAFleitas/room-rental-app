@@ -72,31 +72,31 @@ export default function RentForm(props) {
       return
     }
     // '01/02/2022' '->' '2022/02/01';
-    function convertDateFormat(string) {
-      let date = string.split("/")
-      let fecha = date[2] + "," + date[1] + "," + date[0]
-      return fecha
-    }
-    let inicio = dates.from.toLocaleDateString()
-    let end = dates.to.toLocaleDateString()
-    inicio = convertDateFormat(inicio)
-    end = convertDateFormat(end)
-    console.log(inicio)
-    console.log(end)
+    // function convertDateFormat(string) {
+    //   let date = string.split("/")
+    //   let fecha = date[2] + "," + date[1] + "," + date[0]
+    //   return fecha
+    // }
+    // let inicio = dates.from.toLocaleDateString()
+    // let end = dates.to.toLocaleDateString()
+    // inicio = convertDateFormat(inicio)
+    // end = convertDateFormat(end)
+    // console.log(inicio)
+    // console.log(end)
     let form = {
       propertyID: props.id,
       final_price: finalPrice,
-      start_date: dates.from.toLocaleDateString(),
-      final_date: dates.to.toLocaleDateString(),
+      start_date: dates.from,
+      final_date: dates.to,
       paymenthMethodId: payMethod,
     }
     console.log(form)
     dispatch(addRental(form))
 
-    setDiasOcupados([
-      ...diasOcupados,
-      { after: new Date(inicio), before: new Date(end) },
-    ])
+    // setDiasOcupados([
+    //   ...diasOcupados,
+    //   { after: new Date(inicio), before: new Date(end) },
+    // ])
   }
 
   function handlePayChange(id) {
@@ -162,7 +162,7 @@ export default function RentForm(props) {
             paymentMethods.map(method => {
               console.log(method)
               return (
-                <PaymentMethod>
+                <PaymentMethod key={method.id}>
                   <PaymentMethodName>
                     {method.type + " ending in " + method.lastNumbers}
                   </PaymentMethodName>

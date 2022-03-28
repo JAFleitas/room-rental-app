@@ -1,9 +1,9 @@
 import axios from "axios"
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Creditcard from "../../../../components/CreditCard/CreditCard"
-import { deletePaymentMethod } from "../../../../redux/actions"
+import { deletePaymentMethod, getAllPaymentMethod } from "../../../../redux/actions"
 import getHeaderToken from "../../../../utilities/getHeadertoken"
 import styles from "./styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
@@ -11,6 +11,9 @@ const api = import.meta.env.VITE_APP_API_URL
 const Paymentmethods = () => {
   const methods = useSelector(state => state.paymenthMethods)
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllPaymentMethod())
+  }, [dispatch])
   const deleteMethod = async id => {
     try {
       await axios.delete(`${api}/payment-method/${id}`, getHeaderToken())
@@ -32,9 +35,9 @@ const Paymentmethods = () => {
       <h2 className={styles.title}>Payment methods</h2>
       {methods.length > 0 ? (
         methods.map(method => (
-          <>
+          <div key={method.id}>
+          
             <Creditcard
-              key={method.id}
               isVisa={method?.type === "VISA"}
               cardNumber={"**** **** **** " + method?.lastNumbers}
               fullName={method?.fullName}
@@ -55,7 +58,7 @@ const Paymentmethods = () => {
                 Delete
               </button>
             </div>
-          </>
+          </div>
         ))
       ) : (
         <div>
