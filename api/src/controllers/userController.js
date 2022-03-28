@@ -122,7 +122,6 @@ const getUserDetail = async (req, res, next) => {
 const disableUser = async (req, res, next) => {
   try {
     const user = req.user
-    console.log({ user })
 
     if (!user) {
       res.json({ message: "This User doesnt exists" })
