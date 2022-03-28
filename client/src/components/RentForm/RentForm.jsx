@@ -162,7 +162,7 @@ export default function RentForm(props) {
             paymentMethods.map(method => {
               console.log(method)
               return (
-                <PaymentMethod>
+                <PaymentMethod key={method.id}>
                   <PaymentMethodName>
                     {method.type + " ending in " + method.lastNumbers}
                   </PaymentMethodName>
