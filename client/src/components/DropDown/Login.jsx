@@ -16,6 +16,7 @@ import { BsFacebook } from "react-icons/bs"
 import { logIn } from "../../redux/actions/index"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import LoginWithGoogle from "../auth/login"
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -39,7 +40,6 @@ const Login = () => {
       dispatch(logIn(logInForm))
       navigate("/")
     }
-
   }
   return (
     <Container>
@@ -64,14 +64,11 @@ const Login = () => {
             placeholder="Password"></Input>
         </Field>
         <SendButton onClick={e => handleSubmitLogIn(e)}>Log in</SendButton>
-        <ButtonFacebook>
+        {/*         <ButtonFacebook>
           <BsFacebook />
           Log in with Facebook
-        </ButtonFacebook>
-        <ButtonGoogle>
-          <FcGoogle />
-          Log in with Google
-        </ButtonGoogle>
+        </ButtonFacebook> */}
+        <LoginWithGoogle />
         <RedButton onClick={() => navigate("/forgot-password")}>
           I forgot my password
         </RedButton>
