@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 
 export const Navigator = styled.nav`
-  background-color: #0f1111;
   display: flex;
   flex-direction: row;
   top: 0;
@@ -11,11 +10,18 @@ export const Navigator = styled.nav`
   height: 150px;
   justify-content: space-between;
   align-items: center;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.0665616588432247) 100%
+  );
 `
 
 export const IconContainer = styled.div`
   height: 9vh;
-  width: 80px;
+  height: 90px;
+  width: 100px;
   margin-left: 1.5vw;
   margin-top: 2vh;
   margin-bottom: 2vh;
@@ -25,13 +31,20 @@ export const IconContainer = styled.div`
   justify-content: space-around;
 
   border-radius: 12px;
-  background: #0f1111;
+  background-color: #e2c8ff;
+  transition: background-color 1s;
+
+  &:hover {
+    background-color: #eea0fe;
+    transition: background-color 1s;
+  }
 `
 
 export const Logo = styled.img`
-  width: 100%;
-  height: 64px;
-  margin-top: 0.5vh;
+  width: 80%;
+  margin-left: 10%;
+  height: 85%;
+  margin-top: 7.5%;
   background-repeat: no-repeat;
   background-size: contain;
 `

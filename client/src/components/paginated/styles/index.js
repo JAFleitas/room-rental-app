@@ -7,7 +7,12 @@ export const ContainerPaginated = styled.div`
   height: 80px;
   align-items: center;
   color: #2b2929;
-  background-color: #ffffff;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.0865616588432247) 100%
+  );
 `
 
 export const ButtonPage = styled.button`

@@ -36,7 +36,7 @@ export const Container = styled.form`
   justify-content: center;
   align-items: center;
 
-  background-color: #0f1111;
+  background-color: #e2c8ff;
   border-radius: 1rem;
   padding: 1rem;
   transition: 1s;
@@ -57,7 +57,7 @@ export const Box = styled.div`
   border-radius: 1rem;
   transition: 0.5s;
   &:hover {
-    background-color: #24292f;
+    background-color: black;
   }
 `
 
@@ -66,6 +66,12 @@ export const Label = styled.label`
   font-weight: normal;
   font-family: sans-serif;
   color: white;
+  padding: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-bottom: 2%;
+  background-color: black;
+  border-radius: 15px;
 `
 export const Input = styled.input`
   border-radius: 0.5rem;
