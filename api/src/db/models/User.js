@@ -64,6 +64,11 @@ module.exports = sequelize => {
       allowNull: false,
       defaultValue: "NORMAL",
     },
+    blocked: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      required: true,
+    }
   })
 
   User.associate = models => {
