@@ -1,7 +1,4 @@
-/* eslint-disable */
-
 const { User } = require("../db/index.js")
-
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = process.env
 const bcrypt = require("bcrypt")
@@ -71,9 +68,8 @@ const login = async (req, res, next) => {
     // ningún usuario contiene ese correo
     if (!user) return next({ status: 400, message: "Invalid credentials" })
 
-    //Si la cuenta está desabilitada
-    if (user.dataValues.status === "disabled") {
-      return next({ status: 400, message: "Disabled Account" })
+    if (user.dataValues.status !== "enable" || user.dataValues.blocked) {
+      return next({ status: 401, message: "Account bloqued or disabled" })
     }
 
     // Teniedo el usuario, determinamos si la contraseña enviada es correcta
@@ -100,8 +96,8 @@ const login = async (req, res, next) => {
       },
     )
   } catch (err) {
-    console.log(err)
-    next({ err })
+    // console.log(err)
+    next(err)
   }
 }
 
@@ -109,24 +105,12 @@ const getUserDetail = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id, {
       attributes: {
-        exclude: [
-          "password",
-          "provider",
-          "providerId",
-          "type",
-          "createdAt",
-          "updatedAt",
-        ],
+        exclude: ["password", "provider", "providerId", "type", "updatedAt"],
       },
     })
 
     if (!user) {
       return next({ status: 404, message: "User not found" })
-    }
-
-    //Si la cuenta está desabilitada
-    if (user.dataValues.status === "disabled") {
-      return next({ status: 400, message: "Disabled Account" })
     }
 
     res.json(user)
@@ -135,52 +119,52 @@ const getUserDetail = async (req, res, next) => {
   }
 }
 
-const disableUser = async (req, res) => {
-  const { id } = req.body
+const disableUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(id)
+    const user = req.user
+    console.log({ user })
+
     if (!user) {
       res.json({ message: "This User doesnt exists" })
-    } else if (user.dataValues.status === "enabled") {
-      try {
-        const updateStatus = await User.update(
-          {
-            ...user.dataValues,
-            status: "disabled",
+    }
+
+    try {
+      const updateStatus = await User.update(
+        {
+          status: "disabled",
+        },
+        {
+          where: {
+            id: user.id,
           },
-          {
-            where: {
-              id: user.dataValues.id,
-            },
-          },
-        )
-        if (updateStatus) {
-          res.status(200).json({ message: "Acoount disabled correctly" })
-        } else {
-          res.status(400).json({ message: "Couldnt disbale User" })
-        }
-      } catch (error) {
-        console.log(error)
+        },
+      )
+
+      if (updateStatus) {
+        res.json({ message: "Acoount disabled correctly" })
+      } else {
+        res.status(400).json({ message: "Couldnt disable User account" })
       }
-    } else if (user.dataValues.status === "disabled") {
-      res.json({ status: 400, message: "This account is already Disabled " })
+    } catch (error) {
+      // console.log(error)
+      next(error)
     }
   } catch (err) {
-    console.log(err)
+    // console.log(err)
+    next(err)
   }
 }
 
-const enableUser = async (req, res) => {
-  const { id } = req.body
+const enableUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(id)
+    const user = req.user
+
     if (!user) {
       res.json({ message: "This User doesnt exists" })
-    } else if (user.dataValues.status === "disabled") {
+    } else if (user.status === "disabled") {
       try {
         const updateStatus = await User.update(
           {
-            ...user.dataValues,
             status: "enabled",
           },
           {
@@ -196,12 +180,14 @@ const enableUser = async (req, res) => {
         }
       } catch (error) {
         console.log(error)
+        next(error)
       }
-    } else if (user.dataValues.status === "enabled") {
+    } else if (user.status === "enabled") {
       res.json({ status: 400, message: "This account is already enabled " })
     }
   } catch (err) {
     console.log(err)
+    next(err)
   }
 }
 
@@ -320,7 +306,7 @@ const loginWithGoogle = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error)
-    next({ error })
+    next(error)
   }
 }
 
