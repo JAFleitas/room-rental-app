@@ -38,6 +38,17 @@ module.exports = sequelize => {
         type: DataTypes.DOUBLE,
         allowNull: false,
         defaultValue: 0,
+        set(value) {
+          this.setDataValue("rating", Math.round(value * 100) / 100)
+        },
+      },
+      countReviews: {
+        type: DataTypes.INTEGER,
+        required: true,
+        defaultValue: 0,
+        validate: {
+          min: 0,
+        },
       },
       image: {
         type: DataTypes.ARRAY(DataTypes.STRING),
@@ -47,9 +58,9 @@ module.exports = sequelize => {
         type: DataTypes.ARRAY(DataTypes.DOUBLE),
         allowNull: false,
       },
-      floor: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-      },
+      // floor: {
+      //   type: DataTypes.ARRAY(DataTypes.STRING),
+      // },
       discount: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
@@ -75,6 +86,23 @@ module.exports = sequelize => {
     Property.belongsToMany(models.Service, {
       through: "PropertyServices",
       timestamps: false,
+    })
+
+    Property.hasMany(models.Comment, {
+      sourceKey: "id",
+      foreignKey: "propertyId",
+    })
+
+    //  Relacionando Propiedad con PropertyRental (m:m)
+    Property.hasMany(models.PropertyRental, {
+      sourceKey: "id",
+      foreignKey: "propertyID",
+    })
+
+    // Relacionando Propiedad y User
+    Property.belongsTo(models.User, {
+      sourceKey: "id",
+      foreignKey: "userID",
     })
   }
 }

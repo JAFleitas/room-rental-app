@@ -4,14 +4,19 @@
   color: white;
   border-radius: 15px;
 }
+.calendarContainer{
+  width: 90%;
+}
 
 .RangeExample {
-  border: 1px #d722fc solid;
   /* border-left: 1px #d722fc solid; */
   border-radius: 10px;
   padding: 10px;
+  width: 90%;
 }
-
+.today{
+  color:red
+}
 .Total {
   width: 40%;
   margin-left: 30%;
@@ -26,19 +31,8 @@
   color: #d722fc;
 }
 
-.Selectable
-  .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-  background-color: #f0f8ff !important;
-  color: #4a90e2;
+.Selectable{
+  background-color: rgb(139, 37, 255);
+  color:white;
 }
-.Selectable .DayPicker-Day {
-  border-radius: 0 !important;
-}
-.Selectable .DayPicker-Day--start {
-  border-top-left-radius: 50% !important;
-  border-bottom-left-radius: 50% !important;
-}
-.Selectable .DayPicker-Day--end {
-  border-top-right-radius: 50% !important;
-  border-bottom-right-radius: 50% !important;
-}
+  

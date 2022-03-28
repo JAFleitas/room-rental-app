@@ -3,12 +3,12 @@ import styled from "styled-components"
 export const SubMenu = styled.div`
   display:flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   margin-left: 5%;
   margin-top: 7%;
   padding: 10px;
-  padding-bottom:20px;
-  
   background: rgb(226, 200, 255);
   background: linear-gradient(
     330deg,
@@ -19,7 +19,17 @@ export const SubMenu = styled.div`
   );
   border-radius: 15px;
   height: fit-content;
+  @media (max-width: 720px) {
+    margin: 1rem;
+    width: 90%;
+  }
 
+`
+
+export const Label = styled.h3`
+  font-size: 17px;
+  font-weight: bold;
+  padding-left: 10px;
 `
 
 export const FullName = styled.h1`
@@ -61,9 +71,6 @@ export const InfoContainer = styled.div`
 `
 
 export const Info = styled.h3`
-  font-size: 1.5rem;
-  margin: 10px;
-  @media (max-width: 1120px) {
-    font-size: 1.25rem;
-  }
+  font-size: 16px;
+  margin: 10px 20px;
 `

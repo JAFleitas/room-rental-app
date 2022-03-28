@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { FiSearch } from "react-icons/fi"
 import { useState } from "react"
 import {
@@ -14,7 +14,7 @@ import {
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import {useDispatch, useSelector} from "react-redux";
-import {getAllProperties} from "../../redux/actions";
+import {getAllProperties, setOptionFilters} from "../../redux/actions";
 
 import Filters from "../Filters/Filters"
 
@@ -27,7 +27,7 @@ function SearchBar() {
 
   const handleSearch= (e) => {
     e.preventDefault();
-
+    dispatch(setOptionFilters({location})),
     dispatch(getAllProperties({...filters, location}));
   }
   
@@ -36,6 +36,11 @@ function SearchBar() {
 
     setLocation(value);
   }
+
+  useEffect(() => {
+    setLocation(filters.location)
+  }, [])
+  
 
   return (
     <Container>

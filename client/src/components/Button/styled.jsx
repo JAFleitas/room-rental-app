@@ -5,24 +5,24 @@ export const Container = styled.button`
   justify-content: space-evenly;
   align-items: center;
   height: 20px;
-  width: 120px;
+  width: 80px;
   min-width: 80px;
   min-height: 40px;
   margin-top: 1vh;
   margin-left: 1vw;
   padding: 4px;
   z-index: 50;
-  margin-right: 10px;
+  margin-right: 20px;
 
   border-radius: 21px;
-  background: #0f1111;
+  background: #e2c8ff;
   svg {
-    color: #ededed;
+    color: #000000;
   }
   transition: all 1s;
   &:hover {
     border-radius: 21px;
-    background: #24292f;
+    background: #be86ff;
   }
 
   &:active {
@@ -41,17 +41,18 @@ export const Icon = styled.div`
 `
 
 export const ImageContainer = styled.div`
-  height: 3.5vh;
-  min-height: 24px;
-  width: 1.65vw;
-  min-width: 24px;
+  height: 40px;
+  width: 40px;
   margin-left: 2px;
   color: black;
   background-color: white;
   border-radius: 50px;
-  font-size: 25px;
 `
-// export const ProfileImage = styled.img`
-//   background-repeat: no-repeat;
-//   background-size: contain;
-// `
+export const ProfileImage = styled.img`
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 50%;
+
+  width: 100%;
+  height: 100%;
+`

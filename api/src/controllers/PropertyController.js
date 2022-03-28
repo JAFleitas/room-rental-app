@@ -1,20 +1,37 @@
-const { Property, Service } = require("../db/index.js")
+const { Property, Service, Comment, User } = require("../db/index.js")
 
 const getPropertyById = async (req, res, next) => {
   try {
     const id = req.params.id
-    const propertyDB = await Property.findAll({
+    const propertyDB = await Property.findOne({
       where: {
-        id: id,
+        id,
       },
+      attributes: { exclude: ["userID"] },
+      include: [
+        {
+          model: Comment,
+          include: {
+            model: User,
+            attributes: ["name", "lastname"],
+          },
+          attributes: { exclude: ["userId", "propertyId"] },
+        },
+        {
+          model: User,
+          attributes: ["name", "lastname"],
+        },
+      ],
     })
+
     if (propertyDB) {
       return res.status(200).json(propertyDB)
     } else {
-      return res.status(404).json({ error: "propiedad no encontrada" })
+      return res.status(404).json({ error: "Property not found" })
     }
   } catch (e) {
-    res.status(500).send(e)
+    console.log(e)
+    next(e)
   }
 }
 
@@ -28,12 +45,12 @@ const addProperty = async (req, res) => {
     description,
     image,
     coordinates,
-    floor,
     discount,
     services,
     typePropertyID,
-    userID,
-  } = req.body
+  } = req.body.data
+  const { id } = req.user
+  console.log(id)
   if (name) {
     try {
       const newProperty = await Property.create({
@@ -45,11 +62,10 @@ const addProperty = async (req, res) => {
         description,
         image,
         coordinates,
-        floor,
         discount,
         services,
         typePropertyID,
-        userID,
+        userID: id,
       })
       await Promise.all(
         services.map(async service => await newProperty.addService(service)),
@@ -108,8 +124,53 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const getPropertyByUser = async (req, res, next) => {
+  try {
+    const userID = req.user.id
+    console.log("aca")
+    console.log(userID)
+
+    const properties = await Property.findAll({
+      where: {
+        userID: userID,
+      },
+    })
+    console.log(properties)
+    if (properties) {
+      return res.status(200).json(properties)
+    } else {
+      return res.status(404).json({ error: "User does not have properties" })
+    }
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+const deleteProperty = async (req, res, next) => {
+  try {
+    const { propertyId, userID } = req.body.form
+    const propertyDB = await Property.findOne({
+      where: {
+        id: propertyId,
+      },
+    })
+    await propertyDB.destroy()
+    const properties = await Property.findAll({
+      where: {
+        userID: userID,
+      },
+    })
+    res.status(200).send("Property deleted succesfully" + properties)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getPropertyById,
   addProperty,
   getAll,
+  getPropertyByUser,
+  deleteProperty,
 }

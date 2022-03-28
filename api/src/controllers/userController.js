@@ -1,4 +1,7 @@
+/* eslint-disable */
+
 const { User } = require("../db/index.js")
+
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = process.env
 const bcrypt = require("bcrypt")
@@ -281,6 +284,46 @@ const updateUser = async (req, res, next) => {
   }
 }
 
+const loginWithGoogle = async (req, res, next) => {
+  const { email, name, lastname, photo } = req.body
+
+  const password = await bcrypt.hash(process.env.PASSWORD_GLOBAL_GOOGLE, 10)
+
+  try {
+    const [user, created] = await User.findOrCreate({
+      where: {
+        email,
+      },
+      defaults: {
+        name,
+        lastname,
+        photo,
+        password,
+      },
+    })
+
+    if (user || created) {
+      const payload = {
+        user: { id: user.id },
+      }
+      jwt.sign(
+        payload,
+        JWT_SECRET,
+        {
+          expiresIn: "3d",
+        },
+        (err, token) => {
+          if (err) throw err
+          return res.json({ token })
+        },
+      )
+    }
+  } catch (error) {
+    console.log(error)
+    next({ error })
+  }
+}
+
 module.exports = {
   createUser,
   login,
@@ -290,4 +333,5 @@ module.exports = {
   resetPassword,
   updateUser,
   enableUser,
+  loginWithGoogle,
 }

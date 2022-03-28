@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize")
 
 module.exports = sequelize => {
   const PropertyRental = sequelize.define(
-    "property_rental",
+    "PropertyRental",
     {
       id: {
         type: DataTypes.UUID,
@@ -14,16 +14,12 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      statusPropertyId: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+      paymenthMethodId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      rental_dates: {
-        type: DataTypes.DATE,
-        allownull: false,
-      },
       start_date: {
+        //  YYYY-MM-DD
         type: DataTypes.DATE,
         allownull: false,
       },
@@ -31,9 +27,7 @@ module.exports = sequelize => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      flat: {
-        type: DataTypes.INTEGER,
-      },
+
       discount: {
         type: DataTypes.INTEGER,
       },
@@ -49,10 +43,10 @@ module.exports = sequelize => {
     })
 
     // Relacionando 'alquiler de una propiedad' y Propiedad
-    PropertyRental.belongsTo(models.Property, {
-      sourceKey: "id",
-      foreignKey: "propertyID",
-    })
+    // PropertyRental.belongsTo(models.Property, {
+    //   sourceKey: "id",
+    //   foreignKey: "propertyID",
+    // })
 
     // Relacionando 'alquiler de una propiedad' y Estado
     PropertyRental.belongsTo(models.Rental_status, {

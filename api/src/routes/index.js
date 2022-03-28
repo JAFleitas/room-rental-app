@@ -7,7 +7,9 @@ const userRouter = require("./userRoutes")
 const servicesRoutes = require("./servicesRoutes")
 const categoriesRoutes = require("./categoriesRoutes")
 const favoriteRouter = require("./favoriteRoutes")
-const {contactController} = require("../controllers/contactController")
+const emailRouter = require("./emailRouter")
+const paymenthMethodRouter = require("./paymentMethodRoutes")
+const commentRouter = require("./commentRoutes")
 
 const router = Router()
 
@@ -20,6 +22,8 @@ router.use("/users", userRouter)
 router.use("/services", servicesRoutes)
 router.use("/categories", categoriesRoutes)
 router.use("/favorites", favoriteRouter)
-router.post("/email", contactController)
+router.use("/comments", commentRouter)
+router.use("/", emailRouter)
+router.use("/payment-method", paymenthMethodRouter)
 
 module.exports = router

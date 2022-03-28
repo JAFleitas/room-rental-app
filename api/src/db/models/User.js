@@ -19,12 +19,15 @@ module.exports = sequelize => {
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     provider: {
       type: DataTypes.STRING,
@@ -36,11 +39,12 @@ module.exports = sequelize => {
     photo: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "https://image.emojipng.com/346/10131346.jpg",
+      defaultValue:
+        "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       set(value) {
         this.setDataValue("password", hashSync(value, 10))
       },
@@ -65,5 +69,15 @@ module.exports = sequelize => {
   User.associate = models => {
     // Relacionando con la lista de favoritos 1:1
     User.hasOne(models.Favorite)
+
+    User.hasMany(models.PaymentMethod, {
+      sourceKey: "id",
+      foreignKey: "userId",
+    })
+
+    User.hasMany(models.Property, {
+      sourceKey: "id",
+      foreignKey: "userId",
+    })
   }
 }

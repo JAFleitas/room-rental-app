@@ -1,11 +1,12 @@
 import styled from "styled-components"
 import { AiFillStar } from "react-icons/ai"
+
 export const ContainerPageDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   height: auto;
   padding-top: 50px;
   @media screen and (max-width: 740px) {

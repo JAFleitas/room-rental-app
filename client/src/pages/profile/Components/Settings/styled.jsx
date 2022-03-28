@@ -3,8 +3,11 @@ import styled from "styled-components"
 export const SubMenu = styled.div`
   display:flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   margin-left: 5%;
+  margin-top: 7%;
   padding: 10px;
   background: rgb(226, 200, 255);
   background: linear-gradient(
@@ -16,7 +19,10 @@ export const SubMenu = styled.div`
   );
   border-radius: 15px;
   height: fit-content;
-
+  @media (max-width: 720px) {
+    margin: 1rem;
+    width: 90%;
+  }
 `
 export const Title = styled.h1`
   width: 90%;

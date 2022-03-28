@@ -5,9 +5,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  width: ${({ width }) => width ?? "46%"};
 
   justify-content: space-around;
-  width: 46%;
+  /* width: 46%; */
   height: 250px;
   margin: 1rem 0.3rem;
   border-radius: 15px;

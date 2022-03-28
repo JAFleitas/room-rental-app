@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { AiFillStar } from "react-icons/ai"
 import DatePicker from "react-datepicker"
+import { Link } from "react-router-dom"
+import { BsFillPlusCircleFill } from "react-icons/bs"
 
 export const Container = styled.div`
   width: 50%;
@@ -20,6 +22,7 @@ export const Container = styled.div`
   margin-bottom: 5%;
 
   @media (max-width: 700px) {
+    width: 90%;
     min-width: 500px;
   }
 `
@@ -63,7 +66,6 @@ export const Form = styled.div`
   align-items: flex-end;
   margin-bottom: 5%;
   margin-top: 2%;
-  padding-left: 3%;
 `
 
 export const FormField = styled.div`
@@ -115,5 +117,75 @@ export const SubmitButton = styled.button`
     border-radius: 18px;
     background: #d722fc;
     box-shadow: inset 5px 5px 10px #b71dd6, inset -5px -5px 10px #f727ff;
+  }
+`
+export const PaymentMethodsContainer = styled.div`
+  /* width: 80%; */
+  padding: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+
+  height: 50px;
+  align-self: center;
+  background-color: #d0a6ff;
+  border-radius: 10px;
+  border: 1px solid #d722fc;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+
+export const PaymentMethod = styled.div`
+  background: rgb(139, 37, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(139, 37, 255, 1) 0%,
+    rgba(173, 102, 255, 1) 100%
+  );
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  font-size: 1.4rem;
+`
+
+export const PaymentMethodCheck = styled.input`
+  background-color: #d722fc;
+  border-radius: 15px;
+  border: 1px solid transparent;
+`
+
+export const PaymentMethodName = styled.label`
+  font-size: 15px;
+  color: white;
+  margin-right: 15px;
+`
+
+export const AddPayment = styled(Link)`
+  background: rgb(139, 37, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(139, 37, 255, 1) 0%,
+    rgba(173, 102, 255, 1) 100%
+  );
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  color: white;
+`
+
+export const IconPlus = styled(BsFillPlusCircleFill)`
+  color: white;
+  font-size: 1.4rem;
+  margin-left: 5px;
+
+  &:hover {
+    color: black;
+    font-size: 1.5rem;
+    transition: color 1s;
+    transition: font-size 1s;
   }
 `

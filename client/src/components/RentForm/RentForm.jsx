@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Container,
   Header,
@@ -10,32 +10,56 @@ import {
   FormSelect,
   FormLabel,
   SubmitButton,
+  PaymentMethodsContainer,
+  PaymentMethod,
+  PaymentMethodCheck,
+  PaymentMethodName,
+  AddPayment,
+  IconPlus,
 } from "./styled"
-import DayPicker, { DateUtils } from "react-day-picker"
-import "react-day-picker/lib/style.css"
+
+import { DayPicker } from "react-day-picker"
+import "react-day-picker/dist/style.css"
 import styles from "./Calendar.module.css"
-import { addRental } from "../../redux/actions/index"
+import { addRental, getRental } from "../../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+
+import { useParams } from "react-router-dom"
+
 
 export default function RentForm(props) {
-  props = props.props
-  const userId = useSelector(state => state.user.id)
+  const { id } = useParams()
+  const propertyID = { propertyID: id }
   const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getRental(propertyID))
+  }, [dispatch])
+
+  props = props.props
+
+  const paymentMethods = useSelector(state => state.paymenthMethods)
+
+  const rentals = useSelector(state => state.propertyRentals.data)
+
+
+
   const [dates, setDates] = useState({
     from: undefined,
     to: undefined,
   })
-  function handleDayClick(day) {
-    const range = DateUtils.addDayToRange(day, dates)
-    setDates(range)
-  }
+
+
+  const [payMethod, setPayMethod] = useState()
+
+
+
   function handleResetClick() {
     setDates({
       from: undefined,
       to: undefined,
     })
   }
-  const modifiers = { start: dates.from, end: dates.to }
   // Función para calcular los días transcurridos entre dos fechas
   function restaFechas(f1, f2) {
     if (f1 !== undefined && f2 !== undefined && f1 !== null && f2 !== null) {
@@ -53,26 +77,46 @@ export default function RentForm(props) {
       var dif = fFecha2 - fFecha1
       var dias = Math.floor(dif / (1000 * 60 * 60 * 24))
       return dias
-    } else {
-      console.log("falta poner fechas")
     }
+    return
   }
 
   function handleClick() {
     const finalPrice = restaFechas(dates.from, dates.to) * props.price
-    console.log("precio: " + finalPrice)
-    console.log(props)
+    if (dates.from === undefined || dates.to === undefined) {
+      return
+    }
+    // '01/02/2022' '->' '2022/02/01';
+    // function convertDateFormat(string) {
+    //   let date = string.split("/")
+    //   let fecha = date[2] + "," + date[1] + "," + date[0]
+    //   return fecha
+    // }
+    // let inicio = dates.from.toLocaleDateString()
+    // let end = dates.to.toLocaleDateString()
+    // inicio = convertDateFormat(inicio)
+    // end = convertDateFormat(end)
+    // console.log(inicio)
+    // console.log(end)
     let form = {
-      userID: userId,
       propertyID: props.id,
       final_price: finalPrice,
-      statusPropertyId: props.typePropertyID,
-      rental_dates: dates,
-      start_date: dates.from !== undefined?.toLocaleDateString(),
-      final_date: dates.to !== undefined?.to.toLocaleDateString(),
+      start_date: dates.from,
+      final_date: dates.to,
+      paymenthMethodId: payMethod,
     }
-    console.log(form)
-    // dispatch(addRental(form))
+
+    dispatch(addRental(form))
+
+    // setDiasOcupados([
+    //   ...diasOcupados,
+    //   { after: new Date(inicio), before: new Date(end) },
+    // ])
+  }
+
+  function handlePayChange(id) {
+    console.log(id)
+    setPayMethod(id)
   }
 
   return (
@@ -111,12 +155,25 @@ export default function RentForm(props) {
                 </button>
               )}
             </p>
+
             <DayPicker
-              className={styles}
               numberOfMonths={2}
-              selectedDays={[dates.from, dates]}
-              modifiers={modifiers}
-              onDayClick={handleDayClick}
+              mode="range"
+              selected={dates}
+              onSelect={setDates}
+              disabled={
+                rentals &&
+                rentals.map(rental => {
+                  return {
+                    from: new Date(rental.start_date),
+                    to: new Date(rental.final_date),
+                  }
+                })
+              }
+              modifiersClassNames={{
+                selected: styles.Selectable,
+                today: styles.today,
+              }}
             />
             {restaFechas(dates.from, dates.to) >= 1 ? (
               <h3 className={styles.Total}>
@@ -127,8 +184,60 @@ export default function RentForm(props) {
             )}
           </div>
         </FormField>
+        <PaymentMethodsContainer>
+          {paymentMethods ? (
+            paymentMethods.map(method => {
+              console.log(method)
+              return (
+                <PaymentMethod key={method.id}>
+                  <PaymentMethodName>
+                    {method.type + " ending in " + method.lastNumbers}
+                  </PaymentMethodName>
+                  <PaymentMethodCheck
+                    key={method.id}
+                    type="radio"
+                    name="paymenthmethod"
+                    id={method.id}
+                    value={method.id}
+                    onChange={e => handlePayChange(e.target.id)}
+                  />
+                </PaymentMethod>
+              )
+            })
+          ) : (
+            <AddPayment to="/profile/payment-methods">
+              Add payment method
+            </AddPayment>
+          )}
+          <AddPayment to="/profile/payment-methods">
+            Add payment method <IconPlus />
+          </AddPayment>
+        </PaymentMethodsContainer>
         <SubmitButton onClick={handleClick}>Reservar</SubmitButton>
       </Form>
     </Container>
   )
+}
+
+//Formato para deshabilitar dias
+// ;[
+//   {
+//     after: new Date("2022,2,20"),
+//     before: new Date("2022,2,25"),
+//   },
+// ]
+
+{
+  /* <PaymentMethod>
+<PaymentMethodName>Card 1</PaymentMethodName>
+<PaymentMethodCheck type="checkbox" />
+</PaymentMethod>
+<PaymentMethod>
+<PaymentMethodName>Card 2</PaymentMethodName>
+<PaymentMethodCheck type="checkbox" />
+</PaymentMethod>
+<PaymentMethod>
+<PaymentMethodName>Card 3</PaymentMethodName>
+<PaymentMethodCheck type="checkbox" />
+</PaymentMethod> */
 }

@@ -10,6 +10,7 @@ const {
   forgotPassword,
   updateUser,
   enableUser,
+  loginWithGoogle,
 } = require("../controllers/userController")
 
 const userRouter = Router()
@@ -18,6 +19,8 @@ userRouter.post("/register", createUser)
 
 // Facebook
 userRouter.post("/login", login)
+
+userRouter.post("/loginWithGoogle", loginWithGoogle)
 
 userRouter.get("/", auth, getUserDetail)
 

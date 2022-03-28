@@ -3,20 +3,25 @@ import {
   ContainerComment,
   ContainerStars,
   FillStarIcon,
-  Title,
+  // Title,
 } from "./styles"
 
-export default function ReviewCard({ title, rating, comment }) {
+export default function ReviewCard({ comment }) {
+  let stars = [];
+
+  for (let star = 0; star < comment.rating; star++) {
+    stars.push(<FillStarIcon key={star} />)
+  }
+  console.log(stars);
   return (
     <ContainerCard>
       <ContainerStars>
-        {rating.map(e => (
-          <FillStarIcon key={e} />
-        ))}
+        {stars}
       </ContainerStars>
-      <Title>{title}</Title>
       <ContainerComment>
-        <p>{comment}</p>
+        <p>{comment.message}</p>
+        <span>Comment on: {comment.creationDate}</span>
+        <p>By: {comment.user.name + " " + comment.user.lastname}</p>
       </ContainerComment>
     </ContainerCard>
   )

@@ -3,20 +3,18 @@ import styled from "styled-components"
 export const PageContainer = styled.div`
   width: 100%;
   display: flex;
-  min-width: 500px;
-
-   
-  
 
   @media (max-width: 720px) {
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-around;
   }
 `
 export const MenuContainer = styled.div`
   display: flex;
   width: 300px;
-  margin-top: 7%;
+  height: fit-content;
+  margin-top: 4%;
   margin-bottom: 22%;
   margin-left: 5%;
   padding: 10px;
@@ -32,11 +30,8 @@ export const MenuContainer = styled.div`
   flex-direction: column;
 
   @media (max-width: 720px) {
-
-    width: 70%;
-    margin-top: 10%;
-    align-content: space-between;
-    flex-direction: row;
+    width: 90%;
+    margin: 1rem;
   }
 `
 export const MenuOptions = styled.div`
@@ -58,29 +53,14 @@ export const MenuOption = styled.h3`
     transition: 500ms;
   }
 `
-export const ProfileImageContainer = styled.div`
-  margin-left: 15%;
-  margin-top: 2.5%;
-  margin-bottom: 2.5%;
+
+export const ProfileImage = styled.img`
+  margin: 1rem;
   height: 200px;
   width: 200px;
-  border-radius: 9999px;
-  border: 2px black solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
-  @media (max-width: 720px) {
-    align-self: center;
-    min-width: 0;
-    margin-top: 5%;
-    margin-left: 5%;
-  }
-`
-export const ProfileImage = styled.img`
-  background-size: contain;
-  font-size: small;
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
 `
 
 export const RentHistory = styled.div`

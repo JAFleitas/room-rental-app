@@ -3,12 +3,26 @@ import {
   FiltersButton,
   FilterForm,
   ModalTitle,
+  ModalField,
+  ModalLabel,
+  ModalSubtitle,
+  ModalTexto,
+  ModalSelect,
+  CheckBoxWrapper,
+  CheckBoxLabel,
+  CheckBox,
+  Filter,
   // ModalField,
 } from "./styled"
 import { MdFilterAlt } from "react-icons/md"
 import Modal from "../modal/modal"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllProperties, getAllCategories, getAllServices, setOptionFilters } from "../../redux/actions"
+import {
+  getAllProperties,
+  getAllCategories,
+  getAllServices,
+  setOptionFilters,
+} from "../../redux/actions"
 
 // const initialCategories = [
 //   { name: "Casa de playa", id: "123" },
@@ -33,11 +47,12 @@ const initialFilters = {
 }
 
 export default function Filters() {
+  const filtersGlobal = useSelector(state => state.filters)
   const [modalShow, setModalShow] = useState(false)
   const [filters, setfilters] = useState(initialFilters)
   const [services, setServices] = useState([])
   const [categories, setCategories] = useState([])
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const initialServices = useSelector(state => state.services)
   const initialCategories = useSelector(state => state.categories)
 
@@ -69,32 +84,39 @@ export default function Filters() {
     setfilters({ ...filters, [name]: value })
   }
 
-  const handleApplyFilters = (e) => {
-    e.preventDefault();
+  const handleApplyFilters = e => {
+    e.preventDefault()
 
-    const servicesIds = filters.services.map(service =>  service.id);
-    
-    dispatch(setOptionFilters({...filters, services: servicesIds}))
-    dispatch(getAllProperties({...filters, services: servicesIds}));
-    // console.log(filters);
+    const servicesIds = filters.services.map(service => service.id)
+
+    dispatch(setOptionFilters({ ...filters, services: servicesIds }))
+    dispatch(getAllProperties({ ...filters, services: servicesIds }))
+    console.log(filters);
   }
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault()
-    console.log("clicked")
+    // console.log("clicked")
     setModalShow(!modalShow)
-    console.log(modalShow)
+    // console.log(modalShow)
   }
 
   useEffect(() => {
     setCategories(initialCategories)
     setServices(initialServices)
   }, [initialCategories, initialServices])
-  
+
   useEffect(() => {
     dispatch(getAllCategories())
     dispatch(getAllServices())
+    console.log(filtersGlobal,"filtersGlobal");
+    setfilters({...initialFilters,...filtersGlobal})
   }, [])
+
+  useEffect(() => {
+    console.log(filtersGlobal,"filtersGlobal");
+    setfilters({...initialFilters,...filtersGlobal})
+  }, [filtersGlobal])
 
   return (
     <div>
@@ -105,68 +127,79 @@ export default function Filters() {
         overlayShow={true}
         modalShow={modalShow}
         setModalShow={setModalShow}>
-        <ModalTitle>Filtros</ModalTitle>
+        <ModalTitle>Filter</ModalTitle>
         <FilterForm>
-          <div>
+          <CheckBoxWrapper>
             <h3>
-              <label>Capacity</label>
+              <ModalSubtitle>Capacity</ModalSubtitle>
             </h3>
             <label>Min</label>
-            <input
-              type="number"
-              name="minpeople"
-              value={filters.minpeople}
-              onChange={handleChange}
-            />
-            <label>Max</label>
-            <input
-              type="number"
-              name="maxpeople"
-              value={filters.maxpeople}
-              onChange={handleChange}
-            />
-          </div>
+            <ModalLabel>
+              <CheckBox
+                type="number"
+                name="minpeople"
+                value={filters.minpeople}
+                onChange={handleChange}
+              />
+            </ModalLabel>
+            <label> Max</label>
+            <ModalLabel>
+              <CheckBox
+                type="number"
+                name="maxpeople"
+                value={filters.maxpeople}
+                onChange={handleChange}
+              />
+            </ModalLabel>
+          </CheckBoxWrapper>
           <div>
-            <h3>
-              <label>Price</label>
-            </h3>
+            <br />
+            <ModalSubtitle>Price</ModalSubtitle>
             <label>Min</label>
-            <input
-              type="number"
-              name="minprice"
-              value={filters.minprice}
-              onChange={handleChange}
-            />
-            <label>Max</label>
-            <input
-              type="number"
-              name="maxprice"
-              value={filters.maxprice}
-              onChange={handleChange}
-            />
+            <ModalLabel>
+              <CheckBox
+                type="number"
+                name="minprice"
+                value={filters.minprice}
+                onChange={handleChange}
+              />
+            </ModalLabel>
+            <label> Max</label>
+            <ModalLabel>
+              <CheckBox
+                type="number"
+                name="maxprice"
+                value={filters.maxprice}
+                onChange={handleChange}
+              />
+            </ModalLabel>
           </div>
+          <br />
           <div>
-            <h3>
-              <label>Rooms</label>
-            </h3>
+            <ModalSubtitle>Rooms</ModalSubtitle>
             <label>Min</label>
-            <input
-              type="number"
-              name="minrooms"
-              value={filters.minrooms}
-              onChange={handleChange}
-            />
-            <label>Max</label>
-            <input
-              type="number"
-              name="maxrooms"
-              value={filters.maxrooms}
-              onChange={handleChange}
-            />
+            <ModalLabel>
+              <CheckBox
+                type="number"
+                name="minrooms"
+                value={filters.minrooms}
+                onChange={handleChange}
+              />
+            </ModalLabel>
+            <label> Max</label>
+            <ModalLabel>
+              <CheckBox
+                type="number"
+                name="maxrooms"
+                value={filters.maxrooms}
+                onChange={handleChange}
+              />
+            </ModalLabel>
           </div>
+          <br />
           <div>
-            <label>Category</label>
-            <select
+            <ModalSubtitle>Category</ModalSubtitle>
+            <ModalSelect
               title="type"
               name={"type"}
               id={"type"}
@@ -177,17 +210,18 @@ export default function Filters() {
                   {category.name}
                 </option>
               ))}
-            </select>
+            </ModalSelect>
           </div>
           <div>
-            <label>Servicios</label>
+            <ModalSubtitle>Services </ModalSubtitle>
             <div>
-              <h4>Añadir servicio</h4>
+              <h4>Add Service</h4>
               {services.map(service => (
                 <button
                   style={{
                     padding: "5px",
-                    backgroundColor: "deeppink",
+                    backgroundColor: "#d2d4d3",
+                    color: "black",
                     border: "1px solid black",
                     borderRadius: "10px",
                   }}
@@ -198,12 +232,14 @@ export default function Filters() {
               ))}
             </div>
             <div>
-              <h4>Selected Services</h4>
+              <br />
+              <h4>Added Service</h4>
               {filters.services.map(service => (
                 <button
                   style={{
                     padding: "5px",
-                    backgroundColor: "skyblue",
+                    backgroundColor: "#b7d2c8",
+                    color: "black",
                     border: "1px solid black",
                     borderRadius: "10px",
                   }}
@@ -214,7 +250,7 @@ export default function Filters() {
               ))}
             </div>
           </div>
-          <button onClick={handleApplyFilters}>Aplicar filtros</button>
+          <Filter onClick={handleApplyFilters}>Aplicar filtros</Filter>
           {/*  <ModalField>
             <ModalLabel>Max-Capacity:</ModalLabel>
             <ModalSelect name="MaxPersonas">

@@ -7,7 +7,8 @@ export const ContainerAll = styled.div`
   background-color: #ffffff;
   border-radius: 10px;
   padding: 16px;
-  margin-top: 16px;
+  margin: 1rem;
+  width: 90%;
 `
 
 export const Star = styled(AiFillStar)`
