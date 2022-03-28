@@ -177,15 +177,20 @@ export function getAllProperties(filters, page = 1) {
     // console.log({ filtersQueries })
   }
   return async function (dispatch) {
-    let response = await axios.get(
-      queries
-        ? `${api}/properties/getProperties?${queries}&page=${page}`
-        : `${api}/properties/getProperties?page=${page}`,
-    )
-    return dispatch({
-      type: GET_ALL_PROPERTIES,
-      payload: response.data,
-    })
+    try {
+      let response = await axios.get(
+        queries
+          ? `${api}/properties/getProperties?${queries}&page=${page}`
+          : `${api}/properties/getProperties?page=${page}`,
+      )
+      return dispatch({
+        type: GET_ALL_PROPERTIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+      alert("No se han encontrado propiedades con los filtros aplicados")
+    }
   }
 }
 
@@ -199,17 +204,6 @@ export function getPropertyById(id) {
   }
 }
 
-export const addProperty = data => async dispatch => {
-  try {
-    const res = await axios.post(`${api}/properties/addProperty`, data)
-    dispatch({
-      type: ADD_PROPERTY,
-      payload: res.data,
-    })
-  } catch (error) {
-    console.log(error.response)
-  }
-}
 export const loadUser = () => async dispatch => {
   const config = getHeaderToken()
   try {
@@ -356,14 +350,13 @@ export function getPropertiesByUserId() {
       console.log(response.data)
       return dispatch({
         type: GET_PROPERTIES_BY_USER_ID,
-                payload: response.data,
+        payload: response.data,
       })
     } catch (error) {
       console.log(error.response)
     }
   }
 }
-
 
 export function actionLoginWithGoogle(data) {
   return async function (dispatch) {
@@ -384,19 +377,18 @@ export function actionLoginWithGoogle(data) {
   }
 }
 
-export const getRental= propertyID => async dispatch =>{
-    try {
-      let response = await axios.post(`${api}/rentals/getRental`,propertyID)
-      dispatch({
-        type: GET_RENTAL,
+export const getRental = propertyID => async dispatch => {
+  try {
+    let response = await axios.post(`${api}/rentals/getRental`, propertyID)
+    dispatch({
+      type: GET_RENTAL,
 
-        payload: response.data,
-      })
-    } catch (error) {
-      console.log(error.response)
-    }
+      payload: response.data,
+    })
+  } catch (error) {
+    console.log(error.response)
   }
-
+}
 
 export function deletePropertyFromMyProperties(form) {
   return async function (dispatch) {
@@ -419,5 +411,3 @@ export function deletePropertyFromMyProperties(form) {
     }
   }
 }
-
-
