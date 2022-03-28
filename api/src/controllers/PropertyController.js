@@ -124,8 +124,53 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const getPropertyByUser = async (req, res, next) => {
+  try {
+    const userID = req.user.id
+    console.log("aca")
+    console.log(userID)
+
+    const properties = await Property.findAll({
+      where: {
+        userID: userID,
+      },
+    })
+    console.log(properties)
+    if (properties) {
+      return res.status(200).json(properties)
+    } else {
+      return res.status(404).json({ error: "User does not have properties" })
+    }
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+const deleteProperty = async (req, res, next) => {
+  try {
+    const { propertyId, userID } = req.body.form
+    const propertyDB = await Property.findOne({
+      where: {
+        id: propertyId,
+      },
+    })
+    await propertyDB.destroy()
+    const properties = await Property.findAll({
+      where: {
+        userID: userID,
+      },
+    })
+    res.status(200).send("Property deleted succesfully" + properties)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getPropertyById,
   addProperty,
   getAll,
+  getPropertyByUser,
+  deleteProperty,
 }

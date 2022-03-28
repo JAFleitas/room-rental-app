@@ -1,12 +1,14 @@
 import styled from "styled-components"
+
 export const SubMenu = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 65%;
   margin-left: 5%;
-  margin-top: 7%;
+  margin-top: 4%;
+  margin-bottom: 4%;
   padding: 10px;
   background: rgb(226, 200, 255);
   background: linear-gradient(
@@ -22,7 +24,6 @@ export const SubMenu = styled.div`
     margin: 1rem;
     width: 90%;
   }
-
 `
 export const Title = styled.h1`
   width: 70%;
@@ -46,6 +47,17 @@ export const Title = styled.h1`
   text-align: center;
   margin: 0 auto;
 `
+
+export const CardContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border-radius: 15px;
+  /* border: 2px #d0a6ff solid; */
+  margin-top: 2%;
+`
+
 export const RedButton = styled.button`
   color: #ffffff;
   justify-self: center;
@@ -66,20 +78,20 @@ export const RedButton = styled.button`
 
   &:hover {
     background-color: #ffffff;
-    color:#cf222e;
+    color: #cf222e;
   }
 `
 export const WhiteButton = styled.button`
   display: flex;
   color: black;
   justify-self: center;
-  align-self: center;  
+  align-self: center;
   justify-content: center;
   align-items: center;
   padding: 3px;
   border: 1px solid black;
   border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
+  box-shadow: rgba(27, 31, 36, 0.1);
   width: 30%;
   min-height: 30px;
   background-color: white;
@@ -90,8 +102,17 @@ export const WhiteButton = styled.button`
 
   transition: 0.2s;
 
-  &:hover{
+  &:hover {
     background-color: #e9ecef;
-    
   }
+`
+
+export const Card = styled.div`
+  width: 90%;
+  border-radius: 15px;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #d722fc;
 `

@@ -26,6 +26,9 @@ export const SET_COORDINATES = "SET_COORDINATES"
 export const ADD_FAVORITE = "ADD_FAVORITE"
 export const GET_LIST_FAVORITES = "GET_LIST_FAVORITES"
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
+export const GET_PROPERTIES_BY_USER_ID = "GET_PROPERTIES_BY_USER_ID"
+export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
+  "DELETE_PROPERTY_FROM_MY_PROPERTIES"
 
 const api = import.meta.env.VITE_APP_API_URL
 
@@ -73,7 +76,6 @@ export function getFavorites() {
     }
   }
 }
-
 
 export function addFavorite(idProperty, idListFavorites) {
   return async function (dispatch) {
@@ -236,20 +238,20 @@ export const deleteUser = id => async dispatch => {
   }
 }
 
-export const changePassword = (data)=> async dispatch => {
-    const config = getHeaderToken()
-    try {
-      const res= await axios.put(`${api}/users/reset-password`,data, config)
-      dispatch({
-        type: CHANGE_PASSWORD,
-        payload: res.data,
-      })
-      alert ("Password changed")
-    } catch (error) {
-      console.log(error.response.data)
-      alert ("password is wrong")
-    }
+export const changePassword = data => async dispatch => {
+  const config = getHeaderToken()
+  try {
+    const res = await axios.put(`${api}/users/reset-password`, data, config)
+    dispatch({
+      type: CHANGE_PASSWORD,
+      payload: res.data,
+    })
+    alert("Password changed")
+  } catch (error) {
+    console.log(error.response.data)
+    alert("password is wrong")
   }
+}
 
 export const logIn = data => async dispatch => {
   try {
@@ -331,6 +333,47 @@ export function addRental(form) {
       })
     } catch (error) {
       console.log(error.response.data)
+    }
+  }
+}
+
+export function getPropertiesByUserId() {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.get(
+        `${api}/properties/getPropertiesByUserId`,
+        config,
+      )
+      console.log(response.data)
+      return dispatch({
+        type: GET_PROPERTIES_BY_USER_ID,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function deletePropertyFromMyProperties(form) {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.delete(`${api}/properties/deleteProperty`, {
+        headers: {
+          Authorization: config.headers.Authorization,
+        },
+        data: {
+          form: form,
+        },
+      })
+      return dispatch({
+        type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
     }
   }
 }
