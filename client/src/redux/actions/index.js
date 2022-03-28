@@ -319,7 +319,7 @@ export function actionSetCoordinates(payload) {
   }
 }
 
-export const logout = () => {
+export const actionLogout = () => {
   return {
     type: LOGOUT,
   }
@@ -364,6 +364,26 @@ export function getPropertiesByUserId() {
   }
 }
 
+
+export function actionLoginWithGoogle(data) {
+  return async function (dispatch) {
+    try {
+      // Response
+      const response = await axios.post(`${api}/users/loginWithGoogle`, data)
+      // console.log(res.data.token);
+
+      dispatch({
+        type: LOG_IN,
+        payload: response.data.token,
+      })
+      dispatch(loadUser())
+    } catch (err) {
+      console.log(err.response)
+      alert("no se pudo loguear correctamente")
+    }
+  }
+}
+
 export const getRental= propertyID => async dispatch =>{
     try {
       let response = await axios.post(`${api}/rentals/getRental`,propertyID)
@@ -399,4 +419,5 @@ export function deletePropertyFromMyProperties(form) {
     }
   }
 }
+
 

@@ -19,7 +19,7 @@ module.exports = sequelize => {
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -44,7 +44,7 @@ module.exports = sequelize => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       set(value) {
         this.setDataValue("password", hashSync(value, 10))
       },
