@@ -13,7 +13,7 @@ import {
   Info,
   Rating,
   DivPyR,
-  Location
+  Location,
 } from "./styled"
 
 import Slider from "react-slick"
@@ -33,8 +33,7 @@ function PropertyCard(props) {
     slidesToScroll: 1,
   }
   const navigateTo = useNavigate()
-  const favorites =
-    useSelector(state => state.listFavorites)
+  const favorites = useSelector(state => state.listFavorites)
   const auth = useSelector(state => state.auth)
   const [liked, setLiked] = useState(false)
 
@@ -43,13 +42,13 @@ function PropertyCard(props) {
   }
 
   useEffect(() => {
-    let properties = favorites.FavoriteProperties?.map(e => e.propertyId) || [];
+    let properties = favorites.FavoriteProperties?.map(e => e.propertyId) || []
 
-    setLiked(auth===true && properties?.includes(props.id))
-  }, [favorites]);
-  
+    setLiked(auth === true && properties?.includes(props.id))
+  }, [favorites])
+
   return (
-    <Container>
+    <Container width={props.width}>
       <ImageContainer onClick={() => handleClick()}>
         <Slider {...settings}>
           {props.image &&
@@ -57,10 +56,10 @@ function PropertyCard(props) {
               return <Image key={i} src={image}></Image>
             })}
         </Slider>
-      <Location>
-        <IoLocationOutline />
-        {`${props.location}`}
-      </Location>
+        <Location>
+          <IoLocationOutline />
+          {`${props.location}`}
+        </Location>
       </ImageContainer>
       <Title onClick={() => handleClick()}>{props.name}</Title>
       <Info>{`${props.numberOfRooms} rooms -  ${props.maxNumberOfPeople} guests`}</Info>

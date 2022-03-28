@@ -7,7 +7,7 @@ export const DropDownMenu = styled.div`
   right: -2vw;
   width: 300px;
   transform: translateX(-45%);
-  background-color: #240046;
+  background: linear-gradient(145deg, #cb8fff, #ab79e6);
   border-radius: 17px;
   padding: 1rem;
   overflow: hidden;
@@ -28,8 +28,9 @@ export const DropDownItem = styled.span`
   align-items: center;
   border-radius: 17px;
   transition: background 800ms, color 800ms;
-  padding: 0.5rem;
-  margin-bottom: 5%;
+  padding: 0.4rem;
+  margin-bottom: 2.5%;
+  margin-top: 2.5%;
 
   :hover {
     background-color: #9d4edd;
@@ -46,13 +47,12 @@ export const Container = styled.div`
   background: #fff;
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding:"20px";
+  padding: "20px";
   margin-bottom: 2rem;
   @media (max-width: 500px) {
-  width:100%
+    width: 100%;
   }
 `
-
 
 export const Title = styled.h1`
   font-size: 36px;
@@ -83,7 +83,7 @@ export const Form = styled.form`
   padding-bottom: 10%;
   display: flex;
   flex-direction: column;
-  gap:0.3rem;
+  gap: 0.3rem;
 `
 export const Input = styled.input`
   grid-column: 2/3;
@@ -109,40 +109,39 @@ export const Label = styled.label`
 `
 export const ButtonFacebook = styled.button`
   display: flex;
-  color:#ffffff;
+  color: #ffffff;
   justify-self: center;
-  align-self: center;  
+  align-self: center;
   justify-content: center;
   align-items: center;
   padding: 3px;
   border: 1px solid black;
   border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
+  box-shadow: rgba(27, 31, 36, 0.1);
   width: 50%;
   min-height: 30px;
-  background-color: #1B74E4;
+  background-color: #1b74e4;
   font-size: large;
   font-weight: normal;
   font-family: sans-serif;
 
   transition: 0.2s;
 
-  &:hover{
+  &:hover {
     background-color: #385898;
-    
   }
 `
 export const ButtonGoogle = styled.button`
-display: flex;
+  display: flex;
   color: black;
   justify-self: center;
-  align-self: center;  
+  align-self: center;
   justify-content: center;
   align-items: center;
   padding: 3px;
   border: 1px solid black;
   border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
+  box-shadow: rgba(27, 31, 36, 0.1);
   width: 50%;
   min-height: 30px;
   background-color: white;
@@ -152,19 +151,18 @@ display: flex;
 
   transition: 0.2s;
 
-  &:hover{
+  &:hover {
     background-color: #e9ecef;
-    
   }
 `
-export const SendButton= styled.button`
-  color:#ffffff;
+export const SendButton = styled.button`
+  color: #ffffff;
   justify-self: center;
   align-self: center;
-  text-justify:center;
+  text-justify: center;
   border: 1px solid black;
   border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
+  box-shadow: rgba(27, 31, 36, 0.1);
   width: 50%;
   height: 30px;
   background-color: #2da44e;
@@ -174,9 +172,8 @@ export const SendButton= styled.button`
 
   transition: 0.2s;
 
-  &:hover{
+  &:hover {
     background-color: #2c974b;
-    
   }
 `
 export const RedButton = styled.button`
@@ -198,6 +195,6 @@ export const RedButton = styled.button`
 
   &:hover {
     background-color: #ffffff;
-    color:#cf222e;
+    color: #cf222e;
   }
 `

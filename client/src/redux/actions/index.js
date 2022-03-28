@@ -29,6 +29,9 @@ export const SET_COORDINATES = "SET_COORDINATES"
 export const ADD_FAVORITE = "ADD_FAVORITE"
 export const GET_LIST_FAVORITES = "GET_LIST_FAVORITES"
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
+export const GET_PROPERTIES_BY_USER_ID = "GET_PROPERTIES_BY_USER_ID"
+export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
+  "DELETE_PROPERTY_FROM_MY_PROPERTIES"
 
 const api = import.meta.env.VITE_APP_API_URL
 
@@ -342,6 +345,25 @@ export function addRental(form) {
   }
 }
 
+export function getPropertiesByUserId() {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.get(
+        `${api}/properties/getPropertiesByUserId`,
+        config,
+      )
+      console.log(response.data)
+      return dispatch({
+        type: GET_PROPERTIES_BY_USER_ID,
+                payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
 
 export function actionLoginWithGoogle(data) {
   return async function (dispatch) {
@@ -367,6 +389,7 @@ export const getRental= propertyID => async dispatch =>{
       let response = await axios.post(`${api}/rentals/getRental`,propertyID)
       dispatch({
         type: GET_RENTAL,
+
         payload: response.data,
       })
     } catch (error) {
@@ -375,5 +398,26 @@ export const getRental= propertyID => async dispatch =>{
   }
 
 
+export function deletePropertyFromMyProperties(form) {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.delete(`${api}/properties/deleteProperty`, {
+        headers: {
+          Authorization: config.headers.Authorization,
+        },
+        data: {
+          form: form,
+        },
+      })
+      return dispatch({
+        type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
 
 
