@@ -1,9 +1,7 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet"
-import { useSelector } from "react-redux"
 import "../../../../App.css"
 
-export default function MapDetail() {
-  const coordinates = useSelector(state => state.detailsOfProperty.coordinates)
+export default function MapDetail({coordinates}) {
 
   return (
     <>

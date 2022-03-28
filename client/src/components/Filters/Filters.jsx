@@ -47,6 +47,7 @@ const initialFilters = {
 }
 
 export default function Filters() {
+  const filtersGlobal = useSelector(state => state.filters)
   const [modalShow, setModalShow] = useState(false)
   const [filters, setfilters] = useState(initialFilters)
   const [services, setServices] = useState([])
@@ -90,7 +91,7 @@ export default function Filters() {
 
     dispatch(setOptionFilters({ ...filters, services: servicesIds }))
     dispatch(getAllProperties({ ...filters, services: servicesIds }))
-    // console.log(filters);
+    console.log(filters);
   }
 
   const handleClick = e => {
@@ -108,7 +109,14 @@ export default function Filters() {
   useEffect(() => {
     dispatch(getAllCategories())
     dispatch(getAllServices())
+    console.log(filtersGlobal,"filtersGlobal");
+    setfilters({...initialFilters,...filtersGlobal})
   }, [])
+
+  useEffect(() => {
+    console.log(filtersGlobal,"filtersGlobal");
+    setfilters({...initialFilters,...filtersGlobal})
+  }, [filtersGlobal])
 
   return (
     <div>

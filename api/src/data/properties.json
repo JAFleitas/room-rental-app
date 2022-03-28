@@ -162,7 +162,7 @@
   {
     "id": "3ee0c7b9-68f5-4c72-b565-9cba8127dc81",
     "name": "COZY APARTMENT IN THE HEART OF CUSCO CITY",
-    "location": "Cuzco, Peru",
+    "location": "Chile, Santiago",
     "price": 16,
     "numberOfRooms": 3,
     "maxNumberOfPeople": 5,
@@ -210,7 +210,7 @@
   {
     "id": "7b4939d8-ea31-4239-88c4-04f66b45132d",
     "name": "Acogedor Departamento cerca a la plaza de Armas VA",
-    "location": "Cusco, Peru",
+    "location": "Buenos Aires, Argentina",
     "price": 23,
     "numberOfRooms": 4,
     "maxNumberOfPeople": 7,

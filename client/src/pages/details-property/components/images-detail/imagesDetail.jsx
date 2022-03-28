@@ -12,10 +12,7 @@ import {
   ImageModal,
 } from "./styles"
 
-export default function Images() {
-  const imagesPropertyDetails = useSelector(
-    state => state.detailsOfProperty.image,
-  )
+export default function Images({imagesPropertyDetails}) {
   const [modal, setModal] = useState(false)
 
   return (

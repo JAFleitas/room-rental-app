@@ -1,6 +1,5 @@
 import {
   PageContainer,
-  ProfileImageContainer,
   ProfileImage,
   MenuContainer,
   MenuOptions,
@@ -19,9 +18,7 @@ export default function Profile() {
       {auth ? (
         <>
           <MenuContainer>
-            <ProfileImageContainer>
-              <ProfileImage src={photo} alt="profile_image"></ProfileImage>
-            </ProfileImageContainer>
+            <ProfileImage src={photo} alt="profile_image"></ProfileImage>
             <MenuOptions>
               <Link to="/profile">
                 <MenuOption>My profile</MenuOption>
