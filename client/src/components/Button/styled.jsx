@@ -41,17 +41,18 @@ export const Icon = styled.div`
 `
 
 export const ImageContainer = styled.div`
-  height: 3.5vh;
-  min-height: 24px;
-  width: 1.65vw;
-  min-width: 24px;
+  height: 40px;
+  width: 40px;
   margin-left: 2px;
   color: black;
   background-color: white;
   border-radius: 50px;
-  font-size: 25px;
 `
-// export const ProfileImage = styled.img`
-//   background-repeat: no-repeat;
-//   background-size: contain;
-// `
+export const ProfileImage = styled.img`
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 50%;
+
+  width: 100%;
+  height: 100%;
+`

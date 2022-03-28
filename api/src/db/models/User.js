@@ -19,15 +19,15 @@ module.exports = sequelize => {
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
-      } 
+        isEmail: true,
+      },
     },
     provider: {
       type: DataTypes.STRING,
@@ -43,7 +43,7 @@ module.exports = sequelize => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       set(value) {
         this.setDataValue("password", hashSync(value, 10))
       },
@@ -67,7 +67,7 @@ module.exports = sequelize => {
 
   User.associate = models => {
     // Relacionando con la lista de favoritos 1:1
-    User.hasOne(models.Favorite);
+    User.hasOne(models.Favorite)
 
     User.hasMany(models.PaymentMethod, {
       sourceKey: "id",

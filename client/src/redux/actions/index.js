@@ -74,7 +74,6 @@ export function getFavorites() {
   }
 }
 
-
 export function addFavorite(idProperty, idListFavorites) {
   return async function (dispatch) {
     try {
@@ -236,20 +235,20 @@ export const deleteUser = id => async dispatch => {
   }
 }
 
-export const changePassword = (data)=> async dispatch => {
-    const config = getHeaderToken()
-    try {
-      const res= await axios.put(`${api}/users/reset-password`,data, config)
-      dispatch({
-        type: CHANGE_PASSWORD,
-        payload: res.data,
-      })
-      alert ("Password changed")
-    } catch (error) {
-      console.log(error.response.data)
-      alert ("password is wrong")
-    }
+export const changePassword = data => async dispatch => {
+  const config = getHeaderToken()
+  try {
+    const res = await axios.put(`${api}/users/reset-password`, data, config)
+    dispatch({
+      type: CHANGE_PASSWORD,
+      payload: res.data,
+    })
+    alert("Password changed")
+  } catch (error) {
+    console.log(error.response.data)
+    alert("password is wrong")
   }
+}
 
 export const logIn = data => async dispatch => {
   try {
@@ -314,7 +313,7 @@ export function actionSetCoordinates(payload) {
   }
 }
 
-export const logout = () => {
+export const actionLogout = () => {
   return {
     type: LOGOUT,
   }
@@ -348,6 +347,25 @@ export function addRental({
       })
     } catch (error) {
       console.log(error.response)
+    }
+  }
+}
+
+export function actionLoginWithGoogle(data) {
+  return async function (dispatch) {
+    try {
+      // Response
+      const response = await axios.post(`${api}/users/loginWithGoogle`, data)
+      // console.log(res.data.token);
+
+      dispatch({
+        type: LOG_IN,
+        payload: response.data.token,
+      })
+      dispatch(loadUser())
+    } catch (err) {
+      console.log(err.response)
+      alert("no se pudo loguear correctamente")
     }
   }
 }
