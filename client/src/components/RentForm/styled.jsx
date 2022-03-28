@@ -66,7 +66,6 @@ export const Form = styled.div`
   align-items: flex-end;
   margin-bottom: 5%;
   margin-top: 2%;
-  padding-left: 3%;
 `
 
 export const FormField = styled.div`

@@ -19,35 +19,25 @@ import {
 import { ContainerImages } from "./components/images-detail/styles"
 import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 import RentForm from "../../components/RentForm/RentForm"
-import axios from "axios"
-const api = import.meta.env.VITE_APP_API_URL
+
+import { getPropertyById } from "../../redux/actions"
+import { useDispatch, useSelector } from "react-redux"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
 
 export default function Details() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [property, setProperty] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  //dispatch
+  const dispatch = useDispatch()
+  // console.log(propertyDetails)
   useEffect(() => {
-    const getProperty = async () => {
-      try {
-        const { data } = await axios.get(
-          `${api}/properties/getPropertyById/${id}`,
-        )
-        console.log(data);
-        setProperty(data)
-      } catch (error) {
-        console.log(error.response)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    getProperty()
+    dispatch(getPropertyById(id))
+    setLoading(false)
   }, [])
-
+  const property = useSelector(state => state.detailsOfProperty)
   return loading ? (
     <div>'Loading...'</div>
   ) : property ? (
