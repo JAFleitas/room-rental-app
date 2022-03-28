@@ -10,7 +10,9 @@ const {
   updateUser,
   enableUser,
   loginWithGoogle,
+  getAllUsers,
 } = require("../controllers/userController")
+const adminAuth = require("../middlewares/adminAuth")
 
 const userRouter = Router()
 
@@ -34,5 +36,7 @@ userRouter.post("/loginGoogle", login)
 userRouter.put("/disableUser", auth, disableUser)
 
 userRouter.put("/enableUser", auth, enableUser)
+
+userRouter.get("/all", auth, adminAuth, getAllUsers)
 
 module.exports = userRouter
