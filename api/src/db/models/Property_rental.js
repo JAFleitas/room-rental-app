@@ -20,11 +20,11 @@ module.exports = sequelize => {
       },
       start_date: {
         //  YYYY-MM-DD
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allownull: false,
       },
       final_date: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
       },
 
@@ -43,10 +43,10 @@ module.exports = sequelize => {
     })
 
     // Relacionando 'alquiler de una propiedad' y Propiedad
-    PropertyRental.belongsTo(models.Property, {
-      sourceKey: "id",
-      foreignKey: "propertyID",
-    })
+    // PropertyRental.belongsTo(models.Property, {
+    //   sourceKey: "id",
+    //   foreignKey: "propertyID",
+    // })
 
     // Relacionando 'alquiler de una propiedad' y Estado
     PropertyRental.belongsTo(models.Rental_status, {

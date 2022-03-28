@@ -69,11 +69,4 @@ module.exports = sequelize => {
     { timestamps: false },
   )
 
-  PaymentMethod.associate = models => {
-    // Relacionando con un Usuario   (1:1)
-    PaymentMethod.belongsTo(models.User, {
-      sourceKey: "id",
-      foreignKey: "userId",
-    })
-  }
 }
