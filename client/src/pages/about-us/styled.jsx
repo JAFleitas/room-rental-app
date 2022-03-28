@@ -8,8 +8,10 @@ export const ContainerDiv = styled.div`
   margin-bottom: 3.5vh;
   padding: 10px;
   border-radius: 12px;
-  background-color: #10002b;
-  /* box-shadow: inset 14px 14px 23px #3b005c, inset -14px -14px 23px #5f0096; */
+  border-radius: 50px;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f88aff, #d174e4);
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -20,8 +22,7 @@ export const TeamMate = styled.div`
   width: 28%;
   margin: 15px;
   border-radius: 12px;
-  background: linear-gradient(145deg, #b92fcc, #9c28ac);
-  /* box-shadow: 9px 9px 12px #9c40d1, -9px -9px 12px #e05cff; */
+  background: linear-gradient(145deg, #9703b5, #b403d7);
   display: grid;
   grid-template-rows: 35% 35% 30%;
   grid-template-columns: 50% 50%;
@@ -49,10 +50,13 @@ export const Name = styled.h1`
   margin-right: 5%;
   padding: 3%;
   padding-left: 5%;
+  padding-bottom: 15%;
+
   color: #ffffff;
   border-radius: 11px;
-  background: #bf2cb8;
-  box-shadow: inset 5px 5px 10px #541351, inset -5px -5px 10px #ff45ff;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(230, 113, 253);
 
   grid-row: 1/2;
   grid-column: 2/3;

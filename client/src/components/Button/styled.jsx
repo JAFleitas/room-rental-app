@@ -5,24 +5,24 @@ export const Container = styled.button`
   justify-content: space-evenly;
   align-items: center;
   height: 20px;
-  width: 120px;
+  width: 80px;
   min-width: 80px;
   min-height: 40px;
   margin-top: 1vh;
   margin-left: 1vw;
   padding: 4px;
   z-index: 50;
-  margin-right: 10px;
+  margin-right: 20px;
 
   border-radius: 21px;
-  background: #0f1111;
+  background: #e2c8ff;
   svg {
-    color: #ededed;
+    color: #000000;
   }
   transition: all 1s;
   &:hover {
     border-radius: 21px;
-    background: #24292f;
+    background: #be86ff;
   }
 
   &:active {

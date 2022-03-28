@@ -1,5 +1,5 @@
 import axios from "axios"
-import getPropertyById from "../../utilities/getPropertyById"
+
 import getHeaderToken from "../../utilities/getHeadertoken"
 
 export const LOG_IN = "LOG_IN"
@@ -12,7 +12,10 @@ export const GET_PROPERTY_BY_ID = "GET_PROPERTY_BY_ID"
 export const GET_ALL_PROPERTIES = "GET_ALL_PROPERTIES"
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
+export const GET_PROPERTY = "GET_PROPERTY"
 export const ADD_RENTAL = "ADD_RENTAL"
+export const GET_RENTAL = "GET_RENTAL"
+
 export const GET_ALL_PAYMENT_METHODS = "GET_ALL_PAYMENT_METHODS"
 export const ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD"
 export const EDIT_PAYMENT_METHOD = "EDIT_PAYMENT_METHOD"
@@ -186,12 +189,12 @@ export function getAllProperties(filters, page = 1) {
   }
 }
 
-export function actionGetPropertyById(id) {
+export function getPropertyById(id) {
   return async dispatch => {
-    const response = await getPropertyById(id)
+    const response = await axios.get(`${api}/properties/getPropertyById/${id}`)
     return dispatch({
       type: GET_PROPERTY_BY_ID,
-      payload: response[0],
+      payload: response.data,
     })
   }
 }
@@ -332,6 +335,11 @@ export function addRental(form) {
         payload: response.data,
       })
     } catch (error) {
+      alert(
+        (typeof error?.response?.data === "string"
+          ? error.response.data
+          : error.response.data?.message) || "Something went wrong :(",
+      )
       console.log(error.response.data)
     }
   }
@@ -348,13 +356,27 @@ export function getPropertiesByUserId() {
       console.log(response.data)
       return dispatch({
         type: GET_PROPERTIES_BY_USER_ID,
-        payload: response.data,
+                payload: response.data,
       })
     } catch (error) {
       console.log(error.response)
     }
   }
 }
+
+export const getRental= propertyID => async dispatch =>{
+    try {
+      let response = await axios.post(`${api}/rentals/getRental`,propertyID)
+      dispatch({
+        type: GET_RENTAL,
+
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
 
 export function deletePropertyFromMyProperties(form) {
   return async function (dispatch) {
@@ -377,3 +399,4 @@ export function deletePropertyFromMyProperties(form) {
     }
   }
 }
+

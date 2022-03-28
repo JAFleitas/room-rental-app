@@ -6,7 +6,7 @@ export const ContainerPageDetails = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   height: auto;
   padding-top: 50px;
   @media screen and (max-width: 740px) {
