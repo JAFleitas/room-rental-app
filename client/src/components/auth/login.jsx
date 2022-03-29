@@ -7,8 +7,7 @@ export default function LoginWithGoogle() {
 
   return (
     <ButtonGoogle onClick={loginWithRedirect}>
-      <FcGoogle />
-      Log in with Google
+      <FcGoogle /> Login with Google
     </ButtonGoogle>
   )
 }

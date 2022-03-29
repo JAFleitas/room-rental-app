@@ -40,7 +40,6 @@ const Login = () => {
   }
   return (
     <Container>
-      <Title>Log In</Title>
       <Form fields={2}>
         <Field>
           <Label>Email: </Label>
@@ -54,13 +53,17 @@ const Login = () => {
         <Field>
           <Label>Password: </Label>
           <Input
-            type="text"
+            type="password"
             name="password"
             value={logInForm.password}
             onChange={handleChangeLogIn}
             placeholder="Password"></Input>
         </Field>
-        <SendButton onClick={e => handleSubmitLogIn(e)}>Log in</SendButton>
+        <SendButton
+          disabled={!logInForm.email || !logInForm.password}
+          onClick={e => handleSubmitLogIn(e)}>
+          Log in
+        </SendButton>
         <LoginWithFacebook />
         <LoginWithGoogle />
         <RedButton onClick={() => navigate("/forgot-password")}>
