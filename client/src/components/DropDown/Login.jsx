@@ -13,7 +13,7 @@ import { logIn } from "../../redux/actions/index"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
-import LoginWithFacebook from "../auth/loginwithFacebook"
+import LoginWithFacebook from "../auth/loginWithFacebook"
 
 const Login = () => {
   const dispatch = useDispatch()
