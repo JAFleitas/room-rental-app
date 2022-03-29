@@ -109,11 +109,21 @@ const SignUp = () => {
             placeholder="Password..."></Input>
         </Field>
 
-        <SendButton type="submit" onClick={handleSubmitSignUp}>
+        <SendButton
+          disabled={
+            !signUpForm.email ||
+            !signUpForm.name ||
+            !signUpForm.password ||
+            !signUpForm.lastname ||
+            !signUpForm.country ||
+            !signUpForm.city
+          }
+          type="submit"
+          onClick={handleSubmitSignUp}>
           Sign Up
         </SendButton>
-        <LoginWithFacebook />
         <LoginWithGoogle />
+        <LoginWithFacebook />
       </Form>
     </Container>
   )
