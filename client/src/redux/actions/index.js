@@ -32,7 +32,7 @@ export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 export const GET_PROPERTIES_BY_USER_ID = "GET_PROPERTIES_BY_USER_ID"
 export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
   "DELETE_PROPERTY_FROM_MY_PROPERTIES"
-
+export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 const api = import.meta.env.VITE_APP_API_URL
 
 export function getAllPaymentMethod() {
@@ -404,6 +404,22 @@ export function deletePropertyFromMyProperties(form) {
       })
       return dispatch({
         type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function getRentalsByUser() {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.get(`${api}/rentals/getRentalsByUser`, config)
+      console.log(response)
+      return dispatch({
+        type: GET_RENTALS_BY_USER,
         payload: response.data,
       })
     } catch (error) {

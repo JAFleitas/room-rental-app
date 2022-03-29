@@ -15,7 +15,7 @@ export const MenuContainer = styled.div`
   width: 300px;
   height: fit-content;
   margin-top: 4%;
-  margin-bottom: 22%;
+  margin-bottom: 5%;
   margin-left: 5%;
   padding: 10px;
   background: rgb(226, 200, 255);

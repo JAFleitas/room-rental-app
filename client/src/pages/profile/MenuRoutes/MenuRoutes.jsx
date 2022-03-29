@@ -7,12 +7,13 @@ import History from "../Components/History/History"
 import Favorites from "../Components/Favorites/Favorites"
 import Paymentmethods from "../Components/PaymentMethods/PaymentMethods"
 import MyProperties from "../Components/MyProperties/MyProperties"
+import RentCard from "../../../components/RentCard/RentCard"
 const MenuRoutes = () => {
   return (
     <Routes>
       <Route exact path="/" element={<ProfileInfo />}></Route>
       <Route exact path="/settings" element={<Settings />}></Route>
-      <Route exact path="/history" element={<History />}></Route>
+      <Route exact path="/history" element={<RentCard />}></Route>
       <Route exact path="/myProperties" element={<MyProperties />}></Route>
       <Route exact path="/favorites" element={<Favorites />}></Route>
       <Route exact path="/account" element={<Account />}></Route>
