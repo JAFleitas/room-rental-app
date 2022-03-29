@@ -64,8 +64,8 @@ const Login = () => {
           onClick={e => handleSubmitLogIn(e)}>
           Log in
         </SendButton>
-        <LoginWithFacebook />
         <LoginWithGoogle />
+        <LoginWithFacebook />
         <RedButton onClick={() => navigate("/forgot-password")}>
           I forgot my password
         </RedButton>
