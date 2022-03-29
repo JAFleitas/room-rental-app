@@ -11,6 +11,8 @@ const {
   enableUser,
   loginWithGoogle,
   getAllUsers,
+  blockUser,
+  unlockUser,
 } = require("../controllers/userController")
 const adminAuth = require("../middlewares/adminAuth")
 
@@ -38,5 +40,9 @@ userRouter.put("/disableUser", auth, disableUser)
 userRouter.put("/enableUser", auth, enableUser)
 
 userRouter.get("/all", auth, adminAuth, getAllUsers)
+
+userRouter.put("/blockUser", auth, adminAuth, blockUser)
+
+userRouter.put("/unlockUser", auth, adminAuth, unlockUser)
 
 module.exports = userRouter
