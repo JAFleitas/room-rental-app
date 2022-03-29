@@ -20,6 +20,6 @@ router.get("/getProperties", getFiltersProperty, getAll)
 
 router.get("/getPropertiesByUserId", auth, getPropertyByUser)
 
-router.put("/deleteProperty", disabledProperty)
+router.put("/deleteProperty",auth, disabledProperty)
 
 module.exports = router

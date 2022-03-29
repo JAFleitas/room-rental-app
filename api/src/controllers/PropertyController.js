@@ -1,4 +1,10 @@
-const { Property, Service, Comment, User } = require("../db/index.js")
+const {
+  Property,
+  Service,
+  Comment,
+  User,
+  PropertyRental,
+} = require("../db/index.js")
 
 const getPropertyById = async (req, res, next) => {
   try {
@@ -23,7 +29,6 @@ const getPropertyById = async (req, res, next) => {
         },
       ],
     })
-
     if (propertyDB) {
       return res.status(200).json(propertyDB)
     } else {
@@ -50,7 +55,6 @@ const addProperty = async (req, res) => {
     typePropertyID,
   } = req.body.data
   const { id } = req.user
-  console.log(id)
   if (name) {
     try {
       const newProperty = await Property.create({
@@ -127,15 +131,14 @@ const getAll = async (req, res, next) => {
 const getPropertyByUser = async (req, res, next) => {
   try {
     const userID = req.user.id
-    console.log("aca")
-    console.log(userID)
 
     const properties = await Property.findAll({
       where: {
         userID: userID,
+        status: "enabled",
       },
     })
-    console.log(properties)
+
     if (properties) {
       return res.status(200).json(properties)
     } else {
@@ -149,36 +152,44 @@ const getPropertyByUser = async (req, res, next) => {
 
 const disabledProperty = async (req, res, next) => {
   try {
-    const { id, userId } = req.body
+    const { ID } = req.body
     const propertyDB = await Property.findOne({
       where: {
-        id: id,
+        id: ID,
+      },
+      include: {
+        model: PropertyRental,
       },
     })
+
     if (!propertyDB) {
       res.json({ message: "This Property doesnt exists" })
     }
-    if (propertyDB.dataValues.status === "enabled") {
-      const updateProperty = await Property.update(
+    if (
+      propertyDB.status === "enabled" &&
+      propertyDB.PropertyRentals.length === 0
+    ) {
+      // const updateProperty =
+      await Property.update(
         {
-          ...propertyDB.dataValues,
           status: "disabled",
         },
         {
           where: {
-            id: propertyDB.dataValues.id,
+            id: propertyDB.id,
           },
         },
       )
-      const properties = await Property.findAll({
-        where: {
-          userID: userId,
-        },
-      })
-      if (updateProperty) {
-        res.status(200).send("Property deleted succesfully" + properties)
-      }
-    } else if (propertyDB.dataValues.status === "disabled") {
+      // const properties = await Property.findAll({
+      //   where: {
+      //     userID: userID,
+      //   },
+      // })
+      // if (updateProperty) {
+      //   res.status(200).send("Property deleted succesfully")
+      // }
+      // } else
+    } else if (propertyDB.status === "disabled") {
       res.json({ status: 400, message: "This property is already Disabled " })
     }
   } catch (error) {
