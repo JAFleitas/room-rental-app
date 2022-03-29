@@ -390,18 +390,12 @@ export const getRental = propertyID => async dispatch => {
   }
 }
 
-export function deletePropertyFromMyProperties(form) {
+export function deletePropertyFromMyProperties(ID) {
   return async function (dispatch) {
     const config = getHeaderToken()
+    console.log(ID)
     try {
-      let response = await axios.delete(`${api}/properties/deleteProperty`, {
-        headers: {
-          Authorization: config.headers.Authorization,
-        },
-        data: {
-          form: form,
-        },
-      })
+      let response = await axios.put(`${api}/properties/deleteProperty`,{ID},config)
       return dispatch({
         type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
         payload: response.data,
