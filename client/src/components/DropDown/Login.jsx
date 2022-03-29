@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import {
   Form,
   SendButton,
-  ButtonFacebook,
-  ButtonGoogle,
   Field,
   Input,
   Label,
@@ -11,12 +9,11 @@ import {
   Container,
   RedButton,
 } from "./styled"
-import { FcGoogle } from "react-icons/fc"
-import { BsFacebook } from "react-icons/bs"
 import { logIn } from "../../redux/actions/index"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
+import LoginWithFacebook from "../auth/loginwithFacebook"
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -64,10 +61,7 @@ const Login = () => {
             placeholder="Password"></Input>
         </Field>
         <SendButton onClick={e => handleSubmitLogIn(e)}>Log in</SendButton>
-        {/*         <ButtonFacebook>
-          <BsFacebook />
-          Log in with Facebook
-        </ButtonFacebook> */}
+        <LoginWithFacebook />
         <LoginWithGoogle />
         <RedButton onClick={() => navigate("/forgot-password")}>
           I forgot my password
