@@ -34,7 +34,8 @@
     "password": "juan12345",
     "account_number": 1234567890,
     "rating": 4,
-    "status": "enabled"
+    "status": "enabled",
+    "type": "ADMIN"
   },
   {
     "id": "79864a10-2446-42e5-ab6d-6867f08eca69",

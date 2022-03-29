@@ -27,7 +27,11 @@ module.exports = sequelize => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-
+      status: {
+        type: DataTypes.ENUM("active", "cancelled"),
+        required: true,
+        defaultValue: "active",
+      },
       discount: {
         type: DataTypes.INTEGER,
       },
@@ -49,9 +53,9 @@ module.exports = sequelize => {
     // })
 
     // Relacionando 'alquiler de una propiedad' y Estado
-    PropertyRental.belongsTo(models.Rental_status, {
-      sourceKey: "id",
-      foreignKey: "statusID",
-    })
+    // PropertyRental.belongsTo(models.Rental_status, {
+    //   sourceKey: "id",
+    //   foreignKey: "statusID",
+    // })
   }
 }

@@ -6,12 +6,12 @@ export default function Logout() {
   const { isAuthenticated, logout } = useAuth0()
   const dispatch = useDispatch()
   return (
-    <button
+    <span
       onClick={() => {
         dispatch(actionLogout())
         isAuthenticated && logout({ returnTo: window.location.origin })
       }}>
       Logout
-    </button>
+    </span>
   )
 }

@@ -68,7 +68,7 @@ const login = async (req, res, next) => {
     // ningún usuario contiene ese correo
     if (!user) return next({ status: 400, message: "Invalid credentials" })
 
-    if (user.dataValues.status !== "enable" || user.dataValues.blocked) {
+    if (user.dataValues.status === "enable" || user.dataValues.blocked) {
       return next({ status: 401, message: "Account bloqued or disabled" })
     }
 
@@ -122,7 +122,6 @@ const getUserDetail = async (req, res, next) => {
 const disableUser = async (req, res, next) => {
   try {
     const user = req.user
-    console.log({ user })
 
     if (!user) {
       res.json({ message: "This User doesnt exists" })
@@ -310,6 +309,16 @@ const loginWithGoogle = async (req, res, next) => {
   }
 }
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.findAll();
+
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   createUser,
   login,
@@ -320,4 +329,5 @@ module.exports = {
   updateUser,
   enableUser,
   loginWithGoogle,
+  getAllUsers,
 }
