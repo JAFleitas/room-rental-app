@@ -23,7 +23,7 @@ router.use("/services", servicesRoutes)
 router.use("/categories", categoriesRoutes)
 router.use("/favorites", favoriteRouter)
 router.use("/comments", commentRouter)
-router.use("/", emailRouter)
+router.use("/email", emailRouter)
 router.use("/payment-method", paymenthMethodRouter)
 
 module.exports = router

@@ -1,8 +1,12 @@
 const { Router } = require("express")
-const {contactController} = require("../controllers/contactController")
+const adminAuth = require("../middlewares/adminAuth")
+const auth = require("../middlewares/auth")
+const {contactController, sendPromotionalEmails} = require("../controllers/contactController")
 
 const router = Router()
 
-router.post("/email", contactController)
+router.post("/", contactController)
+
+router.post("/notification", auth,  adminAuth, sendPromotionalEmails)
 
 module.exports = router

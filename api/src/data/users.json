@@ -1,6 +1,6 @@
 [
   {
-    "id": "b49a5948-21a0-44c3-92fc-20b626d94dc2",
+    "id": "79864a20-2446-42f5-ab6d-6867f08eca69",
     "name": "Viviana",
     "lastname": "Calva",
     "country": "Ecuador",
@@ -14,37 +14,59 @@
   },
   {
     "id": "3ae3b92c-af90-40b4-a5de-8d8f1bb4096e",
-    "name": "Maritza",
-    "lastname": "López",
-    "country": "Peru",
-    "email": "maritza.lopez@gmail.com",
-    "city": "Desconcida",
-    "password": "maritza12345",
+    "name": "Facundo",
+    "lastname": "Sánchez",
+    "country": "Argentina",
+    "email": "facundosanchez9963@gmail.com",
+    "password": "facu12345",
     "account_number": 1234567890,
     "rating": 3,
-    "status": "enabled"
+    "status": "enabled",
+    "type": "ADMIN"
   },
   {
     "id": "b2119946-a958-4744-ad61-f05ce92f7024",
     "name": "Juan",
     "lastname": "Perez",
     "country": "Colombia",
-    "email": "juan.perez@gmail.com",
+    "email": "viviana.calva@unl.edu.ec",
     "city": "Barranquilla",
     "password": "juan12345",
     "account_number": 1234567890,
-    "rating": 4,
-    "status": "enabled",
-    "type": "ADMIN"
+    "rating": 4
   },
   {
-    "id": "79864a10-2446-42e5-ab6d-6867f08eca69",
+    "id": "79864a10-2446-42f5-ab6d-6867f08eca69",
     "name": "Julieta",
     "lastname": "Gomez",
     "country": "Colombia",
-    "email": "julieta@gmail.com",
+    "email": "vivicalvat@outlook.com",
     "city": "Barranquilla",
     "password": "julietaYromeo",
+    "account_number": 1234567890,
+    "rating": 4.5,
+    "status": "enabled"
+  },
+  {
+    "id": "79864a10-2446-42e5-ab6d-6867f08eca69",
+    "name": "Gonzalo",
+    "lastname": "Fleitas",
+    "country": "Colombia",
+    "email": "psi.gonzalo.fleitas@gmail.com",
+    "city": "Barranquilla",
+    "password": "gonzalo.fleitas123",
+    "account_number": 1234567890,
+    "rating": 4.5,
+    "status": "enabled"
+  },
+  {
+    "id": "b49a5948-21a0-44c3-92fc-20b626d94dc2",
+    "name": "Luis",
+    "lastname": "Pelaez",
+    "country": "Colombia",
+    "email": "vivicalvat@gmail.com",
+    "city": "Barranquilla",
+    "password": "luis12345",
     "account_number": 1234567890,
     "rating": 4.5,
     "status": "enabled"
