@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom"
 import Details from "../pages/details-property/detailsProperty.jsx"
 import AboutUs from "../pages/about-us/AboutUs"
 import Home from "../pages/home/Home.jsx"
-
 import FormAddProperty from "../components/formAddProperty/form.jsx"
 import Profile from "../pages/profile/profile.jsx"
 import Error404 from "../pages/404/Error404.jsx"
@@ -28,12 +27,6 @@ const RouterApp = () => {
       <Route path="/edit/payment-method/:id" element={<FormPaymentMethod edit={true} />} />
       <Route path="/forgot-password" element={<Forgotpassword/>} />
       <Route path="/help" element={<Help/>} />
-      <Route
-        path="/edit/payment-method/:id"
-        element={<FormPaymentMethod edit={true} />}
-      />
-      <Route path="/forgot-password" element={<Forgotpassword />} />
-      <Route path="/help" element={<Help />} />
       <Route path="/dashboard">
         <Route path="emails" element = {<Emails />}/>
       </Route>

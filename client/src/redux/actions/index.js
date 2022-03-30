@@ -40,8 +40,7 @@ export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
 const api = import.meta.env.VITE_APP_API_URL
 
 export function getAllEmails() {
-  return async funexport const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
-ction(dispatch) {
+  return async function(dispatch) {
     try {
       let { data } = await axios.get(`${api}/notifications`, getHeaderToken())
 
