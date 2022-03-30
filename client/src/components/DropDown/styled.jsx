@@ -60,9 +60,12 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h1`
+  font-family: "Times New Roman", Times, serif;
   font-size: 36px;
-  color: #1f0037;
+  color: #ae74f0;
   margin-bottom: 2.5%;
+  font-weight: 800;
+  text-shadow: 4px 4px 6px #e0c0ff; ;
 `
 
 export const Field = styled.div`
@@ -116,7 +119,6 @@ export const ButtonFacebook = styled.button`
   justify-content: center;
   align-items: center;
   padding: 3px;
-  border: 1px solid black;
   border-radius: 0.5rem;
   box-shadow: rgba(27, 31, 36, 0.1);
   width: 90%;
@@ -140,7 +142,6 @@ export const ButtonGoogle = styled.button`
   justify-content: center;
   align-items: center;
   padding: 3px;
-  border: 1px solid black;
   border-radius: 0.5rem;
   box-shadow: rgba(27, 31, 36, 0.1);
   width: 50%;
@@ -153,7 +154,8 @@ export const ButtonGoogle = styled.button`
   transition: 0.5s;
 
   &:hover {
-    background-color: #e9ecef;
+    background-color: #d9dcdf;
+    border: 1px solid #d9dcdfcc;
   }
 `
 export const SendButton = styled.button`
@@ -161,7 +163,6 @@ export const SendButton = styled.button`
   justify-self: center;
   align-self: center;
   text-justify: center;
-  border: 1px solid black;
   border-radius: 0.5rem;
   box-shadow: rgba(27, 31, 36, 0.1);
   width: 90%;

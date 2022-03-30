@@ -28,6 +28,12 @@ const RouterApp = () => {
       <Route path="/edit/payment-method/:id" element={<FormPaymentMethod edit={true} />} />
       <Route path="/forgot-password" element={<Forgotpassword/>} />
       <Route path="/help" element={<Help/>} />
+      <Route
+        path="/edit/payment-method/:id"
+        element={<FormPaymentMethod edit={true} />}
+      />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
+      <Route path="/help" element={<Help />} />
       <Route path="/dashboard">
         <Route path="emails" element = {<Emails />}/>
       </Route>

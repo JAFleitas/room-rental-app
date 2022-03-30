@@ -25,7 +25,7 @@ import {
   DELETE_PROPERTY_FROM_MY_PROPERTIES,
   GET_RENTAL,
   GET_ALL_EMAILS,
-
+  GET_RENTALS_BY_USER,
 } from "../actions"
 
 const initialState = {
@@ -50,9 +50,9 @@ const initialState = {
   page: 1,
   categories: [],
   services: [],
-
   coordinates: [],
   propertyRentals: [],
+  userRentals: [],
   listFavorites: {},
   paymenthMethods: [],
   admin: {
@@ -68,10 +68,15 @@ function rootReducer(state = initialState, { type, payload }) {
       return {...state, admin: {...state.admin, emails: payload}};
     case GET_ALL_PAYMENT_METHODS:
       return {...state, paymenthMethods: payload};
-    case ADD_PAYMENT_METHOD: 
-    return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
-    case DELETE_PAYMENT_METHOD: 
-    return {...state, paymenthMethods: state.paymenthMethods.filter(method => method.id !== payload)};
+    case ADD_PAYMENT_METHOD:
+      return { ...state, paymenthMethods: [...state.paymenthMethods, payload] }
+    case DELETE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymenthMethods: state.paymenthMethods.filter(
+          method => method.id !== payload,
+        ),
+      }
     case EDIT_PAYMENT_METHOD:
       let newMethods = state.paymenthMethods.filter(
         method => method.id + "" !== payload.id + "",
@@ -189,9 +194,14 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
       }
     case GET_RENTAL:
-      return{
+      return {
         ...state,
-        propertyRentals:payload
+        propertyRentals: payload,
+      }
+    case GET_RENTALS_BY_USER:
+      return {
+        ...state,
+        userRentals: payload,
       }
     default:
       return state

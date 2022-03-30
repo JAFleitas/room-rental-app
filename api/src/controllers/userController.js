@@ -168,7 +168,7 @@ const enableUser = async (req, res, next) => {
           },
           {
             where: {
-              id: user.dataValues.id,
+              id: user.id,
             },
           },
         )
@@ -311,11 +311,82 @@ const loginWithGoogle = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll()
 
-    res.json(users);
+    res.json(users)
   } catch (error) {
-    next(error);
+    next(error)
+  }
+}
+
+const blockUser = async (req, res, next) => {
+  try {
+    const user = req.user
+
+    if (!user) {
+      res.json({ message: "This User doesnt exists" })
+    }
+
+    try {
+      const blockedUser = await User.update(
+        {
+          blocked: true,
+        },
+        {
+          where: {
+            id: user.id,
+          },
+        },
+      )
+
+      if (blockedUser) {
+        res.json({ message: "Acoount blocked correctly" })
+      } else {
+        res.status(400).json({ message: "Couldnt block User account" })
+      }
+    } catch (error) {
+      // console.log(error)
+      next(error)
+    }
+  } catch (err) {
+    // console.log(err)
+    next(err)
+  }
+}
+
+const unlockUser = async (req, res, next) => {
+  try {
+    const user = req.user
+
+    if (!user) {
+      res.json({ message: "This User doesnt exists" })
+    } else if (user.blocked === true) {
+      try {
+        const unlockedUser = await User.update(
+          {
+            blocked: false,
+          },
+          {
+            where: {
+              id: user.id,
+            },
+          },
+        )
+        if (unlockedUser) {
+          res.status(200).json({ message: "Acoount unlock correctly" })
+        } else {
+          res.status(400).json({ message: "Couldnt unlock User" })
+        }
+      } catch (error) {
+        console.log(error)
+        next(error)
+      }
+    } else if (user.blocked === false) {
+      res.json({ status: 400, message: "This account is not blocked" })
+    }
+  } catch (err) {
+    console.log(err)
+    next(err)
   }
 }
 
@@ -330,4 +401,6 @@ module.exports = {
   enableUser,
   loginWithGoogle,
   getAllUsers,
+  blockUser,
+  unlockUser,
 }

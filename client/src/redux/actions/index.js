@@ -32,6 +32,7 @@ export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 export const GET_PROPERTIES_BY_USER_ID = "GET_PROPERTIES_BY_USER_ID"
 export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
   "DELETE_PROPERTY_FROM_MY_PROPERTIES"
+export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 // ADMINISTRADOR
 export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
@@ -39,7 +40,8 @@ export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
 const api = import.meta.env.VITE_APP_API_URL
 
 export function getAllEmails() {
-  return async function(dispatch) {
+  return async funexport const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
+ction(dispatch) {
     try {
       let { data } = await axios.get(`${api}/notifications`, getHeaderToken())
 
@@ -408,20 +410,30 @@ export const getRental = propertyID => async dispatch => {
   }
 }
 
-export function deletePropertyFromMyProperties(form) {
+export function deletePropertyFromMyProperties(ID) {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    console.log(ID)
+    try {
+      let response = await axios.put(`${api}/properties/deleteProperty`,{ID},config)
+      return dispatch({
+        type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function getRentalsByUser() {
   return async function (dispatch) {
     const config = getHeaderToken()
     try {
-      let response = await axios.delete(`${api}/properties/deleteProperty`, {
-        headers: {
-          Authorization: config.headers.Authorization,
-        },
-        data: {
-          form: form,
-        },
-      })
+      let response = await axios.get(`${api}/rentals/getRentalsByUser`, config)
+      console.log(response)
       return dispatch({
-        type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
+        type: GET_RENTALS_BY_USER,
         payload: response.data,
       })
     } catch (error) {
