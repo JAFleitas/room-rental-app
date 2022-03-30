@@ -1,11 +1,13 @@
 const properties = require("../data/properties.json")
 const users = require("../data/users.json")
 const services = require("../data/Services.json")
+const notifications = require("../data/notifications.json")
 const typesProperty = require("../data/type_property.json")
 const {
   Property,
   User,
   Service,
+  Notification,
   Type_property: TypeProperty,
 } = require("../db")
 const usersIds = [
@@ -99,4 +101,12 @@ module.exports = async () => {
     console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
     console.log("No se han podido cargar las propiedades") // eslint-disable-line no-console
   }
+
+    try {
+      await Notification.bulkCreate(notifications, { validate: true })
+      console.log("- Notificaiones cargadas en la DDBB") // eslint-disable-line no-console
+    } catch (err) {
+      console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
+      console.log("No se han podido cargar las notificaciones") // eslint-disable-line no-console
+    }
 }

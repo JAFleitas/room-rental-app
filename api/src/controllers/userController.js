@@ -105,7 +105,7 @@ const getUserDetail = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id, {
       attributes: {
-        exclude: ["password", "provider", "providerId", "type", "updatedAt"],
+        exclude: ["password", "provider", "providerId", "updatedAt"],
       },
     })
 

@@ -24,6 +24,7 @@ import {
   GET_PROPERTIES_BY_USER_ID,
   DELETE_PROPERTY_FROM_MY_PROPERTIES,
   GET_RENTAL,
+  GET_ALL_EMAILS,
 
 } from "../actions"
 
@@ -51,16 +52,21 @@ const initialState = {
   services: [],
 
   coordinates: [],
-  propertyRentals:[],
+  propertyRentals: [],
   listFavorites: {},
   paymenthMethods: [],
+  admin: {
+    emails: null,
+    users: null,
+    orders: null,
+  },
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_EMAILS:
+      return {...state, admin: {...state.admin, emails: payload}};
     case GET_ALL_PAYMENT_METHODS:
-
-
       return {...state, paymenthMethods: payload};
     case ADD_PAYMENT_METHOD: 
     return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
