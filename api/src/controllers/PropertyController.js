@@ -1,3 +1,5 @@
+const { Op } = require("sequelize")
+
 const {
   Property,
   Service,
@@ -26,6 +28,12 @@ const getPropertyById = async (req, res, next) => {
         {
           model: User,
           attributes: ["name", "lastname"],
+        },
+        {
+          model: Service,
+          through: {
+            attributes: [],
+          },
         },
       ],
     })
@@ -84,6 +92,44 @@ const addProperty = async (req, res) => {
   } else {
     res.status(404).json({ message: "Error Required Field not Found" })
   }
+}
+
+const editProperty = async (req, res) => {
+  const {
+    idProperty,
+    name,
+    location,
+    price,
+    numberOfRooms,
+    maxNumberOfPeople,
+    image,
+    services,
+    description,
+    discount,
+    typePropertyID,
+    coordinates,
+  } = req.body.data
+  console.log(idProperty)
+  const { id } = req.user
+  if (id) {
+    await Property.update(
+      {
+        name,
+        location,
+        price,
+        numberOfRooms,
+        maxNumberOfPeople,
+        image,
+        services,
+        description,
+        discount,
+        typePropertyID,
+        coordinates,
+      },
+      { where: { [Op.and]: [{ id: idProperty }, { userID: id }] } },
+    )
+  }
+  res.send("Datos recibidos con éxito")
 }
 
 const getAll = async (req, res, next) => {
@@ -200,6 +246,7 @@ const disabledProperty = async (req, res, next) => {
 module.exports = {
   getPropertyById,
   addProperty,
+  editProperty,
   getAll,
   getPropertyByUser,
   disabledProperty,
