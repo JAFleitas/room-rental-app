@@ -35,6 +35,11 @@ module.exports = sequelize => {
       discount: {
         type: DataTypes.INTEGER,
       },
+      propertyRentalId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+      },
     },
     { timestamps: false },
   )
@@ -45,6 +50,8 @@ module.exports = sequelize => {
       sourceKey: "id",
       foreignKey: "userID",
     })
+
+
 
     // Relacionando 'alquiler de una propiedad' y Propiedad
     // PropertyRental.belongsTo(models.Property, {
