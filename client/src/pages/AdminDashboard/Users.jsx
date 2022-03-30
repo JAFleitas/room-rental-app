@@ -229,12 +229,12 @@ export default function Users() {
                             style={{
                               backgroundColor: "#64075cdd",
                               color: "white",
-                              padding: "5px",
-                              borderRadius: "7px",
+                              padding: "3px",
+                              borderRadius: "6px",
                               marginTop: "5px",
                             }}
                             onClick={() => navigate(`resend/${row.id}`)}>
-                            Resend
+                            Promote to admin
                           </button>
                         </StyledTableCell>
                         <StyledTableCell>{row.name}</StyledTableCell>
