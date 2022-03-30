@@ -6,6 +6,7 @@ import {
   LinkedIn,
   GitHub,
   TeamMateImage,
+  LastTeamMate,
 } from "./styled"
 import { BsLinkedin, BsGithub } from "react-icons/bs"
 import ThiagoImage from "../../assets/Thiago.jpg"
@@ -55,18 +56,7 @@ export default function AboutUs() {
           <BsGithub />
         </GitHub>
       </TeamMate>
-      <TeamMate>
-        <TeamMateImage src={Bertha} />
-        <Name>Bertha Alicia Ramirez Mora</Name>
-        <LinkedIn
-          href="https://www.linkedin.com/in/bertha-alicia-ramirez-mora-9645911a3/ "
-          target="_blank">
-          <BsLinkedin />
-        </LinkedIn>
-        <GitHub href="https://github.com/alibertiux" target="_blank">
-          <BsGithub />
-        </GitHub>
-      </TeamMate>
+
       <TeamMate>
         <TeamMateImage src={Luis} />
         <Name>Luis Peláez</Name>
@@ -105,6 +95,18 @@ export default function AboutUs() {
           <BsGithub />
         </GitHub>
       </TeamMate>
+      <LastTeamMate>
+        <TeamMateImage src={Bertha} />
+        <Name>Bertha Alicia Ramirez Mora</Name>
+        <LinkedIn
+          href="https://www.linkedin.com/in/bertha-alicia-ramirez-mora-9645911a3/ "
+          target="_blank">
+          <BsLinkedin />
+        </LinkedIn>
+        <GitHub href="https://github.com/alibertiux" target="_blank">
+          <BsGithub />
+        </GitHub>
+      </LastTeamMate>
     </ContainerDiv>
   )
 }
