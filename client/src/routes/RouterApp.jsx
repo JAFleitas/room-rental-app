@@ -12,6 +12,7 @@ import FormPaymentMethod from "../pages/profile/Components/FormPaymentMethod/For
 import Forgotpassword from "../pages/ForgotPassword/ForgotPassword.jsx"
 import Help from "../pages/Help/Help.jsx"
 import Emails from "../pages/AdminDashboard/Emails.jsx"
+import FormEmail from "../pages/AdminDashboard/FormEmail.jsx"
 
 const RouterApp = () => {
   return (
@@ -29,6 +30,8 @@ const RouterApp = () => {
       <Route path="/help" element={<Help/>} />
       <Route path="/dashboard">
         <Route path="emails" element = {<Emails />}/>
+        <Route path="emails/create" element = {<FormEmail />}/>
+        <Route path="emails/resend/:id" element = {<FormEmail resend={true} />}/>
       </Route>
       <Route path="/*" element={<Error404 />} />
       {/* <Route exact path="favorites" element={<Favorites />}></Route> */}
