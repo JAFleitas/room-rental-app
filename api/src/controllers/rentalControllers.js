@@ -2,9 +2,6 @@ const { PropertyRental, Property, User } = require("../db/index.js")
 
 const addRental = async (req, res) => {
   const userID = req.user.id
-  console.log("Este seria el userID de AddRental")
-  console.log(userID)
-
   const { propertyID, final_price, start_date, final_date, paymenthMethodId } =
     req.body
   if (userID && final_price && final_date && start_date && paymenthMethodId) {
@@ -47,6 +44,15 @@ const getRental = async (req, res) => {
     res.status(404).json({ message: "Error Required Field not Found" })
   }
 }
+const getAllRentals = async (req, res, next) => {
+  try {
+    const rentals = await PropertyRental.findAll()
+
+    res.json(rentals)
+  } catch (error) {
+    next(error)
+  }
+}
 
 const getRentalsByUser = async (req, res) => {
   const userID = req.user.id
@@ -84,4 +90,5 @@ module.exports = {
   addRental,
   getRental,
   getRentalsByUser,
+  getAllRentals,
 }
