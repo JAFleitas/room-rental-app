@@ -7,6 +7,8 @@ const {
   addProperty,
   editProperty,
   getAll,
+  getPropertyByUser,
+  disabledProperty,
 } = require("../controllers/PropertyController")
 
 const router = Router()
@@ -18,5 +20,9 @@ router.post("/addProperty", auth, addProperty)
 router.put("/editProperty", auth, editProperty)
 
 router.get("/getProperties", getFiltersProperty, getAll)
+
+router.get("/getPropertiesByUserId", auth, getPropertyByUser)
+
+router.put("/deleteProperty",auth, disabledProperty)
 
 module.exports = router

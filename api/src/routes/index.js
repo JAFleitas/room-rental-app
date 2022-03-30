@@ -10,6 +10,7 @@ const favoriteRouter = require("./favoriteRoutes")
 const emailRouter = require("./emailRouter")
 const paymenthMethodRouter = require("./paymentMethodRoutes")
 const commentRouter = require("./commentRoutes")
+const notificationRoutes = require("./notificationRoutes")
 
 const router = Router()
 
@@ -23,7 +24,8 @@ router.use("/services", servicesRoutes)
 router.use("/categories", categoriesRoutes)
 router.use("/favorites", favoriteRouter)
 router.use("/comments", commentRouter)
-router.use("/", emailRouter)
+router.use("/email", emailRouter)
 router.use("/payment-method", paymenthMethodRouter)
+router.use("/notifications", notificationRoutes)
 
 module.exports = router

@@ -19,7 +19,7 @@ module.exports = sequelize => {
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -44,7 +44,7 @@ module.exports = sequelize => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       set(value) {
         this.setDataValue("password", hashSync(value, 10))
       },
@@ -64,13 +64,33 @@ module.exports = sequelize => {
       allowNull: false,
       defaultValue: "NORMAL",
     },
+    blocked: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      required: true,
+    },
   })
 
   User.associate = models => {
     // Relacionando con la lista de favoritos 1:1
-    User.hasOne(models.Favorite);
+    User.hasOne(models.Favorite)
 
     User.hasMany(models.PaymentMethod, {
+      sourceKey: "id",
+      foreignKey: "userId",
+    })
+
+    User.hasMany(models.Property, {
+      sourceKey: "id",
+      foreignKey: "userID",
+    })
+    
+    User.hasMany(models.PropertyRental, {
+      sourceKey: "id",
+      foreignKey: "userID",
+    })
+
+    User.hasMany(models.PropertyRental, {
       sourceKey: "id",
       foreignKey: "userId",
     })

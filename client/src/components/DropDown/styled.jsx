@@ -7,7 +7,7 @@ export const DropDownMenu = styled.div`
   right: -2vw;
   width: 300px;
   transform: translateX(-45%);
-  background-color: #240046;
+  background: linear-gradient(145deg, #cb8fff, #ab79e6);
   border-radius: 17px;
   padding: 1rem;
   overflow: hidden;
@@ -28,8 +28,9 @@ export const DropDownItem = styled.span`
   align-items: center;
   border-radius: 17px;
   transition: background 800ms, color 800ms;
-  padding: 0.5rem;
-  margin-bottom: 5%;
+  padding: 0.4rem;
+  margin-bottom: 2.5%;
+  margin-top: 2.5%;
 
   :hover {
     background-color: #9d4edd;
@@ -43,34 +44,38 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 500px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding:"20px";
+  padding: "20px";
   margin-bottom: 2rem;
+  button {
+    height: 50px;
+    margin-bottom: 8px;
+    svg {
+      margin-right: 8px;
+      font-size: 24px;
+    }
+  }
   @media (max-width: 500px) {
-  width:100%
+    width: 100%;
   }
 `
 
-
 export const Title = styled.h1`
+  font-family: "Times New Roman", Times, serif;
   font-size: 36px;
-  color: #1f0037;
+  color: #ae74f0;
   margin-bottom: 2.5%;
+  font-weight: 800;
+  text-shadow: 4px 4px 6px #e0c0ff; ;
 `
 
 export const Field = styled.div`
   width: 90%;
   margin-left: 5%;
-  margin-top: 2.5%;
   margin-bottom: 2.5%;
 
   height: 30%;
   padding: 20px;
   padding-bottom: 20px;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #bf8ce6, #e3a6ff);
 `
 
 export const Form = styled.form`
@@ -83,7 +88,7 @@ export const Form = styled.form`
   padding-bottom: 10%;
   display: flex;
   flex-direction: column;
-  gap:0.3rem;
+  gap: 0.3rem;
 `
 export const Input = styled.input`
   grid-column: 2/3;
@@ -94,102 +99,31 @@ export const Input = styled.input`
   padding: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
-
+  margin-top: 4px;
   font-size: 20px;
 `
 
 export const Label = styled.label`
   grid-column: 1/2;
   grid-row: 1/2;
-  text-align: left;
-  padding-left: 5%;
   font-size: large;
   font-weight: bold;
   font-family: sans-serif;
+  color: #ffffff;
 `
 export const ButtonFacebook = styled.button`
   display: flex;
-  color:#ffffff;
-  justify-self: center;
-  align-self: center;  
-  justify-content: center;
-  align-items: center;
-  padding: 3px;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
-  width: 50%;
-  min-height: 30px;
-  background-color: #1B74E4;
-  font-size: large;
-  font-weight: normal;
-  font-family: sans-serif;
-
-  transition: 0.2s;
-
-  &:hover{
-    background-color: #385898;
-    
-  }
-`
-export const ButtonGoogle = styled.button`
-display: flex;
-  color: black;
-  justify-self: center;
-  align-self: center;  
-  justify-content: center;
-  align-items: center;
-  padding: 3px;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
-  width: 50%;
-  min-height: 30px;
-  background-color: white;
-  font-size: large;
-  font-weight: normal;
-  font-family: sans-serif;
-
-  transition: 0.2s;
-
-  &:hover{
-    background-color: #e9ecef;
-    
-  }
-`
-export const SendButton= styled.button`
-  color:#ffffff;
-  justify-self: center;
-  align-self: center;
-  text-justify:center;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
-  width: 50%;
-  height: 30px;
-  background-color: #2da44e;
-  font-size: large;
-  font-weight: normal;
-  font-family: sans-serif;
-
-  transition: 0.2s;
-
-  &:hover{
-    background-color: #2c974b;
-    
-  }
-`
-export const RedButton = styled.button`
   color: #ffffff;
   justify-self: center;
   align-self: center;
-  text-justify: center;
-  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
   border-radius: 0.5rem;
   box-shadow: rgba(27, 31, 36, 0.1);
-  width: 50%;
+  width: 90%;
   min-height: 30px;
-  background-color: #cf222e;
+  background-color: #1b74e4;
   font-size: large;
   font-weight: normal;
   font-family: sans-serif;
@@ -197,7 +131,71 @@ export const RedButton = styled.button`
   transition: 0.2s;
 
   &:hover {
+    background-color: #385898;
+  }
+`
+export const ButtonGoogle = styled.button`
+  display: flex;
+  color: black;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 50%;
+  min-height: 30px;
+  background-color: white;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+  width: 90%;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #d9dcdf;
+    border: 1px solid #d9dcdfcc;
+  }
+`
+export const SendButton = styled.button`
+  color: #ffffff;
+  justify-self: center;
+  align-self: center;
+  text-justify: center;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 90%;
+  height: 30px;
+  background-color: ${({ disabled }) => (disabled ? "#404040" : "#2da44e")};
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+
+  transition: 0.2s;
+
+  &:hover {
+    background-color: ${({ disabled }) => (disabled ? "#404040" : "#2c974b")};
+  }
+`
+export const RedButton = styled.button`
+  color: #ff0000;
+  justify-self: center;
+  align-self: center;
+  text-justify: center;
+
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 90%;
+  min-height: 30px;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: sans-serif;
+  text-decoration: underline;
+  transition: 0.2s;
+
+  &:hover {
     background-color: #ffffff;
-    color:#cf222e;
+    color: #cf222e;
+    text-decoration: none;
   }
 `

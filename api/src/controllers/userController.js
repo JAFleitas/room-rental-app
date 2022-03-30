@@ -68,9 +68,8 @@ const login = async (req, res, next) => {
     // ningún usuario contiene ese correo
     if (!user) return next({ status: 400, message: "Invalid credentials" })
 
-    //Si la cuenta está desabilitada
-    if (user.dataValues.status === "disabled") {
-      return next({ status: 400, message: "Disabled Account" })
+    if (user.dataValues.status === "enable" || user.dataValues.blocked) {
+      return next({ status: 401, message: "Account bloqued or disabled" })
     }
 
     // Teniedo el usuario, determinamos si la contraseña enviada es correcta
@@ -97,8 +96,8 @@ const login = async (req, res, next) => {
       },
     )
   } catch (err) {
-    console.log(err)
-    next({ err })
+    // console.log(err)
+    next(err)
   }
 }
 
@@ -106,24 +105,12 @@ const getUserDetail = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id, {
       attributes: {
-        exclude: [
-          "password",
-          "provider",
-          "providerId",
-          "type",
-          "createdAt",
-          "updatedAt",
-        ],
+        exclude: ["password", "provider", "providerId", "updatedAt"],
       },
     })
 
     if (!user) {
       return next({ status: 404, message: "User not found" })
-    }
-
-    //Si la cuenta está desabilitada
-    if (user.dataValues.status === "disabled") {
-      return next({ status: 400, message: "Disabled Account" })
     }
 
     res.json(user)
@@ -132,57 +119,56 @@ const getUserDetail = async (req, res, next) => {
   }
 }
 
-const disableUser = async (req, res) => {
-  const { id } = req.body
+const disableUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(id)
+    const user = req.user
+
     if (!user) {
       res.json({ message: "This User doesnt exists" })
-    } else if (user.dataValues.status === "enabled") {
-      try {
-        const updateStatus = await User.update(
-          {
-            ...user.dataValues,
-            status: "disabled",
+    }
+
+    try {
+      const updateStatus = await User.update(
+        {
+          status: "disabled",
+        },
+        {
+          where: {
+            id: user.id,
           },
-          {
-            where: {
-              id: user.dataValues.id,
-            },
-          },
-        )
-        if (updateStatus) {
-          res.status(200).json({ message: "Acoount disabled correctly" })
-        } else {
-          res.status(400).json({ message: "Couldnt disbale User" })
-        }
-      } catch (error) {
-        console.log(error)
+        },
+      )
+
+      if (updateStatus) {
+        res.json({ message: "Acoount disabled correctly" })
+      } else {
+        res.status(400).json({ message: "Couldnt disable User account" })
       }
-    } else if (user.dataValues.status === "disabled") {
-      res.json({ status: 400, message: "This account is already Disabled " })
+    } catch (error) {
+      // console.log(error)
+      next(error)
     }
   } catch (err) {
-    console.log(err)
+    // console.log(err)
+    next(err)
   }
 }
 
-const enableUser = async (req, res) => {
-  const { id } = req.body
+const enableUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(id)
+    const user = req.user
+
     if (!user) {
       res.json({ message: "This User doesnt exists" })
-    } else if (user.dataValues.status === "disabled") {
+    } else if (user.status === "disabled") {
       try {
         const updateStatus = await User.update(
           {
-            ...user.dataValues,
             status: "enabled",
           },
           {
             where: {
-              id: user.dataValues.id,
+              id: user.id,
             },
           },
         )
@@ -193,12 +179,14 @@ const enableUser = async (req, res) => {
         }
       } catch (error) {
         console.log(error)
+        next(error)
       }
-    } else if (user.dataValues.status === "enabled") {
+    } else if (user.status === "enabled") {
       res.json({ status: 400, message: "This account is already enabled " })
     }
   } catch (err) {
     console.log(err)
+    next(err)
   }
 }
 
@@ -281,6 +269,127 @@ const updateUser = async (req, res, next) => {
   }
 }
 
+const loginWithGoogle = async (req, res, next) => {
+  const { email, name, lastname, photo } = req.body
+
+  const password = await bcrypt.hash(process.env.PASSWORD_GLOBAL_GOOGLE, 10)
+
+  try {
+    const [user, created] = await User.findOrCreate({
+      where: {
+        email,
+      },
+      defaults: {
+        name,
+        lastname,
+        photo,
+        password,
+      },
+    })
+
+    if (user || created) {
+      const payload = {
+        user: { id: user.id },
+      }
+      jwt.sign(
+        payload,
+        JWT_SECRET,
+        {
+          expiresIn: "3d",
+        },
+        (err, token) => {
+          if (err) throw err
+          return res.json({ token })
+        },
+      )
+    }
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.findAll()
+
+    res.json(users)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const blockUser = async (req, res, next) => {
+  try {
+    const user = req.user
+
+    if (!user) {
+      res.json({ message: "This User doesnt exists" })
+    }
+
+    try {
+      const blockedUser = await User.update(
+        {
+          blocked: true,
+        },
+        {
+          where: {
+            id: user.id,
+          },
+        },
+      )
+
+      if (blockedUser) {
+        res.json({ message: "Acoount blocked correctly" })
+      } else {
+        res.status(400).json({ message: "Couldnt block User account" })
+      }
+    } catch (error) {
+      // console.log(error)
+      next(error)
+    }
+  } catch (err) {
+    // console.log(err)
+    next(err)
+  }
+}
+
+const unlockUser = async (req, res, next) => {
+  try {
+    const user = req.user
+
+    if (!user) {
+      res.json({ message: "This User doesnt exists" })
+    } else if (user.blocked === true) {
+      try {
+        const unlockedUser = await User.update(
+          {
+            blocked: false,
+          },
+          {
+            where: {
+              id: user.id,
+            },
+          },
+        )
+        if (unlockedUser) {
+          res.status(200).json({ message: "Acoount unlock correctly" })
+        } else {
+          res.status(400).json({ message: "Couldnt unlock User" })
+        }
+      } catch (error) {
+        console.log(error)
+        next(error)
+      }
+    } else if (user.blocked === false) {
+      res.json({ status: 400, message: "This account is not blocked" })
+    }
+  } catch (err) {
+    console.log(err)
+    next(err)
+  }
+}
+
 module.exports = {
   createUser,
   login,
@@ -290,4 +399,8 @@ module.exports = {
   resetPassword,
   updateUser,
   enableUser,
+  loginWithGoogle,
+  getAllUsers,
+  blockUser,
+  unlockUser,
 }

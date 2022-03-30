@@ -38,17 +38,17 @@ module.exports = sequelize => {
         type: DataTypes.DOUBLE,
         allowNull: false,
         defaultValue: 0,
-        set(value){
+        set(value) {
           this.setDataValue("rating", Math.round(value * 100) / 100)
-        }
+        },
       },
       countReviews: {
         type: DataTypes.INTEGER,
         required: true,
         defaultValue: 0,
         validate: {
-          min: 0
-        }
+          min: 0,
+        },
       },
       image: {
         type: DataTypes.ARRAY(DataTypes.STRING),
@@ -65,6 +65,11 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+      status: {
+        type: DataTypes.ENUM("enabled", "disabled"),
+        allowNull: false,
+        defaultValue: "enabled",
+      },
     },
     { timestamps: false },
   )
@@ -74,6 +79,7 @@ module.exports = sequelize => {
     Property.belongsTo(models.User, {
       sourceKey: "id",
       foreignKey: "userID",
+      required: true,
     })
 
     // Relacionando Propiedad y TypoPropiedad
@@ -97,6 +103,12 @@ module.exports = sequelize => {
     Property.hasMany(models.PropertyRental, {
       sourceKey: "id",
       foreignKey: "propertyID",
+    })
+
+    // Relacionando Propiedad y User
+    Property.belongsTo(models.User, {
+      sourceKey: "id",
+      foreignKey: "userID",
     })
   }
 }

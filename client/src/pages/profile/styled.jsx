@@ -13,8 +13,9 @@ export const PageContainer = styled.div`
 export const MenuContainer = styled.div`
   display: flex;
   width: 300px;
+  height: fit-content;
   margin-top: 4%;
-  margin-bottom: 22%;
+  margin-bottom: 5%;
   margin-left: 5%;
   padding: 10px;
   background: rgb(226, 200, 255);
@@ -31,7 +32,6 @@ export const MenuContainer = styled.div`
   @media (max-width: 720px) {
     width: 90%;
     margin: 1rem;
-
   }
 `
 export const MenuOptions = styled.div`
@@ -55,14 +55,12 @@ export const MenuOption = styled.h3`
 `
 
 export const ProfileImage = styled.img`
-
-  margin:1rem;
+  margin: 1rem;
   height: 200px;
   width: 200px;
   border-radius: 50%;
   justify-self: center;
   align-self: center;
-
 `
 
 export const RentHistory = styled.div`

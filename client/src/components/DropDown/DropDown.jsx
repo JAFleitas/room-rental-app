@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react"
-import { logout } from "../../redux/actions/index"
+
 import { DropDownMenu, DropDownItem } from "./styled"
 import { Link, useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
+import { useAuth0 } from "@auth0/auth0-react"
+import Logout from "../auth/logout"
 
 export default function DropDown({ open }) {
   const auth = useSelector(state => state.auth)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+
+  const { isAuthenticated } = useAuth0()
 
   return (
     <>
       <DropDownMenu visibility={open ? "true" : "false"}>
-        {auth ? (
+        {isAuthenticated || auth ? (
           <>
             <Link to="/profile">
               <DropDownItem>Profile</DropDownItem>
@@ -22,13 +25,7 @@ export default function DropDown({ open }) {
               <Link to="/addProperty">Add Property</Link>
             </DropDownItem>
             <hr />
-            <DropDownItem
-              onClick={() => {
-                dispatch(logout())
-                navigate("/")
-              }}>
-              Logout
-            </DropDownItem>
+            <Logout />
           </>
         ) : (
           <>

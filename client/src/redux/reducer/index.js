@@ -16,14 +16,16 @@ import {
   ADD_FAVORITE,
   REMOVE_FAVORITE,
   ADD_RENTAL,
-
   CHANGE_PASSWORD,
-
   GET_ALL_PAYMENT_METHODS,
   ADD_PAYMENT_METHOD,
   DELETE_PAYMENT_METHOD,
   EDIT_PAYMENT_METHOD,
-
+  GET_PROPERTIES_BY_USER_ID,
+  DELETE_PROPERTY_FROM_MY_PROPERTIES,
+  GET_RENTAL,
+  GET_ALL_EMAILS,
+  GET_RENTALS_BY_USER,
 } from "../actions"
 
 const initialState = {
@@ -43,33 +45,44 @@ const initialState = {
     minprice: "",
     maxprice: "",
     type: "", //tipo de propiedad
-    location: ""
+    location: "",
   },
   page: 1,
   categories: [],
   services: [],
-
   coordinates: [],
-
+  propertyRentals: [],
+  userRentals: [],
   listFavorites: {},
   paymenthMethods: [],
+  admin: {
+    emails: null,
+    users: null,
+    orders: null,
+  },
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_EMAILS:
+      return {...state, admin: {...state.admin, emails: payload}};
     case GET_ALL_PAYMENT_METHODS:
-
       return {...state, paymenthMethods: payload};
-    case ADD_PAYMENT_METHOD: 
-    return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
-    case DELETE_PAYMENT_METHOD: 
-    return {...state, paymenthMethods: state.paymenthMethods.filter(method => method.id !== payload)};
+    case ADD_PAYMENT_METHOD:
+      return { ...state, paymenthMethods: [...state.paymenthMethods, payload] }
+    case DELETE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymenthMethods: state.paymenthMethods.filter(
+          method => method.id !== payload,
+        ),
+      }
     case EDIT_PAYMENT_METHOD:
       let newMethods = state.paymenthMethods.filter(
         method => method.id + "" !== payload.id + "",
       )
-      newMethods.push(payload);
-      return {...state, paymenthMethods: newMethods};
+      newMethods.push(payload)
+      return { ...state, paymenthMethods: newMethods }
     case GET_LIST_FAVORITES:
       return { ...state, listFavorites: payload }
     case ADD_FAVORITE:
@@ -142,12 +155,12 @@ function rootReducer(state = initialState, { type, payload }) {
         auth: true,
       }
     case CHANGE_PASSWORD:
-      return{
-        ...state
+      return {
+        ...state,
       }
     case AUTH_ERROR:
     case LOGOUT:
-      localStorage.removeItem("tokenRentalApp");
+      localStorage.removeItem("tokenRentalApp")
       return {
         ...state,
         token: null,
@@ -155,7 +168,7 @@ function rootReducer(state = initialState, { type, payload }) {
         user: {},
         auth: false,
         listFavorites: {},
-        paymenthMethods: []
+        paymenthMethods: [],
       }
     case CHANGE_PAGE:
       return {
@@ -170,6 +183,25 @@ function rootReducer(state = initialState, { type, payload }) {
     case ADD_RENTAL:
       return {
         ...state,
+      }
+    case GET_PROPERTIES_BY_USER_ID:
+      return {
+        ...state,
+        MyProperties: payload,
+      }
+    case DELETE_PROPERTY_FROM_MY_PROPERTIES:
+      return {
+        ...state,
+      }
+    case GET_RENTAL:
+      return {
+        ...state,
+        propertyRentals: payload,
+      }
+    case GET_RENTALS_BY_USER:
+      return {
+        ...state,
+        userRentals: payload,
       }
     default:
       return state

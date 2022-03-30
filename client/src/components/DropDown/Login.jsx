@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import {
   Form,
   SendButton,
-  ButtonFacebook,
-  ButtonGoogle,
   Field,
   Input,
   Label,
@@ -11,11 +9,11 @@ import {
   Container,
   RedButton,
 } from "./styled"
-import { FcGoogle } from "react-icons/fc"
-import { BsFacebook } from "react-icons/bs"
 import { logIn } from "../../redux/actions/index"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import LoginWithGoogle from "../auth/login"
+import LoginWithFacebook from "../auth/loginWithFacebook"
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -39,11 +37,9 @@ const Login = () => {
       dispatch(logIn(logInForm))
       navigate("/")
     }
-
   }
   return (
     <Container>
-      <Title>Log In</Title>
       <Form fields={2}>
         <Field>
           <Label>Email: </Label>
@@ -57,21 +53,19 @@ const Login = () => {
         <Field>
           <Label>Password: </Label>
           <Input
-            type="text"
+            type="password"
             name="password"
             value={logInForm.password}
             onChange={handleChangeLogIn}
             placeholder="Password"></Input>
         </Field>
-        <SendButton onClick={e => handleSubmitLogIn(e)}>Log in</SendButton>
-        <ButtonFacebook>
-          <BsFacebook />
-          Log in with Facebook
-        </ButtonFacebook>
-        <ButtonGoogle>
-          <FcGoogle />
-          Log in with Google
-        </ButtonGoogle>
+        <SendButton
+          disabled={!logInForm.email || !logInForm.password}
+          onClick={e => handleSubmitLogIn(e)}>
+          Log in
+        </SendButton>
+        <LoginWithGoogle />
+        <LoginWithFacebook />
         <RedButton onClick={() => navigate("/forgot-password")}>
           I forgot my password
         </RedButton>

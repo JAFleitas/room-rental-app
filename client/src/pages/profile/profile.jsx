@@ -32,7 +32,7 @@ export default function Profile() {
               <Link to="/profile/payment-methods">
                 <MenuOption>Payment Methods</MenuOption>
               </Link>
-              <Link to="/profile/properties">
+              <Link to="/profile/myProperties">
                 <MenuOption>My properties</MenuOption>
               </Link>
               <Link to="/profile/history">

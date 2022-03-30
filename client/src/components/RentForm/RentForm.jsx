@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Container,
   Header,
@@ -17,34 +17,59 @@ import {
   AddPayment,
   IconPlus,
 } from "./styled"
-import DayPicker, { DateUtils } from "react-day-picker"
-import "react-day-picker/lib/style.css"
+
+import { DayPicker } from "react-day-picker"
+import "react-day-picker/dist/style.css"
 import styles from "./Calendar.module.css"
-import { addRental } from "../../redux/actions/index"
+import { addRental, getRental } from "../../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
+import { useParams } from "react-router-dom"
+
+
 export default function RentForm(props) {
-  props = props.props
-  const paymentMethods = useSelector(state => state.paymenthMethods)
+  const [monthsInCalendary, setMonthsInCalendary]=useState(2)
+  const mediaqueryList = window.matchMedia("(min-width: 705px)");
+  mediaqueryList.addListener( function(EventoMediaQueryList) {
+    if(EventoMediaQueryList.matches) {
+      setMonthsInCalendary(2)
+    }else{
+
+      setMonthsInCalendary(1)
+    };
+});
+  const { id } = useParams()
+  const propertyID = { propertyID: id }
   const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getRental(propertyID))
+  }, [dispatch])
+
+  props = props.props
+
+  const paymentMethods = useSelector(state => state.paymenthMethods)
+
+  const rentals = useSelector(state => state.propertyRentals.data)
+
+  
+
   const [dates, setDates] = useState({
     from: undefined,
     to: undefined,
   })
+
+
   const [payMethod, setPayMethod] = useState()
-  const [diasOcupados, setDiasOcupados] = useState([])
-  function handleDayClick(day) {
-    const range = DateUtils.addDayToRange(day, dates)
-    setDates(range)
-  }
+
+
+
   function handleResetClick() {
     setDates({
       from: undefined,
       to: undefined,
     })
   }
-  const modifiers = { start: dates.from, end: dates.to }
   // Función para calcular los días transcurridos entre dos fechas
   function restaFechas(f1, f2) {
     if (f1 !== undefined && f2 !== undefined && f1 !== null && f2 !== null) {
@@ -67,8 +92,8 @@ export default function RentForm(props) {
   }
 
   function handleClick() {
-    const finalPrice = restaFechas(dates.from, dates.to) * props.price
-    if (dates.from === undefined || dates.to === undefined) {
+    const finalPrice = restaFechas(dates?.from, dates?.to) * props.price
+    if (dates?.from === undefined || dates?.to === undefined) {
       return
     }
     // '01/02/2022' '->' '2022/02/01';
@@ -90,7 +115,7 @@ export default function RentForm(props) {
       final_date: dates.to,
       paymenthMethodId: payMethod,
     }
-    console.log(form)
+
     dispatch(addRental(form))
 
     // setDiasOcupados([
@@ -128,29 +153,46 @@ export default function RentForm(props) {
         <FormField>
           <div className={styles.RangeExample}>
             <p>
-              {!dates.from && !dates.to && "Please select the first day."}
-              {dates.from && !dates.to && "Please select the last day."}
-              {dates.from &&
-                dates.to &&
-                `Selected from ${dates.from.toLocaleDateString()} to
-            ${dates.to.toLocaleDateString()}`}{" "}
-              {dates.from && dates.to && (
+              {!dates?.from && !dates?.to && "Please select the first day."}
+              {dates?.from && !dates?.to && "Please select the last day."}
+              {dates?.from &&
+                dates?.to &&
+                `Selected from ${dates?.from.toLocaleDateString()} to
+            ${dates?.to.toLocaleDateString()}`}{" "}
+              {dates?.from && dates?.to && (
                 <button className={styles.link} onClick={handleResetClick}>
                   Reset
                 </button>
               )}
             </p>
+
             <DayPicker
-              className={styles}
-              numberOfMonths={2}
-              selectedDays={[dates.from, dates]}
-              modifiers={modifiers}
-              onDayClick={handleDayClick}
-              disabledDays={[diasOcupados]}
+              defaultMonth={new Date()}
+              numberOfMonths={monthsInCalendary}
+              mode="range"
+              selected={dates}
+              onSelect={setDates}
+              hidden={{
+                from: new Date(2000,5,10),
+                to: new Date(),
+              }}
+              disabled={
+                rentals &&
+                rentals.map(rental => {
+                  return {
+                    from: new Date(rental.start_date),
+                    to: new Date(rental.final_date),
+                  }
+                })
+              }
+              modifiersClassNames={{
+                selected: styles.Selectable,
+                today: styles.today,
+              }}
             />
-            {restaFechas(dates.from, dates.to) >= 1 ? (
+            {restaFechas(dates?.from, dates?.to) >= 1 ? (
               <h3 className={styles.Total}>
-                El total es: {restaFechas(dates.from, dates.to) * props.price}$
+                El total es: {restaFechas(dates?.from, dates?.to) * props.price}$
               </h3>
             ) : (
               ""

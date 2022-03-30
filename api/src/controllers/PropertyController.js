@@ -1,6 +1,12 @@
 const { Op } = require("sequelize")
 
-const { Property, Service, Comment, User } = require("../db/index.js")
+const {
+  Property,
+  Service,
+  Comment,
+  User,
+  PropertyRental,
+} = require("../db/index.js")
 
 const getPropertyById = async (req, res, next) => {
   try {
@@ -31,7 +37,6 @@ const getPropertyById = async (req, res, next) => {
         },
       ],
     })
-
     if (propertyDB) {
       return res.status(200).json(propertyDB)
     } else {
@@ -169,9 +174,80 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const getPropertyByUser = async (req, res, next) => {
+  try {
+    const userID = req.user.id
+
+    const properties = await Property.findAll({
+      where: {
+        userID: userID,
+        status: "enabled",
+      },
+    })
+
+    if (properties) {
+      return res.status(200).json(properties)
+    } else {
+      return res.status(404).json({ error: "User does not have properties" })
+    }
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
+const disabledProperty = async (req, res, next) => {
+  try {
+    const { ID } = req.body
+    const propertyDB = await Property.findOne({
+      where: {
+        id: ID,
+      },
+      include: {
+        model: PropertyRental,
+      },
+    })
+
+    if (!propertyDB) {
+      res.json({ message: "This Property doesnt exists" })
+    }
+    if (
+      propertyDB.status === "enabled" &&
+      propertyDB.PropertyRentals.length === 0
+    ) {
+      // const updateProperty =
+      await Property.update(
+        {
+          status: "disabled",
+        },
+        {
+          where: {
+            id: propertyDB.id,
+          },
+        },
+      )
+      // const properties = await Property.findAll({
+      //   where: {
+      //     userID: userID,
+      //   },
+      // })
+      // if (updateProperty) {
+      //   res.status(200).send("Property deleted succesfully")
+      // }
+      // } else
+    } else if (propertyDB.status === "disabled") {
+      res.json({ status: 400, message: "This property is already Disabled " })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getPropertyById,
   addProperty,
   editProperty,
   getAll,
+  getPropertyByUser,
+  disabledProperty,
 }
