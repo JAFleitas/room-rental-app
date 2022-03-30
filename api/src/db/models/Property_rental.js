@@ -51,14 +51,11 @@ module.exports = sequelize => {
       foreignKey: "userID",
     })
 
-
-
     // Relacionando 'alquiler de una propiedad' y Propiedad
-    // PropertyRental.belongsTo(models.Property, {
-    //   sourceKey: "id",
-    //   foreignKey: "propertyID",
-    // })
-
+    PropertyRental.belongsTo(models.Property, {
+      sourceKey: "id",
+      foreignKey: "propertyID",
+    })
     // Relacionando 'alquiler de una propiedad' y Estado
     // PropertyRental.belongsTo(models.Rental_status, {
     //   sourceKey: "id",

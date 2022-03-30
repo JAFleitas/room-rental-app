@@ -24,9 +24,12 @@ const RouterApp = () => {
       <Route exact path="/signUp" element={<SignUp />} />
       <Route exact path="/profile/*" element={<Profile />} />
       <Route path="/add/payment-method" element={<FormPaymentMethod />} />
-      <Route path="/edit/payment-method/:id" element={<FormPaymentMethod edit={true} />} />
-      <Route path="/forgot-password" element={<Forgotpassword/>} />
-      <Route path="/help" element={<Help/>} />
+      <Route
+        path="/edit/payment-method/:id"
+        element={<FormPaymentMethod edit={true} />}
+      />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
+      <Route path="/help" element={<Help />} />
       <Route path="/*" element={<Error404 />} />
       {/* <Route exact path="favorites" element={<Favorites />}></Route> */}
     </Routes>
