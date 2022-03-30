@@ -4,7 +4,7 @@ import Footer from "./components/Footer/Footer"
 import RouterApp from "./routes/RouterApp"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllCategories, getAllEmails, getAllPaymentMethod, getAllProperties, getAllServices, getFavorites, loadUser } from "./redux/actions"
+import { getAllCategories, getAllEmails, getAllPaymentMethod, getAllProperties, getAllServices, getAllUsers, getFavorites, loadUser } from "./redux/actions"
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ function App() {
   useEffect(() => {
     if(auth && admin){
       dispatch(getAllEmails());
+      dispatch(getAllUsers());
     }
   }, [admin]);
 
