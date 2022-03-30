@@ -8,7 +8,6 @@ export function validateFormAddProperty(data) {
     image: "Enter images",
     services: "Enter services, example 'WIFI,TV,...' ",
     description: "Enter description",
-    floor: "Enter number of floor",
     discount: "Enter discount if any",
     typePropertyID: "Enter type property",
     coordinates:
@@ -16,7 +15,7 @@ export function validateFormAddProperty(data) {
   }
 
   for (const property in data) {
-    if (data[property].length > 0) {
+    if (data[property].length > 0 || data[property] >= 0) {
       errors[property] = ""
     }
   }
