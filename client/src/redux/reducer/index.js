@@ -27,6 +27,7 @@ import {
   GET_ALL_EMAILS,
   GET_RENTALS_BY_USER,
   CANCEL_RENTAL,
+  GET_ALL_USERS,
 } from "../actions"
 
 const initialState = {
@@ -65,6 +66,8 @@ const initialState = {
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_USERS:
+      return {...state, admin: {...state.admin, users: payload}};
     case GET_ALL_EMAILS:
       return { ...state, admin: { ...state.admin, emails: payload } }
     case GET_ALL_PAYMENT_METHODS:

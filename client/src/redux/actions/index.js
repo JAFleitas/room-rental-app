@@ -36,7 +36,9 @@ export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
 export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 // ADMINISTRADOR
-export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
+
+export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
+export const GET_ALL_USERS = "GET_ALL_USERS";
 
 const api = import.meta.env.VITE_APP_API_URL
 
@@ -47,6 +49,21 @@ export function getAllEmails() {
 
       return dispatch({
         type: GET_ALL_EMAILS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function getAllUsers() {
+  return async function(dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/users/all`, getHeaderToken())
+
+      return dispatch({
+        type: GET_ALL_USERS,
         payload: data,
       })
     } catch (error) {
