@@ -89,10 +89,5 @@ module.exports = sequelize => {
       sourceKey: "id",
       foreignKey: "userID",
     })
-
-    User.hasMany(models.PropertyRental, {
-      sourceKey: "id",
-      foreignKey: "userId",
-    })
   }
 }
