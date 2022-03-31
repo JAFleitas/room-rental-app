@@ -1,16 +1,15 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Form,
   SendButton,
   Field,
   Input,
   Label,
-  Title,
   Container,
   RedButton,
 } from "./styled"
 import { logIn } from "../../redux/actions/index"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
@@ -18,6 +17,8 @@ import LoginWithFacebook from "../auth/loginWithFacebook"
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const admin = useSelector(state => state.user?.type === "ADMIN");
+  const auth = useSelector(state => state.auth);
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -30,14 +31,23 @@ const Login = () => {
 
   function handleSubmitLogIn(e) {
     e.preventDefault()
-    // console.log("submited")
+
     if (!logInForm.email || !logInForm.password) {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-      navigate("/")
     }
   }
+
+  useEffect(() => {
+    if(auth && admin){
+      navigate("/dashboard/emails")
+    }
+    if(auth && !admin){
+      navigate("/");
+    }
+  }, [auth]);
+
   return (
     <Container>
       <Form fields={2}>
