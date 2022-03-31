@@ -50,27 +50,30 @@ export default function Emails() {
   }
 
   const handleChangeSort = value => {
-    if (sort.sortBy === value) {
-      return setSort({ ...sort, order: sort.order === "asc" ? "dsc" : "asc" })
-    }
-    return setSort({ ...sort, sortBy: value })
-  }
+    let newSort
 
-  React.useEffect(() => {
+    if (sort.sortBy === value) {
+      newSort = { ...sort, order: sort.order === "asc" ? "dsc" : "asc" }
+    } else {
+      newSort = { ...sort, sortBy: value }
+    }
+
+    setSort(newSort)
+
     if (rows && rows.length) {
       // console.log({ rows })
       let sorterRows =
-        sort.order === "asc"
+        newSort.order === "asc"
           ? rows.sort((a, b) =>
-              (a[sort.sortBy] + "").localeCompare(b[sort.sortBy] + ""),
+              (a[newSort.sortBy] + "").localeCompare(b[newSort.sortBy] + ""),
             )
           : rows.sort((a, b) =>
-              (b[sort.sortBy] + "").localeCompare(a[sort.sortBy] + ""),
+              (b[newSort.sortBy] + "").localeCompare(a[newSort.sortBy] + ""),
             )
 
       setCurrentRows(sorterRows)
     }
-  }, [sort, rows])
+  }
 
   return (
     <div style={{ margin: "1rem" }}>
