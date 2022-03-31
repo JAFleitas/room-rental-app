@@ -11,7 +11,7 @@ import TablePagination from "@mui/material/TablePagination"
 import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
-import styles from "./styles.module.css";
+import styles from "./styles.module.css"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,7 +37,7 @@ export default function Emails() {
   const rows = useSelector(state => state.admin.emails)
   const navigate = useNavigate()
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(3)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
   const [sort, setSort] = React.useState({ sortBy: "title", order: "dsc" })
   const [currentRows, setCurrentRows] = React.useState(rows)
 
@@ -75,6 +75,20 @@ export default function Emails() {
       setCurrentRows(sorterRows)
     }
   }
+
+  React.useEffect(() => {
+    if (rows) {
+      let sorterRows =
+        sort.order === "asc"
+          ? rows.sort((a, b) =>
+              (a[sort.sortBy] + "").localeCompare(b[sort.sortBy] + ""),
+            )
+          : rows.sort((a, b) =>
+              (b[sort.sortBy] + "").localeCompare(a[sort.sortBy] + ""),
+            )
+      setCurrentRows(sorterRows)
+    }
+  }, [rows])
 
   return (
     <div style={{ margin: "1rem" }}>

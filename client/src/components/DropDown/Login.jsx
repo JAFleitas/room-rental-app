@@ -17,8 +17,8 @@ import LoginWithFacebook from "../auth/loginWithFacebook"
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const admin = useSelector(state => state.user?.type === "ADMIN");
-  const auth = useSelector(state => state.auth);
+  const admin = useSelector(state => state.user.type)
+  const auth = useSelector(state => state.auth)
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -40,13 +40,12 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if(auth && admin){
+    if (auth && (admin === "SUBADMIN" || admin === "ADMIN")) {
       navigate("/dashboard/emails")
+    } else if (auth && admin === "NORMAL") {
+      navigate("/")
     }
-    if(auth && !admin){
-      navigate("/");
-    }
-  }, [auth]);
+  }, [auth, admin])
 
   return (
     <Container>

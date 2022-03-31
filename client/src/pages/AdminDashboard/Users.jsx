@@ -37,7 +37,7 @@ export default function Users() {
   const rows = useSelector(state => state.admin.users)
   const navigate = useNavigate()
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(3)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [sort, setSort] = React.useState({ sortBy: "type", order: "asc" })
   const [currentRows, setCurrentRows] = React.useState(rows)
 
@@ -51,12 +51,12 @@ export default function Users() {
   }
 
   const handleChangeSort = value => {
-    let newSort;
+    let newSort
 
     if (sort.sortBy === value) {
-      newSort = { ...sort, order: sort.order === "asc" ? "dsc" : "asc" };
-    }else{
-      newSort = { ...sort, sortBy: value };
+      newSort = { ...sort, order: sort.order === "asc" ? "dsc" : "asc" }
+    } else {
+      newSort = { ...sort, sortBy: value }
     }
 
     setSort(newSort)
@@ -74,8 +74,21 @@ export default function Users() {
 
       setCurrentRows(sorterRows)
     }
-
   }
+
+  React.useEffect(() => {
+    if (rows) {
+      let sorterRows =
+        sort.order === "asc"
+          ? rows.sort((a, b) =>
+              (a[sort.sortBy] + "").localeCompare(b[sort.sortBy] + ""),
+            )
+          : rows.sort((a, b) =>
+              (b[sort.sortBy] + "").localeCompare(a[sort.sortBy] + ""),
+            )
+      setCurrentRows(sorterRows)
+    }
+  }, [rows])
 
   return (
     <div style={{ margin: "1rem" }}>
