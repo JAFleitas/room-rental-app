@@ -54,15 +54,6 @@ export const MenuOption = styled.h3`
   }
 `
 
-export const ProfileImage = styled.img`
-  margin: 1rem;
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  justify-self: center;
-  align-self: center;
-`
-
 export const RentHistory = styled.div`
   width: 80%;
   margin-left: 10%;
@@ -122,4 +113,48 @@ export const UserProperties = styled.div`
     margin-left: 5%;
     font-size: 1rem;
   }
+`
+
+export const ContentPhoto = styled.div`
+  background-image: url(${props =>
+    props.photo
+      ? props.photo
+      : "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"});
+  margin: 1rem;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  left: 20px;
+`
+
+export const ChangeImage = styled.div`
+  background-image: url(https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Image-Free-PNG.png);
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  :hover {
+    opacity: 0.7;
+  }
+`
+export const InputInvisible = styled.input`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
 `
