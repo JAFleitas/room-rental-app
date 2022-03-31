@@ -93,8 +93,22 @@ export default function RentForm(props) {
 
   function handleClick() {
     const finalPrice = restaFechas(dates?.from, dates?.to) * props.price
-    if (dates?.from === undefined || dates?.to === undefined) {
-      return
+    if (
+      dates?.from === undefined ||
+      dates?.to === undefined ||
+      payMethod === undefined ||
+      finalPrice === undefined
+    ) {
+      alert("All fields are required")
+    } else {
+      let form = {
+        propertyID: props.id,
+        final_price: finalPrice,
+        start_date: dates.from,
+        final_date: dates.to,
+        paymenthMethodId: payMethod,
+      }
+
     }
     // '01/02/2022' '->' '2022/02/01';
     // function convertDateFormat(string) {
@@ -108,6 +122,11 @@ export default function RentForm(props) {
     // end = convertDateFormat(end)
     // console.log(inicio)
     // console.log(end)
+
+
+    // .then(alert("Renta creada"))
+    // .catch(alert("Hubo un problema..."))
+
     let form = {
       propertyID: props.id,
       final_price: finalPrice,
@@ -123,6 +142,7 @@ export default function RentForm(props) {
       dispatch(actionAddFormRentalProperty(form))
       navigate("/login")
     }
+
 
     // setDiasOcupados([
     //   ...diasOcupados,

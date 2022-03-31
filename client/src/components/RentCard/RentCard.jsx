@@ -9,7 +9,9 @@ import {
   CardInfo,
   ImageContainer,
   Image,
+  RedButton,
 } from "./styled"
+import { cancelRental } from "../../redux/actions/index"
 export default function RentCard() {
   const userRentals = useSelector(state => state.userRentals.data)
   const dispatch = useDispatch()
@@ -18,6 +20,17 @@ export default function RentCard() {
   useEffect(() => {
     dispatch(getRentalsByUser())
   }, [dispatch])
+
+  function handleCancelation(rentID) {
+    console.log(rentID)
+
+    if (rentID) {
+      console.log(rentID)
+      dispatch(cancelRental(rentID))
+    } else {
+      console.log("error no se encontro el id de la renta")
+    }
+  }
   return (
     <Container>
       {userRentals?.map(rent => {
@@ -36,6 +49,11 @@ export default function RentCard() {
               <CardInfo>Final Price: {rent.final_price}</CardInfo>
               {/* <CardInfo>Location: {rent.property.location}</CardInfo> */}
             </CardInfoContainer>
+            <RedButton
+              value={rent.id}
+              onClick={e => handleCancelation(e.target.value)}>
+              Cancelar
+            </RedButton>
           </CardContainer>
         )
       })}

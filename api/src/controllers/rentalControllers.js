@@ -62,6 +62,7 @@ const getRentalsByUser = async (req, res) => {
     const Rentals = await PropertyRental.findAll({
       where: {
         userId: userID,
+        status: "active",
       },
       include: [
         {
@@ -88,9 +89,52 @@ const getRentalsByUser = async (req, res) => {
   }
 }
 
+const cancelRental = async (req, res, next) => {
+  const rentID = req.body.rentID
+  console.log("rentID")
+  console.log(req.body.rentID)
+  console.log(rentID)
+
+  try {
+    // const Rental = await PropertyRental.findByPk(rentID)
+    const Rental = await PropertyRental.findAll({
+      where: {
+        id: rentID,
+      },
+    })
+    console.log(Rental[0])
+
+    if (!Rental) {
+      res.json({ status: 400, message: "This Rent doesnt exists" })
+    }
+    if (Rental[0].dataValues.status === "active") {
+      Rental[0].update({
+        status: "cancelled",
+      })
+      await Rental[0].save()
+
+      // jane.set({
+      //   name: "Ada",
+      //   favoriteColor: "blue"
+      // });
+      // // As above, the database still has "Jane" and "green"
+      // await jane.save();
+
+      res.json({ status: 200, message: "This property has been cancelled " })
+    } else if (Rental[0].dataValues.status === "cancelled") {
+      res.json({ status: 400, message: "This property is already cancelled " })
+    } else {
+      res.json({ status: 400, message: "Error" })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   addRental,
   getRental,
   getRentalsByUser,
   getAllRentals,
+  cancelRental,
 }
