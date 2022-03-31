@@ -20,25 +20,22 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  } ;
 `
 
 export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: 40% 45% 15%;
   background-color: white;
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: wrap; */
   width: ${({ width }) => width ?? "46%"};
 
-  /* justify-content: space-around; */
   width: 46%;
-  height: 300px;
+  height: fit-content;
   margin: 1rem 0.3rem;
   border-radius: 15px;
-  /* align-items: center;
-  justify-items: center; */
   box-shadow: 0 5px 5px rgba(0, e, e, 0.2);
   overflow: hidden;
 
@@ -48,8 +45,18 @@ export const CardContainer = styled.div`
     box-shadow: 0 0 10px #4b4b4b;
     cursor: pointer;
   }
+  @media screen and (max-width: 1080px) {
+    width: 80%;
+    margin-left: 10%;
+  }
+  @media screen and (max-width: 900px) {
+    width: 90%;
+    margin-left: 5%;
+  }
   @media screen and (max-width: 700px) {
     width: 100%;
+    margin: 0;
+    margin-top: 5%;
   } ;
 `
 
@@ -73,7 +80,7 @@ export const CardInfoContainer = styled.div`
   justify-content: space-between;
   border: 1px solid #d722fc;
   border-radius: 15px;
-  padding: 10px;
+  padding: 20px;
   margin: 5px;
 `
 
@@ -96,13 +103,28 @@ export const Image = styled.img`
   height: 100%;
   border-radius: 1rem;
 `
+export const RedButton = styled.button`
+  grid-column: 1/3;
+  grid-row: 3/4;
+  color: #ffffff;
+  text-justify: center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 40%;
+  height: 70%;
+  /* min-height: 30px; */
+  background-color: #cf222e;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+  margin-left: 30%;
+  margin-top: 1%;
+  margin-bottom: 3%;
+  transition: 0.2s;
 
-// discount: null
-// final_date: "2022-03-23T03:00:00.000Z"
-// final_price: 160
-// id: "8ef1f46a-1b52-4961-9a07-81a42467c2b1"
-// paymenthMethodId: 1
-// propertyID: "0ec259b5-1ca1-4cc7-956f-04b2c2106c08"
-// start_date: "2022-03-15T03:00:00.000Z"
-// status: "active"
-// userId: "3ae3b92c-af90-40b4-a5de-8d8f1bb4096e"
+  &:hover {
+    background-color: #ffffff;
+    color: #cf222e;
+  }
+`

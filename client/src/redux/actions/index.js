@@ -15,6 +15,7 @@ export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const GET_PROPERTY = "GET_PROPERTY"
 export const ADD_RENTAL = "ADD_RENTAL"
 export const GET_RENTAL = "GET_RENTAL"
+export const CANCEL_RENTAL = "CANCEL_RENTAL"
 
 export const GET_ALL_PAYMENT_METHODS = "GET_ALL_PAYMENT_METHODS"
 export const ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD"
@@ -35,12 +36,12 @@ export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
 export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 // ADMINISTRADOR
-export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
+export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
 
 const api = import.meta.env.VITE_APP_API_URL
 
 export function getAllEmails() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       let { data } = await axios.get(`${api}/notifications`, getHeaderToken())
 
@@ -347,6 +348,7 @@ export function addRental(form) {
         type: ADD_RENTAL,
         payload: response.data,
       })
+      console.log(response)
     } catch (error) {
       alert(
         (typeof error?.response?.data === "string"
@@ -414,7 +416,11 @@ export function deletePropertyFromMyProperties(ID) {
     const config = getHeaderToken()
     console.log(ID)
     try {
-      let response = await axios.put(`${api}/properties/deleteProperty`,{ID},config)
+      let response = await axios.put(
+        `${api}/properties/deleteProperty`,
+        { ID },
+        config,
+      )
       return dispatch({
         type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
         payload: response.data,
@@ -437,6 +443,21 @@ export function getRentalsByUser() {
       })
     } catch (error) {
       console.log(error.response)
+    }
+  }
+}
+
+export function cancelRental(rentID) {
+  console.log(rentID)
+  return async function (dispatch) {
+    try {
+      let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
+      console.log(response)
+      return dispatch({
+        type: CANCEL_RENTAL,
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
 }
