@@ -35,14 +35,24 @@ export default function ProfileInfo() {
   }
 
   const sendDataEdit = async () => {
-    const res = await axios.put(
-      `${api}/users`,
-      { data: dataUser },
-      getHeaderToken(),
-    )
-    console.log(res.data)
-    dispatch(loadUser())
-    setEditStatus(false)
+    if (
+      dataUser.name &&
+      dataUser.lastname &&
+      dataUser.country &&
+      dataUser.email &&
+      dataUser.account_number !== ""
+    ) {
+      const res = await axios.put(
+        `${api}/users`,
+        { data: dataUser },
+        getHeaderToken(),
+      )
+      console.log(res.data)
+      dispatch(loadUser())
+      setEditStatus(false)
+    } else {
+      console.log("Hay campos vacios")
+    }
   }
 
   useEffect(() => {
