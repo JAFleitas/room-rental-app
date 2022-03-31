@@ -5,6 +5,7 @@ import Emails from "../pages/AdminDashboard/Emails.jsx"
 import FormEmail from "../pages/AdminDashboard/FormEmail.jsx"
 import Users from "../pages/AdminDashboard/Users.jsx"
 import LeftBar from "../pages/AdminDashboard/LeftBar.jsx"
+import FormUser from "../pages/AdminDashboard/FormUser.jsx"
 
 const AdminRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AdminRoutes = () => {
         <Route path="emails/create" element={<FormEmail />} />
         <Route path="emails/resend/:id" element={<FormEmail resend={true} />} />
         <Route path="users" element={<Users />} />
+        <Route path="users/actions/:id" element={<FormUser />} />
       </Route>
         <Route path="*" element={<Error404 />} />
     </Routes>

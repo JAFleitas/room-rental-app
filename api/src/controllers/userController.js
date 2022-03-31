@@ -322,33 +322,20 @@ const getAllUsers = async (req, res, next) => {
 
 const blockUser = async (req, res, next) => {
   try {
-    const user = req.user
+    const { id } = req.params
 
-    if (!user) {
-      res.json({ message: "This User doesnt exists" })
-    }
-
-    try {
-      const blockedUser = await User.update(
-        {
-          blocked: true,
+    await User.update(
+      {
+        blocked: true,
+      },
+      {
+        where: {
+          id,
         },
-        {
-          where: {
-            id: user.id,
-          },
-        },
-      )
+      },
+    )
 
-      if (blockedUser) {
-        res.json({ message: "Acoount blocked correctly" })
-      } else {
-        res.status(400).json({ message: "Couldnt block User account" })
-      }
-    } catch (error) {
-      // console.log(error)
-      next(error)
-    }
+    res.json({ message: "Acunt blocked correctly" })
   } catch (err) {
     // console.log(err)
     next(err)
@@ -357,36 +344,74 @@ const blockUser = async (req, res, next) => {
 
 const unlockUser = async (req, res, next) => {
   try {
-    const user = req.user
+    const { id } = req.params
 
-    if (!user) {
-      res.json({ message: "This User doesnt exists" })
-    } else if (user.blocked === true) {
-      try {
-        const unlockedUser = await User.update(
-          {
-            blocked: false,
-          },
-          {
-            where: {
-              id: user.id,
-            },
-          },
-        )
-        if (unlockedUser) {
-          res.status(200).json({ message: "Acoount unlock correctly" })
-        } else {
-          res.status(400).json({ message: "Couldnt unlock User" })
-        }
-      } catch (error) {
-        console.log(error)
-        next(error)
-      }
-    } else if (user.blocked === false) {
-      res.json({ status: 400, message: "This account is not blocked" })
-    }
+    await User.update(
+      {
+        blocked: false,
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Acunt unlocked correctly" })
   } catch (err) {
-    console.log(err)
+    // console.log(err)
+    next(err)
+  }
+}
+
+const changeEnabledUser = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const { status = "disabled" } = req.body
+
+    await User.update(
+      {
+        status,
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Account change correctly" })
+  } catch (err) {
+    // console.log(err)
+    next(err)
+  }
+}
+
+const promoteToAdmin = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+
+    const isMatch = await bcrypt.compare(password, req.user.password)
+
+    // si la contraseña es incorreta
+    if (!isMatch) return next({ status: 403, message: "Failed" })
+
+
+    await User.update(
+      {
+        type: "SUBADMIN",
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Admin created" })
+  } catch (err) {
+    // console.log(err)
     next(err)
   }
 }
@@ -404,4 +429,6 @@ module.exports = {
   getAllUsers,
   blockUser,
   unlockUser,
+  changeEnabledUser,
+  promoteToAdmin,
 }

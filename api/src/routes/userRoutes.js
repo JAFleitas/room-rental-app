@@ -13,6 +13,8 @@ const {
   getAllUsers,
   blockUser,
   unlockUser,
+  changeEnabledUser,
+  promoteToAdmin,
 } = require("../controllers/userController")
 const adminAuth = require("../middlewares/adminAuth")
 
@@ -41,8 +43,12 @@ userRouter.put("/enableUser", auth, enableUser)
 
 userRouter.get("/all", auth, adminAuth, getAllUsers)
 
-userRouter.put("/blockUser", auth, adminAuth, blockUser)
+userRouter.put("/block/:id", auth, adminAuth, blockUser)
 
-userRouter.put("/unlockUser", auth, adminAuth, unlockUser)
+userRouter.put("/unlock/:id", auth, adminAuth, unlockUser)
+
+userRouter.put("/enable/:id", auth, adminAuth, changeEnabledUser)
+
+userRouter.put("/promote-admin/:id", auth, adminAuth, promoteToAdmin)
 
 module.exports = userRouter
