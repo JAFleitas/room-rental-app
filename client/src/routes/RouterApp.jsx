@@ -8,7 +8,7 @@ const RouterApp = () => {
   const admin = useSelector(state => state.user.type)
   const auth = useSelector(state => state.auth)
 
-  return admin && auth ? <AdminRoutes /> : <UserRoutes />
+  return auth && admin === "ADMIN" ? <AdminRoutes /> : <UserRoutes />
 }
 
 export default RouterApp
