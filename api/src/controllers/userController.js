@@ -249,7 +249,8 @@ const resetPassword = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
-  const { name, lastname, country, photo, account_number, email } = req.body
+  const { name, lastname, country, photo, account_number, email } =
+    req.body.data
 
   const newInfo = {}
 
@@ -261,9 +262,9 @@ const updateUser = async (req, res, next) => {
   if (email) newInfo.email = email
 
   try {
-    await User.update(newInfo, { where: { id: req.user.id } })
-
-    res.end()
+    await User.update(newInfo, { where: { id: req.user.id } }).then(resp => {
+      res.send("Update succesful")
+    })
   } catch (error) {
     next(error)
   }

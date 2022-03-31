@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const SubMenu = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,6 @@ export const SubMenu = styled.div`
     margin: 1rem;
     width: 90%;
   }
-
 `
 
 export const Label = styled.h3`
@@ -73,4 +72,18 @@ export const InfoContainer = styled.div`
 export const Info = styled.h3`
   font-size: 16px;
   margin: 10px 20px;
+`
+
+export const ButtonEdit = styled.div`
+  background-color: ${props => (props.bgColor ? "#F1564E" : "#579AF1")};
+  text-align: right;
+  padding: 5px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+
+  :hover {
+    background-color: ${props => (props.bgColor ? "#F0241A" : "#267EF0")};
+  }
 `
