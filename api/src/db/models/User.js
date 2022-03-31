@@ -68,7 +68,7 @@ module.exports = sequelize => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       required: true,
-    }
+    },
   })
 
   User.associate = models => {
@@ -81,6 +81,16 @@ module.exports = sequelize => {
     })
 
     User.hasMany(models.Property, {
+      sourceKey: "id",
+      foreignKey: "userID",
+    })
+    
+    User.hasMany(models.PropertyRental, {
+      sourceKey: "id",
+      foreignKey: "userID",
+    })
+
+    User.hasMany(models.PropertyRental, {
       sourceKey: "id",
       foreignKey: "userId",
     })

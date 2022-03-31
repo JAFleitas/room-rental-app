@@ -32,8 +32,43 @@ export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 export const GET_PROPERTIES_BY_USER_ID = "GET_PROPERTIES_BY_USER_ID"
 export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
   "DELETE_PROPERTY_FROM_MY_PROPERTIES"
+export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
+
+// ADMINISTRADOR
+export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
+export const GET_ALL_USERS = "GET_ALL_USERS";
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function getAllEmails() {
+  return async function(dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/notifications`, getHeaderToken())
+
+      return dispatch({
+        type: GET_ALL_EMAILS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function getAllUsers() {
+  return async function(dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/users/all`, getHeaderToken())
+
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
 
 export function getAllPaymentMethod() {
   return async function (dispatch) {
@@ -410,10 +445,28 @@ export function deletePropertyFromMyProperties(ID) {
   }
 }
 
+
 export const FORM_PROPERTY_RENTAL = "FORM_PROPERTY_RENTAL"
 export function actionAddFormRentalProperty(payload) {
   return {
     type: FORM_PROPERTY_RENTAL,
     payload,
+  }
+}
+
+export function getRentalsByUser() {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.get(`${api}/rentals/getRentalsByUser`, config)
+      console.log(response)
+      return dispatch({
+        type: GET_RENTALS_BY_USER,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+
   }
 }

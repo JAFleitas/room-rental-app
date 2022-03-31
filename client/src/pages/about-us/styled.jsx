@@ -8,24 +8,71 @@ export const ContainerDiv = styled.div`
   margin-bottom: 3.5vh;
   padding: 10px;
   border-radius: 12px;
-  border-radius: 50px;
-  border-radius: 50px;
-  background: linear-gradient(145deg, #f88aff, #d174e4);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #dfb2ff, #bb95e6);
 
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   overflow: hidden;
+  /* @media (max-width: 1090px) {
+    margin-left: 10%;
+  } */
+  @media (max-width: 740px) {
+    width: 95%;
+    margin-left: 2.5%;
+  }
 `
 export const TeamMate = styled.div`
-  height: 35%;
-  width: 28%;
+  width: 30%;
   margin: 15px;
   border-radius: 12px;
-  background: linear-gradient(145deg, #9703b5, #b403d7);
+  padding: 10px;
+  background: rgb(232, 129, 253);
+  background: linear-gradient(
+    135deg,
+    rgba(232, 129, 253, 1) 0%,
+    rgba(230, 113, 253, 1) 46%,
+    rgba(227, 97, 253, 1) 100%
+  );
   display: grid;
   grid-template-rows: 35% 35% 30%;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 50% 25% 25%;
+
+  @media (max-width: 1090px) {
+    width: 45%;
+  }
+  @media (max-width: 740px) {
+    width: calc(50% - 15px);
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+`
+
+export const LastTeamMate = styled.div`
+  width: 30%;
+  margin: 15px;
+  border-radius: 12px;
+  padding: 10px;
+  background: rgb(232, 129, 253);
+  background: linear-gradient(
+    135deg,
+    rgba(232, 129, 253, 1) 0%,
+    rgba(230, 113, 253, 1) 46%,
+    rgba(227, 97, 253, 1) 100%
+  );
+  display: grid;
+  grid-template-rows: 35% 35% 30%;
+  grid-template-columns: 50% 25% 25%;
+
+  @media (max-width: 1090px) {
+    width: 45%;
+  }
+  @media (max-width: 740px) {
+    width: calc(60% - 15px);
+    margin-left: 10px;
+    margin-right: 5px;
+  }
 `
 
 export const TeamMateImage = styled.img`
@@ -45,31 +92,42 @@ export const Name = styled.h1`
   font-size: 120%;
   font-weight: 600;
   width: 95%;
-  height: 100%;
-  margin-top: 2%;
+  height: fit-content;
+  margin-top: 10%;
+  margin-bottom: 20%;
+
   margin-right: 5%;
   padding: 3%;
-  padding-left: 5%;
-  padding-bottom: 15%;
-
+  padding-left: 3%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
   color: #ffffff;
   border-radius: 11px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: rgb(230, 113, 253);
-
-  grid-row: 1/2;
-  grid-column: 2/3;
+  grid-row: 1/3;
+  grid-column: 2/4;
+  background-color: #39005b;
+  /* border: 4px solid #650279; */
+  @media (max-width: 740px) {
+    font-size: 95%;
+  }
 `
 
 export const LinkedIn = styled.a`
   text-decoration: none;
   font-size: 200%;
   color: #39005b;
-  grid-row: 2/3;
-  grid-column: 2/3;
-  margin-left: 40%;
-  margin-top: 10%;
+  grid-row: 3/4;
+  grid-column: 3/4;
+  margin-left: 20%;
+  /* margin-top: 5%; */
+  padding: 5px;
+
+  @media (max-width: 740px) {
+    margin-top: 60%;
+    grid-row: 2/4;
+  }
+
   &:hover {
     color: white;
   }
@@ -81,8 +139,15 @@ export const GitHub = styled.a`
   color: #39005b;
   grid-row: 3/4;
   grid-column: 2/3;
-  margin-left: 40%;
-  margin-top: 5%;
+  margin-left: 20%;
+  /* margin-top: 5%; */
+  padding: 5px;
+  /* padding-bottom: 15px; */
+
+  @media (max-width: 740px) {
+    margin-top: 60%;
+    grid-row: 2/4;
+  }
 
   &:hover {
     color: white;
