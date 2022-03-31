@@ -32,7 +32,6 @@ export default function Details() {
 
   //dispatch
   const dispatch = useDispatch()
-  // console.log(propertyDetails)
   useEffect(() => {
     dispatch(getPropertyById(id))
     setLoading(false)

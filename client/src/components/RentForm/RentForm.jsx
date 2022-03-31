@@ -21,30 +21,32 @@ import {
 import { DayPicker } from "react-day-picker"
 import "react-day-picker/dist/style.css"
 import styles from "./Calendar.module.css"
-import { addRental, getRental } from "../../redux/actions/index"
+import {
+  actionAddFormRentalProperty,
+  addRental,
+  getRental,
+} from "../../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useParams } from "react-router-dom"
 
-
 export default function RentForm(props) {
-  const [monthsInCalendary, setMonthsInCalendary]=useState(2)
-  const mediaqueryList = window.matchMedia("(min-width: 705px)");
-  mediaqueryList.addListener( function(EventoMediaQueryList) {
-    if(EventoMediaQueryList.matches) {
+  const [monthsInCalendary, setMonthsInCalendary] = useState(2)
+  const mediaqueryList = window.matchMedia("(min-width: 705px)")
+  mediaqueryList.addListener(function (EventoMediaQueryList) {
+    if (EventoMediaQueryList.matches) {
       setMonthsInCalendary(2)
-    }else{
-
+    } else {
       setMonthsInCalendary(1)
-    };
-});
+    }
+  })
   const { id } = useParams()
   const propertyID = { propertyID: id }
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getRental(propertyID))
-  }, [dispatch])
+  }, [])
 
   props = props.props
 
@@ -52,17 +54,12 @@ export default function RentForm(props) {
 
   const rentals = useSelector(state => state.propertyRentals.data)
 
-  
-
   const [dates, setDates] = useState({
     from: undefined,
     to: undefined,
   })
 
-
   const [payMethod, setPayMethod] = useState()
-
-
 
   function handleResetClick() {
     setDates({
@@ -91,6 +88,9 @@ export default function RentForm(props) {
     return
   }
 
+  const auth = useSelector(state => state.auth)
+  const navigate = useNavigate()
+
   function handleClick() {
     const finalPrice = restaFechas(dates?.from, dates?.to) * props.price
     if (dates?.from === undefined || dates?.to === undefined) {
@@ -115,8 +115,14 @@ export default function RentForm(props) {
       final_date: dates.to,
       paymenthMethodId: payMethod,
     }
-
-    dispatch(addRental(form))
+    if (auth) {
+      dispatch(actionAddFormRentalProperty(form))
+      navigate("/pay-reservation")
+    }
+    if (!auth) {
+      dispatch(actionAddFormRentalProperty(form))
+      navigate("/login")
+    }
 
     // setDiasOcupados([
     //   ...diasOcupados,
@@ -173,7 +179,7 @@ export default function RentForm(props) {
               selected={dates}
               onSelect={setDates}
               hidden={{
-                from: new Date(2000,5,10),
+                from: new Date(2000, 5, 10),
                 to: new Date(),
               }}
               disabled={
@@ -192,7 +198,8 @@ export default function RentForm(props) {
             />
             {restaFechas(dates?.from, dates?.to) >= 1 ? (
               <h3 className={styles.Total}>
-                El total es: {restaFechas(dates?.from, dates?.to) * props.price}$
+                El total es: {restaFechas(dates?.from, dates?.to) * props.price}
+                $
               </h3>
             ) : (
               ""
