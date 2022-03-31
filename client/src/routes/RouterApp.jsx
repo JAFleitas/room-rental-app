@@ -11,10 +11,14 @@ import Login from "../components/DropDown/Login.jsx"
 import FormPaymentMethod from "../pages/profile/Components/FormPaymentMethod/FormPaymentMethod.jsx"
 import Forgotpassword from "../pages/ForgotPassword/ForgotPassword.jsx"
 import Help from "../pages/Help/Help.jsx"
+
+import PayPalPay from "../components/paypalButton/paypal.jsx"
+
 import { EditProperty } from "../components/formAddProperty/editProperty.jsx"
 import Emails from "../pages/AdminDashboard/Emails.jsx"
 import FormEmail from "../pages/AdminDashboard/FormEmail.jsx"
 import Users from "../pages/AdminDashboard/Users.jsx"
+
 
 const RouterApp = () => {
   return (
@@ -34,13 +38,17 @@ const RouterApp = () => {
       />
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/help" element={<Help />} />
+
+
       <Route path="/dashboard">
         <Route path="emails" element={<Emails />} />
         <Route path="emails/create" element={<FormEmail />} />
         <Route path="emails/resend/:id" element={<FormEmail resend={true} />} />
         <Route path="users" element={<Users />} />
       </Route>
+
       <Route path="/*" element={<Error404 />} />
+      <Route path="/pay-reservation" element={<PayPalPay />} />
       {/* <Route exact path="favorites" element={<Favorites />}></Route> */}
     </Routes>
   )

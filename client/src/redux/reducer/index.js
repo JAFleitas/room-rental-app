@@ -24,10 +24,14 @@ import {
   GET_PROPERTIES_BY_USER_ID,
   DELETE_PROPERTY_FROM_MY_PROPERTIES,
   GET_RENTAL,
+
+  FORM_PROPERTY_RENTAL,
+
   GET_ALL_EMAILS,
   GET_RENTALS_BY_USER,
   CANCEL_RENTAL,
   GET_ALL_USERS,
+
 } from "../actions"
 
 const initialState = {
@@ -54,6 +58,12 @@ const initialState = {
   services: [],
   coordinates: [],
   propertyRentals: [],
+
+  listFavorites: {},
+  paymenthMethods: [],
+
+  formRentalProperty: null,
+
   userRentals: [],
   listFavorites: {},
   paymenthMethods: [],
@@ -62,6 +72,7 @@ const initialState = {
     users: null,
     orders: null,
   },
+
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -71,7 +82,9 @@ function rootReducer(state = initialState, { type, payload }) {
     case GET_ALL_EMAILS:
       return { ...state, admin: { ...state.admin, emails: payload } }
     case GET_ALL_PAYMENT_METHODS:
+
       return { ...state, paymenthMethods: payload }
+
     case ADD_PAYMENT_METHOD:
       return { ...state, paymenthMethods: [...state.paymenthMethods, payload] }
     case DELETE_PAYMENT_METHOD:
@@ -202,10 +215,17 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         propertyRentals: payload,
       }
+
+    case FORM_PROPERTY_RENTAL:
+      return {
+        ...state,
+        formRentalProperty: payload,
+      }
     case GET_RENTALS_BY_USER:
       return {
         ...state,
         userRentals: payload,
+
       }
     case CANCEL_RENTAL:
       return {

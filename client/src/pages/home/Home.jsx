@@ -11,16 +11,17 @@ import {
 } from "./styled"
 import design from "../../assets/designWelcome.png"
 
-
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { actionLoginWithGoogle } from "../../redux/actions"
 export default function Home() {
   const { isAuthenticated, user } = useAuth0()
   const dispatch = useDispatch()
+  const USER = useSelector(state => state.user)
 
   useEffect(() => {
+    if (USER?.id) return
     if (isAuthenticated) {
       dispatch(
         actionLoginWithGoogle({

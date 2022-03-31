@@ -16,7 +16,7 @@ module.exports = sequelize => {
       },
       paymenthMethodId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       start_date: {
         //  YYYY-MM-DD

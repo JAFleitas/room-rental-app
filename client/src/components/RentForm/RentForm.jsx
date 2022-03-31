@@ -21,9 +21,13 @@ import {
 import { DayPicker } from "react-day-picker"
 import "react-day-picker/dist/style.css"
 import styles from "./Calendar.module.css"
-import { addRental, getRental } from "../../redux/actions/index"
+import {
+  actionAddFormRentalProperty,
+  addRental,
+  getRental,
+} from "../../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useParams } from "react-router-dom"
 
@@ -42,7 +46,7 @@ export default function RentForm(props) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getRental(propertyID))
-  }, [dispatch])
+  }, [])
 
   props = props.props
 
@@ -84,6 +88,9 @@ export default function RentForm(props) {
     return
   }
 
+  const auth = useSelector(state => state.auth)
+  const navigate = useNavigate()
+
   function handleClick() {
     const finalPrice = restaFechas(dates?.from, dates?.to) * props.price
     if (
@@ -102,8 +109,6 @@ export default function RentForm(props) {
         paymenthMethodId: payMethod,
       }
 
-      dispatch(addRental(form))
-      alert("Rent Created")
     }
     // '01/02/2022' '->' '2022/02/01';
     // function convertDateFormat(string) {
@@ -118,8 +123,26 @@ export default function RentForm(props) {
     // console.log(inicio)
     // console.log(end)
 
+
     // .then(alert("Renta creada"))
     // .catch(alert("Hubo un problema..."))
+
+    let form = {
+      propertyID: props.id,
+      final_price: finalPrice,
+      start_date: dates.from,
+      final_date: dates.to,
+      paymenthMethodId: payMethod,
+    }
+    if (auth) {
+      dispatch(actionAddFormRentalProperty(form))
+      navigate("/pay-reservation")
+    }
+    if (!auth) {
+      dispatch(actionAddFormRentalProperty(form))
+      navigate("/login")
+    }
+
 
     // setDiasOcupados([
     //   ...diasOcupados,

@@ -417,7 +417,7 @@ export function actionLoginWithGoogle(data) {
 
 export const getRental = propertyID => async dispatch => {
   try {
-    let response = await axios.post(`${api}/rentals/getRental`, propertyID)
+    let response = await axios.get(`${api}/rentals/getRental`, propertyID)
     dispatch({
       type: GET_RENTAL,
 
@@ -448,6 +448,15 @@ export function deletePropertyFromMyProperties(ID) {
   }
 }
 
+
+export const FORM_PROPERTY_RENTAL = "FORM_PROPERTY_RENTAL"
+export function actionAddFormRentalProperty(payload) {
+  return {
+    type: FORM_PROPERTY_RENTAL,
+    payload,
+  }
+}
+
 export function getRentalsByUser() {
   return async function (dispatch) {
     const config = getHeaderToken()
@@ -461,6 +470,7 @@ export function getRentalsByUser() {
     } catch (error) {
       console.log(error.response)
     }
+
   }
 }
 
