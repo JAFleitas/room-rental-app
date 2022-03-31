@@ -1,10 +1,10 @@
+/* eslint-disable */
 const { PropertyRental } = require("../db/index.js")
 
 const addRental = async (req, res) => {
   const userID = req.user.id
-  const { propertyID, final_price, start_date, final_date, paymenthMethodId } =
-    req.body
-  if (userID && final_price && final_date && start_date && paymenthMethodId) {
+  const { propertyID, final_price, start_date, final_date } = req.body
+  if (userID && final_price && final_date && start_date) {
     if (userID) {
       const newRental = await PropertyRental.create({
         userID,
@@ -12,7 +12,6 @@ const addRental = async (req, res) => {
         final_price,
         start_date,
         final_date,
-        paymenthMethodId,
       })
       if (newRental) {
         res.status(201).json({ message: "Created new rental", data: newRental })
