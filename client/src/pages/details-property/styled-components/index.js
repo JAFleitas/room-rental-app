@@ -91,7 +91,7 @@ export const ServicesSt = styled.div`
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
   color: #666666;

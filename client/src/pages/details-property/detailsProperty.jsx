@@ -72,7 +72,16 @@ export default function Details() {
 
       <DescriptionContainer>
         <h1>What services does the place offer?</h1>
-        <ServicesSt></ServicesSt>
+
+        {property.services ? (
+          property.services.map(e => (
+            <ServicesSt>
+              {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
+            </ServicesSt>
+          ))
+        ) : (
+          <p>This property dont have services</p>
+        )}
       </DescriptionContainer>
 
       <DescriptionContainer>
