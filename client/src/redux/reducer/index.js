@@ -219,7 +219,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         formRentalProperty: payload,
-
+      }
     case GET_RENTALS_BY_USER:
       return {
         ...state,
