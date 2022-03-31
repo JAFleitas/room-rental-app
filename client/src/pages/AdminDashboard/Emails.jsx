@@ -11,6 +11,7 @@ import TablePagination from "@mui/material/TablePagination"
 import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
+import styles from "./styles.module.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -77,7 +78,7 @@ export default function Emails() {
 
   return (
     <div style={{ margin: "1rem" }}>
-      <h2>Promotionals Emails</h2>
+      <h2 className={styles.title}>Promotionals Emails</h2>
       <div
         style={{
           display: "flex",
@@ -231,14 +232,14 @@ export default function Emails() {
                     ))
                 ) : (
                   <StyledTableRow>
-                    <StyledTableCell>
+                    <StyledTableCell colSpan={"7"}>
                       Aún no ha enviado emails promocionales
                     </StyledTableCell>
                   </StyledTableRow>
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell>Loading...</StyledTableCell>
+                  <StyledTableCell colSpan={"7"}>Loading...</StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>

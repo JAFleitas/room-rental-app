@@ -11,6 +11,7 @@ import TablePagination from "@mui/material/TablePagination"
 import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
+import styles from "./styles.module.css"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -78,24 +79,7 @@ export default function Users() {
 
   return (
     <div style={{ margin: "1rem" }}>
-      <h2>Users</h2>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-        }}>
-        <button
-          style={{
-            backgroundColor: "#64075cdd",
-            color: "white",
-            padding: "5px",
-            borderRadius: "7px",
-            margin: "1rem",
-          }}
-          onClick={() => navigate("create")}>
-          Create subadmin
-        </button>
-      </div>
+      <h2 className={styles.title}>Users</h2>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 500 }}>
           <Table sx={{ minWidth: 700 }} stickyHeader aria-label="sticky table">
@@ -207,6 +191,7 @@ export default function Users() {
                     </span>
                   </button>
                 </StyledTableCell>
+                <StyledTableCell>Actions</StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
@@ -225,17 +210,6 @@ export default function Users() {
                             src={row.photo}
                             alt={row.name}
                           />
-                          <button
-                            style={{
-                              backgroundColor: "#64075cdd",
-                              color: "white",
-                              padding: "3px",
-                              borderRadius: "6px",
-                              marginTop: "5px",
-                            }}
-                            onClick={() => navigate(`resend/${row.id}`)}>
-                            Promote to admin
-                          </button>
                         </StyledTableCell>
                         <StyledTableCell>{row.name}</StyledTableCell>
                         <StyledTableCell>{row.lastname}</StyledTableCell>
@@ -245,19 +219,34 @@ export default function Users() {
                         <StyledTableCell>
                           {row.blocked ? "T" : "F"}
                         </StyledTableCell>
-                        <StyledTableCell>{row.createdAt.split("T")[0]}</StyledTableCell>
+                        <StyledTableCell>
+                          {row.createdAt.split("T")[0]}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <button
+                            style={{
+                              backgroundColor: "#64075cdd",
+                              color: "white",
+                              padding: "5px",
+                              borderRadius: "7px",
+                              marginTop: "5px",
+                            }}
+                            onClick={() => navigate(`actions/${row.id}`)}>
+                            User actions
+                          </button>
+                        </StyledTableCell>
                       </StyledTableRow>
                     ))
                 ) : (
                   <StyledTableRow>
-                    <StyledTableCell>
+                    <StyledTableCell colSpan={"9"}>
                       Aún no tiene usuarios
                     </StyledTableCell>
                   </StyledTableRow>
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell>Loading...</StyledTableCell>
+                  <StyledTableCell colSpan={"9"}>Loading...</StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>
