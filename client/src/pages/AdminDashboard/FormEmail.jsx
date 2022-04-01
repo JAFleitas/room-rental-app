@@ -32,9 +32,13 @@ const FormEmail = ({ resend = false }) => {
 
     // POST /emails
     try {
+      const {subject, title, message} = form;
+      console.log({form});
+      if(!subject || !title || !message) return alert("Subject, title and message fields are required");
       const { data } = await axios.post(`${api}/notifications`, form, getHeaderToken())
       console.log({data});
       setForm(initialForm);
+      alert("Promotional email send successfully");
     } catch (error) {
       console.log({ error: error.response?.data })
       alert("Something went wrong :(")
@@ -79,7 +83,7 @@ const FormEmail = ({ resend = false }) => {
           onChange={handleChange}
         />
         <label>Segment</label>
-        <select>
+        <select onChange={handleChange} name="segment">
           {options.map(opt => (
             <option value={opt} key={opt}>
               {opt}

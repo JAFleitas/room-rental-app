@@ -18,12 +18,14 @@ const SubFormPromoteUser = ({ userId }) => {
 
     // PUT /users/enable/:id
     try {
+      if (!password) return alert("Complete password field");
       const { data } = await axios.put(
         `${api}/users/promote-admin/${userId}`,
         { password },
         getHeaderToken(),
       )
       console.log({ data })
+      setPassword("");
       alert(`New admin created`)
     } catch (error) {
       console.log({ error: error.response?.data })
@@ -71,9 +73,10 @@ const FormUser = () => {
 
     // POST /emails
     try {
-      const { data } = await axios.post(`${api}/forgot-password`, {
+      const { data } = await axios.post(`${api}/users/forgot-password`, {
         email: user.email,
       })
+      alert("Password changed successfully, it will be sent to email's user");
       console.log({ data })
     } catch (error) {
       console.log({ error: error.response?.data })
