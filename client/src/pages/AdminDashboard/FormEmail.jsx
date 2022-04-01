@@ -33,7 +33,7 @@ const FormEmail = ({ resend = false }) => {
     // POST /emails
     try {
       const {subject, title, message} = form;
-      console.log({form});
+      // console.log({form});
       if(!subject || !title || !message) return alert("Subject, title and message fields are required");
       const { data } = await axios.post(`${api}/notifications`, form, getHeaderToken())
       console.log({data});
