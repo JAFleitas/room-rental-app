@@ -41,8 +41,6 @@ export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
 export const GET_ALL_USERS = "GET_ALL_USERS"
 
 
-export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
-export const GET_ALL_USERS = "GET_ALL_USERS";
 
 
 const api = import.meta.env.VITE_APP_API_URL
