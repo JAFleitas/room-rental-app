@@ -68,6 +68,7 @@ function PropertyCard(props) {
         <Rating>
           <AiFillStar color="yellow" fontSize={"1.5rem"} />
           {props.rating}
+          {props.rating % 1 === 0 ? ".0" : null}
         </Rating>
       </DivPyR>
       <Heart id={props.id} liked={liked} />

@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault()
     setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
-
+  const form = useSelector(state => state.formRentalProperty)
   function handleSubmitLogIn(e) {
     e.preventDefault()
 
@@ -36,6 +36,13 @@ const Login = () => {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
+
+      if (form.propertyID) {
+        navigate("/pay-reservation")
+      } else {
+        navigate("/")
+      }
+
     }
   }
 
@@ -68,6 +75,9 @@ const Login = () => {
             onChange={handleChangeLogIn}
             placeholder="Password"></Input>
         </Field>
+        <RedButton onClick={() => navigate("/forgot-password")}>
+          I forgot my password
+        </RedButton>
         <SendButton
           disabled={!logInForm.email || !logInForm.password}
           onClick={e => handleSubmitLogIn(e)}>
@@ -75,9 +85,8 @@ const Login = () => {
         </SendButton>
         <LoginWithGoogle />
         <LoginWithFacebook />
-        <RedButton onClick={() => navigate("/forgot-password")}>
-          I forgot my password
-        </RedButton>
+
+        <SendButton signup={true}>Sign up</SendButton>
       </Form>
     </Container>
   )

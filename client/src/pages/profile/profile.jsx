@@ -6,6 +6,9 @@ import {
   ContentPhoto,
   ChangeImage,
   InputInvisible,
+  NotLogIn,
+  Message,
+  LinkLogIn,
 } from "./styled"
 import Routes from "./MenuRoutes/MenuRoutes"
 import { Link } from "react-router-dom"
@@ -117,10 +120,10 @@ export default function Profile() {
           <Routes />
         </>
       ) : (
-        <div>
-          <p>Aún no tiene una cuenta</p>
-          <Link to="/register">Create account</Link>
-        </div>
+        <NotLogIn>
+          <Message>Aún no tiene una cuenta</Message>
+          <LinkLogIn to="/register">Create account</LinkLogIn>
+        </NotLogIn>
       )}
     </PageContainer>
   )

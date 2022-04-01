@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 export const PageContainer = styled.div`
@@ -28,9 +29,10 @@ export const MenuContainer = styled.div`
   );
   border-radius: 15px;
   flex-direction: column;
+  align-content: center;
 
   @media (max-width: 720px) {
-    width: 90%;
+    width: 80%;
     margin: 1rem;
   }
 `
@@ -120,14 +122,19 @@ export const ContentPhoto = styled.div`
     props.photo
       ? props.photo
       : "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"});
-  margin: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
   height: 200px;
   width: 200px;
   border-radius: 50%;
   background-position: center;
   background-size: cover;
+  margin-left: 40px;
+  margin-right: 40px;
+
   position: relative;
-  left: 20px;
+  /* left: 20px; */
 `
 
 export const ChangeImage = styled.div`
@@ -157,4 +164,54 @@ export const InputInvisible = styled.input`
   width: 100%;
   height: 100%;
   font-size: 0;
+`
+
+export const NotLogIn = styled.div`
+  width: 50%;
+  height: 257.5px;
+  margin: 20px;
+  margin-left: 25%;
+  background: rgb(226, 200, 255);
+  background: linear-gradient(
+    330deg,
+    rgba(226, 200, 255, 1) 17%,
+    rgba(233, 213, 255, 1) 39%,
+    rgba(239, 226, 255, 1) 66%,
+    rgba(244, 235, 255, 1) 100%
+  );
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 900px) {
+    width: 80%;
+    /* margin-bottom: 10%; */
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+`
+
+export const Message = styled.p`
+  text-align: center;
+  font-size: 34px;
+`
+export const LinkLogIn = styled(Link)`
+  width: 40%;
+  align-self: center;
+  text-align: center;
+  font-size: 24px;
+  background-color: #d722fc;
+  border-radius: 15px;
+  padding: 8px;
+  margin: 10px;
+  &:hover {
+    border-radius: 16.5px;
+    background: linear-gradient(145deg, #c21fe3, #e624ff);
+  }
+  &:focus {
+    border-radius: 18px;
+    background: #d722fc;
+    box-shadow: inset 5px 5px 10px #b71dd6, inset -5px -5px 10px #f727ff;
+  }
 `

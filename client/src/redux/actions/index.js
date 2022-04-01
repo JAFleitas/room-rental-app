@@ -37,10 +37,25 @@ export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 // ADMINISTRADOR
 
-export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
-export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
+export const GET_ALL_USERS = "GET_ALL_USERS"
+export const ADMIN_BLOCK_USER = "ADMIN_BLOCK_USER"
+export const ADMIN_CHANGE_ENABLE_USER = "ADMIN_CHANGE_ENABLE_USER"
+export const CREATE_ADMIN = "CREATE_ADMIN"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function createAdmin(userId) {
+  return { type: CREATE_ADMIN, payload: { id: userId, type: "SUBADMIN" } }
+}
+
+export function blockUser(userId, blocked) {
+  return { type: ADMIN_BLOCK_USER, payload: { id: userId, blocked } }
+}
+
+export function changeEnableUser(userId, status) {
+  return { type: ADMIN_CHANGE_ENABLE_USER, payload: { id: userId, status } }
+}
 
 export function getAllEmails() {
   return async function (dispatch) {
@@ -58,7 +73,7 @@ export function getAllEmails() {
 }
 
 export function getAllUsers() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       let { data } = await axios.get(`${api}/users/all`, getHeaderToken())
 
@@ -417,7 +432,7 @@ export function actionLoginWithGoogle(data) {
 
 export const getRental = propertyID => async dispatch => {
   try {
-    let response = await axios.get(`${api}/rentals/getRental`, propertyID)
+    let response = await axios.post(`${api}/rentals/getRental`, propertyID)
     dispatch({
       type: GET_RENTAL,
 
@@ -448,7 +463,6 @@ export function deletePropertyFromMyProperties(ID) {
   }
 }
 
-
 export const FORM_PROPERTY_RENTAL = "FORM_PROPERTY_RENTAL"
 export function actionAddFormRentalProperty(payload) {
   return {
@@ -470,7 +484,6 @@ export function getRentalsByUser() {
     } catch (error) {
       console.log(error.response)
     }
-
   }
 }
 
@@ -480,6 +493,9 @@ export function cancelRental(rentID) {
     try {
       let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
       console.log(response)
+      if (response.data.status === 401) {
+        alert(response.data.message)
+      }
       return dispatch({
         type: CANCEL_RENTAL,
       })

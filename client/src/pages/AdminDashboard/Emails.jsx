@@ -227,13 +227,18 @@ export default function Emails() {
                               padding: "5px",
                               borderRadius: "7px",
                               marginTop: "5px",
+                              display: "block",
                             }}
                             onClick={() => navigate(`resend/${row.id}`)}>
                             Resend
                           </button>
                         </StyledTableCell>
                         <StyledTableCell>{row.title}</StyledTableCell>
-                        <StyledTableCell>{row.message}</StyledTableCell>
+                        <StyledTableCell>
+                          {row.message?.length > 170
+                            ? row.message.substring(0, 70) + "..." + row.message.substring(row.message.length - 10, )
+                            : row.message}
+                        </StyledTableCell>
                         <StyledTableCell>
                           <img style={{ maxWidth: "130px" }} src={row.image} />
                         </StyledTableCell>

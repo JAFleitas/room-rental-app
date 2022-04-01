@@ -84,10 +84,10 @@ module.exports = sequelize => {
       sourceKey: "id",
       foreignKey: "userID",
     })
-    
+    // Esto se usa y funciona [NO TOCAR]
     User.hasMany(models.PropertyRental, {
       sourceKey: "id",
-      foreignKey: "userID",
+      foreignKey: "userId",
     })
   }
 }

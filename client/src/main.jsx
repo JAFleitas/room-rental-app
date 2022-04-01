@@ -4,10 +4,11 @@ import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import { Auth0Provider } from "@auth0/auth0-react"
 
+import { PersistGate } from "redux-persist/integration/react"
 import "./index.css"
 import App from "./App"
 
-import { store } from "./redux/store"
+import { store, persistor } from "./redux/store"
 import { Globalcss } from "./styles/global.css"
 
 const domain = import.meta.env.VITE_APP_AUTH0_DOMAIN
@@ -22,7 +23,9 @@ ReactDOM.render(
         redirectUri={window.location.origin}>
         <Globalcss />
         <BrowserRouter>
-          <App />
+          <PersistGate persistor={persistor}>
+            <App />
+          </PersistGate>
         </BrowserRouter>
       </Auth0Provider>
     </Provider>

@@ -159,7 +159,7 @@ export const ButtonGoogle = styled.button`
   }
 `
 export const SendButton = styled.button`
-  color: #ffffff;
+  color: ${({ signup }) => (signup ? "#000000" : "#ffffff")};
   justify-self: center;
   align-self: center;
   text-justify: center;
@@ -167,7 +167,8 @@ export const SendButton = styled.button`
   box-shadow: rgba(27, 31, 36, 0.1);
   width: 90%;
   height: 30px;
-  background-color: ${({ disabled }) => (disabled ? "#404040" : "#2da44e")};
+  background-color: ${({ disabled, signup }) =>
+    disabled ? "#404040" : signup ? "#e2c8ff" : "#2da44e"};
   font-size: large;
   font-weight: normal;
   font-family: sans-serif;
@@ -175,7 +176,8 @@ export const SendButton = styled.button`
   transition: 0.2s;
 
   &:hover {
-    background-color: ${({ disabled }) => (disabled ? "#404040" : "#2c974b")};
+    background-color: ${({ disabled, signup }) =>
+      disabled ? "#404040" : signup ? "#e2c8ffcc" : "#2c974b"};
   }
 `
 export const RedButton = styled.button`
