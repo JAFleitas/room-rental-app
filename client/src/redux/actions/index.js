@@ -35,13 +35,13 @@ export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
 export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 // ADMINISTRADOR
-export const GET_ALL_EMAILS = "GET_ALL_EMAILS";
-export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
+export const GET_ALL_USERS = "GET_ALL_USERS"
 
 const api = import.meta.env.VITE_APP_API_URL
 
 export function getAllEmails() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       let { data } = await axios.get(`${api}/notifications`, getHeaderToken())
 
@@ -56,7 +56,7 @@ export function getAllEmails() {
 }
 
 export function getAllUsers() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       let { data } = await axios.get(`${api}/users/all`, getHeaderToken())
 
@@ -414,7 +414,7 @@ export function actionLoginWithGoogle(data) {
 
 export const getRental = propertyID => async dispatch => {
   try {
-    let response = await axios.get(`${api}/rentals/getRental`, propertyID)
+    let response = await axios.post(`${api}/rentals/getRental`, propertyID)
     dispatch({
       type: GET_RENTAL,
 
@@ -445,7 +445,6 @@ export function deletePropertyFromMyProperties(ID) {
   }
 }
 
-
 export const FORM_PROPERTY_RENTAL = "FORM_PROPERTY_RENTAL"
 export function actionAddFormRentalProperty(payload) {
   return {
@@ -467,6 +466,5 @@ export function getRentalsByUser() {
     } catch (error) {
       console.log(error.response)
     }
-
   }
 }

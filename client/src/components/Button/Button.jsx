@@ -26,7 +26,7 @@ export default function Button() {
         <ImageContainer>
           <ProfileImage src={user && user.picture} />
         </ImageContainer>
-      ) : USER.picture ? (
+      ) : USER.photo ? (
         <ImageContainer>
           <ProfileImage src={USER && USER.photo} />
         </ImageContainer>

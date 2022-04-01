@@ -23,7 +23,6 @@ import "react-day-picker/dist/style.css"
 import styles from "./Calendar.module.css"
 import {
   actionAddFormRentalProperty,
-  addRental,
   getRental,
 } from "../../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux"
@@ -42,11 +41,10 @@ export default function RentForm(props) {
     }
   })
   const { id } = useParams()
-  const propertyID = { propertyID: id }
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getRental(propertyID))
-  }, [])
+    dispatch(getRental({ propertyID: id }))
+  }, [dispatch])
 
   props = props.props
 

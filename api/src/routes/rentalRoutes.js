@@ -14,7 +14,7 @@ const router = Router()
 
 router.post("/addRental", auth, addRental)
 
-router.get("/getRental", getRental)
+router.post("/getRental", getRental)
 
 router.get("/getAllRentals", auth, adminAuth, getAllRentals)
 

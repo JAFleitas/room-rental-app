@@ -10,7 +10,7 @@ import {
   RedButton,
 } from "./styled"
 import { logIn } from "../../redux/actions/index"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault()
     setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
-
+  const form = useSelector(state => state.formRentalProperty)
   function handleSubmitLogIn(e) {
     e.preventDefault()
     // console.log("submited")
@@ -35,7 +35,11 @@ const Login = () => {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-      navigate("/")
+      if (form.propertyID) {
+        navigate("/pay-reservation")
+      } else {
+        navigate("/")
+      }
     }
   }
   return (
@@ -59,6 +63,9 @@ const Login = () => {
             onChange={handleChangeLogIn}
             placeholder="Password"></Input>
         </Field>
+        <RedButton onClick={() => navigate("/forgot-password")}>
+          I forgot my password
+        </RedButton>
         <SendButton
           disabled={!logInForm.email || !logInForm.password}
           onClick={e => handleSubmitLogIn(e)}>
@@ -66,9 +73,8 @@ const Login = () => {
         </SendButton>
         <LoginWithGoogle />
         <LoginWithFacebook />
-        <RedButton onClick={() => navigate("/forgot-password")}>
-          I forgot my password
-        </RedButton>
+
+        <SendButton signup={true}>Sign up</SendButton>
       </Form>
     </Container>
   )
