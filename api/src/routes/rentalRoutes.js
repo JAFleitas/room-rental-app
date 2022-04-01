@@ -15,7 +15,9 @@ const router = Router()
 
 router.post("/addRental", auth, addRental)
 
-router.post("/getRental", getRental) /// DEJENLA POST
+
+router.post("/getRental", getRental)
+
 
 router.get("/getAllRentals", auth, adminAuth, getAllRentals)
 

@@ -25,7 +25,9 @@ export default function DropDown({ open }) {
               <Link to="/addProperty">Add Property</Link>
             </DropDownItem>
             <hr />
-            <Logout />
+            <DropDownItem>
+              <Logout />
+            </DropDownItem>
           </>
         ) : (
           <>

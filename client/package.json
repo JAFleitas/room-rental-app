@@ -33,7 +33,10 @@
     "react-router-dom": "^6.2.2",
     "react-slick": "^0.28.1",
     "redux": "^4.1.2",
-    "slick-carousel": "^1.8.1"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "slick-carousel": "^1.8.1",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
