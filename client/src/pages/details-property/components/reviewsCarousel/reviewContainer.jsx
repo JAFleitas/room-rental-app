@@ -9,14 +9,17 @@ import {
   ButtonSt,
 } from "./styles"
 
-export default function ReviewContainer({ comments, rating= 0 }) {
+export default function ReviewContainer({ comments, rating = 0 }) {
   return (
     <>
       {rating && (
         <ContainerAll>
           <ContainerRating>
             <DivStar>
-              <h1>{rating}</h1>
+              <h1>
+                {rating}
+                {rating % 1 === 0 ? ".0" : null}
+              </h1>
               <Star />
             </DivStar>
           </ContainerRating>
