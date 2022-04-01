@@ -1,7 +1,4 @@
-/* eslint-disable */
-
 const { User } = require("../db/index.js")
-
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = process.env
 const bcrypt = require("bcrypt")
@@ -71,9 +68,8 @@ const login = async (req, res, next) => {
     // ningún usuario contiene ese correo
     if (!user) return next({ status: 400, message: "Invalid credentials" })
 
-    //Si la cuenta está desabilitada
-    if (user.dataValues.status === "disabled") {
-      return next({ status: 400, message: "Disabled Account" })
+    if (user.dataValues.status === "enable" || user.dataValues.blocked) {
+      return next({ status: 401, message: "Account bloqued or disabled" })
     }
 
     // Teniedo el usuario, determinamos si la contraseña enviada es correcta
@@ -100,8 +96,8 @@ const login = async (req, res, next) => {
       },
     )
   } catch (err) {
-    console.log(err)
-    next({ err })
+    // console.log(err)
+    next(err)
   }
 }
 
@@ -109,24 +105,12 @@ const getUserDetail = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id, {
       attributes: {
-        exclude: [
-          "password",
-          "provider",
-          "providerId",
-          "type",
-          "createdAt",
-          "updatedAt",
-        ],
+        exclude: ["password", "provider", "providerId", "updatedAt"],
       },
     })
 
     if (!user) {
       return next({ status: 404, message: "User not found" })
-    }
-
-    //Si la cuenta está desabilitada
-    if (user.dataValues.status === "disabled") {
-      return next({ status: 400, message: "Disabled Account" })
     }
 
     res.json(user)
@@ -135,57 +119,56 @@ const getUserDetail = async (req, res, next) => {
   }
 }
 
-const disableUser = async (req, res) => {
-  const { id } = req.body
+const disableUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(id)
+    const user = req.user
+
     if (!user) {
       res.json({ message: "This User doesnt exists" })
-    } else if (user.dataValues.status === "enabled") {
-      try {
-        const updateStatus = await User.update(
-          {
-            ...user.dataValues,
-            status: "disabled",
+    }
+
+    try {
+      const updateStatus = await User.update(
+        {
+          status: "disabled",
+        },
+        {
+          where: {
+            id: user.id,
           },
-          {
-            where: {
-              id: user.dataValues.id,
-            },
-          },
-        )
-        if (updateStatus) {
-          res.status(200).json({ message: "Acoount disabled correctly" })
-        } else {
-          res.status(400).json({ message: "Couldnt disbale User" })
-        }
-      } catch (error) {
-        console.log(error)
+        },
+      )
+
+      if (updateStatus) {
+        res.json({ message: "Acoount disabled correctly" })
+      } else {
+        res.status(400).json({ message: "Couldnt disable User account" })
       }
-    } else if (user.dataValues.status === "disabled") {
-      res.json({ status: 400, message: "This account is already Disabled " })
+    } catch (error) {
+      // console.log(error)
+      next(error)
     }
   } catch (err) {
-    console.log(err)
+    // console.log(err)
+    next(err)
   }
 }
 
-const enableUser = async (req, res) => {
-  const { id } = req.body
+const enableUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(id)
+    const user = req.user
+
     if (!user) {
       res.json({ message: "This User doesnt exists" })
-    } else if (user.dataValues.status === "disabled") {
+    } else if (user.status === "disabled") {
       try {
         const updateStatus = await User.update(
           {
-            ...user.dataValues,
             status: "enabled",
           },
           {
             where: {
-              id: user.dataValues.id,
+              id: user.id,
             },
           },
         )
@@ -196,12 +179,14 @@ const enableUser = async (req, res) => {
         }
       } catch (error) {
         console.log(error)
+        next(error)
       }
-    } else if (user.dataValues.status === "enabled") {
+    } else if (user.status === "enabled") {
       res.json({ status: 400, message: "This account is already enabled " })
     }
   } catch (err) {
     console.log(err)
+    next(err)
   }
 }
 
@@ -264,7 +249,8 @@ const resetPassword = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
-  const { name, lastname, country, photo, account_number, email } = req.body
+  const { name, lastname, country, photo, account_number, email } =
+    req.body.data
 
   const newInfo = {}
 
@@ -276,9 +262,9 @@ const updateUser = async (req, res, next) => {
   if (email) newInfo.email = email
 
   try {
-    await User.update(newInfo, { where: { id: req.user.id } })
-
-    res.end()
+    await User.update(newInfo, { where: { id: req.user.id } }).then(resp => {
+      res.send("Update successful")
+    })
   } catch (error) {
     next(error)
   }
@@ -320,7 +306,112 @@ const loginWithGoogle = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error)
-    next({ error })
+    next(error)
+  }
+}
+
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.findAll()
+
+    res.json(users)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const blockUser = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    await User.update(
+      {
+        blocked: true,
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Acunt blocked correctly" })
+  } catch (err) {
+    // console.log(err)
+    next(err)
+  }
+}
+
+const unlockUser = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    await User.update(
+      {
+        blocked: false,
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Acunt unlocked correctly" })
+  } catch (err) {
+    // console.log(err)
+    next(err)
+  }
+}
+
+const changeEnabledUser = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const { status = "disabled" } = req.body
+
+    await User.update(
+      {
+        status,
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Account change correctly" })
+  } catch (err) {
+    // console.log(err)
+    next(err)
+  }
+}
+
+const promoteToAdmin = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const { password } = req.body
+
+    const isMatch = await bcrypt.compare(password, req.user.password)
+
+    // si la contraseña es incorreta
+    if (!isMatch) return next({ status: 403, message: "Failed" })
+
+    await User.update(
+      {
+        type: "SUBADMIN",
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+
+    res.json({ message: "Admin created" })
+  } catch (err) {
+    // console.log(err)
+    next(err)
   }
 }
 
@@ -334,4 +425,9 @@ module.exports = {
   updateUser,
   enableUser,
   loginWithGoogle,
+  getAllUsers,
+  blockUser,
+  unlockUser,
+  changeEnabledUser,
+  promoteToAdmin,
 }

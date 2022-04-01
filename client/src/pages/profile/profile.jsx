@@ -1,24 +1,98 @@
 import {
   PageContainer,
-  ProfileImage,
   MenuContainer,
   MenuOptions,
   MenuOption,
+  ContentPhoto,
+  ChangeImage,
+  InputInvisible,
+  NotLogIn,
+  Message,
+  LinkLogIn,
 } from "./styled"
 import Routes from "./MenuRoutes/MenuRoutes"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import getHeaderToken from "../../utilities/getHeadertoken"
+import { loadUser } from "../../redux/actions"
+import axios from "axios"
+import swal from "sweetalert"
+const api = import.meta.env.VITE_APP_API_URL
 
 export default function Profile() {
   const photo = useSelector(state => state.user?.photo)
   const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
+  const changeImageProfile = async e => {
+    if (localStorage.getItem("tokenRentalApp")) {
+      const files = e.target.files
+      if (!/\.(jpg|png|gif)$/i.test(files[0].name)) {
+        swal({
+          title: "Warinig",
+          text: "The file to update is not an image!",
+          icon: "warning",
+        })
+      } else {
+        let data = new FormData()
+        data.append("file", files[0])
+        data.append("upload_preset", "rentalAppProfiles")
+        try {
+          let res = await fetch(
+            "https://api.cloudinary.com/v1_1/dye9d3vzy/image/upload",
+            {
+              method: "POST",
+              body: data,
+            },
+          )
+          let file = await res.json()
+          await axios
+            .put(
+              `${api}/users`,
+              { data: { photo: file.secure_url } },
+              getHeaderToken(),
+            )
+            .then(res => {
+              dispatch(loadUser())
+              swal(res.data, {
+                icon: "success",
+              })
+            })
+            .catch(error =>
+              swal({
+                title: "Error!",
+                text: "An error has occurred",
+                icon: "error",
+              }),
+            )
+        } catch (error) {
+          swal({
+            title: "Error!",
+            text: "An error has occurred",
+            icon: "error",
+          }),
+            console.log(error)
+        }
+      }
+    } else {
+      swal({
+        title: "Error!",
+        text: "This user is not logged in",
+        icon: "error",
+      })
+    }
+  }
 
   return (
     <PageContainer>
       {auth ? (
         <>
           <MenuContainer>
-            <ProfileImage src={photo} alt="profile_image"></ProfileImage>
+            <ContentPhoto photo={photo}>
+              <ChangeImage>
+                <InputInvisible type="file" onChange={changeImageProfile} />
+              </ChangeImage>
+            </ContentPhoto>
             <MenuOptions>
               <Link to="/profile">
                 <MenuOption>My profile</MenuOption>
@@ -46,10 +120,10 @@ export default function Profile() {
           <Routes />
         </>
       ) : (
-        <div>
-          <p>Aún no tiene una cuenta</p>
-          <Link to="/register">Create account</Link>
-        </div>
+        <NotLogIn>
+          <Message>Aún no tiene una cuenta</Message>
+          <LinkLogIn to="/register">Create account</LinkLogIn>
+        </NotLogIn>
       )}
     </PageContainer>
   )

@@ -1,3 +1,5 @@
+import { persistReducer } from "redux-persist"
+import storage from "redux-persist/lib/storage"
 import {
   GET_ALL_PROPERTIES,
   GET_PROPERTY_BY_ID,
@@ -24,7 +26,14 @@ import {
   GET_PROPERTIES_BY_USER_ID,
   DELETE_PROPERTY_FROM_MY_PROPERTIES,
   GET_RENTAL,
-
+  FORM_PROPERTY_RENTAL,
+  GET_ALL_EMAILS,
+  GET_RENTALS_BY_USER,
+  CANCEL_RENTAL,
+  GET_ALL_USERS,
+  CREATE_ADMIN,
+  ADMIN_CHANGE_ENABLE_USER,
+  ADMIN_BLOCK_USER,
 } from "../actions"
 
 const initialState = {
@@ -49,23 +58,51 @@ const initialState = {
   page: 1,
   categories: [],
   services: [],
-
   coordinates: [],
-  propertyRentals:[],
+  propertyRentals: [],
+
   listFavorites: {},
   paymenthMethods: [],
+
+  formRentalProperty: null,
+
+  userRentals: [],
+  listFavorites: {},
+  paymenthMethods: [],
+  admin: {
+    emails: null,
+    users: null,
+    orders: null,
+  },
 }
 
 function rootReducer(state = initialState, { type, payload }) {
+  let newUsers, finded
   switch (type) {
+    case CREATE_ADMIN:
+    case ADMIN_CHANGE_ENABLE_USER:
+    case ADMIN_BLOCK_USER:
+      newUsers = state.admin.users.filter(user => user.id !== payload.id)
+      finded = state.admin.users.find(user => user.id === payload.id)
+      // console.log({finded, payload});
+      newUsers.push({ ...finded, ...payload })
+      return { ...state, admin: { ...state.admin, users: newUsers } }
+    case GET_ALL_USERS:
+      return { ...state, admin: { ...state.admin, users: payload } }
+    case GET_ALL_EMAILS:
+      return { ...state, admin: { ...state.admin, emails: payload } }
     case GET_ALL_PAYMENT_METHODS:
+      return { ...state, paymenthMethods: payload }
 
-
-      return {...state, paymenthMethods: payload};
-    case ADD_PAYMENT_METHOD: 
-    return {...state, paymenthMethods: [...state.paymenthMethods, payload]};
-    case DELETE_PAYMENT_METHOD: 
-    return {...state, paymenthMethods: state.paymenthMethods.filter(method => method.id !== payload)};
+    case ADD_PAYMENT_METHOD:
+      return { ...state, paymenthMethods: [...state.paymenthMethods, payload] }
+    case DELETE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymenthMethods: state.paymenthMethods.filter(
+          method => method.id !== payload,
+        ),
+      }
     case EDIT_PAYMENT_METHOD:
       let newMethods = state.paymenthMethods.filter(
         method => method.id + "" !== payload.id + "",
@@ -183,13 +220,35 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
       }
     case GET_RENTAL:
-      return{
+      return {
         ...state,
-        propertyRentals:payload
+        propertyRentals: payload,
+      }
+
+    case FORM_PROPERTY_RENTAL:
+      return {
+        ...state,
+        formRentalProperty: payload,
+      }
+    case GET_RENTALS_BY_USER:
+      return {
+        ...state,
+        userRentals: payload,
+      }
+    case CANCEL_RENTAL:
+      return {
+        ...state,
       }
     default:
       return state
   }
 }
 
-export default rootReducer
+// gonzalo
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["cart"],
+}
+export default persistReducer(persistConfig, rootReducer)

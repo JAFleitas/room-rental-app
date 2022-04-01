@@ -65,6 +65,11 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+      status: {
+        type: DataTypes.ENUM("enabled", "disabled"),
+        allowNull: false,
+        defaultValue: "enabled",
+      },
     },
     { timestamps: false },
   )
@@ -74,6 +79,7 @@ module.exports = sequelize => {
     Property.belongsTo(models.User, {
       sourceKey: "id",
       foreignKey: "userID",
+      required: true,
     })
 
     // Relacionando Propiedad y TypoPropiedad

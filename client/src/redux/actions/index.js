@@ -15,6 +15,7 @@ export const GET_ALL_SERVICES = "GET_ALL_SERVICES"
 export const GET_PROPERTY = "GET_PROPERTY"
 export const ADD_RENTAL = "ADD_RENTAL"
 export const GET_RENTAL = "GET_RENTAL"
+export const CANCEL_RENTAL = "CANCEL_RENTAL"
 
 export const GET_ALL_PAYMENT_METHODS = "GET_ALL_PAYMENT_METHODS"
 export const ADD_PAYMENT_METHOD = "ADD_PAYMENT_METHOD"
@@ -32,8 +33,59 @@ export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 export const GET_PROPERTIES_BY_USER_ID = "GET_PROPERTIES_BY_USER_ID"
 export const DELETE_PROPERTY_FROM_MY_PROPERTIES =
   "DELETE_PROPERTY_FROM_MY_PROPERTIES"
+export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
+
+// ADMINISTRADOR
+
+export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
+export const GET_ALL_USERS = "GET_ALL_USERS"
+export const ADMIN_BLOCK_USER = "ADMIN_BLOCK_USER"
+export const ADMIN_CHANGE_ENABLE_USER = "ADMIN_CHANGE_ENABLE_USER"
+export const CREATE_ADMIN = "CREATE_ADMIN"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function createAdmin(userId) {
+  return { type: CREATE_ADMIN, payload: { id: userId, type: "SUBADMIN" } }
+}
+
+export function blockUser(userId, blocked) {
+  return { type: ADMIN_BLOCK_USER, payload: { id: userId, blocked } }
+}
+
+export function changeEnableUser(userId, status) {
+  return { type: ADMIN_CHANGE_ENABLE_USER, payload: { id: userId, status } }
+}
+
+export function getAllEmails() {
+  return async function (dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/notifications`, getHeaderToken())
+
+      return dispatch({
+        type: GET_ALL_EMAILS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function getAllUsers() {
+  return async function (dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/users/all`, getHeaderToken())
+
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
 
 export function getAllPaymentMethod() {
   return async function (dispatch) {
@@ -177,15 +229,20 @@ export function getAllProperties(filters, page = 1) {
     // console.log({ filtersQueries })
   }
   return async function (dispatch) {
-    let response = await axios.get(
-      queries
-        ? `${api}/properties/getProperties?${queries}&page=${page}`
-        : `${api}/properties/getProperties?page=${page}`,
-    )
-    return dispatch({
-      type: GET_ALL_PROPERTIES,
-      payload: response.data,
-    })
+    try {
+      let response = await axios.get(
+        queries
+          ? `${api}/properties/getProperties?${queries}&page=${page}`
+          : `${api}/properties/getProperties?page=${page}`,
+      )
+      return dispatch({
+        type: GET_ALL_PROPERTIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+      alert("No se han encontrado propiedades con los filtros aplicados")
+    }
   }
 }
 
@@ -199,17 +256,6 @@ export function getPropertyById(id) {
   }
 }
 
-export const addProperty = data => async dispatch => {
-  try {
-    const res = await axios.post(`${api}/properties/addProperty`, data)
-    dispatch({
-      type: ADD_PROPERTY,
-      payload: res.data,
-    })
-  } catch (error) {
-    console.log(error.response)
-  }
-}
 export const loadUser = () => async dispatch => {
   const config = getHeaderToken()
   try {
@@ -334,6 +380,7 @@ export function addRental(form) {
         type: ADD_RENTAL,
         payload: response.data,
       })
+      console.log(response)
     } catch (error) {
       alert(
         (typeof error?.response?.data === "string"
@@ -356,14 +403,13 @@ export function getPropertiesByUserId() {
       console.log(response.data)
       return dispatch({
         type: GET_PROPERTIES_BY_USER_ID,
-                payload: response.data,
+        payload: response.data,
       })
     } catch (error) {
       console.log(error.response)
     }
   }
 }
-
 
 export function actionLoginWithGoogle(data) {
   return async function (dispatch) {
@@ -384,32 +430,29 @@ export function actionLoginWithGoogle(data) {
   }
 }
 
-export const getRental= propertyID => async dispatch =>{
-    try {
-      let response = await axios.post(`${api}/rentals/getRental`,propertyID)
-      dispatch({
-        type: GET_RENTAL,
+export const getRental = propertyID => async dispatch => {
+  try {
+    let response = await axios.post(`${api}/rentals/getRental`, propertyID)
+    dispatch({
+      type: GET_RENTAL,
 
-        payload: response.data,
-      })
-    } catch (error) {
-      console.log(error.response)
-    }
+      payload: response.data,
+    })
+  } catch (error) {
+    console.log(error.response)
   }
+}
 
-
-export function deletePropertyFromMyProperties(form) {
+export function deletePropertyFromMyProperties(ID) {
   return async function (dispatch) {
     const config = getHeaderToken()
+    console.log(ID)
     try {
-      let response = await axios.delete(`${api}/properties/deleteProperty`, {
-        headers: {
-          Authorization: config.headers.Authorization,
-        },
-        data: {
-          form: form,
-        },
-      })
+      let response = await axios.put(
+        `${api}/properties/deleteProperty`,
+        { ID },
+        config,
+      )
       return dispatch({
         type: DELETE_PROPERTY_FROM_MY_PROPERTIES,
         payload: response.data,
@@ -420,4 +463,44 @@ export function deletePropertyFromMyProperties(form) {
   }
 }
 
+export const FORM_PROPERTY_RENTAL = "FORM_PROPERTY_RENTAL"
+export function actionAddFormRentalProperty(payload) {
+  return {
+    type: FORM_PROPERTY_RENTAL,
+    payload,
+  }
+}
 
+export function getRentalsByUser() {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let response = await axios.get(`${api}/rentals/getRentalsByUser`, config)
+      console.log(response)
+      return dispatch({
+        type: GET_RENTALS_BY_USER,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function cancelRental(rentID) {
+  console.log(rentID)
+  return async function (dispatch) {
+    try {
+      let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
+      console.log(response)
+      if (response.data.status === 401) {
+        alert(response.data.message)
+      }
+      return dispatch({
+        type: CANCEL_RENTAL,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

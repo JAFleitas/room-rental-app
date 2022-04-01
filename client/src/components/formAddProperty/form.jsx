@@ -13,6 +13,7 @@ import {
   LabelSt,
   TextDescription,
   TitleSt,
+  FormPropertyContainer,
 } from "./styles"
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
@@ -33,15 +34,13 @@ const initialStateForm = {
   coordinates: [],
 }
 
-export default function FormAddProperty() {
+export default function FormAddProperty(props) {
   const dispatch = useDispatch()
   const typeProperty = useSelector(state => state.categories)
   const servicesData = useSelector(state => state.services)
   const coordinates = useSelector(state => state.coordinates)
   const [formData, setFormData] = useState(initialStateForm)
   const [errors, setErrors] = useState({})
-
-  console.log(api);
 
   const handleInputChange = e => {
     const { name, value } = e.target
@@ -57,17 +56,47 @@ export default function FormAddProperty() {
   const sendData = async e => {
     e.preventDefault()
     if (localStorage.getItem("tokenRentalApp")) {
-      await axios
-        .post(
-          `${api}/properties/addProperty`,
-          { data: formData },
-          getHeaderToken(),
-        )
-        .then(res => {
-          setFormData(initialStateForm)
-          console.log(res)
-        })
-        .catch(err => console.log(err))
+      if (props.id) {
+        formData.idProperty = props.id
+        await axios
+          .put(
+            `${api}/properties/editProperty`,
+            { data: formData },
+            getHeaderToken(),
+          )
+          .then(res => {
+            setFormData(initialStateForm)
+            console.log(res)
+          })
+          .catch(err => console.log(err))
+      } else {
+        await axios
+          .post(
+            `${api}/properties/addProperty`,
+            { data: formData },
+            getHeaderToken(),
+          )
+          .then(res => {
+            swal({
+              title: "Successful",
+              text: res.data.message,
+              icon: "success",
+            })
+            servicesData.map(elem => {
+              document.getElementById(elem.id).checked = false
+            })
+            document.getElementById("FileImage").value = ""
+            setFormData(prev => {
+              return {
+                ...initialStateForm,
+                image: [],
+                services: [],
+                coordinates: [],
+              }
+            })
+          })
+          .catch(err => console.log(err))
+      }
     } else {
       console.log("Not found token")
     }
@@ -75,7 +104,7 @@ export default function FormAddProperty() {
 
   const handleFileChange = async e => {
     const files = e.target.files
-    let respData = []
+    let respData = formData.image
     for (let index = 0; index < files.length; index++) {
       let data = new FormData()
       data.append("file", files[index])
@@ -112,7 +141,9 @@ export default function FormAddProperty() {
   const validateService = e => {
     let Services = formData.services
     if (e.target.checked === true) {
-      Services.push(e.target.defaultValue)
+      if (!formData.services.includes(e.target.defaultValue)) {
+        Services.push(e.target.defaultValue)
+      }
     } else {
       Services = Services.filter(service => service !== e.target.defaultValue)
     }
@@ -127,6 +158,29 @@ export default function FormAddProperty() {
   useEffect(() => {
     dispatch(getAllCategories())
     dispatch(getAllServices())
+    if (props.id) {
+      const loadData = async id => {
+        const res = await axios.get(`${api}/properties/getPropertyById/${id}`)
+        const services = res.data.services.map(el => el.id)
+        setFormData({
+          name: res.data.name,
+          location: res.data.location,
+          price: res.data.price,
+          numberOfRooms: res.data.numberOfRooms,
+          maxNumberOfPeople: res.data.maxNumberOfPeople,
+          image: res.data.image,
+          services: services,
+          description: res.data.description,
+          discount: res.data.discount,
+          typePropertyID: res.data.typePropertyID,
+          coordinates: res.data.coordinates,
+        })
+        services.map(elem => {
+          document.getElementById(elem).checked = true
+        })
+      }
+      loadData(props.id)
+    }
   }, [])
 
   useEffect(() => {
@@ -144,9 +198,9 @@ export default function FormAddProperty() {
   }, [formData])
 
   return (
-    <>
+    <FormPropertyContainer>
       <TitleSt>
-        <h1>Add Property</h1>
+        {props.id ? <h1>Edit Property</h1> : <h1>Add Property</h1>}
       </TitleSt>
       <Container>
         <FormContainer>
@@ -229,7 +283,9 @@ export default function FormAddProperty() {
             ) : (
               <>
                 <LabelSt>Coordinates </LabelSt>
-                <LabelSt>{coordinates} </LabelSt>
+                <LabelSt>
+                  {formData.coordinates.length ? formData.coordinates : null}{" "}
+                </LabelSt>
               </>
             )}
           </div>
@@ -259,15 +315,21 @@ export default function FormAddProperty() {
                   </div>
                 ))
               : null}
+            {errors.image && <LabelSt error={true}>{errors.image}</LabelSt>}
             <input
               type="file"
               name="file"
+              id="FileImage"
               multiple="multiple"
               onChange={handleFileChange}
             />
 
             <LabelSt>Type of property</LabelSt>
-            <SelectSt name="typePropertyID" onChange={handleInputChange}>
+            <SelectSt
+              name="typePropertyID"
+              value={formData.typePropertyID}
+              onChange={handleInputChange}>
+              <option value=""></option>
               {typeProperty &&
                 typeProperty.map(e => (
                   <option value={e.id} key={e.id}>
@@ -303,16 +365,16 @@ export default function FormAddProperty() {
             errors.name ||
             errors.location ||
             errors.price ||
-            errors.numberOfRooms ||
+            errors.image ||
             errors.description ||
             errors.typePropertyID ||
             errors.coordinates ||
             errors.services
           }
           onClick={sendData}>
-          ADD PROPERTY
+          {props.id ? "UPDATE PROPERTY" : "ADD PROPERTY"}
         </ButtonSt>
       </TitleSt>
-    </>
+    </FormPropertyContainer>
   )
 }

@@ -2,20 +2,17 @@ import React, { useState } from "react"
 import {
   Form,
   SendButton,
-  ButtonFacebook,
-  ButtonGoogle,
   Field,
   Input,
   Label,
   Title,
   Container,
 } from "./styled"
-import { FcGoogle } from "react-icons/fc"
-import { BsFacebook } from "react-icons/bs"
 import { postNewUser } from "../../redux/actions/index"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
+import LoginWithFacebook from "../auth/loginWithFacebook"
 const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -112,14 +109,21 @@ const SignUp = () => {
             placeholder="Password..."></Input>
         </Field>
 
-        <SendButton type="submit" onClick={handleSubmitSignUp}>
+        <SendButton
+          disabled={
+            !signUpForm.email ||
+            !signUpForm.name ||
+            !signUpForm.password ||
+            !signUpForm.lastname ||
+            !signUpForm.country ||
+            !signUpForm.city
+          }
+          type="submit"
+          onClick={handleSubmitSignUp}>
           Sign Up
         </SendButton>
-        {/*           <ButtonFacebook>
-            <BsFacebook />
-            Sign Up with Facebook
-          </ButtonFacebook> */}
         <LoginWithGoogle />
+        <LoginWithFacebook />
       </Form>
     </Container>
   )

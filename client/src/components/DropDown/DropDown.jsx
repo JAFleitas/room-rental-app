@@ -22,10 +22,12 @@ export default function DropDown({ open }) {
             </Link>
             <DropDownItem>
               {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
-              <Link to="/form">Add Property</Link>
+              <Link to="/addProperty">Add Property</Link>
             </DropDownItem>
             <hr />
-            <Logout />
+            <DropDownItem>
+              <Logout />
+            </DropDownItem>
           </>
         ) : (
           <>

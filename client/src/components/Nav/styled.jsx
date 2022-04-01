@@ -38,6 +38,30 @@ export const IconContainer = styled.div`
     background-color: #eea0fe;
     transition: background-color 1s;
   }
+  @media screen and (max-width: 1140px) {
+    height: 9vh;
+    height: 90px;
+    width: 100px;
+    margin-left: 1.5vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+  @media screen and (max-width: 900px) {
+    height: 9vh;
+    height: 70px;
+    width: 80px;
+    margin-left: 2vw;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+  }
+  @media screen and (max-width: 700px) {
+    height: 9vh;
+    height: 50px;
+    width: 70px;
+    margin-left: 2vw;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+  } ;
 `
 
 export const Logo = styled.img`
@@ -53,3 +77,17 @@ export const ToHome = styled(Link)`
   text-decoration: none;
   width: 100px;
 `
+
+// @media screen and (max-width: 1140px) {
+//   width: 80%;
+//   margin-left: 10%;
+// }
+// @media screen and (max-width: 900px) {
+//   width: 90%;
+//   margin-left: 5%;
+// }
+// @media screen and (max-width: 700px) {
+//   width: 100%;
+//   margin: 0;
+//   margin-top: 5%;
+// } ;

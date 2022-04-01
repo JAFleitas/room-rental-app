@@ -1,4 +1,12 @@
-const { Property, Service, Comment, User } = require("../db/index.js")
+const { Op } = require("sequelize")
+
+const {
+  Property,
+  Service,
+  Comment,
+  User,
+  PropertyRental,
+} = require("../db/index.js")
 
 const getPropertyById = async (req, res, next) => {
   try {
@@ -21,9 +29,14 @@ const getPropertyById = async (req, res, next) => {
           model: User,
           attributes: ["name", "lastname"],
         },
+        {
+          model: Service,
+          through: {
+            attributes: [],
+          },
+        },
       ],
     })
-
     if (propertyDB) {
       return res.status(200).json(propertyDB)
     } else {
@@ -50,7 +63,6 @@ const addProperty = async (req, res) => {
     typePropertyID,
   } = req.body.data
   const { id } = req.user
-  console.log(id)
   if (name) {
     try {
       const newProperty = await Property.create({
@@ -80,6 +92,44 @@ const addProperty = async (req, res) => {
   } else {
     res.status(404).json({ message: "Error Required Field not Found" })
   }
+}
+
+const editProperty = async (req, res) => {
+  const {
+    idProperty,
+    name,
+    location,
+    price,
+    numberOfRooms,
+    maxNumberOfPeople,
+    image,
+    services,
+    description,
+    discount,
+    typePropertyID,
+    coordinates,
+  } = req.body.data
+  console.log(idProperty)
+  const { id } = req.user
+  if (id) {
+    await Property.update(
+      {
+        name,
+        location,
+        price,
+        numberOfRooms,
+        maxNumberOfPeople,
+        image,
+        services,
+        description,
+        discount,
+        typePropertyID,
+        coordinates,
+      },
+      { where: { [Op.and]: [{ id: idProperty }, { userID: id }] } },
+    )
+  }
+  res.send("Datos recibidos con éxito")
 }
 
 const getAll = async (req, res, next) => {
@@ -127,15 +177,14 @@ const getAll = async (req, res, next) => {
 const getPropertyByUser = async (req, res, next) => {
   try {
     const userID = req.user.id
-    console.log("aca")
-    console.log(userID)
 
     const properties = await Property.findAll({
       where: {
         userID: userID,
+        status: "enabled",
       },
     })
-    console.log(properties)
+
     if (properties) {
       return res.status(200).json(properties)
     } else {
@@ -147,21 +196,48 @@ const getPropertyByUser = async (req, res, next) => {
   }
 }
 
-const deleteProperty = async (req, res, next) => {
+const disabledProperty = async (req, res, next) => {
   try {
-    const { propertyId, userID } = req.body.form
+    const { ID } = req.body
     const propertyDB = await Property.findOne({
       where: {
-        id: propertyId,
+        id: ID,
+      },
+      include: {
+        model: PropertyRental,
       },
     })
-    await propertyDB.destroy()
-    const properties = await Property.findAll({
-      where: {
-        userID: userID,
-      },
-    })
-    res.status(200).send("Property deleted succesfully" + properties)
+
+    if (!propertyDB) {
+      res.json({ message: "This Property doesnt exists" })
+    }
+    if (
+      propertyDB.status === "enabled" &&
+      propertyDB.PropertyRentals.length === 0
+    ) {
+      // const updateProperty =
+      await Property.update(
+        {
+          status: "disabled",
+        },
+        {
+          where: {
+            id: propertyDB.id,
+          },
+        },
+      )
+      // const properties = await Property.findAll({
+      //   where: {
+      //     userID: userID,
+      //   },
+      // })
+      // if (updateProperty) {
+      //   res.status(200).send("Property deleted succesfully")
+      // }
+      // } else
+    } else if (propertyDB.status === "disabled") {
+      res.json({ status: 400, message: "This property is already Disabled " })
+    }
   } catch (error) {
     next(error)
   }
@@ -170,7 +246,8 @@ const deleteProperty = async (req, res, next) => {
 module.exports = {
   getPropertyById,
   addProperty,
+  editProperty,
   getAll,
   getPropertyByUser,
-  deleteProperty,
+  disabledProperty,
 }

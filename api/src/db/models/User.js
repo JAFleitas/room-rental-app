@@ -64,6 +64,11 @@ module.exports = sequelize => {
       allowNull: false,
       defaultValue: "NORMAL",
     },
+    blocked: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      required: true,
+    },
   })
 
   User.associate = models => {
@@ -76,6 +81,11 @@ module.exports = sequelize => {
     })
 
     User.hasMany(models.Property, {
+      sourceKey: "id",
+      foreignKey: "userID",
+    })
+    // Esto se usa y funciona [NO TOCAR]
+    User.hasMany(models.PropertyRental, {
       sourceKey: "id",
       foreignKey: "userId",
     })

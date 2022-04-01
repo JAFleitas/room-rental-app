@@ -7,6 +7,7 @@ import History from "../Components/History/History"
 import Favorites from "../Components/Favorites/Favorites"
 import Paymentmethods from "../Components/PaymentMethods/PaymentMethods"
 import MyProperties from "../Components/MyProperties/MyProperties"
+// import RentCard from "../../../components/RentCard/RentCard"
 const MenuRoutes = () => {
   return (
     <Routes>

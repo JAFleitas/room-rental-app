@@ -1,0 +1,74 @@
+[
+  {
+    "subject": "No te pierdas los descuentos de fin de año",
+    "title": "Al fin de año se acerca y te tenemos buenas noticias...",
+    "message": "Por fin de año estaremos dando un 5% de descuento en todas las propiedades de alquiler! Aprovecha y haz ese viaje que tanto deseas",
+    "image": "https://www.comologia.com/wp-content/uploads/2014/12/ofertas-de-fin-de-ano-rebajas-descuentos.jpg",
+    "segment": "all",
+    "count": 125
+  },
+  {
+    "subject": "Ofertas imperdibles por navidad",
+    "title": "Bprovecha esta Navidad disfrutando de maravillosos lugares",
+    "message": "La navidad es una fecha especial en la que puedes disfrutar con tu familia y amigos, aprovecha esta navidad para....etc",
+    "image": "https://thumbs.dreamstime.com/b/cartel-promocional-de-venta-navidad-ofertas-descuento-vector-banner-en-vacaciones-invierno-propuesta-tiendas-y-caja-actual-con-165034195.jpg",
+    "segment": "guests",
+    "count": 250
+  },
+  {
+    "subject": "Nueva funcionalidad",
+    "title": "Lista de Favoritos!",
+    "message": "Ahora podrás guardar en una lista de favoritos las propiedades que te gusten o pienses alquilar a futuro!!",
+    "image": "https://i.blogs.es/c2bb33/soonsoon/1366_2000.jpg",
+    "segment": "all",
+    "count": 125
+  },
+  {
+    "subject": "Los 5 mejores destinos par viajar en verano",
+    "title": "Los 5 mejores destinos par viajar en verano",
+    "message": "¡El verano está aquí! Llega la mejor época del año para los viajeros. Por fin vamos a disfrutar del sol y esto nos genera mucha emoción. Con el verano llegan tus vacaciones y es el momento para que hagas esos viajes de encanto que has soñado durante todo el año. ¿A dónde ir este verano? Bueno, las oportunidades y opciones son muchas. Podrías recorrerte todo el mundo, al menos en el trópico y el hemisferio norte, donde el sol te espera para subirle un tono a nuestra piel. No olvides ponerte protector solar. Sino, terminarás tan rojo como una gamba. En este post vamos a ayudarte a elegir dentro de lo mejor de lo mejor. Aquí tienes los mejores lugares donde viajar en verano.",
+    "image": "https://static3.abc.es/media/viajar/2016/07/01/bora-bora-kp0D--620x349@abc.jpg",
+    "segment": "guests",
+    "count": 500
+  },
+  {
+    "subject": "Como tener un viaje seguro",
+    "title": "Quieres que tu viaje salga bien...Tenemos algunos consejos",
+    "message": "Asegúrate de llevar contigo mascarillas, desinfectante para manos y pañitos desinfectantes en un lugar de fácil acceso, así los puedes usar durante el viaje si es necesario. Prepara comida y agua para llevar.",
+    "image": "https://www.eleconomista.com.mx/__export/1626060267550/sites/eleconomista/img/2021/07/11/seguro-covid1_120721w.jpg_1269359182.jpg",
+    "segment": "all",
+    "count": 600
+  },
+  {
+    "subject": "Nueva categoria de propiedades",
+    "title": "Tenemos una nueva categoría",
+    "message": "Ahora tienes la categoría 'Cabaña', puedes usarla en tus propiedades actuales o añadir una nueva propiedad que pertenezca a esta categoria! Así los huéspedes podrán encontrar más fácilmente este tipo de propiedad",
+    "image": "https://media.traveler.es/photos/613769f6b57001fc862c802d/1:1/w_1303,h_1303,c_limit/47536.jpg",
+    "segment": "hosts",
+    "count": 250
+  },
+  {
+    "subject": "Rental app",
+    "title": "Feliz año",
+    "message": "Durante este año deseamos que descubras muchos lugares maravilloso...y blablabla",
+    "image": "https://elcomercio.pe/resizer/ovW8kcNp2g9JecuYzFNvtdVfkzg=/980x528/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/S4VOQFWL2RDCZJ742IASJWDPVU.jpg",
+    "segment": "all",
+    "count": 125
+  },
+  {
+    "subject": "No te pierdas los descuentos de fin de año",
+    "title": "Al fin de año se acerca y te tenemos buenas noticias...",
+    "message": "Por fin de año estaremos dando un 5% de descuento en todas las propiedades de alquiler! Aprovecha y haz ese viaje que tanto deseas",
+    "image": "https://www.comologia.com/wp-content/uploads/2014/12/ofertas-de-fin-de-ano-rebajas-descuentos.jpg",
+    "segment": "all",
+    "count": 125
+  },
+  {
+    "subject": "Ofertas imperdibles por navidad",
+    "title": "Bprovecha esta Navidad disfrutando de maravillosos lugares",
+    "message": "La navidad es una fecha especial en la que puedes disfrutar con tu familia y amigos, aprovecha esta navidad para....etc",
+    "image": "https://thumbs.dreamstime.com/b/cartel-promocional-de-venta-navidad-ofertas-descuento-vector-banner-en-vacaciones-invierno-propuesta-tiendas-y-caja-actual-con-165034195.jpg",
+    "segment": "guests",
+    "count": 250
+  }
+]

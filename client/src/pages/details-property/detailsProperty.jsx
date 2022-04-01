@@ -20,7 +20,7 @@ import { ContainerImages } from "./components/images-detail/styles"
 import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 import RentForm from "../../components/RentForm/RentForm"
 
-import { getPropertyById } from "../../redux/actions"
+import { getPropertyById, GET_PROPERTY_BY_ID } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 
 const Images = lazy(() => import("./components/images-detail/imagesDetail"))
@@ -32,10 +32,15 @@ export default function Details() {
 
   //dispatch
   const dispatch = useDispatch()
-  // console.log(propertyDetails)
   useEffect(() => {
     dispatch(getPropertyById(id))
     setLoading(false)
+    return () => {
+      dispatch({
+        type: GET_PROPERTY_BY_ID,
+        payload: null,
+      })
+    }
   }, [])
   const property = useSelector(state => state.detailsOfProperty)
   return loading ? (
@@ -73,7 +78,16 @@ export default function Details() {
 
       <DescriptionContainer>
         <h1>What services does the place offer?</h1>
-        <ServicesSt></ServicesSt>
+
+        {property.services ? (
+          property.services.map(e => (
+            <ServicesSt>
+              {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
+            </ServicesSt>
+          ))
+        ) : (
+          <p>This property dont have services</p>
+        )}
       </DescriptionContainer>
 
       <DescriptionContainer>

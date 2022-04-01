@@ -21,19 +21,29 @@ import {
 import { DayPicker } from "react-day-picker"
 import "react-day-picker/dist/style.css"
 import styles from "./Calendar.module.css"
-import { addRental, getRental } from "../../redux/actions/index"
+import {
+  actionAddFormRentalProperty,
+  getRental,
+} from "../../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useParams } from "react-router-dom"
 
-
 export default function RentForm(props) {
+  const [monthsInCalendary, setMonthsInCalendary] = useState(2)
+  const mediaqueryList = window.matchMedia("(min-width: 705px)")
+  mediaqueryList.addListener(function (EventoMediaQueryList) {
+    if (EventoMediaQueryList.matches) {
+      setMonthsInCalendary(2)
+    } else {
+      setMonthsInCalendary(1)
+    }
+  })
   const { id } = useParams()
-  const propertyID = { propertyID: id }
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getRental(propertyID))
+    dispatch(getRental({ propertyID: id }))
   }, [dispatch])
 
   props = props.props
@@ -42,17 +52,12 @@ export default function RentForm(props) {
 
   const rentals = useSelector(state => state.propertyRentals.data)
 
-
-
   const [dates, setDates] = useState({
     from: undefined,
     to: undefined,
   })
 
-
   const [payMethod, setPayMethod] = useState()
-
-
 
   function handleResetClick() {
     setDates({
@@ -81,10 +86,27 @@ export default function RentForm(props) {
     return
   }
 
+  const auth = useSelector(state => state.auth)
+  const navigate = useNavigate()
+
   function handleClick() {
-    const finalPrice = restaFechas(dates.from, dates.to) * props.price
-    if (dates.from === undefined || dates.to === undefined) {
-      return
+    const finalPrice = restaFechas(dates?.from, dates?.to) * props.price
+    if (
+      dates?.from === undefined ||
+      dates?.to === undefined ||
+      payMethod === undefined ||
+      finalPrice === undefined
+    ) {
+      alert("All fields are required")
+    } else {
+      let form = {
+        propertyID: props.id,
+        final_price: finalPrice,
+        start_date: dates.from,
+        final_date: dates.to,
+        paymenthMethodId: payMethod,
+      }
+
     }
     // '01/02/2022' '->' '2022/02/01';
     // function convertDateFormat(string) {
@@ -98,6 +120,11 @@ export default function RentForm(props) {
     // end = convertDateFormat(end)
     // console.log(inicio)
     // console.log(end)
+
+
+    // .then(alert("Renta creada"))
+    // .catch(alert("Hubo un problema..."))
+
     let form = {
       propertyID: props.id,
       final_price: finalPrice,
@@ -105,8 +132,15 @@ export default function RentForm(props) {
       final_date: dates.to,
       paymenthMethodId: payMethod,
     }
+    if (auth) {
+      dispatch(actionAddFormRentalProperty(form))
+      navigate("/pay-reservation")
+    }
+    if (!auth) {
+      dispatch(actionAddFormRentalProperty(form))
+      navigate("/login")
+    }
 
-    dispatch(addRental(form))
 
     // setDiasOcupados([
     //   ...diasOcupados,
@@ -143,13 +177,13 @@ export default function RentForm(props) {
         <FormField>
           <div className={styles.RangeExample}>
             <p>
-              {!dates.from && !dates.to && "Please select the first day."}
-              {dates.from && !dates.to && "Please select the last day."}
-              {dates.from &&
-                dates.to &&
-                `Selected from ${dates.from.toLocaleDateString()} to
-            ${dates.to.toLocaleDateString()}`}{" "}
-              {dates.from && dates.to && (
+              {!dates?.from && !dates?.to && "Please select the first day."}
+              {dates?.from && !dates?.to && "Please select the last day."}
+              {dates?.from &&
+                dates?.to &&
+                `Selected from ${dates?.from.toLocaleDateString()} to
+            ${dates?.to.toLocaleDateString()}`}{" "}
+              {dates?.from && dates?.to && (
                 <button className={styles.link} onClick={handleResetClick}>
                   Reset
                 </button>
@@ -157,10 +191,15 @@ export default function RentForm(props) {
             </p>
 
             <DayPicker
-              numberOfMonths={2}
+              defaultMonth={new Date()}
+              numberOfMonths={monthsInCalendary}
               mode="range"
               selected={dates}
               onSelect={setDates}
+              hidden={{
+                from: new Date(2000, 5, 10),
+                to: new Date(),
+              }}
               disabled={
                 rentals &&
                 rentals.map(rental => {
@@ -175,9 +214,10 @@ export default function RentForm(props) {
                 today: styles.today,
               }}
             />
-            {restaFechas(dates.from, dates.to) >= 1 ? (
+            {restaFechas(dates?.from, dates?.to) >= 1 ? (
               <h3 className={styles.Total}>
-                El total es: {restaFechas(dates.from, dates.to) * props.price}$
+                El total es: {restaFechas(dates?.from, dates?.to) * props.price}
+                $
               </h3>
             ) : (
               ""
