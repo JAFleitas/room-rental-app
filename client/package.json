@@ -12,7 +12,9 @@
     "@auth0/auth0-react": "^1.9.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
+    "@mui/styled-engine-sc": "^5.5.2",
     "@paypal/react-paypal-js": "^7.6.0",
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
@@ -47,7 +49,7 @@
     "eslint-plugin-react": "^7.29.4",
     "postcss": "^8.4.8",
     "prettier": "^2.5.1",
-    "styled-components": "^5.3.3",
+    "styled-components": "^5.3.5",
     "tailwindcss": "^3.0.23",
     "vite": "^2.8.0"
   }

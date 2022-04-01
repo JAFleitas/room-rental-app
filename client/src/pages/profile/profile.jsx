@@ -1,24 +1,69 @@
 import {
   PageContainer,
-  ProfileImage,
   MenuContainer,
   MenuOptions,
   MenuOption,
+  ContentPhoto,
+  ChangeImage,
+  InputInvisible,
 } from "./styled"
 import Routes from "./MenuRoutes/MenuRoutes"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import getHeaderToken from "../../utilities/getHeadertoken"
+import { loadUser } from "../../redux/actions"
+import axios from "axios"
+const api = import.meta.env.VITE_APP_API_URL
 
 export default function Profile() {
   const photo = useSelector(state => state.user?.photo)
   const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
+  const changeImageProfile = async e => {
+    if (localStorage.getItem("tokenRentalApp")) {
+      const files = e.target.files
+      let data = new FormData()
+      data.append("file", files[0])
+      data.append("upload_preset", "rentalAppProfiles")
+      try {
+        let res = await fetch(
+          "https://api.cloudinary.com/v1_1/dye9d3vzy/image/upload",
+          {
+            method: "POST",
+            body: data,
+          },
+        )
+        let file = await res.json()
+        await axios
+          .put(
+            `${api}/users`,
+            { data: { photo: file.secure_url } },
+            getHeaderToken(),
+          )
+          .then(res => {
+            dispatch(loadUser())
+            // console.log(res)
+          })
+          .catch(err => console.log(err))
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      console.log("Not found token")
+    }
+  }
 
   return (
     <PageContainer>
       {auth ? (
         <>
           <MenuContainer>
-            <ProfileImage src={photo} alt="profile_image"></ProfileImage>
+            <ContentPhoto photo={photo}>
+              <ChangeImage>
+                <InputInvisible type="file" onChange={changeImageProfile} />
+              </ChangeImage>
+            </ContentPhoto>
             <MenuOptions>
               <Link to="/profile">
                 <MenuOption>My profile</MenuOption>

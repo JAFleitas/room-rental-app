@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Form,
   SendButton,
   Field,
   Input,
   Label,
-  Title,
   Container,
   RedButton,
 } from "./styled"
@@ -18,6 +17,8 @@ import LoginWithFacebook from "../auth/loginWithFacebook"
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const admin = useSelector(state => state.user.type)
+  const auth = useSelector(state => state.auth)
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -30,18 +31,29 @@ const Login = () => {
   const form = useSelector(state => state.formRentalProperty)
   function handleSubmitLogIn(e) {
     e.preventDefault()
-    // console.log("submited")
+
     if (!logInForm.email || !logInForm.password) {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
+
       if (form.propertyID) {
         navigate("/pay-reservation")
       } else {
         navigate("/")
       }
+
     }
   }
+
+  useEffect(() => {
+    if (auth && (admin === "SUBADMIN" || admin === "ADMIN")) {
+      navigate("/dashboard/emails")
+    } else if (auth && admin === "NORMAL") {
+      navigate("/")
+    }
+  }, [auth, admin])
+
   return (
     <Container>
       <Form fields={2}>

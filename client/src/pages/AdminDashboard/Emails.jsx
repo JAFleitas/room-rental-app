@@ -11,6 +11,7 @@ import TablePagination from "@mui/material/TablePagination"
 import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
+import styles from "./styles.module.css"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,7 +37,7 @@ export default function Emails() {
   const rows = useSelector(state => state.admin.emails)
   const navigate = useNavigate()
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(3)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
   const [sort, setSort] = React.useState({ sortBy: "title", order: "dsc" })
   const [currentRows, setCurrentRows] = React.useState(rows)
 
@@ -50,15 +51,33 @@ export default function Emails() {
   }
 
   const handleChangeSort = value => {
+    let newSort
+
     if (sort.sortBy === value) {
-      return setSort({ ...sort, order: sort.order === "asc" ? "dsc" : "asc" })
+      newSort = { ...sort, order: sort.order === "asc" ? "dsc" : "asc" }
+    } else {
+      newSort = { ...sort, sortBy: value }
     }
-    return setSort({ ...sort, sortBy: value })
+
+    setSort(newSort)
+
+    if (rows && rows.length) {
+      // console.log({ rows })
+      let sorterRows =
+        newSort.order === "asc"
+          ? rows.sort((a, b) =>
+              (a[newSort.sortBy] + "").localeCompare(b[newSort.sortBy] + ""),
+            )
+          : rows.sort((a, b) =>
+              (b[newSort.sortBy] + "").localeCompare(a[newSort.sortBy] + ""),
+            )
+
+      setCurrentRows(sorterRows)
+    }
   }
 
   React.useEffect(() => {
-    if (rows && rows.length) {
-      // console.log({ rows })
+    if (rows) {
       let sorterRows =
         sort.order === "asc"
           ? rows.sort((a, b) =>
@@ -67,14 +86,13 @@ export default function Emails() {
           : rows.sort((a, b) =>
               (b[sort.sortBy] + "").localeCompare(a[sort.sortBy] + ""),
             )
-
       setCurrentRows(sorterRows)
     }
-  }, [sort, rows])
+  }, [rows])
 
   return (
     <div style={{ margin: "1rem" }}>
-      <h2>Promotionals Emails</h2>
+      <h2 className={styles.title}>Promotionals Emails</h2>
       <div
         style={{
           display: "flex",
@@ -228,14 +246,14 @@ export default function Emails() {
                     ))
                 ) : (
                   <StyledTableRow>
-                    <StyledTableCell>
+                    <StyledTableCell colSpan={"7"}>
                       Aún no ha enviado emails promocionales
                     </StyledTableCell>
                   </StyledTableRow>
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell>Loading...</StyledTableCell>
+                  <StyledTableCell colSpan={"7"}>Loading...</StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>
