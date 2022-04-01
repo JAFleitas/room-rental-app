@@ -263,7 +263,7 @@ const updateUser = async (req, res, next) => {
 
   try {
     await User.update(newInfo, { where: { id: req.user.id } }).then(resp => {
-      res.send("Update succesful")
+      res.send("Update successful")
     })
   } catch (error) {
     next(error)
@@ -389,14 +389,13 @@ const changeEnabledUser = async (req, res, next) => {
 
 const promoteToAdmin = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { password } = req.body;
+    const { id } = req.params
+    const { password } = req.body
 
     const isMatch = await bcrypt.compare(password, req.user.password)
 
     // si la contraseña es incorreta
     if (!isMatch) return next({ status: 403, message: "Failed" })
-
 
     await User.update(
       {

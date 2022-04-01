@@ -13,6 +13,7 @@ import {
   LabelSt,
   TextDescription,
   TitleSt,
+  FormPropertyContainer,
 } from "./styles"
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
@@ -76,8 +77,23 @@ export default function FormAddProperty(props) {
             getHeaderToken(),
           )
           .then(res => {
-            setFormData(initialStateForm)
-            console.log(res)
+            swal({
+              title: "Successful",
+              text: res.data.message,
+              icon: "success",
+            })
+            servicesData.map(elem => {
+              document.getElementById(elem.id).checked = false
+            })
+            document.getElementById("FileImage").value = ""
+            setFormData(prev => {
+              return {
+                ...initialStateForm,
+                image: [],
+                services: [],
+                coordinates: [],
+              }
+            })
           })
           .catch(err => console.log(err))
       }
@@ -160,8 +176,7 @@ export default function FormAddProperty(props) {
           coordinates: res.data.coordinates,
         })
         services.map(elem => {
-          let servi = document.getElementById(elem)
-          servi.checked = true
+          document.getElementById(elem).checked = true
         })
       }
       loadData(props.id)
@@ -183,7 +198,7 @@ export default function FormAddProperty(props) {
   }, [formData])
 
   return (
-    <>
+    <FormPropertyContainer>
       <TitleSt>
         {props.id ? <h1>Edit Property</h1> : <h1>Add Property</h1>}
       </TitleSt>
@@ -300,9 +315,11 @@ export default function FormAddProperty(props) {
                   </div>
                 ))
               : null}
+            {errors.image && <LabelSt error={true}>{errors.image}</LabelSt>}
             <input
               type="file"
               name="file"
+              id="FileImage"
               multiple="multiple"
               onChange={handleFileChange}
             />
@@ -348,7 +365,7 @@ export default function FormAddProperty(props) {
             errors.name ||
             errors.location ||
             errors.price ||
-            errors.numberOfRooms ||
+            errors.image ||
             errors.description ||
             errors.typePropertyID ||
             errors.coordinates ||
@@ -358,6 +375,6 @@ export default function FormAddProperty(props) {
           {props.id ? "UPDATE PROPERTY" : "ADD PROPERTY"}
         </ButtonSt>
       </TitleSt>
-    </>
+    </FormPropertyContainer>
   )
 }
