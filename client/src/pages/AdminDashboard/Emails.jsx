@@ -227,6 +227,7 @@ export default function Emails() {
                               padding: "5px",
                               borderRadius: "7px",
                               marginTop: "5px",
+                              display: "block"
                             }}
                             onClick={() => navigate(`resend/${row.id}`)}>
                             Resend

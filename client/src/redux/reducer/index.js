@@ -31,6 +31,9 @@ import {
   GET_RENTALS_BY_USER,
   CANCEL_RENTAL,
   GET_ALL_USERS,
+  CREATE_ADMIN,
+  ADMIN_CHANGE_ENABLE_USER,
+  ADMIN_BLOCK_USER,
 } from "../actions"
 
 const initialState = {
@@ -74,7 +77,16 @@ const initialState = {
 }
 
 function rootReducer(state = initialState, { type, payload }) {
+  let newUsers, finded
   switch (type) {
+    case CREATE_ADMIN:
+    case ADMIN_CHANGE_ENABLE_USER:
+    case ADMIN_BLOCK_USER:
+      newUsers = state.admin.users.filter(user => user.id !== payload.id)
+      finded = state.admin.users.find(user => user.id === payload.id)
+      // console.log({finded, payload});
+      newUsers.push({ ...finded, ...payload })
+      return { ...state, admin: { ...state.admin, users: newUsers } }
     case GET_ALL_USERS:
       return { ...state, admin: { ...state.admin, users: payload } }
     case GET_ALL_EMAILS:
