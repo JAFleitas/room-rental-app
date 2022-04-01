@@ -84,9 +84,9 @@ function rootReducer(state = initialState, { type, payload }) {
     case ADMIN_BLOCK_USER:
       newUsers = state.admin.users.filter(user => user.id !== payload.id)
       finded = state.admin.users.find(user => user.id === payload.id)
-      console.log({finded});
+      // console.log({finded, payload});
       newUsers.push({ ...finded, ...payload })
-      return { ...state, admin: { ...state.admin, user: newUsers } }
+      return { ...state, admin: { ...state.admin, users: newUsers } }
     case GET_ALL_USERS:
       return { ...state, admin: { ...state.admin, users: payload } }
     case GET_ALL_EMAILS:

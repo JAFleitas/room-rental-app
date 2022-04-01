@@ -50,11 +50,11 @@ export function createAdmin(userId) {
 }
 
 export function blockUser(userId, blocked) {
-  return { type: CREATE_ADMIN, payload: { id: userId, blocked } }
+  return { type: ADMIN_BLOCK_USER, payload: { id: userId, blocked } }
 }
 
 export function changeEnableUser(userId, status) {
-  return { type: CREATE_ADMIN, payload: { id: userId, status } }
+  return { type: ADMIN_CHANGE_ENABLE_USER, payload: { id: userId, status } }
 }
 
 export function getAllEmails() {

@@ -29,7 +29,7 @@ const SubFormPromoteUser = ({ userId }) => {
       console.log({ data })
       setPassword("")
       alert(`New admin created`)
-      dispatch(createAdmin(userId));
+      dispatch(createAdmin(userId))
     } catch (error) {
       console.log({ error: error.response?.data })
       alert("Something went wrong :(")
