@@ -39,11 +39,23 @@ export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
 export const GET_ALL_USERS = "GET_ALL_USERS"
-
-
-
+export const ADMIN_BLOCK_USER = "ADMIN_BLOCK_USER"
+export const ADMIN_CHANGE_ENABLE_USER = "ADMIN_CHANGE_ENABLE_USER"
+export const CREATE_ADMIN = "CREATE_ADMIN"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function createAdmin(userId) {
+  return { type: CREATE_ADMIN, payload: { id: userId, type: "SUBADMIN" } }
+}
+
+export function blockUser(userId, blocked) {
+  return { type: CREATE_ADMIN, payload: { id: userId, blocked } }
+}
+
+export function changeEnableUser(userId, status) {
+  return { type: CREATE_ADMIN, payload: { id: userId, status } }
+}
 
 export function getAllEmails() {
   return async function (dispatch) {
