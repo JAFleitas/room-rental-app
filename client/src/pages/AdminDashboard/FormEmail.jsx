@@ -51,7 +51,7 @@ const FormEmail = ({ resend = false }) => {
   useEffect(() => {
     if (resend) {
       const oldEmail = oldEmails.find(email => email.id + "" === id + "")
-      setForm({ ...form, ...oldEmail })
+      setForm({ ...form, ...oldEmail, message: oldEmail.message || "" })
     }
   }, [resend, oldEmails])
 
@@ -75,6 +75,7 @@ const FormEmail = ({ resend = false }) => {
         />
         <label>Message</label>
         <textarea
+          maxLength={1500}
           name="message"
           value={form.message}
           onChange={handleChange}></textarea>

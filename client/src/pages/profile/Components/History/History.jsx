@@ -1,6 +1,8 @@
 import React from "react"
-import { SubMenu } from "./styled"
+import { Title, SubMenu } from "../Favorites/styled"
 
 export default function History() {
-  return <SubMenu>Hello</SubMenu>
+  return <SubMenu>
+     <Title>My history</Title>
+  </SubMenu>
 }
