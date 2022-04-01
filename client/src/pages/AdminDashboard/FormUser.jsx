@@ -130,7 +130,7 @@ const FormUser = () => {
         users?.find(user => user.id + "" === id + "") || false
       setUser(selectedUser)
     }
-  }, [id])
+  }, [id, users])
 
   return (
     <div className={styles.container}>
