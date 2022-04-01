@@ -1,7 +1,8 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import { getAllEmails } from "../../redux/actions"
 import getHeaderToken from "../../utilities/getHeadertoken"
 import styles from "../ForgotPassword/styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
@@ -20,6 +21,7 @@ const FormEmail = ({ resend = false }) => {
   const oldEmails = useSelector(state => state.admin.emails)
   const [form, setForm] = useState(initialForm)
   const { id } = useParams()
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -39,6 +41,7 @@ const FormEmail = ({ resend = false }) => {
       console.log({data});
       setForm(initialForm);
       alert("Promotional email send successfully");
+      dispatch(getAllEmails());
     } catch (error) {
       console.log({ error: error.response?.data })
       alert("Something went wrong :(")
