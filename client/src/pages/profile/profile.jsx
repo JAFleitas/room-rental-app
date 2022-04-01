@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux"
 import getHeaderToken from "../../utilities/getHeadertoken"
 import { loadUser } from "../../redux/actions"
 import axios from "axios"
+import swal from "sweetalert"
 const api = import.meta.env.VITE_APP_API_URL
 
 export default function Profile() {
@@ -23,34 +24,59 @@ export default function Profile() {
   const changeImageProfile = async e => {
     if (localStorage.getItem("tokenRentalApp")) {
       const files = e.target.files
-      let data = new FormData()
-      data.append("file", files[0])
-      data.append("upload_preset", "rentalAppProfiles")
-      try {
-        let res = await fetch(
-          "https://api.cloudinary.com/v1_1/dye9d3vzy/image/upload",
-          {
-            method: "POST",
-            body: data,
-          },
-        )
-        let file = await res.json()
-        await axios
-          .put(
-            `${api}/users`,
-            { data: { photo: file.secure_url } },
-            getHeaderToken(),
+      if (!/\.(jpg|png|gif)$/i.test(files[0].name)) {
+        swal({
+          title: "Warinig",
+          text: "The file to update is not an image!",
+          icon: "warning",
+        })
+      } else {
+        let data = new FormData()
+        data.append("file", files[0])
+        data.append("upload_preset", "rentalAppProfiles")
+        try {
+          let res = await fetch(
+            "https://api.cloudinary.com/v1_1/dye9d3vzy/image/upload",
+            {
+              method: "POST",
+              body: data,
+            },
           )
-          .then(res => {
-            dispatch(loadUser())
-            // console.log(res)
-          })
-          .catch(err => console.log(err))
-      } catch (error) {
-        console.log(error)
+          let file = await res.json()
+          await axios
+            .put(
+              `${api}/users`,
+              { data: { photo: file.secure_url } },
+              getHeaderToken(),
+            )
+            .then(res => {
+              dispatch(loadUser())
+              swal(res.data, {
+                icon: "success",
+              })
+            })
+            .catch(error =>
+              swal({
+                title: "Error!",
+                text: "An error has occurred",
+                icon: "error",
+              }),
+            )
+        } catch (error) {
+          swal({
+            title: "Error!",
+            text: "An error has occurred",
+            icon: "error",
+          }),
+            console.log(error)
+        }
       }
     } else {
-      console.log("Not found token")
+      swal({
+        title: "Error!",
+        text: "This user is not logged in",
+        icon: "error",
+      })
     }
   }
 
