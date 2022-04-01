@@ -45,7 +45,7 @@ export const CardContainer = styled.div`
     box-shadow: 0 0 10px #4b4b4b;
     cursor: pointer;
   }
-  @media screen and (max-width: 1080px) {
+  @media screen and (max-width: 1140px) {
     width: 80%;
     margin-left: 10%;
   }

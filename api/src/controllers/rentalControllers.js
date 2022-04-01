@@ -1,8 +1,6 @@
-
 /* eslint-disable */
 
 const { PropertyRental, Property, User } = require("../db/index.js")
-
 
 const addRental = async (req, res) => {
   const userID = req.user.id
@@ -104,28 +102,66 @@ const cancelRental = async (req, res, next) => {
     })
     console.log(Rental[0])
 
-    if (!Rental) {
-      res.json({ status: 400, message: "This Rent doesnt exists" })
-    }
-    if (Rental[0].dataValues.status === "active") {
-      Rental[0].update({
-        status: "cancelled",
-      })
-      await Rental[0].save()
+    let startDate = Rental[0].dataValues.start_date
+    let today = new Date()
+    console.log("startDate")
+    console.log(startDate)
+    console.log("today")
+    console.log(today)
+    if (
+      today !== undefined &&
+      startDate !== undefined &&
+      today !== null &&
+      startDate !== null
+    ) {
+      function difference(date1, date2) {
+        const date1utc = Date.UTC(
+          date1.getFullYear(),
+          date1.getMonth(),
+          date1.getDate(),
+        )
+        const date2utc = Date.UTC(
+          date2.getFullYear(),
+          date2.getMonth(),
+          date2.getDate(),
+        )
+        day = 1000 * 60 * 60 * 24
+        return (date2utc - date1utc) / day
+      }
+      // Thiago
+      const time_difference = difference(today, startDate)
+      console.log(time_difference)
+      if (time_difference <= 10) {
+        res.json({
+          status: 401,
+          message:
+            "Error, the cancellation process can happen with an anticipation of 10+ days before the start date of the rent",
+        })
+      } else {
+        if (!Rental) {
+          res.json({ status: 400, message: "This Rent doesnt exists" })
+        }
+        if (Rental[0].dataValues.status === "active") {
+          Rental[0].update({
+            status: "cancelled",
+          })
+          await Rental[0].save()
 
-      // jane.set({
-      //   name: "Ada",
-      //   favoriteColor: "blue"
-      // });
-      // // As above, the database still has "Jane" and "green"
-      // await jane.save();
-
-      res.json({ status: 200, message: "This property has been cancelled " })
-    } else if (Rental[0].dataValues.status === "cancelled") {
-      res.json({ status: 400, message: "This property is already cancelled " })
-    } else {
-      res.json({ status: 400, message: "Error" })
+          res.json({
+            status: 200,
+            message: "This property has been cancelled ",
+          })
+        } else if (Rental[0].dataValues.status === "cancelled") {
+          res.json({
+            status: 400,
+            message: "This property is already cancelled ",
+          })
+        } else {
+          res.json({ status: 400, message: "Error" })
+        }
+      }
     }
+    // Thiago
   } catch (error) {
     next(error)
   }

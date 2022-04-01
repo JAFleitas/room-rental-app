@@ -40,9 +40,6 @@ export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
 export const GET_ALL_USERS = "GET_ALL_USERS"
 
-
-
-
 const api = import.meta.env.VITE_APP_API_URL
 
 export function getAllEmails() {
@@ -481,6 +478,9 @@ export function cancelRental(rentID) {
     try {
       let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
       console.log(response)
+      if (response.data.status === 401) {
+        alert(response.data.message)
+      }
       return dispatch({
         type: CANCEL_RENTAL,
       })
