@@ -1,6 +1,6 @@
 import styled from "styled-components"
 export const SubMenu = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,6 @@ export const SubMenu = styled.div`
     margin: 1rem;
     width: 90%;
   }
-
 `
 export const Title = styled.h1`
   width: 70%;
@@ -46,6 +45,57 @@ export const Title = styled.h1`
   text-align: center;
   margin: 0 auto;
 `
+export const RedButtonn = styled.button`
+  color: #ffffff;
+  justify-self: center;
+  align-self: center;
+  text-justify: center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 30%;
+  min-height: 30px;
+  background-color: #cf222e;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+  margin-left: 160px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #ffffff;
+    color: #cf222e;
+  }
+`
+export const WhiteButton = styled.button`
+  display: flex;
+  color: black;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: rgba(27, 31, 36, 0.1);
+  width: 30%;
+  min-height: 30px;
+  background-color: white;
+  font-size: large;
+  font-weight: normal;
+  font-family: sans-serif;
+  margin: 1rem auto;
+
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+`
+
 export const RedButton = styled.button`
   color: #ffffff;
   justify-self: center;
@@ -60,38 +110,11 @@ export const RedButton = styled.button`
   font-size: large;
   font-weight: normal;
   font-family: sans-serif;
-  margin: 1rem 0;
-
+  margin: 0.5rem;
   transition: 0.2s;
 
   &:hover {
     background-color: #ffffff;
-    color:#cf222e;
-  }
-`
-export const WhiteButton = styled.button`
-  display: flex;
-  color: black;
-  justify-self: center;
-  align-self: center;  
-  justify-content: center;
-  align-items: center;
-  padding: 3px;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  box-shadow: rgba(27,31,36,0.1);
-  width: 30%;
-  min-height: 30px;
-  background-color: white;
-  font-size: large;
-  font-weight: normal;
-  font-family: sans-serif;
-  margin: 1rem auto;
-
-  transition: 0.2s;
-
-  &:hover{
-    background-color: #e9ecef;
-    
+    color: #cf222e;
   }
 `
