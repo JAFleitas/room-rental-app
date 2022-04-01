@@ -14,7 +14,7 @@ module.exports = sequelize => {
         required: true,
       },
       message: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1500),
         retuired: true,
       },
       segment: {
@@ -22,7 +22,7 @@ module.exports = sequelize => {
         required: true,
       },
       image: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(700),
         required: true,
         validate: {
           isURL: true,
