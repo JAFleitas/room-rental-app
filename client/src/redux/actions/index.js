@@ -493,6 +493,9 @@ export function cancelRental(rentID) {
     try {
       let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
       console.log(response)
+      if (response.data.status === 401) {
+        alert(response.data.message)
+      }
       return dispatch({
         type: CANCEL_RENTAL,
       })
