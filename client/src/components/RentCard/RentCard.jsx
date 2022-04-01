@@ -15,11 +15,13 @@ import { cancelRental } from "../../redux/actions/index"
 export default function RentCard() {
   const userRentals = useSelector(state => state.userRentals.data)
   const dispatch = useDispatch()
-  console.log(userRentals)
+  // Thiago
+
+  const [render, setRender] = useState(true)
 
   useEffect(() => {
     dispatch(getRentalsByUser())
-  }, [dispatch])
+  }, [render])
 
   function handleCancelation(rentID) {
     console.log(rentID)
@@ -27,10 +29,13 @@ export default function RentCard() {
     if (rentID) {
       console.log(rentID)
       dispatch(cancelRental(rentID))
+      setRender(!render)
     } else {
       console.log("error no se encontro el id de la renta")
     }
   }
+  // Thiago
+
   return (
     <Container>
       {userRentals?.map(rent => {
