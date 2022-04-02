@@ -5,6 +5,7 @@ import { ContainerPaginated, ButtonPage, LabelPage, OutOf } from "./styles"
 
 export default function Paginated() {
   const totalPages = useSelector(state => state.AllProperties.totalPages)
+  const globalPage = useSelector(state => state.page)
   const [currentPage, setCurrentPage] = useState(1)
   const filters = useSelector(state => state.filters)
 
@@ -12,6 +13,9 @@ export default function Paginated() {
 
   useEffect(() => {
     dispatch(actionChangePage(currentPage))
+    return () => {
+      window.scroll(0, 0)
+    }
   }, [currentPage])
   useEffect(() => {
     setCurrentPage(1)
@@ -30,7 +34,7 @@ export default function Paginated() {
         <>
           <LabelPage decoration={"underline"} border={"1px solid #2b2929;"}>
             {" "}
-            {currentPage}{" "}
+            {globalPage}{" "}
           </LabelPage>
           <OutOf border={"1px solid #2b2929;"}>out of</OutOf>
           <LabelPage border={"1px solid #2b2929;"}> {totalPages}</LabelPage>
