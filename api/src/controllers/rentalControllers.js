@@ -14,7 +14,6 @@ const addRental = async (req, res) => {
         start_date,
         final_date,
       })
-      console.log(newRental)
 
       if (newRental) {
         res.status(201).json({ message: "Created new rental", data: newRental })
@@ -47,8 +46,16 @@ const getRental = async (req, res) => {
 const getAllRentals = async (req, res, next) => {
   try {
     const rentals = await PropertyRental.findAll()
+    for (let i = 0; i < rentals.length; i++) {
+      rentals[i].dataValues.user = await User.findByPk(rentals[i].userID)
+      rentals[i].dataValues.property = await Property.findByPk(
+        rentals[i].propertyID,
+      )
+    }
 
-    res.json(rentals)
+    await Promise.all([rentals]).then(response => {
+      res.json(rentals)
+    })
   } catch (error) {
     next(error)
   }

@@ -9,6 +9,7 @@ import {
   getAllProperties,
   getAllServices,
   getAllUsers,
+  getAllRentals,
   getFavorites,
   loadUser,
 } from "./redux/actions"
@@ -38,6 +39,7 @@ function App() {
     if (auth && admin) {
       dispatch(getAllEmails())
       dispatch(getAllUsers())
+      dispatch(getAllRentals())
     }
   }, [admin])
 
