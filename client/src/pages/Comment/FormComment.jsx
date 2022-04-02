@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styles from "../ForgotPassword/styles.module.css"
 import Rating from "@mui/material/Rating"
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import getHeaderToken from "../../utilities/getHeadertoken"
 const api = import.meta.env.VITE_APP_API_URL
 
@@ -10,7 +10,8 @@ const FormComment = () => {
   const [message, setMessage] = useState("")
   const [stars, setStars] = useState(2.5)
   const { id: propertyId } = useParams()
-
+  const navigate = useNavigate()
+  
   const handleChangeMessage = e => {
     const { value } = e.target
 
@@ -31,6 +32,7 @@ const FormComment = () => {
         console.table(comment);
         setMessage("");
         alert("Comment saved succesfully");
+        navigate("/profile/history");
       } catch (error) {
         alert(
           (typeof error?.response?.data === "string"
