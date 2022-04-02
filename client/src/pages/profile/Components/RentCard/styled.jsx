@@ -1,11 +1,9 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  width: 70%;
-  margin-left: 2.5%;
+  width: 65%;
+  margin: 2.5%;
   margin-top: 4%;
-  margin-bottom: 4%;
-
   height: fit-content;
   border-radius: 10px;
   background: rgb(226, 200, 255);
@@ -30,11 +28,10 @@ export const CardContainer = styled.div`
   grid-template-columns: 40% 60%;
   grid-template-rows: 40% 45% 15%;
   background-color: white;
-  width: ${({ width }) => width ?? "46%"};
+  width: ${({ width }) => width ?? "44%"};
 
-  width: 46%;
   height: fit-content;
-  margin: 1rem 0.3rem;
+  margin: 0.75rem;
   border-radius: 15px;
   box-shadow: 0 5px 5px rgba(0, e, e, 0.2);
   overflow: hidden;
