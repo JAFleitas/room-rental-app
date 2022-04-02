@@ -3,15 +3,17 @@ import styled from "styled-components"
 export const Container = styled.div`
   background-color: #e2c8ff;
   border-radius: 20px;
-
   width: 40%;
-  margin-left: 30%;
-  margin-top: 1%;
+  margin: 0.5rem auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 70px;
+
+  @media screen and (max-width: 800px) {
+    width: 90%;
+  }
 `
 export const SelectSt = styled.select`
   height: 35%;
@@ -27,7 +29,6 @@ export const SelectSt = styled.select`
   border-radius: 10px;
   padding: 5px;
   margin-left: 15px;
-  /* margin-right: 15px; */
 
   &:focus {
     background: rgb(139, 37, 255);
@@ -38,14 +39,7 @@ export const LabelSt = styled.label`
   font-size: 15px;
   font-weight: 900;
   margin-right: 5px;
-  background: rgb(173, 102, 255);
-  background: linear-gradient(
-    135deg,
-    rgba(173, 102, 255, 1) 0%,
-    rgba(190, 134, 255, 1) 78%,
-    rgba(208, 166, 255, 1) 100%
-  );
-  color: white;
-  padding: 8px;
+  color: black;
+  padding: 5px;
   border-radius: 15px;
 `
