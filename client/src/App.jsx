@@ -36,7 +36,7 @@ function App() {
   }, [auth])
 
   useEffect(() => {
-    if (auth && admin) {
+    if (auth && (admin === "ADMIN" || admin === "SUBADMIN")) {
       dispatch(getAllEmails())
       dispatch(getAllUsers())
       dispatch(getAllRentals())
