@@ -106,7 +106,6 @@ export default function RentForm(props) {
         final_date: dates.to,
         paymenthMethodId: payMethod,
       }
-
     }
     // '01/02/2022' '->' '2022/02/01';
     // function convertDateFormat(string) {
@@ -121,7 +120,6 @@ export default function RentForm(props) {
     // console.log(inicio)
     // console.log(end)
 
-
     // .then(alert("Renta creada"))
     // .catch(alert("Hubo un problema..."))
 
@@ -134,13 +132,12 @@ export default function RentForm(props) {
     }
     if (auth) {
       dispatch(actionAddFormRentalProperty(form))
-      navigate("/pay-reservation")
+      navigate("/pay-reservation", { scroll: { x: 0, y: 0 } })
     }
     if (!auth) {
       dispatch(actionAddFormRentalProperty(form))
-      navigate("/login")
+      navigate("/login", { scroll: { x: 0, y: 0 } })
     }
-
 
     // setDiasOcupados([
     //   ...diasOcupados,

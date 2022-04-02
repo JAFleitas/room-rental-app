@@ -21,6 +21,7 @@ const UserRoutes = () => {
     <>
       <Nav />
       <Routes>
+        <Route path="/logIn" element={<Login />} />
         <Route path="/property-info/:id" element={<Details />} />
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/about-us" element={<AboutUs />} />

@@ -12,7 +12,7 @@ import {
   getFavorites,
   loadUser,
 } from "./redux/actions"
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom"
 import Login from "./components/DropDown/Login"
 
 function App() {
@@ -43,9 +43,6 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route exact path="/logIn" element={<Login />} />
-      </Routes>
       <RouterApp />
     </>
   )

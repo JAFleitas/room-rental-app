@@ -38,7 +38,7 @@ function PropertyCard(props) {
   const [liked, setLiked] = useState(false)
 
   function handleClick() {
-    navigateTo(`/property-info/${props.id}`)
+    navigateTo(`/property-info/${props.id}`, { scroll: { x: 0, y: 0 } })
   }
 
   useEffect(() => {
