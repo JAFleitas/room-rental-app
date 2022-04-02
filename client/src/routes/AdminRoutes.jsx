@@ -4,7 +4,7 @@ import Error404 from "../pages/404/Error404.jsx"
 import Emails from "../pages/AdminDashboard/Emails.jsx"
 import FormEmail from "../pages/AdminDashboard/FormEmail.jsx"
 import Users from "../pages/AdminDashboard/Users.jsx"
-import LeftBar from "../pages/AdminDashboard/LeftBar.jsx"
+import LeftBar from "../pages/AdminDashboard/LeftBar/LeftBar.jsx"
 import FormUser from "../pages/AdminDashboard/FormUser.jsx"
 
 import Security from "../pages/AdminDashboard/Security.jsx"
