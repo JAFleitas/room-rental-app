@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getRentalsByUser } from "../../redux/actions"
+import { getRentalsByUser } from "../../../../redux/actions"
 import {
   Container,
   CardContainer,
@@ -11,7 +11,8 @@ import {
   Image,
   RedButton,
 } from "./styled"
-import { cancelRental } from "../../redux/actions/index"
+import { cancelRental } from "../../../../redux/actions/index"
+import { Title } from "../Acount/styled"
 export default function RentCard() {
   const userRentals = useSelector(state => state.userRentals.data)
   const dispatch = useDispatch()
@@ -38,6 +39,7 @@ export default function RentCard() {
 
   return (
     <Container>
+      <Title>My history</Title>
       {userRentals?.map(rent => {
         return (
           <CardContainer>

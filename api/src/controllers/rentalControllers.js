@@ -33,6 +33,7 @@ const getRental = async (req, res) => {
     const Rentals = await PropertyRental.findAll({
       where: {
         propertyID: propertyID,
+        status:"active"
       },
     })
     if (Rentals) {
@@ -89,9 +90,7 @@ const getRentalsByUser = async (req, res) => {
 
 const cancelRental = async (req, res, next) => {
   const rentID = req.body.rentID
-  console.log("rentID")
-  console.log(req.body.rentID)
-  console.log(rentID)
+
 
   try {
     // const Rental = await PropertyRental.findByPk(rentID)
