@@ -19,7 +19,7 @@ import {
 import { ContainerImages } from "./components/images-detail/styles"
 import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 import RentForm from "../../components/RentForm/RentForm"
-
+import CircularProgress from "@mui/material/CircularProgress"
 import { getPropertyById, GET_PROPERTY_BY_ID } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -44,7 +44,9 @@ export default function Details() {
   }, [])
   const property = useSelector(state => state.detailsOfProperty)
   return loading ? (
-    <div>'Loading...'</div>
+    <div style={{display: "flex"}}>
+      <CircularProgress />
+    </div>
   ) : property ? (
     <ContainerPageDetails>
       <ContainerMapAndTitle>

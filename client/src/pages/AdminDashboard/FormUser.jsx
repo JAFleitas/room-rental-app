@@ -6,6 +6,7 @@ import { blockUser, changeEnableUser, createAdmin } from "../../redux/actions"
 import getHeaderToken from "../../utilities/getHeadertoken"
 import styles from "../ForgotPassword/styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
+import CircularProgress from "@mui/material/CircularProgress"
 
 const SubFormPromoteUser = ({ userId }) => {
   const [password, setPassword] = useState("")
@@ -179,7 +180,7 @@ const FormUser = () => {
             <div>User not found</div>
           )
         ) : (
-          <div>Loading...</div>
+          <div style={{display: "flex"}}><CircularProgress /></div>
         )}
         {user?.type !== "ADMIN" ? (
           <>

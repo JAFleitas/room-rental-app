@@ -28,22 +28,31 @@ export const Icon = styled.span`
   z-index: -1;
 `
 
-export const Container = styled.form`
+export const ContainerSearchBar = styled.div`
   display: flex;
-  width: 80%;
-  height: 100px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  margin: 0.5rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
 
+  @media screen and (max-width: 525px) {
+    flex-direction: column;
+
+    div{
+      width: 95%;
+    }
+  } ;
+`
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
   background-color: #e2c8ff;
   border-radius: 1rem;
   padding: 1rem;
   transition: 1s;
-
-  &:hover {
-    cursor: pointer;
-  }
 `
 export const Box = styled.div`
   display: flex;

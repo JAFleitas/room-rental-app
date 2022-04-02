@@ -12,6 +12,7 @@ import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
 import styles from "./styles.module.css"
+import CircularProgress from "@mui/material/CircularProgress"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -260,7 +261,11 @@ export default function Users() {
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell colSpan={"9"}>Loading...</StyledTableCell>
+                  <StyledTableCell colSpan={"9"}>
+                    <div style={{ display: "flex" }}>
+                      <CircularProgress />
+                    </div>
+                  </StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>
