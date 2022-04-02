@@ -41,7 +41,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (auth) {
+    if (auth && admin) {
       if (admin === "NORMAL") {
         return navigate("/", { scroll: { x: 0, y: 0 } })
       } else {

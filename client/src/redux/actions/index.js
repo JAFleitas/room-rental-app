@@ -344,7 +344,7 @@ export function postNewUser({
         type: POST_NEW_USER,
         payload: response.data.token,
       })
-      dispatch(loadUser())
+      // dispatch(loadUser())
     } catch (error) {
       console.log(error.response)
       alert("no se pudo crear el usuario")

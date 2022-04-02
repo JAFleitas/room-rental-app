@@ -13,8 +13,6 @@ import {
   getFavorites,
   loadUser,
 } from "./redux/actions"
-import { Route, Routes } from "react-router-dom"
-import Login from "./components/DropDown/Login"
 
 function App() {
   const dispatch = useDispatch()
