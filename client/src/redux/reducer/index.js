@@ -34,6 +34,7 @@ import {
   CREATE_ADMIN,
   ADMIN_CHANGE_ENABLE_USER,
   ADMIN_BLOCK_USER,
+  GET_ALL_RENTALS,
 } from "../actions"
 
 const initialState = {
@@ -224,7 +225,11 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         propertyRentals: payload,
       }
-
+    case GET_ALL_RENTALS:
+      return{
+        ...state,
+        propertyRentals: payload,
+      }
     case FORM_PROPERTY_RENTAL:
       return {
         ...state,
