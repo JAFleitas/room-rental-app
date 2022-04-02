@@ -109,12 +109,12 @@ export default function Filters() {
   useEffect(() => {
     dispatch(getAllCategories())
     dispatch(getAllServices())
-    console.log(filtersGlobal,"filtersGlobal");
+    // console.log(filtersGlobal,"filtersGlobal");
     setfilters({...initialFilters,...filtersGlobal})
   }, [])
 
   useEffect(() => {
-    console.log(filtersGlobal,"filtersGlobal");
+    // console.log(filtersGlobal,"filtersGlobal");
     setfilters({...initialFilters,...filtersGlobal})
   }, [filtersGlobal])
 

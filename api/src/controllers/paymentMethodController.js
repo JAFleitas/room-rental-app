@@ -19,7 +19,7 @@ const createPaymentMethod = async (req, res, next) => {
     req.body
 
   try {
-    console.log(req.user);
+    // console.log(req.user);
     const methods = await PaymentMethod.findAll({
       where: { userId: req.user.id },
     })

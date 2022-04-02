@@ -196,6 +196,7 @@ function rootReducer(state = initialState, { type, payload }) {
         auth: false,
         listFavorites: {},
         paymenthMethods: [],
+        admin: initialState.admin
       }
     case CHANGE_PAGE:
       return {

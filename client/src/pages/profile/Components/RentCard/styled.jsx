@@ -78,7 +78,6 @@ export const CardInfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  border: 1px solid #d722fc;
   border-radius: 15px;
   padding: 20px;
   margin: 5px;
@@ -103,28 +102,29 @@ export const Image = styled.img`
   height: 100%;
   border-radius: 1rem;
 `
-export const RedButton = styled.button`
-  grid-column: 1/3;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: 0.5rem;
   grid-row: 3/4;
-  color: #ffffff;
+  grid-column: 1/3;
+`
+export const Button = styled.button`
   text-justify: center;
-  border: 1px solid black;
+  border: none;
   border-radius: 0.5rem;
   box-shadow: rgba(27, 31, 36, 0.1);
-  width: 40%;
-  height: 70%;
-  /* min-height: 30px; */
-  background-color: #cf222e;
-  font-size: large;
+  background-color: #ab119fdd;
+  color: white;
+  padding: 4px 7px;
+  font-size: 1rem;
   font-weight: normal;
   font-family: sans-serif;
-  margin-left: 30%;
-  margin-top: 1%;
-  margin-bottom: 3%;
   transition: 0.2s;
 
   &:hover {
-    background-color: #ffffff;
-    color: #cf222e;
+    background-color: #64075cdd;
   }
 `

@@ -149,7 +149,7 @@ export default function RentForm(props) {
   }
 
   function handlePayChange(id) {
-    console.log(id)
+    // console.log(id)
     setPayMethod(id)
   }
 
@@ -227,7 +227,7 @@ export default function RentForm(props) {
         <PaymentMethodsContainer>
           {paymentMethods ? (
             paymentMethods.map(method => {
-              console.log(method)
+              // console.log(method)
               return (
                 <PaymentMethod key={method.id}>
                   <PaymentMethodName>

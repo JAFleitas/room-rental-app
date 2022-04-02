@@ -69,19 +69,19 @@ export default function Rentals() {
     setSort(newSort)
 
     if(rows && rows.length && value === "user.name"){
-      console.log(rows);
+      // console.log(rows);
 
       let sorterRows = rows.sort(handleSortNestedProps("user", "name", newSort.order));
 
       setCurrentRows(sorterRows)
     } else if(rows && rows.length && value === "property.name"){
-      console.log(rows);
+      // console.log(rows);
 
       let sorterRows = rows.sort(handleSortNestedProps("property", "name", newSort.order));
 
       setCurrentRows(sorterRows)
     } else if(rows && rows.length && value === "property.location"){
-      console.log(rows);
+      // console.log(rows);
 
       let sorterRows = rows.sort(handleSortNestedProps("property", "location", newSort.order));
 

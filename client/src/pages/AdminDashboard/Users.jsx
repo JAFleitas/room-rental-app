@@ -77,7 +77,7 @@ export default function Users() {
   }
 
   React.useEffect(() => {
-    console.log({rows});
+    // console.log({rows});
     if (rows) {
       let sorterRows =
         sort.order === "asc"
