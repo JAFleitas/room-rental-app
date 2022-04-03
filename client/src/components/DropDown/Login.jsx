@@ -71,9 +71,6 @@ const Login = () => {
             onChange={handleChangeLogIn}
             placeholder="Password"></Input>
         </Field>
-        <RedButton onClick={() => navigate("/forgot-password")}>
-          I forgot my password
-        </RedButton>
         <SendButton
           disabled={!logInForm.email || !logInForm.password}
           onClick={e => handleSubmitLogIn(e)}>
@@ -81,8 +78,10 @@ const Login = () => {
         </SendButton>
         <LoginWithGoogle />
         <LoginWithFacebook />
-
         <SendButton signup={true}>Sign up</SendButton>
+        <RedButton onClick={() => navigate("/forgot-password")}>
+          I forgot my password
+        </RedButton>
       </Form>
     </Container>
   )
