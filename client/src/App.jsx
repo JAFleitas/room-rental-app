@@ -13,11 +13,13 @@ import {
   getFavorites,
   loadUser,
 } from "./redux/actions"
+import { useNavigate } from "react-router-dom"
 
 function App() {
   const dispatch = useDispatch()
   const auth = useSelector(state => state.auth)
   const admin = useSelector(state => state.user.type)
+  const navigate = useNavigate()
 
   useEffect(() => {
     localStorage.tokenRentalApp && dispatch(loadUser())
@@ -40,6 +42,16 @@ function App() {
       dispatch(getAllRentals())
     }
   }, [admin])
+
+  useEffect(() => {
+    if (auth && admin) {
+      if (admin === "NORMAL") {
+        return navigate("/", { scroll: { x: 0, y: 0 } })
+      } else {
+        return navigate("/dashboard/emails")
+      }
+    }
+  }, [auth, admin])
 
   return (
     <>

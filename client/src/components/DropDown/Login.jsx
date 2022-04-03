@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import {
   Form,
   SendButton,
@@ -9,17 +9,15 @@ import {
   RedButton,
 } from "./styled"
 import { logIn } from "../../redux/actions/index"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
-import { ToastContainer} from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify"
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const admin = useSelector(state => state.user.type)
-  const auth = useSelector(state => state.auth)
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -29,27 +27,16 @@ const Login = () => {
     e.preventDefault()
     setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
-  const form = useSelector(state => state.formRentalProperty)
+
   function handleSubmitLogIn(e) {
     e.preventDefault()
 
     if (!logInForm.email || !logInForm.password) {
-      alert("Missing fields, please try again")
+      toast.warning("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-      /* navigate("/", { scroll: { x: 0, y: 0 } }) */
     }
   }
-
-  useEffect(() => {
-    if (auth && admin) {
-      if (admin === "NORMAL") {
-        return navigate("/", { scroll: { x: 0, y: 0 } })
-      } else {
-        return navigate("/dashboard/emails")
-      }
-    }
-  }, [auth, admin])
 
   return (
     <Container>

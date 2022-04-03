@@ -7,6 +7,7 @@ import getHeaderToken from "../../utilities/getHeadertoken"
 import styles from "../ForgotPassword/styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
 import CircularProgress from "@mui/material/CircularProgress"
+import { toast } from "react-toastify"
 
 const SubFormPromoteUser = ({ userId }) => {
   const [password, setPassword] = useState("")
@@ -21,19 +22,19 @@ const SubFormPromoteUser = ({ userId }) => {
 
     // PUT /users/enable/:id
     try {
-      if (!password) return alert("Complete password field")
-      const { data } = await axios.put(
+      if (!password) return toast.warning("Complete password field")
+      await axios.put(
         `${api}/users/promote-admin/${userId}`,
         { password },
         getHeaderToken(),
       )
       // console.log({ data })
       setPassword("")
-      alert(`New admin created`)
+      toast.success(`New admin created`)
       dispatch(createAdmin(userId))
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      toast.error("Something went wrong :(")
     }
   }
 
@@ -81,11 +82,11 @@ const FormUser = () => {
       const { data } = await axios.post(`${api}/users/forgot-password`, {
         email: user.email,
       })
-      alert("Password changed successfully, it will be sent to email's user")
+      toast.success("Password changed successfully, it will be sent to email's user")
       // console.log({ data })
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      toast.error("Something went wrong :(")
     }
   }
 
@@ -101,10 +102,10 @@ const FormUser = () => {
       )
       // console.log({ data })
       dispatch(blockUser(user.id, !user.blocked))
-      alert(`${user.blocked ? "User unlocked" : "User blocked"} correctly`)
+      toast.success(`${user.blocked ? "User unlocked" : "User blocked"} correctly`)
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      toast.error("Something went wrong :(")
     }
   }
 
@@ -125,14 +126,14 @@ const FormUser = () => {
           user.status === "disabled" ? "enabled" : "disabled",
         ),
       )
-      alert(
+      toast.success(
         `${
           user.status === "disabled" ? "User enable" : "User disable"
         } correctly`,
       )
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      toast.error("Something went wrong :(")
     }
   }
 

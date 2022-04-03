@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
+import { toast } from "react-toastify"
 const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -41,7 +42,7 @@ const SignUp = () => {
       !signUpForm.city ||
       !signUpForm.password
     ) {
-      alert("Missing fields, please try again")
+      toast.warning("Missing fields, please try again")
     } else {
       dispatch(postNewUser(signUpForm))
       navigate("/")

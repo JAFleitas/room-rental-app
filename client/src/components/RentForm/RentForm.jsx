@@ -29,6 +29,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 
 import { useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export default function RentForm(props) {
   const [monthsInCalendary, setMonthsInCalendary] = useState(2)
@@ -97,7 +98,7 @@ export default function RentForm(props) {
       payMethod === undefined ||
       finalPrice === undefined
     ) {
-      alert("All fields are required")
+      toast.warning("All fields are required")
     } else {
       let form = {
         propertyID: props.id,
@@ -107,21 +108,6 @@ export default function RentForm(props) {
         paymenthMethodId: payMethod,
       }
     }
-    // '01/02/2022' '->' '2022/02/01';
-    // function convertDateFormat(string) {
-    //   let date = string.split("/")
-    //   let fecha = date[2] + "," + date[1] + "," + date[0]
-    //   return fecha
-    // }
-    // let inicio = dates.from.toLocaleDateString()
-    // let end = dates.to.toLocaleDateString()
-    // inicio = convertDateFormat(inicio)
-    // end = convertDateFormat(end)
-    // console.log(inicio)
-    // console.log(end)
-
-    // .then(alert("Renta creada"))
-    // .catch(alert("Hubo un problema..."))
 
     let form = {
       propertyID: props.id,
