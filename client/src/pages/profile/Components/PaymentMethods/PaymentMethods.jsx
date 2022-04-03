@@ -35,8 +35,7 @@ const Paymentmethods = () => {
       <h2 className={styles.title}>Payment methods</h2>
       {methods.length > 0 ? (
         methods.map(method => (
-          <div key={method.id}>
-          
+          <div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center"}} key={method.id}>
             <Creditcard
               isVisa={method?.type === "VISA"}
               cardNumber={"**** **** **** " + method?.lastNumbers}

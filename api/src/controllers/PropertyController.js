@@ -109,7 +109,7 @@ const editProperty = async (req, res) => {
     typePropertyID,
     coordinates,
   } = req.body.data
-  console.log(idProperty)
+  // console.log(idProperty)
   const { id } = req.user
   if (id) {
     await Property.update(

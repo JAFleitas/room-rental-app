@@ -34,8 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }))
 
-export default function Users() {
-  const rows = useSelector(state => state.admin.users)
+export default function Rentals() {
+  const rows = useSelector(state => state.propertyRentals)
   const navigate = useNavigate()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
@@ -46,13 +46,20 @@ export default function Users() {
     setPage(newPage)
   }
 
+  const handleSortNestedProps = (prop1, prop2 = null, direction = 'asc') => (e1, e2) => {
+    const a = prop2 ? e1[prop1][prop2] : e1[prop1],
+        b = prop2 ? e2[prop1][prop2] : e2[prop1],
+        sortOrder = direction === "asc" ? 1 : -1
+    return (a < b) ? -sortOrder : (a > b) ? sortOrder : 0;
+}
+
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
 
   const handleChangeSort = value => {
-    let newSort
+    var newSort
 
     if (sort.sortBy === value) {
       newSort = { ...sort, order: sort.order === "asc" ? "dsc" : "asc" }
@@ -62,7 +69,26 @@ export default function Users() {
 
     setSort(newSort)
 
-    if (rows && rows.length) {
+    if(rows && rows.length && value === "user.name"){
+      // console.log(rows);
+
+      let sorterRows = rows.sort(handleSortNestedProps("user", "name", newSort.order));
+
+      setCurrentRows(sorterRows)
+    } else if(rows && rows.length && value === "property.name"){
+      // console.log(rows);
+
+      let sorterRows = rows.sort(handleSortNestedProps("property", "name", newSort.order));
+
+      setCurrentRows(sorterRows)
+    } else if(rows && rows.length && value === "property.location"){
+      // console.log(rows);
+
+      let sorterRows = rows.sort(handleSortNestedProps("property", "location", newSort.order));
+
+      setCurrentRows(sorterRows)
+    }
+    else if (rows && rows.length && rows[0].user.name) {
       // console.log({ rows })
       let sorterRows =
         newSort.order === "asc"
@@ -78,7 +104,6 @@ export default function Users() {
   }
 
   React.useEffect(() => {
-    // console.log({rows});
     if (rows) {
       let sorterRows =
         sort.order === "asc"
@@ -94,7 +119,7 @@ export default function Users() {
 
   return (
     <div style={{ margin: "1rem" }}>
-      <h2 className={styles.title}>Users</h2>
+      <h2 className={styles.title}>Rentals</h2>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 500 }}>
           <Table sx={{ minWidth: 700 }} stickyHeader aria-label="sticky table">
@@ -109,13 +134,14 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("name")}>
-                    Name{" "}
+                    onClick={() => handleChangeSort("user.name")}>
+                    Lessor Name{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -124,13 +150,14 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("lastname")}>
-                    Lastname{" "}
+                    onClick={() => handleChangeSort("property.name")}>
+                    Property Name{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -139,13 +166,14 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("country")}>
-                    Country{" "}
+                    onClick={() => handleChangeSort("property.location")}>
+                    Location{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -154,13 +182,14 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("email")}>
-                    Email{" "}
+                    onClick={() => handleChangeSort("start_date")}>
+                    Start Date{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -169,13 +198,14 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("type")}>
-                    Privileges{" "}
+                    onClick={() => handleChangeSort("final_date")}>
+                    Final Date{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -184,13 +214,14 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("blocked")}>
-                    Blocked{" "}
+                    onClick={() => handleChangeSort("final_price")}>
+                    Final Price{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -199,14 +230,13 @@ export default function Users() {
                       width: "95%",
                       justifyContent: "space-between",
                     }}
-                    onClick={() => handleChangeSort("createdAt")}>
-                    Desde{" "}
+                    onClick={() => handleChangeSort("status")}>
+                    Status{" "}
                     <span style={{ display: "inline", padding: "5px" }}>
                       <RiSortAsc />
                     </span>
                   </button>
                 </StyledTableCell>
-                <StyledTableCell>Actions</StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
@@ -222,46 +252,31 @@ export default function Users() {
                         <StyledTableCell>
                           <img
                             style={{ width: "55px", borderRadius: "50%" }}
-                            src={row.photo}
-                            alt={row.name}
+                            src={row.property.image[0]}
+                            alt={row.property.name}
                           />
                         </StyledTableCell>
-                        <StyledTableCell>{row.name}</StyledTableCell>
-                        <StyledTableCell>{row.lastname}</StyledTableCell>
-                        <StyledTableCell>{row.country}</StyledTableCell>
-                        <StyledTableCell>{row.email}</StyledTableCell>
-                        <StyledTableCell>{row.type}</StyledTableCell>
+                        <StyledTableCell>{row.user.name}</StyledTableCell>
+                        <StyledTableCell>{row.property.name}</StyledTableCell>
                         <StyledTableCell>
-                          {row.blocked ? "T" : "F"}
+                          {row.property.location}
                         </StyledTableCell>
-                        <StyledTableCell>
-                          {row.createdAt.split("T")[0]}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <button
-                            style={{
-                              backgroundColor: "#64075cdd",
-                              color: "white",
-                              padding: "5px",
-                              borderRadius: "7px",
-                              marginTop: "5px",
-                            }}
-                            onClick={() => navigate(`actions/${row.id}`)}>
-                            User actions
-                          </button>
-                        </StyledTableCell>
+                        <StyledTableCell>{row.start_date}</StyledTableCell>
+                        <StyledTableCell>{row.final_date}</StyledTableCell>
+                        <StyledTableCell>{row.final_price}</StyledTableCell>
+                        <StyledTableCell>{row.status}</StyledTableCell>
                       </StyledTableRow>
                     ))
                 ) : (
                   <StyledTableRow>
-                    <StyledTableCell colSpan={"9"}>
-                      Aún no tiene usuarios
+                    <StyledTableCell colSpan={"8"}>
+                      You don't have rental history yet
                     </StyledTableCell>
                   </StyledTableRow>
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell colSpan={"9"}>
+                  <StyledTableCell colSpan={"8"}>
                     <div style={{ display: "flex" }}>
                       <CircularProgress />
                     </div>

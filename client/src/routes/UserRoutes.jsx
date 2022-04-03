@@ -15,12 +15,14 @@ import PayPalPay from "../components/paypalButton/paypal.jsx"
 import { EditProperty } from "../components/formAddProperty/editProperty.jsx"
 import Nav from "../components/Nav/Nav"
 import Footer from "../components/Footer/Footer"
+import FormComment from "../pages/Comment/FormComment.jsx"
 
 const UserRoutes = () => {
   return (
     <>
       <Nav />
       <Routes>
+        <Route path="/logIn" element={<Login />} />
         <Route path="/property-info/:id" element={<Details />} />
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/about-us" element={<AboutUs />} />
@@ -35,6 +37,7 @@ const UserRoutes = () => {
         />
         <Route path="/forgot-password" element={<Forgotpassword />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/comment/:id" element={<FormComment />} />
         <Route path="/pay-reservation" element={<PayPalPay />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>

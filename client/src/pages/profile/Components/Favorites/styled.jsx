@@ -7,7 +7,7 @@ export const SubMenu = styled.div`
   align-items: center;
   width: 50%;
   margin-left: 5%;
-  margin-top: 7%;
+  margin-top: 4%;
   padding: 10px;
   background: rgb(226, 200, 255);
   background: linear-gradient(

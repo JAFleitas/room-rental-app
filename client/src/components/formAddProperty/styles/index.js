@@ -11,6 +11,7 @@ export const Container = styled.div`
 `
 
 export const ContainerMap = styled.div`
+  z-index: 0;
   display: flex;
   width: 400px;
   height: 200px;
@@ -32,7 +33,7 @@ export const FormContainer = styled.form`
 `
 
 export const LabelSt = styled.label`
-  color: ${({ error }) => (error ? "#ff0000" : "#acacac")};
+  color: ${({ error }) => (error ? "#ff0000" : "#6BA7F4")};
   font-size: 16px;
   font-weight: 600;
   font-family: "Times New Roman", Times, serif;
@@ -70,7 +71,7 @@ export const TitleSt = styled.div`
     font-size: 24px;
     font-weight: 800;
     font-family: Arial, Helvetica, sans-serif;
-    color: #cfcfcf;
+    color: #4b93f0;
   }
 `
 
@@ -84,4 +85,11 @@ export const ButtonSt = styled.button`
   :hover {
     background: ${({ disabled }) => (disabled ? "#ccc" : "#8766f0")};
   }
+`
+export const FormPropertyContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  padding-bottom: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
 `

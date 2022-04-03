@@ -11,10 +11,12 @@ const {
   Type_property: TypeProperty,
 } = require("../db")
 const usersIds = [
-  "b49a5948-21a0-44c3-92fc-20b626d94dc2",
-  "3ae3b92c-af90-40b4-a5de-8d8f1bb4096e",
   "b2119946-a958-4744-ad61-f05ce92f7024",
+  "79864a10-2446-42f5-ab6d-6867f08eca19",
+  "79864a10-2446-42f5-ab6d-6867f08eca65",
   "79864a10-2446-42e5-ab6d-6867f08eca69",
+  "b49a5948-21a0-44c3-92fc-20b626d94dc2",
+  "b49a5948-21a0-44c3-92fc-10b626d94dc2",
 ]
 
 module.exports = async () => {
@@ -37,11 +39,7 @@ module.exports = async () => {
 
   try {
     await User.bulkCreate(
-      users.map(user => ({
-        ...user,
-        photo:
-          "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg",
-      })),
+      users,
       { validate: true },
     )
     console.log("- Usuarios cargados en la DDBB") // eslint-disable-line no-console
@@ -72,7 +70,7 @@ module.exports = async () => {
           services,
           typePropertyID,
         } = property
-        const userID = usersIds[randomNumber(0, 3)]
+        const userID = usersIds[randomNumber(0, usersIds.length-1)]
         const createdProperty = await Property.create({
           id,
           name,
@@ -104,8 +102,9 @@ module.exports = async () => {
 
     try {
       await Notification.bulkCreate(notifications, { validate: true })
-      console.log("- Notificaiones cargadas en la DDBB") // eslint-disable-line no-console
+      console.log("- Notificaciones cargadas en la DDBB") // eslint-disable-line no-console
     } catch (err) {
+      // console.log(err);
       console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
       console.log("No se han podido cargar las notificaciones") // eslint-disable-line no-console
     }

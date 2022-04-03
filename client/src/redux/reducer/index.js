@@ -31,6 +31,10 @@ import {
   GET_RENTALS_BY_USER,
   CANCEL_RENTAL,
   GET_ALL_USERS,
+  CREATE_ADMIN,
+  ADMIN_CHANGE_ENABLE_USER,
+  ADMIN_BLOCK_USER,
+  GET_ALL_RENTALS,
 } from "../actions"
 
 const initialState = {
@@ -74,7 +78,16 @@ const initialState = {
 }
 
 function rootReducer(state = initialState, { type, payload }) {
+  let newUsers, finded
   switch (type) {
+    case CREATE_ADMIN:
+    case ADMIN_CHANGE_ENABLE_USER:
+    case ADMIN_BLOCK_USER:
+      newUsers = state.admin.users.filter(user => user.id !== payload.id)
+      finded = state.admin.users.find(user => user.id === payload.id)
+      // console.log({finded, payload});
+      newUsers.push({ ...finded, ...payload })
+      return { ...state, admin: { ...state.admin, users: newUsers } }
     case GET_ALL_USERS:
       return { ...state, admin: { ...state.admin, users: payload } }
     case GET_ALL_EMAILS:
@@ -183,6 +196,7 @@ function rootReducer(state = initialState, { type, payload }) {
         auth: false,
         listFavorites: {},
         paymenthMethods: [],
+        admin: initialState.admin
       }
     case CHANGE_PAGE:
       return {
@@ -212,7 +226,11 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         propertyRentals: payload,
       }
-
+    case GET_ALL_RENTALS:
+      return{
+        ...state,
+        propertyRentals: payload,
+      }
     case FORM_PROPERTY_RENTAL:
       return {
         ...state,

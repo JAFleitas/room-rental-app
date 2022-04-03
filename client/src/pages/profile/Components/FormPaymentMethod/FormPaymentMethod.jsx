@@ -219,7 +219,7 @@ const FormPaymentMethod = ({ edit }) => {
                   name="expirationMonth"
                   value={form.expirationMonth}>
                   <option value={""}>Month</option>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(month => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
                     <option value={month} key={month}>
                       {month}
                     </option>

@@ -36,21 +36,17 @@ const Login = () => {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-
-      if (form.propertyID) {
-        navigate("/pay-reservation")
-      } else {
-        navigate("/")
-      }
-
+      /* navigate("/", { scroll: { x: 0, y: 0 } }) */
     }
   }
 
   useEffect(() => {
-    if (auth && (admin === "SUBADMIN" || admin === "ADMIN")) {
-      navigate("/dashboard/emails")
-    } else if (auth && admin === "NORMAL") {
-      navigate("/")
+    if (auth && admin) {
+      if (admin === "NORMAL") {
+        return navigate("/", { scroll: { x: 0, y: 0 } })
+      } else {
+        return navigate("/dashboard/emails")
+      }
     }
   }, [auth, admin])
 

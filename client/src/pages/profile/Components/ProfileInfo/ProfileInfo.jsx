@@ -12,6 +12,7 @@ import axios from "axios"
 const api = import.meta.env.VITE_APP_API_URL
 import getHeaderToken from "../../../../utilities/getHeadertoken"
 import { loadUser } from "../../../../redux/actions"
+import swal from "sweetalert"
 
 export default function ProfileInfo() {
   const user = useSelector(state => state.user)
@@ -34,7 +35,7 @@ export default function ProfileInfo() {
     setEditStatus(false)
   }
 
-  const sendDataEdit = async () => {
+  const sendDataEdit = () => {
     if (
       dataUser.name &&
       dataUser.lastname &&
@@ -42,16 +43,43 @@ export default function ProfileInfo() {
       dataUser.email &&
       dataUser.account_number !== ""
     ) {
-      const res = await axios.put(
-        `${api}/users`,
-        { data: dataUser },
-        getHeaderToken(),
-      )
-      console.log(res.data)
-      dispatch(loadUser())
-      setEditStatus(false)
+      swal({
+        title: "Are you sure?",
+        text: "Data will be updated",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async willUpdated => {
+        if (willUpdated) {
+          const res = await axios.put(
+            `${api}/users`,
+            { data: dataUser },
+            getHeaderToken(),
+          )
+          dispatch(loadUser())
+          setEditStatus(false)
+
+          swal(res.data, {
+            icon: "success",
+          }).catch(
+            error =>
+              swal({
+                title: "Error!",
+                text: "An error has occurred",
+                icon: "error",
+              }),
+            console.log(error),
+          )
+        } else {
+          swal("Your profile data is safe!")
+        }
+      })
     } else {
-      console.log("Hay campos vacios")
+      swal({
+        title: "Error!",
+        text: "Complete all form",
+        icon: "error",
+      })
     }
   }
 

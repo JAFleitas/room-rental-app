@@ -38,7 +38,7 @@ function PropertyCard(props) {
   const [liked, setLiked] = useState(false)
 
   function handleClick() {
-    navigateTo(`/property-info/${props.id}`)
+    navigateTo(`/property-info/${props.id}`, { scroll: { x: 0, y: 0 } })
   }
 
   useEffect(() => {
@@ -68,6 +68,7 @@ function PropertyCard(props) {
         <Rating>
           <AiFillStar color="yellow" fontSize={"1.5rem"} />
           {props.rating}
+          {props.rating % 1 === 0 ? ".0" : null}
         </Rating>
       </DivPyR>
       <Heart id={props.id} liked={liked} />

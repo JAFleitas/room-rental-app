@@ -12,6 +12,7 @@ import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
 import styles from "./styles.module.css"
+import CircularProgress from "@mui/material/CircularProgress"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -227,13 +228,20 @@ export default function Emails() {
                               padding: "5px",
                               borderRadius: "7px",
                               marginTop: "5px",
+                              display: "block",
                             }}
                             onClick={() => navigate(`resend/${row.id}`)}>
                             Resend
                           </button>
                         </StyledTableCell>
                         <StyledTableCell>{row.title}</StyledTableCell>
-                        <StyledTableCell>{row.message}</StyledTableCell>
+                        <StyledTableCell>
+                          {row.message?.length > 170
+                            ? row.message.substring(0, 70) +
+                              "..." +
+                              row.message.substring(row.message.length - 10)
+                            : row.message}
+                        </StyledTableCell>
                         <StyledTableCell>
                           <img style={{ maxWidth: "130px" }} src={row.image} />
                         </StyledTableCell>
@@ -253,7 +261,11 @@ export default function Emails() {
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell colSpan={"7"}>Loading...</StyledTableCell>
+                  <StyledTableCell colSpan={"7"}>
+                    <div style={{ display: "flex" }}>
+                      <CircularProgress />
+                    </div>
+                  </StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>

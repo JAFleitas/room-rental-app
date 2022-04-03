@@ -12,7 +12,7 @@ export default function ReviewCard({ comment }) {
   for (let star = 0; star < comment.rating; star++) {
     stars.push(<FillStarIcon key={star} />)
   }
-  console.log(stars);
+  // console.log(stars);
   return (
     <ContainerCard>
       <ContainerStars>

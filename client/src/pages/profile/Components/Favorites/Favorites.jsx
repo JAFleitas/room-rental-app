@@ -20,8 +20,8 @@ export default function Favoritos() {
 
   return (
     <SubMenu>
-      <Title>Your Favorites</Title>
-      {propertiesDOM?.filter(prop => prop)}
+      <Title>My Favorites</Title>
+      {propertiesDOM.length > 0 ? propertiesDOM?.filter(prop => prop) : <h3>You have not saved favorites yet</h3>}
     </SubMenu>
   )
 }
