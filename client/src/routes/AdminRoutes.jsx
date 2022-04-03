@@ -6,6 +6,7 @@ import FormEmail from "../pages/AdminDashboard/FormEmail.jsx"
 import Users from "../pages/AdminDashboard/Users.jsx"
 import LeftBar from "../pages/AdminDashboard/LeftBar/LeftBar.jsx"
 import FormUser from "../pages/AdminDashboard/FormUser.jsx"
+import LandingPage from "../pages/LandingPage/LandingPage"
 
 import Security from "../pages/AdminDashboard/Security.jsx"
 
@@ -14,7 +15,6 @@ import Rentals from "../pages/AdminDashboard/Rentals.jsx"
 const AdminRoutes = () => {
   return (
     <>
-
       <LeftBar />
       <Routes>
         <Route path="/dashboard">
@@ -25,6 +25,7 @@ const AdminRoutes = () => {
           <Route path="users" element={<Users />} />
           <Route path="users/actions/:id" element={<FormUser />} />
           <Route path="rentals" element={<Rentals />} />
+          <Route path="landing-page" element={<LandingPage />} />
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
