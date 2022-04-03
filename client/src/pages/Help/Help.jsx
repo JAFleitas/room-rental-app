@@ -1,7 +1,9 @@
 import axios from "axios"
 import React, { useState } from "react"
+import { ErrorAlert, SuccessAlert, WarningAlert } from "../../utilities/alerts"
 import styles from "../ForgotPassword/styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
+import { ToastContainer} from 'react-toastify';
 
 const initialForm = {
   email: "",
@@ -23,7 +25,7 @@ const Help = () => {
     const { email, subject, message } = form
 
     if (!email || !subject || !message) {
-      alert("Complete all fields")
+      WarningAlert("Complete all fields")
     } else {
       try {
         await axios.post(`${api}/email`, {
@@ -32,11 +34,11 @@ const Help = () => {
           message,
         })
         setForm(initialForm)
-        alert(
+        SuccessAlert(
           "The email has been sent correctly, we will contact you in the next 72 hours",
         )
       } catch (error) {
-        alert(
+        ErrorAlert(
           (typeof error?.response?.data === "string"
             ? error.response.data
             : error.response.data?.message) || "Something went wrong :(",
@@ -74,6 +76,7 @@ const Help = () => {
           onChange={handleChange}></textarea>
         <button>Send email</button>
       </form>
+      <ToastContainer limit={3} />
     </div>
   )
 }

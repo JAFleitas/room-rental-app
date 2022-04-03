@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
+import { ToastContainer} from 'react-toastify';
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -83,6 +84,7 @@ const Login = () => {
           I forgot my password
         </RedButton>
       </Form>
+      <ToastContainer limit={3} />
     </Container>
   )
 }

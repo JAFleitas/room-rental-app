@@ -9,6 +9,7 @@ import {
   DesignContainer,
 } from "./styled"
 import design from "../../assets/designWelcome.png"
+import { ToastContainer} from 'react-toastify';
 
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect } from "react"
@@ -57,6 +58,7 @@ export default function Home() {
       </Container> */}
       <AllPropertyCard />
       <Paginated />
+      <ToastContainer limit={3}/>
     </div>
   )
 }
