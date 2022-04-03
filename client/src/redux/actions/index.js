@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ErrorAlert } from "../../utilities/alerts"
 
 import getHeaderToken from "../../utilities/getHeadertoken"
 
@@ -318,7 +319,7 @@ export const logIn = data => async dispatch => {
     dispatch(loadUser())
   } catch (err) {
     console.log(err.response)
-    alert("no se pudo loguear correctamente")
+    ErrorAlert("Could not log in correctly")
   }
 }
 
@@ -347,7 +348,7 @@ export function postNewUser({
       // dispatch(loadUser())
     } catch (error) {
       console.log(error.response)
-      alert("no se pudo crear el usuario")
+      ErrorAlert("no se pudo crear el usuario")
     }
   }
 }

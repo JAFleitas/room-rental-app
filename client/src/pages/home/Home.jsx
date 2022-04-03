@@ -1,15 +1,16 @@
 import AllPropertyCard from "../../components/AllPropertyCard/AllPropertyCard"
 import Paginated from "../../components/paginated/paginated"
-// import {
-//   WelcomeContainer,
-//   WelcomeTitle,
-//   WelcomeText,
-//   Container,
-//   Design,
-//   DesignContainer,
-// } from "./styled"
-// import design from "../../assets/designWelcome.png"
 
+import {
+  WelcomeContainer,
+  WelcomeTitle,
+  WelcomeText,
+  Container,
+  Design,
+  DesignContainer,
+} from "./styled"
+import design from "../../assets/designWelcome.png"
+import { ToastContainer} from 'react-toastify';
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -59,6 +60,7 @@ export default function Home() {
       </Container> */}
       <AllPropertyCard />
       <Paginated />
+      <ToastContainer limit={3}/>
     </div>
   )
 }
