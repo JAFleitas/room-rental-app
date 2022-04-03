@@ -8,7 +8,6 @@ import Logout from "../auth/logout"
 export default function DropDown({ open }) {
   const auth = useSelector(state => state.auth)
   const navigate = useNavigate()
-
   const { isAuthenticated } = useAuth0()
 
   return (

@@ -13,12 +13,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from "react-toastify"
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const admin = useSelector(state => state.user.type)
+  const userType = useSelector(state => state.user.type)
   const auth = useSelector(state => state.auth)
   const [logInForm, setLogInForm] = useState({
     email: "",
@@ -29,7 +29,7 @@ const Login = () => {
     e.preventDefault()
     setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
-  const form = useSelector(state => state.formRentalProperty)
+
   function handleSubmitLogIn(e) {
     e.preventDefault()
 
@@ -42,8 +42,9 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (auth && admin) {
-      if (admin === "NORMAL") {
+    if (auth && userType) {
+      console.log({ userType })
+      if (userType === "NORMAL") {
         return navigate("/", { scroll: { x: 0, y: 0 } })
       } else {
         return navigate("/dashboard/emails")
