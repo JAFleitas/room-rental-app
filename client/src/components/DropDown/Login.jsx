@@ -37,20 +37,19 @@ const Login = () => {
       alert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-      /* navigate("/", { scroll: { x: 0, y: 0 } }) */
     }
   }
 
   useEffect(() => {
     if (auth && userType) {
-      console.log({ userType })
+      console.log({ auth, userType })
       if (userType === "NORMAL") {
         return navigate("/", { scroll: { x: 0, y: 0 } })
       } else {
         return navigate("/dashboard/emails")
       }
     }
-  }, [auth, admin])
+  }, [auth, userType])
 
   return (
     <Container>
