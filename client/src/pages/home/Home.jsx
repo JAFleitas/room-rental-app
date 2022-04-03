@@ -1,19 +1,20 @@
 import AllPropertyCard from "../../components/AllPropertyCard/AllPropertyCard"
 import Paginated from "../../components/paginated/paginated"
-import {
-  WelcomeContainer,
-  WelcomeTitle,
-  WelcomeText,
-  Container,
-  Design,
-  DesignContainer,
-} from "./styled"
-import design from "../../assets/designWelcome.png"
+// import {
+//   WelcomeContainer,
+//   WelcomeTitle,
+//   WelcomeText,
+//   Container,
+//   Design,
+//   DesignContainer,
+// } from "./styled"
+// import design from "../../assets/designWelcome.png"
 
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { actionLoginWithGoogle } from "../../redux/actions"
+import { useNavigate } from "react-router-dom"
 import SearchBar from "../../components/SearchBar/SearchBar"
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
   }, [isAuthenticated])
   return (
     <div>
+      // <Sorters />
       <SearchBar />
       {/* <Container>
         <DesignContainer>
