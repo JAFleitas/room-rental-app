@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styles from "../ForgotPassword/styles.module.css"
 import { useDispatch } from "react-redux"
 import { changePassword } from "../../redux/actions";
+import { toast } from "react-toastify";
 
 const initialForm = {
   newPassword: "",
@@ -43,7 +44,7 @@ const Security = () => {
       setForm(initialForm)
     } else {
       console.table(newErrors);
-      alert("Check your fields")
+      toast.warning("Check your fields")
     }
   }
 

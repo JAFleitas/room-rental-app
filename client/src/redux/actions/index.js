@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify"
 import { ErrorAlert } from "../../utilities/alerts"
 
 import getHeaderToken from "../../utilities/getHeadertoken"
@@ -245,7 +246,7 @@ export function getAllProperties(filters, page = 1) {
       })
     } catch (error) {
       console.log(error.response)
-      alert("No se han encontrado propiedades con los filtros aplicados")
+      toast.info("No se han encontrado propiedades con los filtros aplicados")
     }
   }
 }
@@ -299,10 +300,10 @@ export const changePassword = data => async dispatch => {
       type: CHANGE_PASSWORD,
       payload: res.data,
     })
-    alert("Password changed")
+    toast.success("Password changed")
   } catch (error) {
     console.log(error.response.data)
-    alert("password is wrong")
+    toast.error("password is wrong")
   }
 }
 
@@ -386,7 +387,7 @@ export function addRental(form) {
       })
       // console.log(response)
     } catch (error) {
-      alert(
+      toast.error(
         (typeof error?.response?.data === "string"
           ? error.response.data
           : error.response.data?.message) || "Something went wrong :(",
@@ -429,7 +430,7 @@ export function actionLoginWithGoogle(data) {
       dispatch(loadUser())
     } catch (err) {
       console.log(err.response)
-      alert("no se pudo loguear correctamente")
+      toast.error("Loguin failed :(")
     }
   }
 }
@@ -514,7 +515,7 @@ export function cancelRental(rentID) {
       let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
       console.log(response)
       if (response.data.status === 401) {
-        alert(response.data.message)
+        toast.info(response.data.message)
       }
       return dispatch({
         type: CANCEL_RENTAL,

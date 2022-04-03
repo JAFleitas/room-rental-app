@@ -4,6 +4,7 @@ import Rating from "@mui/material/Rating"
 import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 import getHeaderToken from "../../utilities/getHeadertoken"
+import { toast } from "react-toastify"
 const api = import.meta.env.VITE_APP_API_URL
 
 const FormComment = () => {
@@ -31,17 +32,17 @@ const FormComment = () => {
         getHeaderToken())
         console.table(comment);
         setMessage("");
-        alert("Comment saved succesfully");
+        toast.success("Comment saved succesfully");
         navigate("/profile/history");
       } catch (error) {
-        alert(
+        toast.error(
           (typeof error?.response?.data === "string"
             ? error.response.data
             : error.response.data?.message) || "Something went wrong :(",
         )
       }
     } else {
-      alert("Comment field is requierd")
+      toast.warning("Comment field is requierd")
     }
   }
 

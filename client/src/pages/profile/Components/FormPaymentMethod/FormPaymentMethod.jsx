@@ -8,6 +8,7 @@ import getHeaderToken from "../../../../utilities/getHeadertoken"
 const api = import.meta.env.VITE_APP_API_URL
 import { useNavigate, useParams } from "react-router-dom"
 import { addPaymentMethod, editPaymentMethod } from "../../../../redux/actions"
+import { toast } from "react-toastify"
 
 const initialForm = {
   cardNumber: "",
@@ -85,7 +86,7 @@ const FormPaymentMethod = ({ edit }) => {
     setErrors(errors)
 
     if (Object.keys(errors).length > 0) {
-      alert("Check all fields")
+      toast.warning("Check all fields")
     } else {
       if (edit) {
         try {
@@ -111,7 +112,7 @@ const FormPaymentMethod = ({ edit }) => {
           return
         } catch (error) {
           console.log(error?.response)
-          alert(
+          toast.error(
             (typeof error?.response?.data === "string"
               ? error.response.data
               : error.response.data?.message) || "Something went wrong :(",
@@ -129,7 +130,7 @@ const FormPaymentMethod = ({ edit }) => {
           return
         } catch (error) {
           console.log(error?.response)
-          alert(
+          toast.error(
             (typeof error?.response?.data === "string"
               ? error.response.data
               : error.response.data?.message) || "Something went wrong :(",

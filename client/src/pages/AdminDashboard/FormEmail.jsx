@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 import { getAllEmails } from "../../redux/actions"
 import getHeaderToken from "../../utilities/getHeadertoken"
 import styles from "../ForgotPassword/styles.module.css"
@@ -36,15 +37,15 @@ const FormEmail = ({ resend = false }) => {
     try {
       const {subject, title, message} = form;
       // console.log({form});
-      if(!subject || !title || !message) return alert("Subject, title and message fields are required");
+      if(!subject || !title || !message) return toast.warning("Subject, title and message fields are required");
       const { data } = await axios.post(`${api}/notifications`, form, getHeaderToken())
       // console.log({data});
       setForm(initialForm);
-      alert("Promotional email send successfully");
+      toast.success("Promotional email send successfully");
       dispatch(getAllEmails());
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      toast.error("Something went wrong :(")
     }
   }
 

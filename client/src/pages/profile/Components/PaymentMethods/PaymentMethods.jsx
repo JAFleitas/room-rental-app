@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import Creditcard from "../../../../components/CreditCard/CreditCard"
 import { deletePaymentMethod, getAllPaymentMethod } from "../../../../redux/actions"
 import getHeaderToken from "../../../../utilities/getHeadertoken"
@@ -22,7 +23,7 @@ const Paymentmethods = () => {
       // return
     } catch (error) {
       console.log(error.response)
-      alert(
+      toast.error(
         (typeof error?.response?.data === "string"
           ? error.response.data
           : error.response.data?.message) || "Something went wrong :(",
