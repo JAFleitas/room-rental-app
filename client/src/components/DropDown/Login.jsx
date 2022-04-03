@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import {
   Form,
   SendButton,
@@ -9,7 +9,7 @@ import {
   RedButton,
 } from "./styled"
 import { logIn } from "../../redux/actions/index"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
@@ -18,8 +18,6 @@ import { ToastContainer } from "react-toastify"
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const userType = useSelector(state => state.user.type)
-  const auth = useSelector(state => state.auth)
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -39,17 +37,6 @@ const Login = () => {
       dispatch(logIn(logInForm))
     }
   }
-
-  useEffect(() => {
-    if (auth && userType) {
-      console.log({ auth, userType })
-      if (userType === "NORMAL") {
-        return navigate("/", { scroll: { x: 0, y: 0 } })
-      } else {
-        return navigate("/dashboard/emails")
-      }
-    }
-  }, [auth, userType])
 
   return (
     <Container>
