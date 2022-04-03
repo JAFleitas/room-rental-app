@@ -47,7 +47,9 @@ export default function RentCard() {
             <ImageContainer>
               <Image src={rent.property.image[0]} alt="image not found" />
             </ImageContainer>
-            <CardTitle>{rent.property.name}</CardTitle>
+            <CardTitle onClick={() => navigate(`/property-info/${rent.property.id}`)}>
+              {rent.property.name}
+            </CardTitle>
             <CardInfoContainer>
               <CardInfo>Location: {rent.property.location}</CardInfo>
               <CardInfo>
