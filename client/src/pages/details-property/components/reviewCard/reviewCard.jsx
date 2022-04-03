@@ -1,23 +1,19 @@
 import {
   ContainerCard,
   ContainerComment,
-  ContainerStars,
-  FillStarIcon,
-  // Title,
 } from "./styles"
+import Rating from "@mui/material/Rating";
 
 export default function ReviewCard({ comment }) {
-  let stars = [];
 
-  for (let star = 0; star < comment.rating; star++) {
-    stars.push(<FillStarIcon key={star} />)
-  }
-  // console.log(stars);
   return (
     <ContainerCard>
-      <ContainerStars>
-        {stars}
-      </ContainerStars>
+      <Rating
+        name="read-only"
+        value={comment.rating}
+        precision={0.5}
+        readOnly
+      />
       <ContainerComment>
         <p>{comment.message}</p>
         <span>Comment on: {comment.creationDate}</span>
