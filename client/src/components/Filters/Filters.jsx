@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {
-  getAllProperties,
-  setOptionFilters,
-} from "../../redux/actions"
+import { getAllProperties, setOptionFilters } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Form, InputsNumber, Services } from "./styled"
 import FilterAltIcon from "@mui/icons-material/FilterAlt"
@@ -34,16 +31,20 @@ export default function Filters() {
 
     if (!add) {
       // Si ya está lo quitamos de los filtros seleccionados
+      const newServices = filters.services.filter(service => service.id !== id);
       setfilters({
         ...filters,
-        services: filters.services.filter(service => service.id !== id),
+        services: newServices,
       })
+      dispatch(setOptionFilters({services: newServices.map(e => e.id)}));
 
       // Y lo volvemos a añadir a las opciones de filtrado
       setServices([...services, service])
     } else {
+      const newServices = [...filters.services, service];
       // O sino lo agregamos a los filtros seleccionados
-      setfilters({ ...filters, services: [...filters.services, service] })
+      setfilters({ ...filters, services: newServices });
+      dispatch(setOptionFilters({ services: newServices.map(e => e.id) }))
 
       // Y lo quitamos de la opciones de filtrado
       setServices(services.filter(service => service.id !== id))
@@ -53,16 +54,22 @@ export default function Filters() {
   const handleChange = e => {
     const { name, value } = e.target
 
-    setfilters({ ...filters, [name]: value })
+    // Cambio el estado local
+    const newFilters = { ...filters, [name]: value }
+    setfilters(newFilters)
+
+    // Y envio los nuevos filtros
+    const copyFilters = { ...newFilters};
+    delete copyFilters.services;
+    console.log({ copyFilters })
+    dispatch(setOptionFilters(copyFilters));
   }
 
-  const handleApplyFilters = e => {
+  const handleRestartFilters = e => {
     e.preventDefault()
 
-    const servicesIds = filters.services.map(service => service.id)
-
-    dispatch(setOptionFilters({ ...filters, services: servicesIds }))
-    dispatch(getAllProperties({ ...filters, services: servicesIds }))
+    setfilters(initialFilters)
+    setServices(initialServices)
   }
 
   useEffect(() => {
@@ -155,6 +162,7 @@ export default function Filters() {
             id={"type"}
             onChange={handleChange}
             value={filters.type}>
+            <option value={""}>All</option>
             {categories.map(category => (
               <option value={category.id} key={category.id}>
                 {category.name}
@@ -207,8 +215,8 @@ export default function Filters() {
           alignSelf: "center",
           padding: "2px",
         }}
-        onClick={handleApplyFilters}>
-        <FilterAltIcon /> Filter
+        onClick={handleRestartFilters}>
+        <FilterAltIcon /> Restart filters
       </button>
     </Form>
   )
