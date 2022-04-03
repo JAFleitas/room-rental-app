@@ -13,8 +13,6 @@ import {
   getFavorites,
   loadUser,
 } from "./redux/actions"
-import { Route, Routes } from "react-router-dom"
-import Login from "./components/DropDown/Login"
 
 function App() {
   const dispatch = useDispatch()
@@ -36,7 +34,7 @@ function App() {
   }, [auth])
 
   useEffect(() => {
-    if (auth && admin) {
+    if (auth && (admin === "ADMIN" || admin === "SUBADMIN")) {
       dispatch(getAllEmails())
       dispatch(getAllUsers())
       dispatch(getAllRentals())

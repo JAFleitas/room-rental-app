@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { SubMenu, Title, CardContainer, Card, RedButton } from "./styled"
+import { Title, CardContainer, Card, RedButton } from "./styled"
 import { useSelector, useDispatch } from "react-redux"
 import PropertyCard from "../../../../components/PropertyCard/PropertyCard"
 import {
   getPropertiesByUserId,
   deletePropertyFromMyProperties,
 } from "../../../../redux/actions/index"
-import { useNavigate } from "react-router-dom"
+// import { SubMenu } from "../ProfileInfo/styled"
+import { Container } from "../RentCard/styled"
 
 export default function MyProperties() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const user = useSelector(state => state.user)
   const MyProperties = useSelector(state => state.MyProperties) || []
   const [render, setRender]=useState(true)
@@ -28,7 +28,7 @@ export default function MyProperties() {
   }
 
   return (
-    <SubMenu>
+    <Container>
       <Title>My properties</Title>
       <CardContainer>
         {MyProperties?.map(property => {
@@ -56,6 +56,6 @@ export default function MyProperties() {
           )
         })}
       </CardContainer>
-    </SubMenu>
+    </Container>
   )
 }

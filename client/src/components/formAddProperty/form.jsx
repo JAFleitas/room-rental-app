@@ -66,7 +66,7 @@ export default function FormAddProperty(props) {
           )
           .then(res => {
             setFormData(initialStateForm)
-            console.log(res)
+            // console.log(res)
           })
           .catch(err => console.log(err))
       } else {

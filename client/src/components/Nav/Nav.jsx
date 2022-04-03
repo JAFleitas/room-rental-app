@@ -1,16 +1,12 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Button from "../Button/Button"
-import SearchBar from "../SearchBar/SearchBar"
 import { Navigator, IconContainer, Logo, ToHome } from "./styled"
 import logo from "../../assets/Rental_App_Logo.png"
 import { useDispatch } from "react-redux"
-import { actionChangePage, loadUser } from "../../redux/actions/index"
+import { actionChangePage } from "../../redux/actions/index"
 
 export default function Nav() {
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(loadUser())
-  }, [])
 
   return (
     <Navigator>
@@ -19,7 +15,6 @@ export default function Nav() {
           <Logo src={logo}></Logo>
         </ToHome>
       </IconContainer>
-      <SearchBar />
       <Button />
     </Navigator>
   )

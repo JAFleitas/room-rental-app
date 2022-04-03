@@ -12,6 +12,7 @@ import { useSelector } from "react-redux"
 import { RiSortAsc } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
 import styles from "./styles.module.css"
+import CircularProgress from "@mui/material/CircularProgress"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -69,19 +70,19 @@ export default function Rentals() {
     setSort(newSort)
 
     if(rows && rows.length && value === "user.name"){
-      console.log(rows);
+      // console.log(rows);
 
       let sorterRows = rows.sort(handleSortNestedProps("user", "name", newSort.order));
 
       setCurrentRows(sorterRows)
     } else if(rows && rows.length && value === "property.name"){
-      console.log(rows);
+      // console.log(rows);
 
       let sorterRows = rows.sort(handleSortNestedProps("property", "name", newSort.order));
 
       setCurrentRows(sorterRows)
     } else if(rows && rows.length && value === "property.location"){
-      console.log(rows);
+      // console.log(rows);
 
       let sorterRows = rows.sort(handleSortNestedProps("property", "location", newSort.order));
 
@@ -124,8 +125,7 @@ export default function Rentals() {
           <Table sx={{ minWidth: 700 }} stickyHeader aria-label="sticky table">
             <TableHead>
               <StyledTableRow>
-
-              <StyledTableCell>Photo</StyledTableCell>
+                <StyledTableCell>Photo</StyledTableCell>
                 <StyledTableCell>
                   <button
                     style={{
@@ -141,7 +141,7 @@ export default function Rentals() {
                     </span>
                   </button>
                 </StyledTableCell>
-               
+
                 <StyledTableCell>
                   <button
                     style={{
@@ -237,7 +237,6 @@ export default function Rentals() {
                     </span>
                   </button>
                 </StyledTableCell>
-
               </StyledTableRow>
             </TableHead>
             <TableBody>
@@ -259,24 +258,29 @@ export default function Rentals() {
                         </StyledTableCell>
                         <StyledTableCell>{row.user.name}</StyledTableCell>
                         <StyledTableCell>{row.property.name}</StyledTableCell>
-                        <StyledTableCell>{row.property.location}</StyledTableCell>
+                        <StyledTableCell>
+                          {row.property.location}
+                        </StyledTableCell>
                         <StyledTableCell>{row.start_date}</StyledTableCell>
                         <StyledTableCell>{row.final_date}</StyledTableCell>
                         <StyledTableCell>{row.final_price}</StyledTableCell>
                         <StyledTableCell>{row.status}</StyledTableCell>
-
                       </StyledTableRow>
                     ))
                 ) : (
                   <StyledTableRow>
                     <StyledTableCell colSpan={"8"}>
-                    You don't have rental history yet
+                      You don't have rental history yet
                     </StyledTableCell>
                   </StyledTableRow>
                 )
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell colSpan={"8"}>Loading...</StyledTableCell>
+                  <StyledTableCell colSpan={"8"}>
+                    <div style={{ display: "flex" }}>
+                      <CircularProgress />
+                    </div>
+                  </StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>

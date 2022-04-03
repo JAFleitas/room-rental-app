@@ -1,11 +1,9 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  width: 70%;
-  margin-left: 2.5%;
+  width: 65%;
+  margin: 2.5%;
   margin-top: 4%;
-  margin-bottom: 4%;
-
   height: fit-content;
   border-radius: 10px;
   background: rgb(226, 200, 255);
@@ -30,11 +28,10 @@ export const CardContainer = styled.div`
   grid-template-columns: 40% 60%;
   grid-template-rows: 40% 45% 15%;
   background-color: white;
-  width: ${({ width }) => width ?? "46%"};
+  width: ${({ width }) => width ?? "44%"};
 
-  width: 46%;
   height: fit-content;
-  margin: 1rem 0.3rem;
+  margin: 0.75rem;
   border-radius: 15px;
   box-shadow: 0 5px 5px rgba(0, e, e, 0.2);
   overflow: hidden;
@@ -78,7 +75,6 @@ export const CardInfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  border: 1px solid #d722fc;
   border-radius: 15px;
   padding: 20px;
   margin: 5px;
@@ -103,28 +99,29 @@ export const Image = styled.img`
   height: 100%;
   border-radius: 1rem;
 `
-export const RedButton = styled.button`
-  grid-column: 1/3;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: 0.5rem;
   grid-row: 3/4;
-  color: #ffffff;
+  grid-column: 1/3;
+`
+export const Button = styled.button`
   text-justify: center;
-  border: 1px solid black;
+  border: none;
   border-radius: 0.5rem;
   box-shadow: rgba(27, 31, 36, 0.1);
-  width: 40%;
-  height: 70%;
-  /* min-height: 30px; */
-  background-color: #cf222e;
-  font-size: large;
+  background-color: #ab119fdd;
+  color: white;
+  padding: 4px 7px;
+  font-size: 1rem;
   font-weight: normal;
   font-family: sans-serif;
-  margin-left: 30%;
-  margin-top: 1%;
-  margin-bottom: 3%;
   transition: 0.2s;
 
   &:hover {
-    background-color: #ffffff;
-    color: #cf222e;
+    background-color: #64075cdd;
   }
 `

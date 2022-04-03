@@ -79,12 +79,12 @@ const getRentalsByUser = async (req, res) => {
         // },
       ],
     })
-    console.log("Las rentas del usuario son: ")
-    console.log(Rentals)
-    console.log(userID)
+    // console.log("Las rentas del usuario son: ")
+    // console.log(Rentals)
+    // console.log(userID)
 
     if (Rentals) {
-      res.status(201).json({ data: Rentals })
+      res.status(201).json(Rentals)
     } else {
       res
         .status(500)
@@ -106,14 +106,14 @@ const cancelRental = async (req, res, next) => {
         id: rentID,
       },
     })
-    console.log(Rental[0])
+    // console.log(Rental[0])
 
     let startDate = Rental[0].dataValues.start_date
     let today = new Date()
-    console.log("startDate")
-    console.log(startDate)
-    console.log("today")
-    console.log(today)
+    // console.log("startDate")
+    // console.log(startDate)
+    // console.log("today")
+    // console.log(today)
     if (
       today !== undefined &&
       startDate !== undefined &&
@@ -136,7 +136,7 @@ const cancelRental = async (req, res, next) => {
       }
       // Thiago
       const time_difference = difference(today, startDate)
-      console.log(time_difference)
+      // console.log(time_difference)
       if (time_difference <= 10) {
         res.json({
           status: 401,

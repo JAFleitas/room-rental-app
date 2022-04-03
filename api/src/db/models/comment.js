@@ -11,7 +11,7 @@ module.exports = sequelize => {
         primaryKey: true,
       },
       rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
         allowNull: false,
         defaultValue: 0,
         validate: {

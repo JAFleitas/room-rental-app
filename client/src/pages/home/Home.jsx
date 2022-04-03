@@ -1,5 +1,4 @@
 import AllPropertyCard from "../../components/AllPropertyCard/AllPropertyCard"
-import Sorters from "../../components/Filters/Sorters"
 import Paginated from "../../components/paginated/paginated"
 import {
   WelcomeContainer,
@@ -15,6 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { actionLoginWithGoogle } from "../../redux/actions"
+import SearchBar from "../../components/SearchBar/SearchBar"
 
 export default function Home() {
   const { isAuthenticated, user } = useAuth0()
@@ -36,9 +36,8 @@ export default function Home() {
   }, [isAuthenticated])
   return (
     <div>
-      <Sorters />
-
-      <Container>
+      <SearchBar />
+      {/* <Container>
         <DesignContainer>
           <Design src={design} alt="welcome-design" />
         </DesignContainer>
@@ -55,8 +54,7 @@ export default function Home() {
             many other fantastic functionalities.
           </WelcomeText>
         </WelcomeContainer>
-      </Container>
-
+      </Container> */}
       <AllPropertyCard />
       <Paginated />
     </div>

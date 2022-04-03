@@ -38,7 +38,7 @@ const FormEmail = ({ resend = false }) => {
       // console.log({form});
       if(!subject || !title || !message) return alert("Subject, title and message fields are required");
       const { data } = await axios.post(`${api}/notifications`, form, getHeaderToken())
-      console.log({data});
+      // console.log({data});
       setForm(initialForm);
       alert("Promotional email send successfully");
       dispatch(getAllEmails());
