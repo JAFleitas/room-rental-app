@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
-
+import React from "react"
 import { DropDownMenu, DropDownItem } from "./styled"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useAuth0 } from "@auth0/auth0-react"
 import Logout from "../auth/logout"
@@ -17,12 +16,12 @@ export default function DropDown({ open }) {
       <DropDownMenu visibility={open ? "true" : "false"}>
         {isAuthenticated || auth ? (
           <>
-            <Link to="/profile">
-              <DropDownItem>Profile</DropDownItem>
-            </Link>
-            <DropDownItem>
+            <DropDownItem onClick={() => navigate("/profile")}>
+              Profile
+            </DropDownItem>
+            <DropDownItem onClick={() => navigate("/addProperty")}>
               {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
-              <Link to="/addProperty">Add Property</Link>
+              Add Property
             </DropDownItem>
             <hr />
             <DropDownItem>
