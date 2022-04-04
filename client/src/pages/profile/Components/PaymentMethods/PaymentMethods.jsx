@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import Creditcard from "../../../../components/CreditCard/CreditCard"
 import { deletePaymentMethod, getAllPaymentMethod } from "../../../../redux/actions"
+import { ErrorAlert } from "../../../../utilities/alerts"
 import getHeaderToken from "../../../../utilities/getHeadertoken"
 import styles from "./styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
@@ -23,7 +24,7 @@ const Paymentmethods = () => {
       // return
     } catch (error) {
       console.log(error.response)
-      toast.error(
+      ErrorAlert(
         (typeof error?.response?.data === "string"
           ? error.response.data
           : error.response.data?.message) || "Something went wrong :(",

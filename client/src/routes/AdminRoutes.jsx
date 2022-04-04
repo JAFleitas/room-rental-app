@@ -11,11 +11,12 @@ import LandingPage from "../pages/LandingPage/LandingPage"
 import Security from "../pages/AdminDashboard/Security.jsx"
 
 import Rentals from "../pages/AdminDashboard/Rentals.jsx"
-
+import { ToastContainer } from "react-toastify"
 const AdminRoutes = () => {
   return (
     <>
       <LeftBar />
+      <ToastContainer limit={3}/>
       <Routes>
         <Route path="/dashboard">
           <Route path="security" element={<Security />} />

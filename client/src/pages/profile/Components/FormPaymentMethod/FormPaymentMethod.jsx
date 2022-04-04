@@ -9,6 +9,7 @@ const api = import.meta.env.VITE_APP_API_URL
 import { useNavigate, useParams } from "react-router-dom"
 import { addPaymentMethod, editPaymentMethod } from "../../../../redux/actions"
 import { toast } from "react-toastify"
+import { ErrorAlert, WarningAlert } from "../../../../utilities/alerts"
 
 const initialForm = {
   cardNumber: "",
@@ -86,7 +87,7 @@ const FormPaymentMethod = ({ edit }) => {
     setErrors(errors)
 
     if (Object.keys(errors).length > 0) {
-      toast.warning("Check all fields")
+      WarningAlert("Check all fields")
     } else {
       if (edit) {
         try {
@@ -112,7 +113,7 @@ const FormPaymentMethod = ({ edit }) => {
           return
         } catch (error) {
           console.log(error?.response)
-          toast.error(
+          ErrorAlert(
             (typeof error?.response?.data === "string"
               ? error.response.data
               : error.response.data?.message) || "Something went wrong :(",
@@ -130,7 +131,7 @@ const FormPaymentMethod = ({ edit }) => {
           return
         } catch (error) {
           console.log(error?.response)
-          toast.error(
+          ErrorAlert(
             (typeof error?.response?.data === "string"
               ? error.response.data
               : error.response.data?.message) || "Something went wrong :(",

@@ -1,12 +1,13 @@
 import { toast } from "react-toastify"
+import { ErrorAlert, SuccessAlert } from "./alerts"
 import getHeaderToken from "./getHeadertoken"
 export default changePassword = async (data) => {
     const config = getHeaderToken()
     try {
       await axios.post(`${api}/users/reset-password`,data, config)
-      toast.success("Password changed")
+      SuccessAlert("Password changed")
     } catch (error) {
       console.log(error.response.data)
-      toast.error ("password is wrong")
+      ErrorAlert ("password is wrong")
     }
   }

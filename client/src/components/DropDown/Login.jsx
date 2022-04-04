@@ -13,7 +13,8 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
-import { toast, ToastContainer } from "react-toastify"
+import { WarningAlert } from "../../utilities/alerts"
+
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -32,7 +33,7 @@ const Login = () => {
     e.preventDefault()
 
     if (!logInForm.email || !logInForm.password) {
-      toast.warning("Missing fields, please try again")
+      WarningAlert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
     }
@@ -71,7 +72,6 @@ const Login = () => {
           I forgot my password
         </RedButton>
       </Form>
-      <ToastContainer limit={3} />
     </Container>
   )
 }
