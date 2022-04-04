@@ -29,7 +29,7 @@ export default function Details() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
-
+  const userLoginId = useSelector(state => state.user.id)
   //dispatch
   const dispatch = useDispatch()
   useEffect(() => {
@@ -111,7 +111,11 @@ export default function Details() {
           rating={property.rating}
         />
       </DescriptionContainer>
-      <RentForm props={property} />
+      {property.userID === userLoginId ? (
+        <div>You cannot rent your property!</div>
+      ) : (
+        <RentForm props={property} />
+      )}
     </ContainerPageDetails>
   ) : (
     <div>No se ha podido cargar la propiedad</div>
