@@ -108,10 +108,14 @@ export default function Details() {
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
-        <ReviewContainer
-          comments={property.comments}
-          rating={property.rating}
-        />
+        {property.comments.length === 0 && property.rating === 0 ? (
+          <div>No comments yet</div>
+        ) : (
+          <ReviewContainer
+            comments={property.comments}
+            rating={property.rating}
+          />
+        )}
       </DescriptionContainer>
       {property.userID === userLoginId ? (
         <div>You cannot rent your property!</div>
