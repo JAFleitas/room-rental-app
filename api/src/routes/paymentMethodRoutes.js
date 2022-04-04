@@ -6,10 +6,13 @@ const {
   updatePaymentMethod,
   deletePaymentMethod,
 } = require("../controllers/paymentMethodController")
+const { paymentStripe } = require("../controllers/stripeController")
 
 const router = Router()
 
 router.get("/", auth, getAllPaymentMethodsByUser)
+
+router.post("/paymentStripe", auth, paymentStripe)
 
 router.post("/", auth, createPaymentMethod)
 
