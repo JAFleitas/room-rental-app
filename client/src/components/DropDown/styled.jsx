@@ -20,6 +20,16 @@ export const DropDownMenu = styled.div`
       : `
     visibility: hidden;
     `};
+  /* @media (max-width: 550px) {
+    width: 98vw;
+    top: 15vh;
+    right: -43vw;
+  } */
+  @media (max-width: 550px) {
+    width: 98vw;
+    top: 15vh;
+    right: -43vw;
+  }
 `
 export const DropDownItem = styled.span`
   height: 50px;
@@ -35,6 +45,11 @@ export const DropDownItem = styled.span`
   :hover {
     background-color: #9d4edd;
     color: black;
+  }
+  @media (max-width: 550px) {
+    width: 100%;
+    justify-content: center;
+    font-size: 20px;
   }
 `
 export const Container = styled.div`
