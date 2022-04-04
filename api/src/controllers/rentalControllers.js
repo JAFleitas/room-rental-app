@@ -46,17 +46,8 @@ const getRental = async (req, res) => {
 }
 const getAllRentals = async (req, res, next) => {
   try {
-    const rentals = await PropertyRental.findAll()
-    for (let i = 0; i < rentals.length; i++) {
-      rentals[i].dataValues.user = await User.findByPk(rentals[i].userID)
-      rentals[i].dataValues.property = await Property.findByPk(
-        rentals[i].propertyID,
-      )
-    }
-
-    await Promise.all([rentals]).then(response => {
-      res.json(rentals)
-    })
+    const rentals = await PropertyRental.findAll({include:[{model:User},{model:Property}]})
+    res.json(rentals)
   } catch (error) {
     next(error)
   }
