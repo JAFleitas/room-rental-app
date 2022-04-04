@@ -16,11 +16,12 @@ import { EditProperty } from "../components/formAddProperty/editProperty.jsx"
 import Nav from "../components/Nav/Nav"
 import Footer from "../components/Footer/Footer"
 import FormComment from "../pages/Comment/FormComment.jsx"
-
+import {ToastContainer } from "react-toastify"
 const UserRoutes = () => {
   return (
     <>
       <Nav />
+      <ToastContainer limit={3}/>
       <Routes>
         <Route path="/logIn" element={<Login />} />
         <Route path="/property-info/:id" element={<Details />} />

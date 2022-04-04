@@ -30,6 +30,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
+import { WarningAlert } from "../../utilities/alerts"
 
 export default function RentForm(props) {
   const [monthsInCalendary, setMonthsInCalendary] = useState(2)
@@ -98,7 +99,7 @@ export default function RentForm(props) {
       payMethod === undefined ||
       finalPrice === undefined
     ) {
-      toast.warning("All fields are required")
+      WarningAlert("All fields are required")
     } else {
       let form = {
         propertyID: props.id,

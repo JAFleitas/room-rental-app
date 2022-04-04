@@ -5,6 +5,7 @@ import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 import getHeaderToken from "../../utilities/getHeadertoken"
 import { toast } from "react-toastify"
+import { ErrorAlert, SuccessAlert, WarningAlert } from "../../utilities/alerts"
 const api = import.meta.env.VITE_APP_API_URL
 
 const FormComment = () => {
@@ -32,17 +33,17 @@ const FormComment = () => {
         getHeaderToken())
         console.table(comment);
         setMessage("");
-        toast.success("Comment saved succesfully");
+        SuccessAlert("Comment saved succesfully");
         navigate("/profile/history");
       } catch (error) {
-        toast.error(
+        ErrorAlert(
           (typeof error?.response?.data === "string"
             ? error.response.data
             : error.response.data?.message) || "Something went wrong :(",
         )
       }
     } else {
-      toast.warning("Comment field is requierd")
+      WarningAlert("Comment field is requierd")
     }
   }
 
