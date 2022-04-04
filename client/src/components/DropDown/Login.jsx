@@ -66,7 +66,9 @@ const Login = () => {
         </SendButton>
         <LoginWithGoogle />
         <LoginWithFacebook />
-        <SendButton signup={true}>Sign up</SendButton>
+        <SendButton signup={true} onClick={() => navigate("/signUp")}>
+          Sign up
+        </SendButton>
         <RedButton onClick={() => navigate("/forgot-password")}>
           I forgot my password
         </RedButton>

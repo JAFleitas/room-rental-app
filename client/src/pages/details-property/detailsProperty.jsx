@@ -11,6 +11,7 @@ import {
   BotonBack,
   ServicesSt,
   DivReview,
+  Services,
 } from "./styled-components"
 import {
   ContainerMap,
@@ -85,19 +86,24 @@ export default function Details() {
         {property.image && <Images imagesPropertyDetails={property.image} />}
       </Suspense>
 
-      <DescriptionContainer>
+      <Services>
         <h1>What services does the place offer?</h1>
 
         {property.services ? (
-          property.services.map((e, i) => (
-            <ServicesSt key={i}>
+
+      
+ 
+
+          property.services.map(e => (
+            <ServicesSt key={e.id}>
+>
               {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
             </ServicesSt>
           ))
         ) : (
           <p>This property dont have services</p>
         )}
-      </DescriptionContainer>
+      </Services>
 
       <DescriptionContainer>
         <h1>Description</h1>
