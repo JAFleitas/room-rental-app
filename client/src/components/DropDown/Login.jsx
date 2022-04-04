@@ -15,7 +15,6 @@ import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
 import { WarningAlert } from "../../utilities/alerts"
 
-
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -67,7 +66,9 @@ const Login = () => {
         </SendButton>
         <LoginWithGoogle />
         <LoginWithFacebook />
-        <SendButton signup={true}>Sign up</SendButton>
+        <SendButton signup={true} onClick={() => navigate("/signUp")}>
+          Sign up
+        </SendButton>
         <RedButton onClick={() => navigate("/forgot-password")}>
           I forgot my password
         </RedButton>
