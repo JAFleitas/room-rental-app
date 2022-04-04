@@ -210,7 +210,7 @@ export function getAllServices() {
   }
 }
 
-export function getAllProperties(filters, page = 1) {
+export function getAllProperties(filters, page = 1, dates) {
   let queries = ""
   // console.log(filters)
   if (filters) {
@@ -235,10 +235,11 @@ export function getAllProperties(filters, page = 1) {
   }
   return async function (dispatch) {
     try {
-      let response = await axios.get(
+      let response = await axios.post(
         queries
           ? `${api}/properties/getProperties?${queries}&page=${page}`
           : `${api}/properties/getProperties?page=${page}`,
+        dates,
       )
       return dispatch({
         type: GET_ALL_PROPERTIES,
@@ -523,5 +524,12 @@ export function cancelRental(rentID) {
     } catch (error) {
       console.log(error.response)
     }
+  }
+}
+export const SAVE_DATE = "SAVE_DATE"
+export function actionSaveDates(payload) {
+  return {
+    type: SAVE_DATE,
+    payload,
   }
 }

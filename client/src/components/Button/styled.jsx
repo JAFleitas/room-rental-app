@@ -11,7 +11,7 @@ export const Container = styled.button`
   margin-top: 1vh;
   margin-left: 1vw;
   padding: 4px;
-  z-index: 50;
+  z-index: 150;
   margin-right: 20px;
 
   border-radius: 21px;

@@ -15,7 +15,6 @@ import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
 import { WarningAlert } from "../../utilities/alerts"
 
-
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()

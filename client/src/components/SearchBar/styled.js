@@ -38,7 +38,7 @@ export const ContainerSearchBar = styled.div`
   @media screen and (max-width: 525px) {
     flex-direction: column;
 
-    div{
+    div {
       width: 95%;
     }
   } ;
@@ -66,7 +66,7 @@ export const Box = styled.div`
   border-radius: 1rem;
   transition: 0.5s;
   &:hover {
-    background-color: black;
+    background-color: #a455ff;
   }
 `
 
@@ -79,7 +79,7 @@ export const Label = styled.label`
   padding-left: 6px;
   padding-right: 6px;
   margin-bottom: 2%;
-  background-color: black;
+  background-color: #a455ff;
   border-radius: 15px;
 `
 export const Input = styled.input`

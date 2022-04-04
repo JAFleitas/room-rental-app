@@ -96,7 +96,6 @@ export default function RentForm(props) {
     if (
       dates?.from === undefined ||
       dates?.to === undefined ||
-      payMethod === undefined ||
       finalPrice === undefined
     ) {
       WarningAlert("All fields are required")

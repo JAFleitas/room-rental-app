@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { getAllProperties, setOptionFilters } from "../../redux/actions"
+import {
+  actionSaveDates,
+  getAllProperties,
+  setOptionFilters,
+} from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { Form, InputsNumber, Services } from "./styled"
 import FilterAltIcon from "@mui/icons-material/FilterAlt"
@@ -31,19 +35,19 @@ export default function Filters() {
 
     if (!add) {
       // Si ya está lo quitamos de los filtros seleccionados
-      const newServices = filters.services.filter(service => service.id !== id);
+      const newServices = filters.services.filter(service => service.id !== id)
       setfilters({
         ...filters,
         services: newServices,
       })
-      dispatch(setOptionFilters({services: newServices.map(e => e.id)}));
+      dispatch(setOptionFilters({ services: newServices.map(e => e.id) }))
 
       // Y lo volvemos a añadir a las opciones de filtrado
       setServices([...services, service])
     } else {
-      const newServices = [...filters.services, service];
+      const newServices = [...filters.services, service]
       // O sino lo agregamos a los filtros seleccionados
-      setfilters({ ...filters, services: newServices });
+      setfilters({ ...filters, services: newServices })
       dispatch(setOptionFilters({ services: newServices.map(e => e.id) }))
 
       // Y lo quitamos de la opciones de filtrado
@@ -59,10 +63,10 @@ export default function Filters() {
     setfilters(newFilters)
 
     // Y envio los nuevos filtros
-    const copyFilters = { ...newFilters};
-    delete copyFilters.services;
+    const copyFilters = { ...newFilters }
+    delete copyFilters.services
     console.log({ copyFilters })
-    dispatch(setOptionFilters(copyFilters));
+    dispatch(setOptionFilters(copyFilters))
   }
 
   const handleRestartFilters = e => {
@@ -71,6 +75,7 @@ export default function Filters() {
     setfilters(initialFilters)
     setServices(initialServices)
     dispatch(setOptionFilters(initialFilters))
+    dispatch(actionSaveDates({}))
   }
 
   useEffect(() => {

@@ -42,9 +42,14 @@ export default function Details() {
       })
     }
   }, [])
+  useEffect(() => {
+    return () => {
+      window.scroll(0, 0)
+    }
+  }, [])
   const property = useSelector(state => state.detailsOfProperty)
   return loading ? (
-    <div style={{display: "flex"}}>
+    <div style={{ display: "flex" }}>
       <CircularProgress />
     </div>
   ) : property ? (
@@ -82,8 +87,8 @@ export default function Details() {
         <h1>What services does the place offer?</h1>
 
         {property.services ? (
-          property.services.map(e => (
-            <ServicesSt>
+          property.services.map((e, i) => (
+            <ServicesSt key={i}>
               {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
             </ServicesSt>
           ))
