@@ -142,6 +142,7 @@ export default function ProfileInfo() {
               value={dataUser.email}
               name="email"
               onChange={handleChangeInfo}
+              disabled={true}
             />
           </Info>
         ) : (
