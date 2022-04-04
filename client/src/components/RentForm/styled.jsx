@@ -103,7 +103,7 @@ export const SubmitButton = styled.button`
   padding: 5px;
   align-self: center;
   margin-top: 3%;
-  background-color: #d722fc;
+  background-color: ${({ disabled }) => (disabled ? "#aaa" : "#d722fc")};
   border-radius: 15px;
   border: 1px solid transparent;
   color: white;
@@ -111,7 +111,8 @@ export const SubmitButton = styled.button`
 
   &:hover {
     border-radius: 16.5px;
-    background: linear-gradient(145deg, #c21fe3, #e624ff);
+    background: ${({ disabled }) =>
+      disabled ? "#aaa" : "linear-gradient(145deg, #c21fe3, #e624ff)"};
   }
   &:focus {
     border-radius: 18px;

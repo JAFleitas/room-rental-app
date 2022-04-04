@@ -135,19 +135,9 @@ export default function ProfileInfo() {
           <Info>{user.lastname ? user.lastname : "Incomplete"}</Info>
         )}
         <Label>Email</Label>
-        {user.email && editStatus ? (
-          <Info>
-            <input
-              type="text"
-              value={dataUser.email}
-              name="email"
-              onChange={handleChangeInfo}
-              disabled={true}
-            />
-          </Info>
-        ) : (
-          <Info>{user.email ? user.email : "Incomplete"}</Info>
-        )}
+
+        <Info>{user.email ? user.email : "Incomplete"}</Info>
+
         <Label>Country</Label>
         {user.country && editStatus ? (
           <Info>
