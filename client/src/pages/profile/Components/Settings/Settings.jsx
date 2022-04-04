@@ -56,16 +56,19 @@ export default function Settings() {
       ) : (
         <ChangePassword>
           <Input
+            type={"password"}
             placeholder="Old Password"
             name="oldPassword"
             value={input.oldPassword}
             onChange={e => handleChange(e)}></Input>
           <Input
+            type={"password"}
             placeholder="New Password"
             name="newPassword"
             value={input.newPassword}
             onChange={e => handleChange(e)}></Input>
           <Input
+            type={"password"}
             placeholder="New Password"
             value={compare}
             onChange={e => handleChangeCompare(e)}></Input>
