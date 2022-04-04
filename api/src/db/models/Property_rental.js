@@ -43,7 +43,7 @@ module.exports = sequelize => {
     // Relacionando un 'alquiler de una propiedad' y Usuario
     PropertyRental.belongsTo(models.User, {
       sourceKey: "id",
-      foreignKey: "userId",
+      foreignKey: "userID",
     })
     //  Relacionando 'alquiler de una propiedad' y Propiedad
     //  Esto se usa y funciona [NO TOCAR]
