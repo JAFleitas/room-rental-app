@@ -12,7 +12,11 @@ import {
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllProperties, setOptionFilters } from "../../redux/actions"
+import {
+  actionSaveDates,
+  getAllProperties,
+  setOptionFilters,
+} from "../../redux/actions"
 import Filters from "../Filters/Filters"
 import Sorters from "../Filters/Sorters"
 import FilterAltIcon from "@mui/icons-material/FilterAlt"
@@ -22,13 +26,21 @@ function SearchBar() {
   const [endDate, setEndDate] = useState(new Date())
   const [location, setLocation] = useState("")
   const filters = useSelector(state => state.filters)
+  const page = useSelector(state => state.page)
+  const dates = useSelector(state => state.dates)
   const dispatch = useDispatch()
   const [openFilters, setOpenFilters] = useState(false)
 
   const handleSearch = e => {
     e.preventDefault()
-    dispatch(setOptionFilters({ location })),
-      dispatch(getAllProperties({ ...filters, location }))
+    dispatch(
+      actionSaveDates({
+        start_date: startDate,
+        final_date: endDate,
+      }),
+    )
+    dispatch(setOptionFilters({ location }))
+    dispatch(getAllProperties({ ...filters, location }, page, dates))
   }
 
   const handleChange = e => {
@@ -73,7 +85,8 @@ function SearchBar() {
           </SearchButton>
         </ContainerSearchBar>
         <button onClick={() => setOpenFilters(!openFilters)}>
-          <FilterAltIcon />{openFilters ? "Close" : "Open"} filters
+          <FilterAltIcon />
+          {openFilters ? "Close" : "Open"} filters
         </button>
         {openFilters && <Filters />}
       </Container>

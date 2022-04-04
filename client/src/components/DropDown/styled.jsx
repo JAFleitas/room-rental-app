@@ -46,6 +46,7 @@ export const Container = styled.div`
   width: 500px;
   padding: "20px";
   margin-bottom: 2rem;
+
   button {
     height: 50px;
     margin-bottom: 8px;

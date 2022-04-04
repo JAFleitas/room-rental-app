@@ -1,4 +1,6 @@
-// import { reviewsObj } from "../../../../utilities/reviewsObjdemo"
+import { useState } from "react"
+import { useSelector } from "react-redux"
+import Modal from "../../../../components/modal/modal"
 import ReviewCard from "../reviewCard/reviewCard"
 import {
   DivStar,
@@ -9,7 +11,10 @@ import {
   ButtonSt,
 } from "./styles"
 
-export default function ReviewContainer({ comments, rating = 0 }) {
+export default function ReviewContainer({ rating = 0 }) {
+  const comments = useSelector(state => state.detailsOfProperty.comments)
+  const [modalShow, setModalShow] = useState(false)
+
   return (
     <>
       {rating && (
@@ -28,9 +33,20 @@ export default function ReviewContainer({ comments, rating = 0 }) {
               <ReviewCard key={comment.id} comment={comment} />
             ))}
             <div>
-              <ButtonSt>See all reviews</ButtonSt>
+              <ButtonSt onClick={() => setModalShow(true)}>
+                See all reviews
+              </ButtonSt>
             </div>
           </ContainerCards>
+          <Modal
+            overlayShow={true}
+            modalShow={modalShow}
+            setModalShow={setModalShow}
+            width={"80%"}>
+            {comments?.map((e, i) => (
+              <ReviewCard key={i} comment={e.comment} />
+            ))}
+          </Modal>
         </ContainerAll>
       )}
     </>

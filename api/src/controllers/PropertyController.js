@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 const { Op } = require("sequelize")
-
+const { compareDates } = require("../utilities/compareDates")
 const {
   Property,
   Service,
@@ -15,7 +16,7 @@ const getPropertyById = async (req, res, next) => {
       where: {
         id,
       },
-      attributes: { exclude: ["userID"] },
+
       include: [
         {
           model: Comment,
@@ -134,6 +135,8 @@ const editProperty = async (req, res) => {
 
 const getAll = async (req, res, next) => {
   try {
+    const { final_date, start_date } = req.body
+
     const options = req.options || { where: {} }
 
     let { page } = req.query
@@ -150,13 +153,34 @@ const getAll = async (req, res, next) => {
           attributes: [], // que atributos de aquí quiero o si está vacío me elimina el atributo Country anidado
         },
       },
+      {
+        model: PropertyRental,
+        attributes: ["start_date", "final_date"],
+      },
     ]
 
     // console.log(options)
-    const properties = await Property.findAll(options)
+    let properties = await Property.findAll(options)
 
     if (properties.length === 0) {
       return next({ message: "Properties not founded", status: 404 })
+    }
+    if (final_date?.length || start_date?.length) {
+      properties = properties.filter(e => {
+        if (
+          !e.PropertyRentals.every(rental =>
+            compareDates(
+              rental.start_date,
+              rental.final_date,
+              start_date,
+              final_date,
+            ),
+          )
+        ) {
+          return false
+        }
+        return e
+      })
     }
 
     // Paginación

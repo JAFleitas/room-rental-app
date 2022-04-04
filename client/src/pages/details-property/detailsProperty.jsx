@@ -30,17 +30,24 @@ export default function Details() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
-
+  const userLoginId = useSelector(state => state.user.id)
   //dispatch
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getPropertyById(id))
     setLoading(false)
     return () => {
-      dispatch({
-        type: GET_PROPERTY_BY_ID,
-        payload: null,
-      })
+      if (id === undefined) {
+        dispatch({
+          type: GET_PROPERTY_BY_ID,
+          payload: null,
+        })
+      }
+    }
+  }, [])
+  useEffect(() => {
+    return () => {
+      window.scroll(0, 0)
     }
   }, [])
   const property = useSelector(state => state.detailsOfProperty)
@@ -83,8 +90,13 @@ export default function Details() {
         <h1>What services does the place offer?</h1>
 
         {property.services ? (
+
+      
+ 
+
           property.services.map(e => (
             <ServicesSt key={e.id}>
+>
               {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
             </ServicesSt>
           ))
@@ -102,12 +114,20 @@ export default function Details() {
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
-        <ReviewContainer
-          comments={property.comments}
-          rating={property.rating}
-        />
+        {property?.comments?.length === 0 && property?.rating === 0 ? (
+          <div>No comments yet</div>
+        ) : (
+          <ReviewContainer
+            comments={property.comments}
+            rating={property.rating}
+          />
+        )}
       </DescriptionContainer>
-      <RentForm props={property} />
+      {property?.userID === userLoginId ? (
+        <div>You cannot rent your property!</div>
+      ) : (
+        <RentForm props={property} />
+      )}
     </ContainerPageDetails>
   ) : (
     <div>No se ha podido cargar la propiedad</div>

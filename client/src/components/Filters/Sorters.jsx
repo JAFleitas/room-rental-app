@@ -16,10 +16,11 @@ const Sorters = () => {
   const dispatch = useDispatch()
   const currentOptions = useSelector(state => state.filters)
   const page = useSelector(state => state.page)
+  const dates = useSelector(state => state.dates)
 
   useEffect(() => {
     setOptions({ order: currentOptions.order, orderBy: currentOptions.orderBy })
-    dispatch(getAllProperties(currentOptions, page))
+    dispatch(getAllProperties(currentOptions, page, dates))
   }, [currentOptions.order, currentOptions.orderBy, page])
 
   const handleChange = e => {

@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { actionChangePage } from "../../redux/actions"
+import { getAllProperties } from "../../redux/actions"
 import { ContainerPaginated, ButtonPage, LabelPage, OutOf } from "./styles"
 
 export default function Paginated() {
   const totalPages = useSelector(state => state.AllProperties.totalPages)
-  const globalPage = useSelector(state => state.page)
+
   const [currentPage, setCurrentPage] = useState(1)
   const filters = useSelector(state => state.filters)
+  const dates = useSelector(state => state.dates)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(actionChangePage(currentPage))
+    dispatch(getAllProperties(filters, currentPage, dates))
     return () => {
       window.scroll(0, 0)
     }
   }, [currentPage])
   useEffect(() => {
     setCurrentPage(1)
-  }, [filters])
+  }, [filters, dates])
 
   return (
     <ContainerPaginated>
@@ -34,7 +35,7 @@ export default function Paginated() {
         <>
           <LabelPage decoration={"underline"} border={"1px solid #2b2929;"}>
             {" "}
-            {globalPage}{" "}
+            {currentPage}{" "}
           </LabelPage>
           <OutOf border={"1px solid #2b2929;"}>out of</OutOf>
           <LabelPage border={"1px solid #2b2929;"}> {totalPages}</LabelPage>
