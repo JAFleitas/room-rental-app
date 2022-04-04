@@ -13,7 +13,7 @@ export const Overlay = styled.div`
   align-items: ${({ positionModalY }) => positionModalY ?? "center"};
   justify-content: ${({ positionModalX }) => positionModalX ?? "center"};
 
-  z-index: 100;
+  z-index: 200;
 `
 
 export const ContainerModal = styled.div`
