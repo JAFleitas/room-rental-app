@@ -31,7 +31,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { WarningAlert } from "../../utilities/alerts"
-
+import { compareDates } from "../../utilities/compareDates"
 export default function RentForm(props) {
   const [monthsInCalendary, setMonthsInCalendary] = useState(2)
   const mediaqueryList = window.matchMedia("(min-width: 705px)")
@@ -236,7 +236,22 @@ export default function RentForm(props) {
             Add payment method <IconPlus />
           </AddPayment>
         </PaymentMethodsContainer>
-        <SubmitButton onClick={handleClick}>Reservar</SubmitButton>
+        <SubmitButton
+          disabled={
+            !dates?.from || !dates?.to
+              ? true
+              : !rentals?.every(e =>
+                  compareDates(
+                    e.start_date,
+                    e.final_date,
+                    dates.from,
+                    dates.to,
+                  ),
+                )
+          }
+          onClick={handleClick}>
+          Reservar
+        </SubmitButton>
       </Form>
     </Container>
   )
