@@ -15,6 +15,7 @@ module.exports = async (req, res, next) => {
     maxrooms = null,
     minpeople = null,
     maxpeople = null,
+    status = "enabled",
   } = req.query
   const options = { where: {} }
 
@@ -30,6 +31,8 @@ module.exports = async (req, res, next) => {
   orderBy.push(order)
   options.order = [orderBy]
 
+  options.status = "enabled"
+
   // Definimos si filtrado por locacion
   if (location) {
     options.where = {
@@ -38,6 +41,8 @@ module.exports = async (req, res, next) => {
       },
     }
   }
+
+  options.where.status = status
 
   // Definimos si hay un termino de búsqueda
   if (search) {
