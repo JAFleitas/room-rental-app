@@ -59,7 +59,6 @@ const addProperty = async (req, res) => {
     description,
     image,
     coordinates,
-    discount,
     services,
     typePropertyID,
   } = req.body.data
@@ -75,7 +74,6 @@ const addProperty = async (req, res) => {
         description,
         image,
         coordinates,
-        discount,
         services,
         typePropertyID,
         userID: id,
@@ -106,7 +104,6 @@ const editProperty = async (req, res) => {
     image,
     services,
     description,
-    discount,
     typePropertyID,
     coordinates,
   } = req.body.data
@@ -123,7 +120,6 @@ const editProperty = async (req, res) => {
         image,
         services,
         description,
-        discount,
         typePropertyID,
         coordinates,
       },

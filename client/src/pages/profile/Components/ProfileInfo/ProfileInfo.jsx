@@ -151,7 +151,7 @@ export default function ProfileInfo() {
         ) : (
           <Info>{user.country ? user.country : "Incomplete"}</Info>
         )}
-        <Label>Number of count</Label>
+        <Label>Account number</Label>
         {user.account_number && editStatus ? (
           <Info>
             <input
