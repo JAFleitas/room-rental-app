@@ -171,7 +171,6 @@ export default function FormAddProperty(props) {
           image: res.data.image,
           services: services,
           description: res.data.description,
-          discount: res.data.discount,
           typePropertyID: res.data.typePropertyID,
           coordinates: res.data.coordinates,
         })
@@ -263,18 +262,6 @@ export default function FormAddProperty(props) {
           {errors.description && (
             <LabelSt error={true}>{errors.description}</LabelSt>
           )}
-          <LabelSt>Discount</LabelSt>
-          <input
-            type="range"
-            max="30"
-            min="0"
-            step="5"
-            style={{ width: "40%" }}
-            name="discount"
-            value={formData.discount}
-            onChange={handleInputChange}
-          />
-          <label>{formData.discount} %</label>
         </FormContainer>
         <ContainerImgAndMap>
           <div>
