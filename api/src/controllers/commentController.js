@@ -25,7 +25,7 @@ const getAllCommentsByProperty = async (req, res, next) => {
 
 const getAllCommentsByUser = async (req, res, next) => {
   try {
-    const { id: userId } = req.user;
+    const { id: userId } = req.user
 
     const comments = await Comment.findAll({
       attributes: { exclude: ["propertyId, userId"] },
@@ -117,7 +117,7 @@ const updateComment = async (req, res, next) => {
   }
 
   try {
-    let newFields = {}
+    const newFields = {}
 
     if (message) newFields.message = message
     if (rating) newFields.rating = rating
