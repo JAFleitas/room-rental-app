@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { Title, CardContainer, Card, RedButton } from "./styled"
+import {
+  Title,
+  CardContainer,
+  Card,
+  RedButton,
+  WhiteButton,
+  ContainerButtons,
+  EditButton,
+} from "./styled"
 import { useSelector, useDispatch } from "react-redux"
 import PropertyCard from "../../../../components/PropertyCard/PropertyCard"
 import {
@@ -8,20 +16,20 @@ import {
 } from "../../../../redux/actions/index"
 // import { SubMenu } from "../ProfileInfo/styled"
 import { Container } from "../RentCard/styled"
+import { useNavigate } from "react-router-dom"
 
 export default function MyProperties() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
   const MyProperties = useSelector(state => state.MyProperties) || []
-  const [render, setRender]=useState(true)
-
+  const [render, setRender] = useState(true)
+  const navigate = useNavigate()
   useEffect(() => {
     dispatch(getPropertiesByUserId(user.id))
-  }, [dispatch,render])
+  }, [dispatch, render])
 
   function handleDelete(e) {
-    
-      console.log(e.target.value)
+    console.log(e.target.value)
     dispatch(deletePropertyFromMyProperties(e.target.value))
     setRender(!render)
     // navigate("/profile/myProperties")
@@ -46,12 +54,18 @@ export default function MyProperties() {
                 rating={property.rating}
                 image={property.image}
               />
-              <RedButton
-                id={property.id}
-                value={property.id}
-                onClick={e => handleDelete(e)}>
-                Eliminar
-              </RedButton>
+              <ContainerButtons>
+                <RedButton
+                  id={property.id}
+                  value={property.id}
+                  onClick={e => handleDelete(e)}>
+                  Eliminar
+                </RedButton>
+                <EditButton
+                  onClick={() => navigate(`/editProperty/${property.id}`)}>
+                  Edit
+                </EditButton>
+              </ContainerButtons>
             </Card>
           )
         })}

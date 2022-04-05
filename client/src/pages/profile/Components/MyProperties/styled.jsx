@@ -116,3 +116,19 @@ export const Card = styled.div`
   align-items: center;
   border: 2px solid #d722fc;
 `
+export const ContainerButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+  &button {
+    width: 100%;
+  }
+`
+export const EditButton = styled(RedButton)`
+  background: #00bb2d;
+  &:hover {
+    background: #00bb2daa;
+    color: #fff;
+  }
+`
