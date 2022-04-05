@@ -14,6 +14,7 @@ export const Container = styled.div`
     rgba(239, 226, 255, 1) 66%,
     rgba(244, 235, 255, 1) 100%
   );
+  border: 1px solid #d822fc3f;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;

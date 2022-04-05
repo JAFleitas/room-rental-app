@@ -50,6 +50,7 @@ export const Container = styled.div`
   width: 90%;
   margin: auto;
   background-color: #e2c8ff;
+  border: 1px solid #d822fc3f;
   border-radius: 1rem;
   padding: 1rem;
   transition: 1s;

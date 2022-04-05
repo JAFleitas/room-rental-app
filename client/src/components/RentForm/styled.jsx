@@ -15,6 +15,8 @@ export const Container = styled.div`
     rgba(239, 226, 255, 1) 66%,
     rgba(244, 235, 255, 1) 100%
   );
+  border: 1px solid #d822fc3f;
+
   border-radius: 15px;
   display: flex;
   flex-direction: column;

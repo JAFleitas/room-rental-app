@@ -120,7 +120,17 @@ export const Location = styled.div`
   margin-top: 1.5rem;
 `
 
-export const Rating = styled.p`
+export const Rating = styled.div`
   color: black;
   font-size: small;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const RatingNumber = styled.p`
+  color: black;
+  font-size: small;
+  text-align: center;
+  margin-left: 5px;
 `

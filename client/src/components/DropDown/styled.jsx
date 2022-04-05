@@ -97,8 +97,24 @@ export const Field = styled.div`
 export const Form = styled.form`
   width: 100%;
   border-radius: 25px;
-  background: #5d00a4;
-  box-shadow: inset 21px 21px 42px #430076, inset -21px -21px 42px #7700d2;
+  /* background: rgb(226, 200, 255);
+  background: linear-gradient(
+    121deg,
+    rgba(226, 200, 255, 1) 0%,
+    rgba(235, 199, 255, 1) 25%,
+    rgba(244, 199, 255, 1) 50%,
+    rgba(254, 199, 255, 1) 75%,
+    rgba(255, 199, 246, 1) 100%
+  ); */
+  background: rgb(39, 0, 130);
+  background: linear-gradient(
+    135deg,
+    rgba(39, 0, 130, 1) 0%,
+    rgba(61, 0, 130, 1) 25%,
+    rgba(84, 0, 130, 1) 50%,
+    rgba(106, 0, 130, 1) 75%,
+    rgba(128, 0, 130, 1) 100%
+  );
   border-radius: 10px;
   padding-top: 10%;
   padding-bottom: 10%;
@@ -205,6 +221,7 @@ export const RedButton = styled.button`
   box-shadow: rgba(27, 31, 36, 0.1);
   width: 90%;
   min-height: 30px;
+  border-radius: 0.5rem;
   font-size: 16px;
   font-weight: normal;
   font-family: sans-serif;

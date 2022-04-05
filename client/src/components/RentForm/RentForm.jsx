@@ -250,7 +250,7 @@ export default function RentForm(props) {
                 )
           }
           onClick={handleClick}>
-          Reservar
+          Reserve
         </SubmitButton>
       </Form>
     </Container>
