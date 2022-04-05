@@ -46,12 +46,14 @@ export default function Rentals() {
     setPage(newPage)
   }
 
-  const handleSortNestedProps = (prop1, prop2 = null, direction = 'asc') => (e1, e2) => {
-    const a = prop2 ? e1[prop1][prop2] : e1[prop1],
+  const handleSortNestedProps =
+    (prop1, prop2 = null, direction = "asc") =>
+    (e1, e2) => {
+      const a = prop2 ? e1[prop1][prop2] : e1[prop1],
         b = prop2 ? e2[prop1][prop2] : e2[prop1],
         sortOrder = direction === "asc" ? 1 : -1
-    return (a < b) ? -sortOrder : (a > b) ? sortOrder : 0;
-}
+      return a < b ? -sortOrder : a > b ? sortOrder : 0
+    }
 
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value)
@@ -69,26 +71,31 @@ export default function Rentals() {
 
     setSort(newSort)
 
-    if(rows && rows.length && value === "user.name"){
+    if (rows && rows.length && value === "user.name") {
       // console.log(rows);
 
-      let sorterRows = rows.sort(handleSortNestedProps("user", "name", newSort.order));
+      let sorterRows = rows.sort(
+        handleSortNestedProps("user", "name", newSort.order),
+      )
 
       setCurrentRows(sorterRows)
-    } else if(rows && rows.length && value === "property.name"){
+    } else if (rows && rows.length && value === "property.name") {
       // console.log(rows);
 
-      let sorterRows = rows.sort(handleSortNestedProps("property", "name", newSort.order));
+      let sorterRows = rows.sort(
+        handleSortNestedProps("property", "name", newSort.order),
+      )
 
       setCurrentRows(sorterRows)
-    } else if(rows && rows.length && value === "property.location"){
+    } else if (rows && rows.length && value === "property.location") {
       // console.log(rows);
 
-      let sorterRows = rows.sort(handleSortNestedProps("property", "location", newSort.order));
+      let sorterRows = rows.sort(
+        handleSortNestedProps("property", "location", newSort.order),
+      )
 
       setCurrentRows(sorterRows)
-    }
-    else if (rows && rows.length && rows[0].user.name) {
+    } else if (rows && rows.length && rows[0].user.name) {
       // console.log({ rows })
       let sorterRows =
         newSort.order === "asc"
@@ -251,7 +258,12 @@ export default function Rentals() {
                       <StyledTableRow key={row.id}>
                         <StyledTableCell>
                           <img
-                            style={{ width: "55px", borderRadius: "50%" }}
+                            style={{
+                              width: "80px",
+                              objectFit: "cover",
+                              padding: "0",
+                              margin: "0"
+                            }}
                             src={row.property.image[0]}
                             alt={row.property.name}
                           />

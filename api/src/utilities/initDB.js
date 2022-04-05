@@ -3,12 +3,14 @@ const users = require("../data/users.json")
 const services = require("../data/Services.json")
 const notifications = require("../data/notifications.json")
 const typesProperty = require("../data/type_property.json")
+const rentals = require("../data/rentals.json")
 const {
   Property,
   User,
   Service,
   Notification,
   Type_property: TypeProperty,
+  PropertyRental,
 } = require("../db")
 const usersIds = [
   "b2119946-a958-4744-ad61-f05ce92f7024",
@@ -38,10 +40,7 @@ module.exports = async () => {
   }
 
   try {
-    await User.bulkCreate(
-      users,
-      { validate: true },
-    )
+    await User.bulkCreate(users, { validate: true })
     console.log("- Usuarios cargados en la DDBB") // eslint-disable-line no-console
   } catch (err) {
     console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
@@ -70,7 +69,7 @@ module.exports = async () => {
           services,
           typePropertyID,
         } = property
-        const userID = usersIds[randomNumber(0, usersIds.length-1)]
+        const userID = usersIds[randomNumber(0, usersIds.length - 1)]
         const createdProperty = await Property.create({
           id,
           name,
@@ -100,12 +99,20 @@ module.exports = async () => {
     console.log("No se han podido cargar las propiedades") // eslint-disable-line no-console
   }
 
-    try {
-      await Notification.bulkCreate(notifications, { validate: true })
-      console.log("- Notificaciones cargadas en la DDBB") // eslint-disable-line no-console
-    } catch (err) {
-      // console.log(err);
-      console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
-      console.log("No se han podido cargar las notificaciones") // eslint-disable-line no-console
-    }
+  try {
+    await Notification.bulkCreate(notifications, { validate: true })
+    console.log("- Notificaciones cargadas en la DDBB") // eslint-disable-line no-console
+  } catch (err) {
+    // console.log(err);
+    console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
+    console.log("No se han podido cargar las notificaciones") // eslint-disable-line no-console
+  }
+
+  try {
+    await PropertyRental.bulkCreate(rentals, { validate: true })
+    console.log("- Rentas cargadas en la DDBB") // eslint-disable-line no-console
+  } catch (err) {
+    console.log(`Tipo de error: ${err}`) // eslint-disable-line no-console
+    console.log("No se han podido cargar las rentas") // eslint-disable-line no-console
+  }
 }

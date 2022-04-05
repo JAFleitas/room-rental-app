@@ -1,0 +1,66 @@
+[
+  {
+    "final_price": 250,
+    "start_date": "2021/01/30",
+    "final_date": "2021/02/25",
+    "userID": "b49a5948-21a0-44c3-92fc-20b626d94dc2",
+    "propertyID": "13eaa861-d3f1-43eb-b884-4ab396a82318",
+    "createdAt": "2022-01-01T22:57:08.981Z"
+  },
+  {
+    "final_price": 325,
+    "start_date": "2021/02/10",
+    "final_date": "2021/02/25",
+    "userID": "b2119946-a958-4744-ad61-f05ce92f7024",
+    "propertyID": "13eaa861-d3f1-43eb-b884-4ab396a82318",
+    "createdAt": "2022-01-04T22:57:08.981Z"
+  },
+  {
+    "final_price": 100,
+    "start_date": "2021/02/01",
+    "final_date": "2021/02/03",
+    "userID": "b2119946-a958-4744-ad61-f05ce92f7024",
+    "propertyID": "2e47c8f0-01a2-4c88-a333-43c944e1c93f",
+    "createdAt": "2022-01-10T22:57:08.981Z"
+  },
+  {
+    "final_price": 133,
+    "start_date": "2022/02/17",
+    "final_date": "2022/02/20",
+    "userID": "79864a10-2446-42e5-ab6d-6867f08eca69",
+    "propertyID": "2e47c8f0-01a2-4c88-a333-43c944e1c93f",
+    "createdAt": "2022-02-10T22:57:08.981Z"
+  },
+  {
+    "final_price": 250,
+    "start_date": "2022/05/30",
+    "final_date": "2022/05/25",
+    "userID": "79864a10-2446-42e5-ab6d-6867f08eca69",
+    "propertyID": "a19646f5-4ac3-46d7-b1ca-0a84b8c6f20a",
+    "createdAt": "2022-02-03T22:57:08.981Z"
+  },
+  {
+    "final_price": 105,
+    "start_date": "2021/02/01",
+    "final_date": "2021/02/03",
+    "userID": "79864a10-2446-42f5-ab6d-6867f08eca19",
+    "propertyID": "a19646f5-4ac3-46d7-b1ca-0a84b8c6f20a",
+    "createdAt": "2022-03-10T22:57:08.981Z"
+  },
+  {
+    "final_price": 153,
+    "start_date": "2022/02/17",
+    "final_date": "2022/02/20",
+    "userID": "79864a10-2446-42f5-ab6d-6867f08eca19",
+    "propertyID": "0b1f9feb-d17a-4fd5-92bb-3286cd5dad47",
+    "createdAt": "2022-03-23T22:57:08.981Z"
+  },
+  {
+    "final_price": 321,
+    "start_date": "2022/05/30",
+    "final_date": "2022/05/25",
+    "userID": "79864a10-2446-42f5-ab6d-6867f08eca65",
+    "propertyID": "0012425b-8655-49d7-b838-184b6e58948e",
+    "createdAt": "2022-02-03T22:57:08.981Z"
+  }
+]

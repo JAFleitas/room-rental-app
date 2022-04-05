@@ -13,6 +13,12 @@
   margin: 1rem;
 }
 
+.subtitle{
+  font-size: 1.5rem;
+  color: #94268bdd;
+  margin: 1rem;
+}
+
 .card-container{
   display: flex;
   flex-wrap: wrap;
@@ -35,4 +41,22 @@
   justify-content: center;
   box-shadow: 7px 6px slategray;
   cursor: pointer;
+}
+
+.income{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100px;
+  background-color: #42ba96;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin: 1rem;
+  color: white;
+  font-weight: bold;
+}
+
+.income div{
+  margin: 0.75rem;
 }

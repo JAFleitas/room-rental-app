@@ -12,6 +12,7 @@ import {
   getAllRentals,
   getFavorites,
   loadUser,
+  getMonthlyIncomes,
 } from "./redux/actions"
 import { useNavigate } from "react-router-dom"
 
@@ -40,6 +41,7 @@ function App() {
       dispatch(getAllEmails())
       dispatch(getAllUsers())
       dispatch(getAllRentals())
+      dispatch(getMonthlyIncomes())
     }
   }, [admin])
 

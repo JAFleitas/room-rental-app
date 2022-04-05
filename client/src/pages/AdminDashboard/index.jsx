@@ -10,14 +10,31 @@ import PaidIcon from "@mui/icons-material/Paid"
 
 const Index = () => {
   const user = useSelector(state => state.user)
+  const incomes = useSelector(state => state.incomes)
   const state = useSelector(state => state)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div>
       <h1 className={styles["index-title"]}>
         Hi! {user.name} {user.lastname}, wellcome to your admin dashboard
       </h1>
+      <h3 className={styles.subtitle}>Incomes</h3>
+      <div className={styles["card-container"]}>
+        {incomes.map(income => {
+          return (
+            <div className={styles.income} key={income.rentedOn}>
+              <PaidIcon fontSize="large" />
+              <div>
+                <h4>Year: {income.rentedOn.split("-")[0]}</h4>
+                <h4>Month: {income.rentedOn.split("-")[1]}</h4>
+                <p>${income.totalAmount}</p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      <h3 className={styles.subtitle}>App data</h3>
       <div className={styles["card-container"]}>
         <div
           onClick={() => navigate("/dashboard/emails")}
@@ -51,7 +68,7 @@ const Index = () => {
           onClick={() => navigate("/dashboard/rentals")}
           className={styles.card}>
           <PaidIcon fontSize="large" />
-          <p>{state?.admin?.orders?.length || 0} rented properties</p>
+          <p>{state?.propertyRentals?.length || 0} rented properties</p>
         </div>
       </div>
     </div>

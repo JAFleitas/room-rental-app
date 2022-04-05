@@ -36,6 +36,7 @@ import {
   ADMIN_BLOCK_USER,
   GET_ALL_RENTALS,
   SAVE_DATE,
+  GET_MONTHLY_INCOMES,
 } from "../actions"
 
 const initialState = {
@@ -77,11 +78,14 @@ const initialState = {
     users: null,
     orders: null,
   },
+  incomes: [],
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   let newUsers, finded
   switch (type) {
+    case GET_MONTHLY_INCOMES:
+      return { ...state, incomes: payload }
     case CREATE_ADMIN:
     case ADMIN_CHANGE_ENABLE_USER:
     case ADMIN_BLOCK_USER:
