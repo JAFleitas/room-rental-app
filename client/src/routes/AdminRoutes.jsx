@@ -14,6 +14,8 @@ import Rentals from "../pages/AdminDashboard/Rentals.jsx"
 import { ToastContainer } from "react-toastify"
 import Categories from "../pages/AdminDashboard/Categories.jsx"
 import Services from "../pages/AdminDashboard/Services.jsx"
+import Index from "../pages/AdminDashboard/index.jsx"
+
 const AdminRoutes = () => {
   return (
     <>
@@ -21,6 +23,7 @@ const AdminRoutes = () => {
       <ToastContainer limit={3}/>
       <Routes>
         <Route path="/dashboard">
+          <Route index element={<Index />} />
           <Route path="security" element={<Security />} />
           <Route path="emails" element={<Emails />} />
           <Route path="categories" element={<Categories />} />

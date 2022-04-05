@@ -5,3 +5,34 @@
   text-align: center;
   margin: 1rem;
 }
+
+.index-title{
+  font-size: 2rem;
+  padding: 1rem;
+  color: #94268bdd;
+  margin: 1rem;
+}
+
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem;
+}
+
+.card{
+  width: 200px;
+  height: 170px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 1rem;
+  background-color: rosybrown;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 7px 6px slategray;
+  cursor: pointer;
+}

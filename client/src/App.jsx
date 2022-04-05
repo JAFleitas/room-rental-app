@@ -48,7 +48,7 @@ function App() {
       if (admin === "NORMAL") {
         return navigate("/", { scroll: { x: 0, y: 0 } })
       } else {
-        return navigate("/dashboard/emails")
+        return navigate("/dashboard")
       }
     }
   }, [auth, admin])
