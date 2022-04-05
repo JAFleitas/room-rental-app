@@ -15,7 +15,8 @@ import { actionLogout } from "../../../redux/actions"
 import LogoutIcon from "@mui/icons-material/Logout"
 import ListIcon from '@mui/icons-material/List';
 import {CustomizedButton, CustomizedDiv} from "./styles"
-
+import CategoryIcon from "@mui/icons-material/Category"
+import AppsIcon from "@mui/icons-material/Apps"
 
 export default function LeftBar() {
   const [state, setState] = React.useState({
@@ -35,12 +36,19 @@ export default function LeftBar() {
   }
   const list = anchor => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 230}}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
       <List>
-        {["Users", "Rentals", "Emails", "Security"].map(text => (
+        {[
+          "Users",
+          "Rentals",
+          "Emails",
+          "Security",
+          "Categories",
+          "Services",
+        ].map(text => (
           <ListItem
             button
             onClick={() => navigate(`/dashboard/${text}`)}
@@ -52,6 +60,10 @@ export default function LeftBar() {
                 <MailIcon />
               ) : text === "Rentals" ? (
                 <ReceiptIcon />
+              ) : text === "Categories" ? (
+                <CategoryIcon />
+              ) : text === "Services" ? (
+                <AppsIcon />
               ) : (
                 <VpnKeyIcon />
               )}
@@ -59,6 +71,9 @@ export default function LeftBar() {
             <ListItemText primary={text} />
           </ListItem>
         ))}
+        <br/>
+        <hr/>
+        <br/>
         <ListItem
           button
           onClick={() => {

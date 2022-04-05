@@ -9,6 +9,6 @@ const router = Router()
 
 router.get("/getAllServices", getAllServices)
 
-router.post("/addService", addService)
+router.post("/", addService)
 
 module.exports = router

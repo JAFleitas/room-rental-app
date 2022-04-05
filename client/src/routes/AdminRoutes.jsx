@@ -12,6 +12,8 @@ import Security from "../pages/AdminDashboard/Security.jsx"
 
 import Rentals from "../pages/AdminDashboard/Rentals.jsx"
 import { ToastContainer } from "react-toastify"
+import Categories from "../pages/AdminDashboard/Categories.jsx"
+import Services from "../pages/AdminDashboard/Services.jsx"
 const AdminRoutes = () => {
   return (
     <>
@@ -21,6 +23,8 @@ const AdminRoutes = () => {
         <Route path="/dashboard">
           <Route path="security" element={<Security />} />
           <Route path="emails" element={<Emails />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="services" element={<Services />} />
           <Route path="emails/create" element={<FormEmail />} /> 
           <Route path="emails/resend/:id" element={<FormEmail resend={true} />}/>
           <Route path="users" element={<Users />} />
