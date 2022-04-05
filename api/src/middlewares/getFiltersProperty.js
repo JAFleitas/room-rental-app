@@ -2,7 +2,7 @@ const { Op } = require("sequelize")
 
 module.exports = async (req, res, next) => {
   let {
-    attributes,
+    services,
     order = "ASC",
     orderBy = "name",
     search,
@@ -19,9 +19,9 @@ module.exports = async (req, res, next) => {
   const options = { where: {} }
 
   // Definimos que atributos quiere traer o excluir
-  if (attributes || exclude) {
-    options.attributes = attributes
-      ? attributes.split(" ")
+  if (services || exclude) {
+    options.services = services
+      ? services.split(" ")
       : { exclude: exclude.split(" ") }
   }
 
@@ -102,7 +102,7 @@ module.exports = async (req, res, next) => {
   }
 
   // Añado las opciones de filtrado a la request
-  req.options = options;
-  
+  req.options = options
+
   next()
 }

@@ -57,7 +57,7 @@ export default function Filters() {
 
   const handleChange = e => {
     const { name, value } = e.target
-
+    if (value < 0) return
     // Cambio el estado local
     const newFilters = { ...filters, [name]: value }
     setfilters(newFilters)
@@ -65,7 +65,7 @@ export default function Filters() {
     // Y envio los nuevos filtros
     const copyFilters = { ...newFilters }
     delete copyFilters.services
-    console.log({ copyFilters })
+
     dispatch(setOptionFilters(copyFilters))
   }
 
