@@ -24,8 +24,8 @@ export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
         modalShow={modalShow}
         setModalShow={setModalShow}
         width={"80%"}>
-        {comments?.map((e, i) => (
-          <ReviewCard key={i} comment={e.comment} />
+        {comments?.map((comment, i) => (
+          <ReviewCard key={i} comment={comment} />
         ))}
       </Modal>
     </>

@@ -43,8 +43,8 @@ export default function ReviewContainer({ rating = 0 }) {
             modalShow={modalShow}
             setModalShow={setModalShow}
             width={"80%"}>
-            {comments?.map((e, i) => (
-              <ReviewCard key={i} comment={e.comment} />
+            {comments?.map((comment, i) => (
+              <ReviewCard key={i} comment={comment} />
             ))}
           </Modal>
         </ContainerAll>

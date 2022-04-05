@@ -8,7 +8,7 @@ const addRental = async (req, res) => {
   if (userID && final_price && final_date && start_date) {
     if (userID) {
       const newRental = await PropertyRental.create({
-        userId: userID,
+        userID,
         propertyID,
         final_price,
         start_date,
@@ -32,7 +32,7 @@ const getRental = async (req, res) => {
     const Rentals = await PropertyRental.findAll({
       where: {
         propertyID: propertyID,
-        status:"active"
+        status: "active",
       },
     })
     if (Rentals) {
@@ -46,7 +46,9 @@ const getRental = async (req, res) => {
 }
 const getAllRentals = async (req, res, next) => {
   try {
-    const rentals = await PropertyRental.findAll({include:[{model:User},{model:Property}]})
+    const rentals = await PropertyRental.findAll({
+      include: [{ model: User }, { model: Property }],
+    })
     res.json(rentals)
   } catch (error) {
     next(error)
@@ -58,7 +60,7 @@ const getRentalsByUser = async (req, res) => {
   if (userID) {
     const Rentals = await PropertyRental.findAll({
       where: {
-        userId: userID,
+        userID,
         status: "active",
       },
       include: [
@@ -88,7 +90,6 @@ const getRentalsByUser = async (req, res) => {
 
 const cancelRental = async (req, res, next) => {
   const rentID = req.body.rentID
-
 
   try {
     // const Rental = await PropertyRental.findByPk(rentID)
