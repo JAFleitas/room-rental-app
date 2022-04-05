@@ -17,7 +17,7 @@ export default function Account() {
 
   return (
     <SubMenu>
-      <Title>Delete Acount</Title>
+      <Title>Delete Account</Title>
       <RedButton
         onClick={() => {
           setOpen(!open)

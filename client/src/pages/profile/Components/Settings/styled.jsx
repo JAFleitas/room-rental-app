@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const SubMenu = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -17,6 +17,7 @@ export const SubMenu = styled.div`
     rgba(239, 226, 255, 1) 66%,
     rgba(244, 235, 255, 1) 100%
   );
+  border: 1px solid #d822fc3f;
   border-radius: 15px;
   height: fit-content;
   @media (max-width: 720px) {
@@ -108,10 +109,9 @@ export const Button = styled.button`
 `
 
 export const PasswordError = styled.label`
- font-family: cursive;
- font-size: small;
- color: #6d6875;
- align-self: start;
- margin-left: 15px;
-
+  font-family: cursive;
+  font-size: small;
+  color: #6d6875;
+  align-self: start;
+  margin-left: 15px;
 `

@@ -94,10 +94,10 @@ export const ServicesSt = styled.div`
   font-size: 16px;
   font-weight: 600;
   text-align: center;
-  color: #666666;
+  color: #333333;
   padding: 5px;
   margin: 3px 5px;
-  background-color: lightblue;
+  background: linear-gradient(145deg, #cb8fff, #ab79e6);
   border: none;
   border-radius: 10px;
   & svg {
@@ -111,7 +111,6 @@ export const ServicesSt = styled.div`
   }
   &:hover {
     color: black;
-    background-color: dark-light-blue;
     padding: 7px;
   }
 `

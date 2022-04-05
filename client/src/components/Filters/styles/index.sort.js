@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   background-color: #e2c8ff;
+  border: 1px solid #d822fc3f;
   border-radius: 20px;
   width: 40%;
   margin: 0.5rem auto;
@@ -16,7 +17,7 @@ export const Container = styled.div`
   }
 `
 export const SelectSt = styled.select`
-  height: 35%;
+  height: fit-content;
   color: white;
   background: rgb(139, 37, 255);
   background: linear-gradient(

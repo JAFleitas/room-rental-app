@@ -5,7 +5,7 @@ import {
   setOptionFilters,
 } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { Form, InputsNumber, Services } from "./styled"
+import { Form, InputsNumber, Services, RestartFilterButton } from "./styled"
 import FilterAltIcon from "@mui/icons-material/FilterAlt"
 
 const initialFilters = {
@@ -210,20 +210,9 @@ export default function Filters() {
           ))}
         </div>
       </Services>
-      <button
-        style={{
-          border: "2px solid #6e5fcb",
-          color: "#6e5fcb",
-          width: "120px",
-          borderRadius: "10px",
-          fontWeight: "bold",
-          backgroundColor: "white",
-          alignSelf: "center",
-          padding: "2px",
-        }}
-        onClick={handleRestartFilters}>
+      <RestartFilterButton onClick={handleRestartFilters}>
         <FilterAltIcon /> Restart filters
-      </button>
+      </RestartFilterButton>
     </Form>
   )
 }
