@@ -9,6 +9,7 @@ const {
   getRentalsByUser,
   getAllRentals,
   cancelRental,
+  getMonthlyIncome,
 } = require("../controllers/rentalControllers")
 
 const router = Router()
@@ -24,5 +25,7 @@ router.get("/getAllRentals", auth, adminAuth, getAllRentals)
 router.get("/getRentalsByUser", auth, getRentalsByUser)
 
 router.put("/cancelRental", cancelRental)
+
+router.get("/incomes", getMonthlyIncome)
 
 module.exports = router

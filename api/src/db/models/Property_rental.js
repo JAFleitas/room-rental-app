@@ -36,7 +36,7 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
       },
     },
-    { timestamps: false },
+    { timestamps: true },
   )
 
   PropertyRental.associate = models => {

@@ -56,7 +56,7 @@ export default function LandingPage() {
         <Image src={image4} />
       </LittleImageContainer>
       <ButtonContainer>
-        <ToHome to={"/"}>Home</ToHome>
+        <ToHome to={"/home"}>Home</ToHome>
       </ButtonContainer>
     </PageContainer>
   )

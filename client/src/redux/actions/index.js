@@ -45,10 +45,25 @@ export const GET_ALL_USERS = "GET_ALL_USERS"
 export const ADMIN_BLOCK_USER = "ADMIN_BLOCK_USER"
 export const ADMIN_CHANGE_ENABLE_USER = "ADMIN_CHANGE_ENABLE_USER"
 export const CREATE_ADMIN = "CREATE_ADMIN"
-
+export const GET_MONTHLY_INCOMES = "GET_MONTHLY_INCOMES"
 export const GET_ALL_RENTALS = "GET_ALL_RENTAL"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function getMonthlyIncomes() {
+  return async function (dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/rentals/incomes`, getHeaderToken())
+
+      return dispatch({
+        type: GET_MONTHLY_INCOMES,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
 
 export function createAdmin(userId) {
   return { type: CREATE_ADMIN, payload: { id: userId, type: "SUBADMIN" } }

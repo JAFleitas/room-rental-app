@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const { PropertyRental, Property, User } = require("../db/index.js")
+const { PropertyRental, Property, User, sequelize } = require("../db/index.js")
 
 const addRental = async (req, res) => {
   const userID = req.user.id
@@ -44,6 +44,7 @@ const getRental = async (req, res) => {
     res.status(404).json({ message: "Error Required Field not Found" })
   }
 }
+
 const getAllRentals = async (req, res, next) => {
   try {
     const rentals = await PropertyRental.findAll({
@@ -165,10 +166,34 @@ const cancelRental = async (req, res, next) => {
   }
 }
 
+const getMonthlyIncome = async (req, res, next) => {
+  try {
+    const incomes = await PropertyRental.findAll({
+      attributes: [
+        [sequelize.fn("SUM", sequelize.col("final_price")), "totalAmount"],
+        [
+          sequelize.fn("date_trunc", "month", sequelize.col("createdAt")),
+          "rentedOn",
+        ],
+      ],
+      where: { status: "active" },
+      order: [[sequelize.literal('"rentedOn"'), "ASC"]],
+      group: "rentedOn",
+    })
+    // await PropertyRental.sum("final_price", { where: { status: "active" } })
+
+    res.json(incomes)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
 module.exports = {
   addRental,
   getRental,
   getRentalsByUser,
   getAllRentals,
   cancelRental,
+  getMonthlyIncome,
 }

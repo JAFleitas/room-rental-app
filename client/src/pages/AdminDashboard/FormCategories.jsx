@@ -46,7 +46,7 @@ const FormCategories = ({ show }) => {
           name="name"
           value={name}
           onChange={handleChange}
-          placeholder="Cabain"
+          placeholder="Cabain, house, etc"
         />
         <button>Create category</button>
       </form>

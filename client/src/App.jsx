@@ -12,6 +12,7 @@ import {
   getAllRentals,
   getFavorites,
   loadUser,
+  getMonthlyIncomes,
 } from "./redux/actions"
 import { useNavigate } from "react-router-dom"
 
@@ -40,15 +41,16 @@ function App() {
       dispatch(getAllEmails())
       dispatch(getAllUsers())
       dispatch(getAllRentals())
+      dispatch(getMonthlyIncomes())
     }
   }, [admin])
 
   useEffect(() => {
     if (auth && admin) {
       if (admin === "NORMAL") {
-        return navigate("/", { scroll: { x: 0, y: 0 } })
+        return navigate("/home", { scroll: { x: 0, y: 0 } })
       } else {
-        return navigate("/dashboard/emails")
+        return navigate("/dashboard")
       }
     }
   }, [auth, admin])

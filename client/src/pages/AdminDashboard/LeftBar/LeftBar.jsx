@@ -17,6 +17,7 @@ import ListIcon from '@mui/icons-material/List';
 import {CustomizedButton, CustomizedDiv} from "./styles"
 import CategoryIcon from "@mui/icons-material/Category"
 import AppsIcon from "@mui/icons-material/Apps"
+import HomeIcon from "@mui/icons-material/Home"
 
 export default function LeftBar() {
   const [state, setState] = React.useState({
@@ -36,11 +37,21 @@ export default function LeftBar() {
   }
   const list = anchor => (
     <Box
-      sx={{ width: 230}}
+      sx={{ width: 230 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
       <List>
+        <ListItem
+          button
+          onClick={() => {
+            navigate("/dashboard")
+          }}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
         {[
           "Users",
           "Rentals",
@@ -71,14 +82,14 @@ export default function LeftBar() {
             <ListItemText primary={text} />
           </ListItem>
         ))}
-        <br/>
-        <hr/>
-        <br/>
+        <br />
+        <hr />
+        <br />
         <ListItem
           button
           onClick={() => {
             dispatch(actionLogout())
-            navigate("/")
+            navigate("/home")
           }}>
           <ListItemIcon>
             <LogoutIcon />
