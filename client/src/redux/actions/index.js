@@ -212,32 +212,18 @@ export function getAllServices() {
 
 export function getAllProperties(filters, page = 1, dates) {
   let queries = ""
-  // console.log(filters)
-  if (filters) {
-    let filtersQueries = []
-
-    filtersQueries = Object.getOwnPropertyNames(filters)
-    // console.log({ filtersQueries })
-    if (filtersQueries.services)
-      filtersQueries.services = filtersQueries.services.join("%20")
-    // console.log("cambio")
-    // console.log({ filtersQueries })
-    filtersQueries = filtersQueries.map(query =>
-      filters[query]
-        ? query === "services"
-          ? ` ${query}=${filters[query].join("%20")}`
-          : `${query}=${filters[query]}`
-        : null,
-    )
-    filtersQueries = filtersQueries.filter(exists => exists)
-    queries = filtersQueries.join("&")
-    // console.log({ filtersQueries })
+  for (const query in filters) {
+    if (query === "services" && filters[query].length > 0) {
+      queries = `${query}=${filters[query].join("%20")}&${queries}`
+    } else if (filters[query].length > 0) {
+      queries = `${query}=${filters[query]}&${queries}`
+    }
   }
   return async function (dispatch) {
     try {
       let response = await axios.post(
         queries
-          ? `${api}/properties/getProperties?${queries}&page=${page}`
+          ? `${api}/properties/getProperties?${queries}page=${page}`
           : `${api}/properties/getProperties?page=${page}`,
         dates,
       )

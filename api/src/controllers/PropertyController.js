@@ -8,6 +8,7 @@ const {
   User,
   PropertyRental,
 } = require("../db/index.js")
+const { includeServices } = require("../utilities/includeServices")
 
 const getPropertyById = async (req, res, next) => {
   try {
@@ -134,7 +135,7 @@ const getAll = async (req, res, next) => {
     const { final_date, start_date } = req.body
 
     const options = req.options || { where: {} }
-
+    console.log(options.services)
     let { page } = req.query
 
     page = page ?? 1
@@ -177,6 +178,11 @@ const getAll = async (req, res, next) => {
         }
         return e
       })
+    }
+    if (options?.services?.length > 0) {
+      properties = properties.filter(property =>
+        includeServices(property.services, options.services) ? property : null,
+      )
     }
 
     // Paginación
