@@ -8,6 +8,12 @@ const REACT_KEY_STRIPE = import.meta.env.VITE_PUBLIC_API_KEY_STRIPE
 const stripePromise = loadStripe(REACT_KEY_STRIPE)
 
 const CardStripe = () => {
+  console.log("Public Api Key")
+  console.log(REACT_KEY_STRIPE)
+  console.log("--------------")
+  console.log("Promesa stripe")
+  console.log(stripePromise)
+  console.log("--------------")
   const imgCreditCard =
     "https://www.viabcp.com/wcm/connect/a3ae4393-4e61-4c7f-b9d7-803f7797d0dd/BCP_Transformers.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-a3ae4393-4e61-4c7f-b9d7-803f7797d0dd-mYBiz7o"
   return (

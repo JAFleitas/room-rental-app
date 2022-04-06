@@ -18,6 +18,12 @@ const Form_Stripe = () => {
       type: "card",
       card: elements.getElement(CardElement),
     })
+
+    console.log("Errores")
+    console.log(error)
+    console.log("---------------")
+    console.log("Formulario")
+    console.log(form)
     if (!error && form !== null) {
       const { id } = paymentMethod
       //El amount está en centavos, así que debe multiplicarce por 10
@@ -44,6 +50,8 @@ const Form_Stripe = () => {
           })
         }
       } catch (error) {
+        console.log(error)
+        console.log(error)
         swal({
           title: "Error!",
           text: "An error has occurred",
