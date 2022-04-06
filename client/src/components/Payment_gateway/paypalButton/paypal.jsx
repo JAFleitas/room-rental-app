@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import swal from "sweetalert"
 import { ContainerPage, PaypalContainer } from "./styles"
 import Error404 from "../../../pages/404/Error404"
-import { toast } from "react-toastify"
+
 import { ErrorAlert } from "../../../utilities/alerts"
 
 export default function PayPalPay() {

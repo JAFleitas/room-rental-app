@@ -6,11 +6,13 @@ import getHeaderToken from "../../../utilities/getHeadertoken"
 import { InputSubmit } from "../paypalButton/styles"
 import swal from "sweetalert"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const Form_Stripe = () => {
   const stripe = useStripe()
   const elements = useElements()
   const form = useSelector(state => state.formRentalProperty)
+  const navigate = useNavigate()
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -34,7 +36,7 @@ const Form_Stripe = () => {
             title: "Success",
             text: data.message,
             icon: "success",
-          })
+          }).then(() => navigate("/home"))
         } else {
           swal({
             title: "Error!",
