@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 import { BsFillPlusCircleFill } from "react-icons/bs"
 
 export const Container = styled.div`
-  width: 50%;
-  min-width: 800px;
+  width: 90%;
+
   background: rgb(226, 200, 255);
   background: linear-gradient(
     330deg,
@@ -23,9 +23,8 @@ export const Container = styled.div`
   align-items: center;
   margin-bottom: 5%;
 
-  @media (max-width: 700px) {
-    width: 90%;
-    min-width: 500px;
+  @media (max-width: 800px) {
+    width: 100%;
   }
 `
 
@@ -71,9 +70,9 @@ export const Form = styled.div`
 `
 
 export const FormField = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 2%;
 `
 
