@@ -20,7 +20,7 @@ const paymentStripe = async (req, res) => {
         })
         if (payment.status === "succeeded") {
           const newRental = await PropertyRental.create({
-            userId: userID,
+            userID,
             propertyID,
             final_price,
             start_date,
