@@ -17,7 +17,7 @@ export default function Nav() {
     <Navigator>
       <IconContainer>
         <ToHome
-          to="/"
+          to="/home"
           onClick={() => {
             dispatch(actionChangePage(1))
             dispatch(actionSaveDates({}))

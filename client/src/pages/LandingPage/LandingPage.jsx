@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {
   WelcomeTitle,
   PageContainer,
@@ -22,6 +22,11 @@ import image7 from "../../assets/Background-images/bckgr07.jpg"
 import image8 from "../../assets/Background-images/bckgr08.jpg"
 
 export default function LandingPage() {
+  useEffect(() => {
+    return () => {
+      window.scroll(0, 0)
+    }
+  })
   return (
     <PageContainer>
       <WelcomeTitle>We are Rental App</WelcomeTitle>

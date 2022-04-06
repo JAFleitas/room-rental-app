@@ -139,7 +139,7 @@ const getAll = async (req, res, next) => {
     let { page } = req.query
 
     page = page ?? 1
-    const PropertyXpage = 6
+    const PropertyXpage = 10
 
     // incluimos los servicios de la propiedad
     options.include = [
