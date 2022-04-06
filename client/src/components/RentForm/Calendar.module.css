@@ -17,6 +17,9 @@
   align-items: center;
   flex-direction: column;
 }
+.RangeExample h3{
+  margin-left: 0;
+}
 .today{
   color:red
 }
