@@ -18,6 +18,11 @@ const Form_Stripe = () => {
       type: "card",
       card: elements.getElement(CardElement),
     })
+    console.log("Errores")
+    console.log(error)
+    console.log("---------------")
+    console.log("Formulario")
+    console.log(form)
     if (!error && form !== null) {
       const { id } = paymentMethod
       //El amount está en centavos, así que debe multiplicarce por 10
