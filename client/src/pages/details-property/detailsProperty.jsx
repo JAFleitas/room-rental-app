@@ -60,7 +60,7 @@ export default function Details() {
       <ContainerMapAndTitle>
         <DescriptionContainer>
           <BotonBack>
-            <button onClick={() => navigate("/")}>
+            <button onClick={() => navigate("/home")}>
               <IoChevronBackSharp />
             </button>
           </BotonBack>

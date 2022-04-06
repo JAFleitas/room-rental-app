@@ -26,7 +26,7 @@ export default function PayPalPay() {
         timer: "3000",
       }).then(() => {
         dispatch(actionAddFormRentalProperty(null))
-        navigate("/")
+        navigate("/home")
       })
     }
   }, [status])
@@ -55,7 +55,7 @@ export default function PayPalPay() {
                     setStatus(res.status)
                   } catch (err) {
                     ErrorAlert(err)
-                    navigate("/")
+                    navigate("/home")
                   }
                 }}
                 style={{ layout: "vertical" }}

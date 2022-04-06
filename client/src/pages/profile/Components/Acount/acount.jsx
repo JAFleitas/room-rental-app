@@ -12,7 +12,7 @@ export default function Account() {
   const id = useSelector(state => state.user.id)
   function handleSubmit(e) {
     dispatch(deleteUser(id))
-    navigate("/")
+    navigate("/home")
   }
 
   return (

@@ -46,7 +46,7 @@ const SignUp = () => {
       WarningAlert("Missing fields, please try again")
     } else {
       dispatch(postNewUser(signUpForm))
-      navigate("/")
+      navigate("/home")
     }
 
     //function handleLogin() {
