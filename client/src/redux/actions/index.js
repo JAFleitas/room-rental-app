@@ -351,7 +351,7 @@ export function postNewUser({
       // dispatch(loadUser())
     } catch (error) {
       console.log(error.response)
-      ErrorAlert("no se pudo crear el usuario")
+      ErrorAlert("Can not create user!")
     }
   }
 }

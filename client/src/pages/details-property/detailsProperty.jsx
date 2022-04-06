@@ -37,12 +37,10 @@ export default function Details() {
     dispatch(getPropertyById(id))
     setLoading(false)
     return () => {
-      if (id === undefined) {
-        dispatch({
-          type: GET_PROPERTY_BY_ID,
-          payload: null,
-        })
-      }
+      dispatch({
+        type: GET_PROPERTY_BY_ID,
+        payload: null,
+      })
     }
   }, [])
   useEffect(() => {

@@ -34,14 +34,7 @@ import { WarningAlert } from "../../utilities/alerts"
 import { compareDates } from "../../utilities/compareDates"
 export default function RentForm(props) {
   const [monthsInCalendary, setMonthsInCalendary] = useState(2)
-  const mediaqueryList = window.matchMedia("(min-width: 705px)")
-  mediaqueryList.addListener(function (EventoMediaQueryList) {
-    if (EventoMediaQueryList.matches) {
-      setMonthsInCalendary(2)
-    } else {
-      setMonthsInCalendary(1)
-    }
-  })
+
   const { id } = useParams()
   const dispatch = useDispatch()
   useEffect(() => {
@@ -99,16 +92,7 @@ export default function RentForm(props) {
       finalPrice === undefined
     ) {
       WarningAlert("All fields are required")
-    } else {
-      let form = {
-        propertyID: props.id,
-        final_price: finalPrice,
-        start_date: dates.from,
-        final_date: dates.to,
-        paymenthMethodId: payMethod,
-      }
     }
-
     let form = {
       propertyID: props.id,
       final_price: finalPrice,
@@ -135,6 +119,16 @@ export default function RentForm(props) {
     // console.log(id)
     setPayMethod(id)
   }
+
+  const calendaryWidth = () => {
+    if (window.innerWidth > 750) setMonthsInCalendary(2)
+    if (window.innerWidth < 750) setMonthsInCalendary(1)
+  }
+  useEffect(() => {
+    window.addEventListener("resize", calendaryWidth)
+
+    return () => window.removeEventListener("resize", calendaryWidth)
+  }, [])
 
   return (
     <Container>

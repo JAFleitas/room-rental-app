@@ -5,14 +5,17 @@
   border-radius: 15px;
 }
 .calendarContainer{
-  width: 90%;
+  width: 100%;
 }
 
 .RangeExample {
   /* border-left: 1px #d722fc solid; */
   border-radius: 10px;
   padding: 10px;
-  width: 90%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .today{
   color:red

@@ -8,7 +8,7 @@ import {
   Title,
   Container,
 } from "./styled"
-import { postNewUser } from "../../redux/actions/index"
+import { loadUser, postNewUser } from "../../redux/actions/index"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
@@ -46,6 +46,7 @@ const SignUp = () => {
       WarningAlert("Missing fields, please try again")
     } else {
       dispatch(postNewUser(signUpForm))
+      dispatch(loadUser())
       navigate("/home")
     }
 
