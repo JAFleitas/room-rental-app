@@ -11,9 +11,10 @@ export const Container = styled.button`
   margin-top: 1vh;
   margin-left: 1vw;
   padding: 4px;
-  z-index: 50;
+  z-index: 150;
   margin-right: 20px;
 
+  border: 1px solid #d822fc3f;
   border-radius: 21px;
   background: #e2c8ff;
   svg {
@@ -21,14 +22,18 @@ export const Container = styled.button`
   }
   transition: all 1s;
   &:hover {
-    border-radius: 21px;
-    background: #be86ff;
+    /* border-radius: 21px;
+    background: #be86ff; */
+    background-color: #eea0fe;
+    transition: background-color 1s;
   }
 
   &:active {
     border-radius: 21px;
-    background: #be4eff;
-    box-shadow: inset 6px 6px 12px #8d3abd, inset -6px -6px 12px #ef62ff;
+    /* background: #be4eff;
+    box-shadow: inset 6px 6px 12px #8d3abd, inset -6px -6px 12px #ef62ff; */
+    background: #eea0fe;
+    box-shadow: inset 5px 5px 10px #d18de0, inset -5px -5px 10px #ffb3ff;
   }
 `
 

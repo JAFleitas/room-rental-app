@@ -15,11 +15,11 @@ const getAllPaymentMethodsByUser = async (req, res, next) => {
 }
 
 const createPaymentMethod = async (req, res, next) => {
-  const { cardNumber, fullName, expirationMonth, expirationYear, ccv } =
+  const { cardNumber, fullName, expirationMonth, expirationYear } =
     req.body
 
   try {
-    console.log(req.user);
+    // console.log(req.user);
     const methods = await PaymentMethod.findAll({
       where: { userId: req.user.id },
     })
@@ -32,24 +32,18 @@ const createPaymentMethod = async (req, res, next) => {
     console.log(error)
   }
 
-  if (!cardNumber || !fullName || !expirationMonth || !expirationYear || !ccv) {
+  if (!cardNumber || !fullName || !expirationMonth || !expirationYear) {
     return next({ status: 400, message: "All fields are required" })
   }
 
   try {
-    let lastNumbers = cardNumber.substring(
-      cardNumber.length - 4,
-      cardNumber.length,
-    )
     let type = cardNumber[0] === '4' ? "VISA" : "MASTERCARD"
     const paymenthMethod = await PaymentMethod.create({
       type,
-      lastNumbers,
       cardNumber,
       fullName,
       expirationMonth,
       expirationYear,
-      ccv,
       userId: req.user.id
     })
 
@@ -60,7 +54,7 @@ const createPaymentMethod = async (req, res, next) => {
 }
 
 const updatePaymentMethod = async (req, res, next) => {
-  const { cardNumber, fullName, expirationMonth, expirationYear, ccv } =
+  const { cardNumber, fullName, expirationMonth, expirationYear } =
     req.body
   const { id } = req.params
 
@@ -71,16 +65,12 @@ const updatePaymentMethod = async (req, res, next) => {
   try {
     let newFields = {}
     if (cardNumber) {
-      newFields.lastNumbers = cardNumber.substring(
-        cardNumber.length - 4,
-        cardNumber.length,
-      )
+      newFields.cardNumber = cardNumber;
       newFields.type = cardNumber[0] === 4 ? "VISA" : "MASTERCARD"
     }
     if (fullName) newFields.fullName = fullName
     if (expirationMonth) newFields.expirationMonth = expirationMonth
     if (expirationYear) newFields.expirationYear = expirationYear
-    if (ccv) newFields.ccv = ccv
 
     await PaymentMethod.update(newFields, { where: { id } })
 

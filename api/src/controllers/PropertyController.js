@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 const { Op } = require("sequelize")
-
+const { compareDates } = require("../utilities/compareDates")
 const {
   Property,
   Service,
@@ -7,6 +8,7 @@ const {
   User,
   PropertyRental,
 } = require("../db/index.js")
+const { includeServices } = require("../utilities/includeServices")
 
 const getPropertyById = async (req, res, next) => {
   try {
@@ -15,7 +17,7 @@ const getPropertyById = async (req, res, next) => {
       where: {
         id,
       },
-      attributes: { exclude: ["userID"] },
+
       include: [
         {
           model: Comment,
@@ -58,7 +60,6 @@ const addProperty = async (req, res) => {
     description,
     image,
     coordinates,
-    discount,
     services,
     typePropertyID,
   } = req.body.data
@@ -74,7 +75,6 @@ const addProperty = async (req, res) => {
         description,
         image,
         coordinates,
-        discount,
         services,
         typePropertyID,
         userID: id,
@@ -105,11 +105,10 @@ const editProperty = async (req, res) => {
     image,
     services,
     description,
-    discount,
     typePropertyID,
     coordinates,
   } = req.body.data
-  console.log(idProperty)
+  // console.log(idProperty)
   const { id } = req.user
   if (id) {
     await Property.update(
@@ -122,7 +121,6 @@ const editProperty = async (req, res) => {
         image,
         services,
         description,
-        discount,
         typePropertyID,
         coordinates,
       },
@@ -134,8 +132,10 @@ const editProperty = async (req, res) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const options = req.options || { where: {} }
+    const { final_date, start_date } = req.body
 
+    const options = req.options || { where: {} }
+    console.log(options.services)
     let { page } = req.query
 
     page = page ?? 1
@@ -150,13 +150,39 @@ const getAll = async (req, res, next) => {
           attributes: [], // que atributos de aquí quiero o si está vacío me elimina el atributo Country anidado
         },
       },
+      {
+        model: PropertyRental,
+        attributes: ["start_date", "final_date"],
+      },
     ]
 
     // console.log(options)
-    const properties = await Property.findAll(options)
+    let properties = await Property.findAll(options)
 
     if (properties.length === 0) {
       return next({ message: "Properties not founded", status: 404 })
+    }
+    if (final_date?.length || start_date?.length) {
+      properties = properties.filter(e => {
+        if (
+          !e.PropertyRentals.every(rental =>
+            compareDates(
+              rental.start_date,
+              rental.final_date,
+              start_date,
+              final_date,
+            ),
+          )
+        ) {
+          return false
+        }
+        return e
+      })
+    }
+    if (options?.services?.length > 0) {
+      properties = properties.filter(property =>
+        includeServices(property.services, options.services) ? property : null,
+      )
     }
 
     // Paginación

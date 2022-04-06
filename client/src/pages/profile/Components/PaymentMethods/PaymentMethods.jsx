@@ -2,15 +2,20 @@ import axios from "axios"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import Creditcard from "../../../../components/CreditCard/CreditCard"
-import { deletePaymentMethod, getAllPaymentMethod } from "../../../../redux/actions"
+import {
+  deletePaymentMethod,
+  getAllPaymentMethod,
+} from "../../../../redux/actions"
+import { ErrorAlert } from "../../../../utilities/alerts"
 import getHeaderToken from "../../../../utilities/getHeadertoken"
 import styles from "./styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
 
 const Paymentmethods = () => {
   const methods = useSelector(state => state.paymenthMethods)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllPaymentMethod())
   }, [dispatch])
@@ -22,7 +27,7 @@ const Paymentmethods = () => {
       // return
     } catch (error) {
       console.log(error.response)
-      alert(
+      ErrorAlert(
         (typeof error?.response?.data === "string"
           ? error.response.data
           : error.response.data?.message) || "Something went wrong :(",
@@ -35,14 +40,24 @@ const Paymentmethods = () => {
       <h2 className={styles.title}>Payment methods</h2>
       {methods.length > 0 ? (
         methods.map(method => (
-          <div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center"}} key={method.id}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+            key={method.id}>
             <Creditcard
               isVisa={method?.type === "VISA"}
-              cardNumber={"**** **** **** " + method?.lastNumbers}
+              cardNumber={
+                "**** **** **** " +
+                method?.cardNumber.substring(method?.cardNumber.length - 4)
+              }
               fullName={method?.fullName}
               expirationMonth={method?.expirationMonth}
               expirationYear={method?.expirationYear}
-              ccv={method?.ccv}
+              ccv={"***"}
               staticData={true}
             />
             <div className={styles.containerButtons}>
@@ -61,7 +76,7 @@ const Paymentmethods = () => {
         ))
       ) : (
         <div>
-          <p>Aún no ha agregado metodos de pago</p>
+          <p>There aren't any payment methods linked to this account</p>
         </div>
       )}
       <Link className={styles.btn} to="/add/payment-method">

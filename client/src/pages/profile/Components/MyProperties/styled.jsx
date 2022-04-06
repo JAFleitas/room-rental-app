@@ -18,6 +18,7 @@ export const SubMenu = styled.div`
     rgba(239, 226, 255, 1) 66%,
     rgba(244, 235, 255, 1) 100%
   );
+  border: 1px solid #d822fc3f;
   border-radius: 15px;
   height: fit-content;
   @media (max-width: 720px) {
@@ -115,4 +116,20 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   border: 2px solid #d722fc;
+`
+export const ContainerButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+  &button {
+    width: 100%;
+  }
+`
+export const EditButton = styled(RedButton)`
+  background: #00bb2d;
+  &:hover {
+    background: #00bb2daa;
+    color: #fff;
+  }
 `

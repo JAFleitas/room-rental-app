@@ -11,18 +11,24 @@ import Login from "../components/DropDown/Login.jsx"
 import FormPaymentMethod from "../pages/profile/Components/FormPaymentMethod/FormPaymentMethod.jsx"
 import Forgotpassword from "../pages/ForgotPassword/ForgotPassword.jsx"
 import Help from "../pages/Help/Help.jsx"
-import PayPalPay from "../components/paypalButton/paypal.jsx"
 import { EditProperty } from "../components/formAddProperty/editProperty.jsx"
 import Nav from "../components/Nav/Nav"
 import Footer from "../components/Footer/Footer"
+import FormComment from "../pages/Comment/FormComment.jsx"
+import { ToastContainer } from "react-toastify"
+import { Payment } from "../components/Payment_gateway/payment.jsx"
+import LandingPage from "../pages/LandingPage/LandingPage"
 
 const UserRoutes = () => {
   return (
     <>
       <Nav />
+      <ToastContainer limit={3} />
       <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route exact path="/home" element={<Home />}></Route>
+        <Route path="/logIn" element={<Login />} />
         <Route path="/property-info/:id" element={<Details />} />
-        <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/about-us" element={<AboutUs />} />
         <Route exact path="/editProperty/:id" element={<EditProperty />} />
         <Route exact path="/addProperty" element={<AddProperty />} />
@@ -35,7 +41,8 @@ const UserRoutes = () => {
         />
         <Route path="/forgot-password" element={<Forgotpassword />} />
         <Route path="/help" element={<Help />} />
-        <Route path="/pay-reservation" element={<PayPalPay />} />
+        <Route path="/comment/:id" element={<FormComment />} />
+        <Route path="/pay-reservation" element={<Payment />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <Footer />

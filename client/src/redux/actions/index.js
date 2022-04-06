@@ -1,4 +1,6 @@
 import axios from "axios"
+import { toast } from "react-toastify"
+import { ErrorAlert, SuccessAlert } from "../../utilities/alerts"
 
 import getHeaderToken from "../../utilities/getHeadertoken"
 
@@ -39,11 +41,29 @@ export const GET_RENTALS_BY_USER = "GET_RENTALS_BY_USER"
 
 export const GET_ALL_EMAILS = "GET_ALL_EMAILS"
 export const GET_ALL_USERS = "GET_ALL_USERS"
+
 export const ADMIN_BLOCK_USER = "ADMIN_BLOCK_USER"
 export const ADMIN_CHANGE_ENABLE_USER = "ADMIN_CHANGE_ENABLE_USER"
 export const CREATE_ADMIN = "CREATE_ADMIN"
+export const GET_MONTHLY_INCOMES = "GET_MONTHLY_INCOMES"
+export const GET_ALL_RENTALS = "GET_ALL_RENTAL"
 
 const api = import.meta.env.VITE_APP_API_URL
+
+export function getMonthlyIncomes() {
+  return async function (dispatch) {
+    try {
+      let { data } = await axios.get(`${api}/rentals/incomes`, getHeaderToken())
+
+      return dispatch({
+        type: GET_MONTHLY_INCOMES,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
 
 export function createAdmin(userId) {
   return { type: CREATE_ADMIN, payload: { id: userId, type: "SUBADMIN" } }
@@ -205,35 +225,22 @@ export function getAllServices() {
   }
 }
 
-export function getAllProperties(filters, page = 1) {
+export function getAllProperties(filters, page = 1, dates) {
   let queries = ""
-  // console.log(filters)
-  if (filters) {
-    let filtersQueries = []
-
-    filtersQueries = Object.getOwnPropertyNames(filters)
-    // console.log({ filtersQueries })
-    if (filtersQueries.services)
-      filtersQueries.services = filtersQueries.services.join("%20")
-    // console.log("cambio")
-    // console.log({ filtersQueries })
-    filtersQueries = filtersQueries.map(query =>
-      filters[query]
-        ? query === "services"
-          ? ` ${query}=${filters[query].join("%20")}`
-          : `${query}=${filters[query]}`
-        : null,
-    )
-    filtersQueries = filtersQueries.filter(exists => exists)
-    queries = filtersQueries.join("&")
-    // console.log({ filtersQueries })
+  for (const query in filters) {
+    if (query === "services" && filters[query].length > 0) {
+      queries = `${query}=${filters[query].join("%20")}&${queries}`
+    } else if (filters[query].length > 0) {
+      queries = `${query}=${filters[query]}&${queries}`
+    }
   }
   return async function (dispatch) {
     try {
-      let response = await axios.get(
+      let response = await axios.post(
         queries
-          ? `${api}/properties/getProperties?${queries}&page=${page}`
+          ? `${api}/properties/getProperties?${queries}page=${page}`
           : `${api}/properties/getProperties?page=${page}`,
+        dates,
       )
       return dispatch({
         type: GET_ALL_PROPERTIES,
@@ -241,7 +248,7 @@ export function getAllProperties(filters, page = 1) {
       })
     } catch (error) {
       console.log(error.response)
-      alert("No se han encontrado propiedades con los filtros aplicados")
+      ErrorAlert("No se han encontrado propiedades con los filtros aplicados")
     }
   }
 }
@@ -295,10 +302,10 @@ export const changePassword = data => async dispatch => {
       type: CHANGE_PASSWORD,
       payload: res.data,
     })
-    alert("Password changed")
+    SuccessAlert("Password changed")
   } catch (error) {
     console.log(error.response.data)
-    alert("password is wrong")
+    ErrorAlert("password is wrong")
   }
 }
 
@@ -315,7 +322,7 @@ export const logIn = data => async dispatch => {
     dispatch(loadUser())
   } catch (err) {
     console.log(err.response)
-    alert("no se pudo loguear correctamente")
+    ErrorAlert("Could not log in correctly")
   }
 }
 
@@ -341,10 +348,10 @@ export function postNewUser({
         type: POST_NEW_USER,
         payload: response.data.token,
       })
-      dispatch(loadUser())
+      // dispatch(loadUser())
     } catch (error) {
       console.log(error.response)
-      alert("no se pudo crear el usuario")
+      ErrorAlert("no se pudo crear el usuario")
     }
   }
 }
@@ -380,9 +387,9 @@ export function addRental(form) {
         type: ADD_RENTAL,
         payload: response.data,
       })
-      console.log(response)
+      // console.log(response)
     } catch (error) {
-      alert(
+      ErrorAlert(
         (typeof error?.response?.data === "string"
           ? error.response.data
           : error.response.data?.message) || "Something went wrong :(",
@@ -425,7 +432,7 @@ export function actionLoginWithGoogle(data) {
       dispatch(loadUser())
     } catch (err) {
       console.log(err.response)
-      alert("no se pudo loguear correctamente")
+      ErrorAlert("Loguin failed :(")
     }
   }
 }
@@ -446,7 +453,7 @@ export const getRental = propertyID => async dispatch => {
 export function deletePropertyFromMyProperties(ID) {
   return async function (dispatch) {
     const config = getHeaderToken()
-    console.log(ID)
+    // console.log(ID)
     try {
       let response = await axios.put(
         `${api}/properties/deleteProperty`,
@@ -475,11 +482,27 @@ export function getRentalsByUser() {
   return async function (dispatch) {
     const config = getHeaderToken()
     try {
-      let response = await axios.get(`${api}/rentals/getRentalsByUser`, config)
-      console.log(response)
+      let { data } = await axios.get(`${api}/rentals/getRentalsByUser`, config)
+      // console.log(data)
       return dispatch({
         type: GET_RENTALS_BY_USER,
-        payload: response.data,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+}
+
+export function getAllRentals() {
+  return async function (dispatch) {
+    const config = getHeaderToken()
+    try {
+      let { data } = await axios.get(`${api}/rentals/getAllRentals`, config)
+      // console.log(data, "hola")
+      return dispatch({
+        type: GET_ALL_RENTALS,
+        payload: data,
       })
     } catch (error) {
       console.log(error.response)
@@ -494,13 +517,20 @@ export function cancelRental(rentID) {
       let response = await axios.put(`${api}/rentals/cancelRental`, { rentID })
       console.log(response)
       if (response.data.status === 401) {
-        alert(response.data.message)
+        ErrorAlert(response.data.message)
       }
       return dispatch({
         type: CANCEL_RENTAL,
       })
     } catch (error) {
-      console.log(error)
+      console.log(error.response)
     }
+  }
+}
+export const SAVE_DATE = "SAVE_DATE"
+export function actionSaveDates(payload) {
+  return {
+    type: SAVE_DATE,
+    payload,
   }
 }

@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import swal from "sweetalert"
 import { ContainerPage, PaypalContainer } from "./styles"
 import Error404 from "../../pages/404/Error404"
+import { toast } from "react-toastify"
+import { ErrorAlert } from "../../utilities/alerts"
 
 export default function PayPalPay() {
   const clientID = import.meta.env.VITE_APP_CLIENT_ID_PAYPAL
@@ -24,7 +26,7 @@ export default function PayPalPay() {
         timer: "3000",
       }).then(() => {
         dispatch(actionAddFormRentalProperty(null))
-        navigate("/")
+        navigate("/home")
       })
     }
   }, [status])
@@ -50,8 +52,8 @@ export default function PayPalPay() {
                 const res = await actions.order.capture()
                 setStatus(res.status)
               } catch (err) {
-                alert(err)
-                navigate("/")
+                ErrorAlert(err)
+                navigate("/home")
               }
             }}
             style={{ layout: "vertical" }}

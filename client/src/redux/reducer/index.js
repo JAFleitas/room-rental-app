@@ -34,6 +34,9 @@ import {
   CREATE_ADMIN,
   ADMIN_CHANGE_ENABLE_USER,
   ADMIN_BLOCK_USER,
+  GET_ALL_RENTALS,
+  SAVE_DATE,
+  GET_MONTHLY_INCOMES,
 } from "../actions"
 
 const initialState = {
@@ -55,6 +58,7 @@ const initialState = {
     type: "", //tipo de propiedad
     location: "",
   },
+  dates: {},
   page: 1,
   categories: [],
   services: [],
@@ -74,11 +78,14 @@ const initialState = {
     users: null,
     orders: null,
   },
+  incomes: [],
 }
 
 function rootReducer(state = initialState, { type, payload }) {
   let newUsers, finded
   switch (type) {
+    case GET_MONTHLY_INCOMES:
+      return { ...state, incomes: payload }
     case CREATE_ADMIN:
     case ADMIN_CHANGE_ENABLE_USER:
     case ADMIN_BLOCK_USER:
@@ -195,6 +202,7 @@ function rootReducer(state = initialState, { type, payload }) {
         auth: false,
         listFavorites: {},
         paymenthMethods: [],
+        admin: initialState.admin,
       }
     case CHANGE_PAGE:
       return {
@@ -224,7 +232,11 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         propertyRentals: payload,
       }
-
+    case GET_ALL_RENTALS:
+      return {
+        ...state,
+        propertyRentals: payload,
+      }
     case FORM_PROPERTY_RENTAL:
       return {
         ...state,
@@ -238,6 +250,11 @@ function rootReducer(state = initialState, { type, payload }) {
     case CANCEL_RENTAL:
       return {
         ...state,
+      }
+    case SAVE_DATE:
+      return {
+        ...state,
+        dates: payload,
       }
     default:
       return state

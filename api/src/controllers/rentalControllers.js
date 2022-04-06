@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const { PropertyRental, Property, User } = require("../db/index.js")
+const { PropertyRental, Property, User, sequelize } = require("../db/index.js")
 
 const addRental = async (req, res) => {
   const userID = req.user.id
@@ -8,13 +8,12 @@ const addRental = async (req, res) => {
   if (userID && final_price && final_date && start_date) {
     if (userID) {
       const newRental = await PropertyRental.create({
-        userId: userID,
+        userID,
         propertyID,
         final_price,
         start_date,
         final_date,
       })
-      console.log(newRental)
 
       if (newRental) {
         res.status(201).json({ message: "Created new rental", data: newRental })
@@ -33,6 +32,7 @@ const getRental = async (req, res) => {
     const Rentals = await PropertyRental.findAll({
       where: {
         propertyID: propertyID,
+        status: "active",
       },
     })
     if (Rentals) {
@@ -44,10 +44,12 @@ const getRental = async (req, res) => {
     res.status(404).json({ message: "Error Required Field not Found" })
   }
 }
+
 const getAllRentals = async (req, res, next) => {
   try {
-    const rentals = await PropertyRental.findAll()
-
+    const rentals = await PropertyRental.findAll({
+      include: [{ model: User }, { model: Property }],
+    })
     res.json(rentals)
   } catch (error) {
     next(error)
@@ -59,7 +61,7 @@ const getRentalsByUser = async (req, res) => {
   if (userID) {
     const Rentals = await PropertyRental.findAll({
       where: {
-        userId: userID,
+        userID,
         status: "active",
       },
       include: [
@@ -71,12 +73,12 @@ const getRentalsByUser = async (req, res) => {
         // },
       ],
     })
-    console.log("Las rentas del usuario son: ")
-    console.log(Rentals)
-    console.log(userID)
+    // console.log("Las rentas del usuario son: ")
+    // console.log(Rentals)
+    // console.log(userID)
 
     if (Rentals) {
-      res.status(201).json({ data: Rentals })
+      res.status(201).json(Rentals)
     } else {
       res
         .status(500)
@@ -89,9 +91,6 @@ const getRentalsByUser = async (req, res) => {
 
 const cancelRental = async (req, res, next) => {
   const rentID = req.body.rentID
-  console.log("rentID")
-  console.log(req.body.rentID)
-  console.log(rentID)
 
   try {
     // const Rental = await PropertyRental.findByPk(rentID)
@@ -100,14 +99,14 @@ const cancelRental = async (req, res, next) => {
         id: rentID,
       },
     })
-    console.log(Rental[0])
+    // console.log(Rental[0])
 
     let startDate = Rental[0].dataValues.start_date
     let today = new Date()
-    console.log("startDate")
-    console.log(startDate)
-    console.log("today")
-    console.log(today)
+    // console.log("startDate")
+    // console.log(startDate)
+    // console.log("today")
+    // console.log(today)
     if (
       today !== undefined &&
       startDate !== undefined &&
@@ -130,7 +129,7 @@ const cancelRental = async (req, res, next) => {
       }
       // Thiago
       const time_difference = difference(today, startDate)
-      console.log(time_difference)
+      // console.log(time_difference)
       if (time_difference <= 10) {
         res.json({
           status: 401,
@@ -167,10 +166,34 @@ const cancelRental = async (req, res, next) => {
   }
 }
 
+const getMonthlyIncome = async (req, res, next) => {
+  try {
+    const incomes = await PropertyRental.findAll({
+      attributes: [
+        [sequelize.fn("SUM", sequelize.col("final_price")), "totalAmount"],
+        [
+          sequelize.fn("date_trunc", "month", sequelize.col("createdAt")),
+          "rentedOn",
+        ],
+      ],
+      where: { status: "active" },
+      order: [[sequelize.literal('"rentedOn"'), "ASC"]],
+      group: "rentedOn",
+    })
+    // await PropertyRental.sum("final_price", { where: { status: "active" } })
+
+    res.json(incomes)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+
 module.exports = {
   addRental,
   getRental,
   getRentalsByUser,
   getAllRentals,
   cancelRental,
+  getMonthlyIncome,
 }

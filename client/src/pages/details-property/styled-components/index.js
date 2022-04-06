@@ -89,12 +89,17 @@ export const ServicesSt = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+
   flex-wrap: wrap;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   text-align: center;
-  color: #666666;
+  color: #333333;
+  padding: 5px;
+  margin: 3px 5px;
+  background: linear-gradient(145deg, #cb8fff, #ab79e6);
+  border: none;
+  border-radius: 10px;
   & svg {
     font-size: 22px;
     text-align: center;
@@ -104,6 +109,10 @@ export const ServicesSt = styled.div`
   & div {
     padding: 20px;
   }
+  &:hover {
+    color: black;
+    padding: 7px;
+  }
 `
 export const DivReview = styled.div`
   display: flex;
@@ -112,5 +121,24 @@ export const DivReview = styled.div`
   & h2 {
     padding-left: 5px;
     padding-top: 2px;
+  }
+`
+export const Services = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 1rem;
+  flex-direction: column;
+  width: 25vw;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  border-bottom: 0.5px solid #aaaaaaaa;
+  margin-bottom: 20px;
+  & h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: #6f5fcacc;
+    padding-bottom: 10px;
   }
 `

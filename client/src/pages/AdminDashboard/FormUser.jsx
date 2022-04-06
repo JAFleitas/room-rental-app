@@ -6,6 +6,9 @@ import { blockUser, changeEnableUser, createAdmin } from "../../redux/actions"
 import getHeaderToken from "../../utilities/getHeadertoken"
 import styles from "../ForgotPassword/styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
+import CircularProgress from "@mui/material/CircularProgress"
+import { toast } from "react-toastify"
+import { ErrorAlert, SuccessAlert, WarningAlert } from "../../utilities/alerts"
 
 const SubFormPromoteUser = ({ userId }) => {
   const [password, setPassword] = useState("")
@@ -20,19 +23,19 @@ const SubFormPromoteUser = ({ userId }) => {
 
     // PUT /users/enable/:id
     try {
-      if (!password) return alert("Complete password field")
-      const { data } = await axios.put(
+      if (!password) return WarningAlert("Complete password field")
+      await axios.put(
         `${api}/users/promote-admin/${userId}`,
         { password },
         getHeaderToken(),
       )
-      console.log({ data })
+      // console.log({ data })
       setPassword("")
-      alert(`New admin created`)
+      SuccessAlert(`New admin created`)
       dispatch(createAdmin(userId))
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      ErrorAlert("Something went wrong :(")
     }
   }
 
@@ -80,11 +83,11 @@ const FormUser = () => {
       const { data } = await axios.post(`${api}/users/forgot-password`, {
         email: user.email,
       })
-      alert("Password changed successfully, it will be sent to email's user")
-      console.log({ data })
+      SuccessAlert("Password changed successfully, it will be sent to email's user")
+      // console.log({ data })
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      ErrorAlert("Something went wrong :(")
     }
   }
 
@@ -98,12 +101,12 @@ const FormUser = () => {
         {},
         getHeaderToken(),
       )
-      console.log({ data })
+      // console.log({ data })
       dispatch(blockUser(user.id, !user.blocked))
-      alert(`${user.blocked ? "User unlocked" : "User blocked"} correctly`)
+      SuccessAlert(`${user.blocked ? "User unlocked" : "User blocked"} correctly`)
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      ErrorAlert("Something went wrong :(")
     }
   }
 
@@ -117,21 +120,21 @@ const FormUser = () => {
         { status: user.status === "disabled" ? "enabled" : "disabled" },
         getHeaderToken(),
       )
-      console.log({ data })
+      // console.log({ data })
       dispatch(
         changeEnableUser(
           user.id,
           user.status === "disabled" ? "enabled" : "disabled",
         ),
       )
-      alert(
+      SuccessAlert(
         `${
           user.status === "disabled" ? "User enable" : "User disable"
         } correctly`,
       )
     } catch (error) {
       console.log({ error: error.response?.data })
-      alert("Something went wrong :(")
+      ErrorAlert("Something went wrong :(")
     }
   }
 
@@ -179,7 +182,7 @@ const FormUser = () => {
             <div>User not found</div>
           )
         ) : (
-          <div>Loading...</div>
+          <div style={{display: "flex"}}><CircularProgress /></div>
         )}
         {user?.type !== "ADMIN" ? (
           <>

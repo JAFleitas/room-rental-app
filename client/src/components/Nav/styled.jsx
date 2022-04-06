@@ -10,12 +10,13 @@ export const Navigator = styled.nav`
   height: 150px;
   justify-content: space-between;
   align-items: center;
-  background: rgb(255, 255, 255);
+  background-color: transparent;
+  /* background: rgb(255, 255, 255);
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 0.0665616588432247) 100%
-  );
+  ); */
 `
 
 export const IconContainer = styled.div`
@@ -30,6 +31,7 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: space-around;
 
+  border: 1px solid #d822fc3f;
   border-radius: 12px;
   background-color: #e2c8ff;
   transition: background-color 1s;

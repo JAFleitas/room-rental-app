@@ -14,6 +14,7 @@ import {
   Rating,
   DivPyR,
   Location,
+  RatingNumber,
 } from "./styled"
 
 import Slider from "react-slick"
@@ -38,7 +39,7 @@ function PropertyCard(props) {
   const [liked, setLiked] = useState(false)
 
   function handleClick() {
-    navigateTo(`/property-info/${props.id}`)
+    navigateTo(`/property-info/${props.id}`, { scroll: { x: 0, y: 0 } })
   }
 
   useEffect(() => {
@@ -67,8 +68,10 @@ function PropertyCard(props) {
         <Price>${props.price}/ night </Price>
         <Rating>
           <AiFillStar color="yellow" fontSize={"1.5rem"} />
-          {props.rating}
-          {props.rating % 1 === 0 ? ".0" : null}
+          <RatingNumber>
+            {props.rating}
+            {props.rating % 1 === 0 ? ".0" : null}
+          </RatingNumber>
         </Rating>
       </DivPyR>
       <Heart id={props.id} liked={liked} />

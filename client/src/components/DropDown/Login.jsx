@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import {
   Form,
   SendButton,
@@ -9,16 +9,15 @@ import {
   RedButton,
 } from "./styled"
 import { logIn } from "../../redux/actions/index"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import LoginWithGoogle from "../auth/login"
 import LoginWithFacebook from "../auth/loginWithFacebook"
+import { WarningAlert } from "../../utilities/alerts"
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const admin = useSelector(state => state.user.type)
-  const auth = useSelector(state => state.auth)
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -28,31 +27,16 @@ const Login = () => {
     e.preventDefault()
     setLogInForm({ ...logInForm, [e.target.name]: e.target.value })
   }
-  const form = useSelector(state => state.formRentalProperty)
+
   function handleSubmitLogIn(e) {
     e.preventDefault()
 
     if (!logInForm.email || !logInForm.password) {
-      alert("Missing fields, please try again")
+      WarningAlert("Missing fields, please try again")
     } else {
       dispatch(logIn(logInForm))
-
-      if (form.propertyID) {
-        navigate("/pay-reservation")
-      } else {
-        navigate("/")
-      }
-
     }
   }
-
-  useEffect(() => {
-    if (auth && (admin === "SUBADMIN" || admin === "ADMIN")) {
-      navigate("/dashboard/emails")
-    } else if (auth && admin === "NORMAL") {
-      navigate("/")
-    }
-  }, [auth, admin])
 
   return (
     <Container>
@@ -75,9 +59,6 @@ const Login = () => {
             onChange={handleChangeLogIn}
             placeholder="Password"></Input>
         </Field>
-        <RedButton onClick={() => navigate("/forgot-password")}>
-          I forgot my password
-        </RedButton>
         <SendButton
           disabled={!logInForm.email || !logInForm.password}
           onClick={e => handleSubmitLogIn(e)}>
@@ -85,8 +66,12 @@ const Login = () => {
         </SendButton>
         <LoginWithGoogle />
         <LoginWithFacebook />
-
-        <SendButton signup={true}>Sign up</SendButton>
+        <SendButton signup={true} onClick={() => navigate("/signUp")}>
+          Sign up
+        </SendButton>
+        <RedButton onClick={() => navigate("/forgot-password")}>
+          I forgot my password
+        </RedButton>
       </Form>
     </Container>
   )

@@ -101,7 +101,7 @@ export default function Profile() {
                 <MenuOption>Settings</MenuOption>
               </Link>
               <Link to="/profile/account">
-                <MenuOption>Acount</MenuOption>
+                <MenuOption>Account</MenuOption>
               </Link>
               <Link to="/profile/payment-methods">
                 <MenuOption>Payment Methods</MenuOption>

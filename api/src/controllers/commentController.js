@@ -1,4 +1,5 @@
 const { Comment, User, Property } = require("../db/index.js")
+const { Op } = require("sequelize")
 
 const getAllCommentsByProperty = async (req, res, next) => {
   try {
@@ -25,7 +26,7 @@ const getAllCommentsByProperty = async (req, res, next) => {
 
 const getAllCommentsByUser = async (req, res, next) => {
   try {
-    const { id: userId } = req.user;
+    const { id: userId } = req.user
 
     const comments = await Comment.findAll({
       attributes: { exclude: ["propertyId, userId"] },
@@ -50,61 +51,52 @@ const createComment = async (req, res, next) => {
   const userId = req.user.id
   const { propertyId, rating, message } = req.body
 
-  try {
+  if (userId) {
     if (!message || !rating || !propertyId) {
-      return next({ status: 400, message: "All fields are required" })
+      return send({ status: 400, message: "All fields are required" })
+    } else {
+      try {
+        const creationDate = new Date().toLocaleDateString()
+
+        const [comment, created] = await Comment.findOrCreate({
+          where: { userId, propertyId },
+          defaults: {
+            rating,
+            message,
+            creationDate,
+          },
+        })
+
+        if (!created) {
+          return res.status(400).json({
+            message: "Each user can leave only one comment on a property",
+          })
+        }
+
+        let comments = await Comment.findAll({
+          where: { propertyId },
+          attributes: ["rating"],
+        })
+
+        let SumaRating = 0
+
+        comments.map(comen => {
+          SumaRating += comen.rating
+        })
+        await Property.update(
+          {
+            rating: SumaRating / comments.length,
+            countReviews: comments.length,
+          },
+          { where: { id: propertyId } },
+        )
+        res.send("Comment created").status(201)
+      } catch (error) {
+        console.log(error)
+      }
     }
-    const property = await Property.findOne({ where: { id: propertyId } })
-
-    if (!property) {
-      return next({ status: 404, message: "Property not founded" })
-    }
-
-    const comments = await Comment.findAll({
-      where: { userId, propertyId },
-    })
-
-    if (comments.length > 0) {
-      return res
-        .status(400)
-        .json({ message: "Each user can leave only one comment on a property" })
-    }
-
-    const creationDate = new Date().toLocaleDateString()
-
-    try {
-      const comment = await Comment.create({
-        rating,
-        message,
-        creationDate,
-        propertyId,
-        userId,
-      })
-
-      const {
-        dataValues: { rating: currentRating, countReviews },
-      } = property
-
-      const newRating =
-        countReviews === 0
-          ? rating
-          : (currentRating * countReviews + Number(rating)) / countReviews + 1
-      // console.log({ currentRating, countReviews, rating, newRating })
-      await Property.update(
-        {
-          rating: newRating,
-          countReviews: countReviews + 1,
-        },
-        { where: { id: propertyId } },
-      )
-
-      res.status(201).json(comment)
-    } catch (error) {
-      next(error)
-    }
-  } catch (error) {
-    console.log(error)
-    next(error)
+  } else {
+    console.log("Not found Token")
   }
 }
 
@@ -117,7 +109,7 @@ const updateComment = async (req, res, next) => {
   }
 
   try {
-    let newFields = {}
+    const newFields = {}
 
     if (message) newFields.message = message
     if (rating) newFields.rating = rating

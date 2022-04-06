@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import styles from "./styles.module.css";
+import { ToastContainer} from 'react-toastify';
+import { WarningAlert, SuccessAlert, ErrorAlert } from "../../utilities/alerts"
 const api = import.meta.env.VITE_APP_API_URL
 
 const Forgotpassword = () => {
@@ -15,15 +17,15 @@ const Forgotpassword = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if(!email) return alert("Complete email field");
+    if(!email) return WarningAlert("Complete email field");
     try {
       await axios.post(`${api}/users/forgot-password`, {
         email,
       })
       setEmail("");
-      alert("Check your email")
+      SuccessAlert("Check your email")
     } catch (error) {
-      alert(
+      ErrorAlert(
         (typeof error?.response?.data === "string"
           ? error.response.data
           : error.response.data?.message) || "Something went wrong :(",
@@ -46,6 +48,7 @@ const Forgotpassword = () => {
         />
         <button>Reset password</button>
       </form>
+      <ToastContainer limit={3} />
     </div>
   )
 }

@@ -9,16 +9,18 @@ import {
   getAllProperties,
   getAllServices,
   getAllUsers,
+  getAllRentals,
   getFavorites,
   loadUser,
+  getMonthlyIncomes,
 } from "./redux/actions"
-import { Route, Routes } from "react-router-dom";
-import Login from "./components/DropDown/Login"
+import { useNavigate } from "react-router-dom"
 
 function App() {
   const dispatch = useDispatch()
   const auth = useSelector(state => state.auth)
   const admin = useSelector(state => state.user.type)
+  const navigate = useNavigate()
 
   useEffect(() => {
     localStorage.tokenRentalApp && dispatch(loadUser())
@@ -35,17 +37,26 @@ function App() {
   }, [auth])
 
   useEffect(() => {
-    if (auth && admin) {
+    if (auth && (admin === "ADMIN" || admin === "SUBADMIN")) {
       dispatch(getAllEmails())
       dispatch(getAllUsers())
+      dispatch(getAllRentals())
+      dispatch(getMonthlyIncomes())
     }
   }, [admin])
 
+  useEffect(() => {
+    if (auth && admin) {
+      if (admin === "NORMAL") {
+        return navigate("/home", { scroll: { x: 0, y: 0 } })
+      } else {
+        return navigate("/dashboard")
+      }
+    }
+  }, [auth, admin])
+
   return (
     <>
-      <Routes>
-        <Route exact path="/logIn" element={<Login />} />
-      </Routes>
       <RouterApp />
     </>
   )

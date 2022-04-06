@@ -1,10 +1,11 @@
 import { useState } from "react"
 import Modal from "../../../../components/modal/modal"
-import { reviewsObj } from "../../../../utilities/reviewsObjdemo"
 import ReviewCard from "../reviewCard/reviewCard"
+import { useSelector } from "react-redux"
 
 export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
   const [modalShow, setModalShow] = useState(false)
+  const comments = useSelector(state => state.detailsOfProperty.comments)
 
   return (
     <>
@@ -23,13 +24,8 @@ export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
         modalShow={modalShow}
         setModalShow={setModalShow}
         width={"80%"}>
-        {reviewsObj.map((e, i) => (
-          <ReviewCard
-            key={i}
-            title={e.title}
-            rating={e.rating}
-            comment={e.comment}
-          />
+        {comments?.map((comment, i) => (
+          <ReviewCard key={i} comment={comment} />
         ))}
       </Modal>
     </>

@@ -135,18 +135,9 @@ export default function ProfileInfo() {
           <Info>{user.lastname ? user.lastname : "Incomplete"}</Info>
         )}
         <Label>Email</Label>
-        {user.email && editStatus ? (
-          <Info>
-            <input
-              type="text"
-              value={dataUser.email}
-              name="email"
-              onChange={handleChangeInfo}
-            />
-          </Info>
-        ) : (
-          <Info>{user.email ? user.email : "Incomplete"}</Info>
-        )}
+
+        <Info>{user.email ? user.email : "Incomplete"}</Info>
+
         <Label>Country</Label>
         {user.country && editStatus ? (
           <Info>
@@ -160,7 +151,7 @@ export default function ProfileInfo() {
         ) : (
           <Info>{user.country ? user.country : "Incomplete"}</Info>
         )}
-        <Label>Number of count</Label>
+        <Label>Account number</Label>
         {user.account_number && editStatus ? (
           <Info>
             <input

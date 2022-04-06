@@ -31,7 +31,8 @@
     "passport-google-oidc": "^0.1.0",
     "passport-twitter": "^1.0.4",
     "pg": "^8.7.3",
-    "sequelize": "^6.17.0"
+    "sequelize": "^6.17.0",
+    "stripe": "^8.215.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

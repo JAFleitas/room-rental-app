@@ -28,22 +28,32 @@ export const Icon = styled.span`
   z-index: -1;
 `
 
-export const Container = styled.form`
+export const ContainerSearchBar = styled.div`
   display: flex;
-  width: 80%;
-  height: 100px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  margin: 0.5rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
 
+  @media screen and (max-width: 525px) {
+    flex-direction: column;
+
+    div {
+      width: 95%;
+    }
+  } ;
+`
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
   background-color: #e2c8ff;
+  border: 1px solid #d822fc3f;
   border-radius: 1rem;
   padding: 1rem;
   transition: 1s;
-
-  &:hover {
-    cursor: pointer;
-  }
 `
 export const Box = styled.div`
   display: flex;
@@ -57,7 +67,7 @@ export const Box = styled.div`
   border-radius: 1rem;
   transition: 0.5s;
   &:hover {
-    background-color: black;
+    background-color: #a455ff;
   }
 `
 
@@ -70,7 +80,7 @@ export const Label = styled.label`
   padding-left: 6px;
   padding-right: 6px;
   margin-bottom: 2%;
-  background-color: black;
+  background-color: #a455ff;
   border-radius: 15px;
 `
 export const Input = styled.input`

@@ -11,6 +11,7 @@ import {
   BotonBack,
   ServicesSt,
   DivReview,
+  Services,
 } from "./styled-components"
 import {
   ContainerMap,
@@ -19,7 +20,7 @@ import {
 import { ContainerImages } from "./components/images-detail/styles"
 import ReviewContainer from "./components/reviewsCarousel/reviewContainer"
 import RentForm from "../../components/RentForm/RentForm"
-
+import CircularProgress from "@mui/material/CircularProgress"
 import { getPropertyById, GET_PROPERTY_BY_ID } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -29,28 +30,37 @@ export default function Details() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
-
+  const userLoginId = useSelector(state => state.user.id)
   //dispatch
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getPropertyById(id))
     setLoading(false)
     return () => {
-      dispatch({
-        type: GET_PROPERTY_BY_ID,
-        payload: null,
-      })
+      if (id === undefined) {
+        dispatch({
+          type: GET_PROPERTY_BY_ID,
+          payload: null,
+        })
+      }
+    }
+  }, [])
+  useEffect(() => {
+    return () => {
+      window.scroll(0, 0)
     }
   }, [])
   const property = useSelector(state => state.detailsOfProperty)
   return loading ? (
-    <div>'Loading...'</div>
+    <div style={{ display: "flex" }}>
+      <CircularProgress />
+    </div>
   ) : property ? (
     <ContainerPageDetails>
       <ContainerMapAndTitle>
         <DescriptionContainer>
           <BotonBack>
-            <button onClick={() => navigate("/")}>
+            <button onClick={() => navigate("/home")}>
               <IoChevronBackSharp />
             </button>
           </BotonBack>
@@ -76,19 +86,18 @@ export default function Details() {
         {property.image && <Images imagesPropertyDetails={property.image} />}
       </Suspense>
 
-      <DescriptionContainer>
+      <Services>
         <h1>What services does the place offer?</h1>
-
         {property.services ? (
           property.services.map(e => (
-            <ServicesSt>
+            <ServicesSt key={e.id}>
               {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
             </ServicesSt>
           ))
         ) : (
           <p>This property dont have services</p>
         )}
-      </DescriptionContainer>
+      </Services>
 
       <DescriptionContainer>
         <h1>Description</h1>
@@ -99,12 +108,20 @@ export default function Details() {
           <AiFillStarSt />
           <h2>Reviews</h2>
         </DivReview>
-        <ReviewContainer
-          comments={property.comments}
-          rating={property.rating}
-        />
+        {property?.comments?.length === 0 && property?.rating === 0 ? (
+          <div>No comments yet</div>
+        ) : (
+          <ReviewContainer
+            comments={property.comments}
+            rating={property.rating}
+          />
+        )}
       </DescriptionContainer>
-      <RentForm props={property} />
+      {property?.userID === userLoginId ? (
+        <div>You cannot rent your property!</div>
+      ) : (
+        <RentForm props={property} />
+      )}
     </ContainerPageDetails>
   ) : (
     <div>No se ha podido cargar la propiedad</div>

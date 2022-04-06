@@ -8,13 +8,13 @@ import getHeaderToken from "../../../../utilities/getHeadertoken"
 const api = import.meta.env.VITE_APP_API_URL
 import { useNavigate, useParams } from "react-router-dom"
 import { addPaymentMethod, editPaymentMethod } from "../../../../redux/actions"
+import { ErrorAlert, WarningAlert } from "../../../../utilities/alerts"
 
 const initialForm = {
   cardNumber: "",
   fullName: "",
   expirationMonth: "",
   expirationYear: "",
-  ccv: "",
 }
 
 const FormPaymentMethod = ({ edit }) => {
@@ -37,7 +37,7 @@ const FormPaymentMethod = ({ edit }) => {
   }
 
   const validateForm = form => {
-    const { cardNumber, fullName, expirationMonth, expirationYear, ccv } = form
+    const { cardNumber, fullName, expirationMonth, expirationYear} = form
     const errors = {}
 
     if (cardNumber[0] !== "4" && cardNumber[0] !== "5")
@@ -45,7 +45,7 @@ const FormPaymentMethod = ({ edit }) => {
     if (fullName.split(" ").length < 2)
       errors.fullName = "Debe contener mas de una palabra"
 
-    if (!expirationMonth || !expirationYear || !ccv) {
+    if (!expirationMonth || !expirationYear) {
       errors.general = "All fields are required"
     }
 
@@ -55,14 +55,14 @@ const FormPaymentMethod = ({ edit }) => {
   const handleChange = e => {
     let { name, value } = e.target
 
-    setFrontal(name !== "ccv")
+    setFrontal(name !== "fullName")
 
     if (name === "cardNumber") {
       if (form.cardNumber[0] === "4") setIsVisa(true)
       else setIsVisa(false)
     }
 
-    if (name === "cardNumber" || name === "ccv") {
+    if (name === "cardNumber") {
       value = value
         .replace(/\s/g, "")
         // Eliminar las letras
@@ -85,7 +85,7 @@ const FormPaymentMethod = ({ edit }) => {
     setErrors(errors)
 
     if (Object.keys(errors).length > 0) {
-      alert("Check all fields")
+      WarningAlert("Check all fields")
     } else {
       if (edit) {
         try {
@@ -111,7 +111,7 @@ const FormPaymentMethod = ({ edit }) => {
           return
         } catch (error) {
           console.log(error?.response)
-          alert(
+          ErrorAlert(
             (typeof error?.response?.data === "string"
               ? error.response.data
               : error.response.data?.message) || "Something went wrong :(",
@@ -129,7 +129,7 @@ const FormPaymentMethod = ({ edit }) => {
           return
         } catch (error) {
           console.log(error?.response)
-          alert(
+          ErrorAlert(
             (typeof error?.response?.data === "string"
               ? error.response.data
               : error.response.data?.message) || "Something went wrong :(",
@@ -158,7 +158,7 @@ const FormPaymentMethod = ({ edit }) => {
         fullName={form.fullName}
         expirationMonth={form.expirationMonth}
         expirationYear={form.expirationYear}
-        ccv={form.ccv}
+        ccv={"***"}
       />
 
       {/* <!-- Contenedor Boton Abrir Formulario --> */}
@@ -251,10 +251,11 @@ const FormPaymentMethod = ({ edit }) => {
             <label htmlFor="inputCCV">CCV</label>
             <input
               type="text"
-              value={form.ccv}
+              value={"***"}
               onChange={handleChange}
               name="ccv"
               maxLength="3"
+              readOnly
             />
           </div>
         </div>

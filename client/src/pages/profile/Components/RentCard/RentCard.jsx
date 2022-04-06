@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getRentalsByUser } from "../../redux/actions"
+import { getRentalsByUser } from "../../../../redux/actions"
 import {
   Container,
   CardContainer,
@@ -9,42 +9,47 @@ import {
   CardInfo,
   ImageContainer,
   Image,
-  RedButton,
+  Button,
+  ButtonsContainer,
 } from "./styled"
-import { cancelRental } from "../../redux/actions/index"
-export default function RentCard() {
-  const userRentals = useSelector(state => state.userRentals.data)
-  const dispatch = useDispatch()
-  // Thiago
+import { cancelRental } from "../../../../redux/actions/index"
+import { Title } from "../Acount/styled"
+import { useNavigate } from "react-router-dom"
 
+export default function RentCard() {
+  const userRentals = useSelector(state => state.userRentals)
   const [render, setRender] = useState(true)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getRentalsByUser())
   }, [render])
 
   function handleCancelation(rentID) {
-    console.log(rentID)
+    // console.log(rentID)
 
     if (rentID) {
-      console.log(rentID)
+      // console.log(rentID)
       dispatch(cancelRental(rentID))
       setRender(!render)
     } else {
       console.log("error no se encontro el id de la renta")
     }
   }
-  // Thiago
 
   return (
     <Container>
-      {userRentals?.map(rent => {
+      <Title>My history</Title>
+      {userRentals?.length === 0 ? <div style={{width: "46%", margin: "2rem"}}>No rentals yet</div> :userRentals?.map(rent => {
         return (
-          <CardContainer>
+          <CardContainer key={rent.id}>
             <ImageContainer>
               <Image src={rent.property.image[0]} alt="image not found" />
             </ImageContainer>
-            <CardTitle>{rent.property.name}</CardTitle>
+            <CardTitle onClick={() => navigate(`/property-info/${rent.property.id}`)}>
+              {rent.property.name}
+            </CardTitle>
             <CardInfoContainer>
               <CardInfo>Location: {rent.property.location}</CardInfo>
               <CardInfo>
@@ -54,11 +59,18 @@ export default function RentCard() {
               <CardInfo>Final Price: {rent.final_price}</CardInfo>
               {/* <CardInfo>Location: {rent.property.location}</CardInfo> */}
             </CardInfoContainer>
-            <RedButton
-              value={rent.id}
-              onClick={e => handleCancelation(e.target.value)}>
-              Cancelar
-            </RedButton>
+            <ButtonsContainer>
+              <Button
+                value={rent.id}
+                onClick={e => handleCancelation(e.target.value)}>
+                Cancel
+              </Button>
+              <Button
+                value={rent.id}
+                onClick={() => navigate(`/comment/${rent.property.id}`)}>
+                Add comment
+              </Button>
+            </ButtonsContainer>
           </CardContainer>
         )
       })}

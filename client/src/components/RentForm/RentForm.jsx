@@ -29,7 +29,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 
 import { useParams } from "react-router-dom"
-
+import { toast } from "react-toastify"
+import { WarningAlert } from "../../utilities/alerts"
+import { compareDates } from "../../utilities/compareDates"
 export default function RentForm(props) {
   const [monthsInCalendary, setMonthsInCalendary] = useState(2)
   const mediaqueryList = window.matchMedia("(min-width: 705px)")
@@ -94,10 +96,9 @@ export default function RentForm(props) {
     if (
       dates?.from === undefined ||
       dates?.to === undefined ||
-      payMethod === undefined ||
       finalPrice === undefined
     ) {
-      alert("All fields are required")
+      WarningAlert("All fields are required")
     } else {
       let form = {
         propertyID: props.id,
@@ -106,24 +107,7 @@ export default function RentForm(props) {
         final_date: dates.to,
         paymenthMethodId: payMethod,
       }
-
     }
-    // '01/02/2022' '->' '2022/02/01';
-    // function convertDateFormat(string) {
-    //   let date = string.split("/")
-    //   let fecha = date[2] + "," + date[1] + "," + date[0]
-    //   return fecha
-    // }
-    // let inicio = dates.from.toLocaleDateString()
-    // let end = dates.to.toLocaleDateString()
-    // inicio = convertDateFormat(inicio)
-    // end = convertDateFormat(end)
-    // console.log(inicio)
-    // console.log(end)
-
-
-    // .then(alert("Renta creada"))
-    // .catch(alert("Hubo un problema..."))
 
     let form = {
       propertyID: props.id,
@@ -134,13 +118,12 @@ export default function RentForm(props) {
     }
     if (auth) {
       dispatch(actionAddFormRentalProperty(form))
-      navigate("/pay-reservation")
+      navigate("/pay-reservation", { scroll: { x: 0, y: 0 } })
     }
     if (!auth) {
       dispatch(actionAddFormRentalProperty(form))
-      navigate("/login")
+      navigate("/login", { scroll: { x: 0, y: 0 } })
     }
-
 
     // setDiasOcupados([
     //   ...diasOcupados,
@@ -149,7 +132,7 @@ export default function RentForm(props) {
   }
 
   function handlePayChange(id) {
-    console.log(id)
+    // console.log(id)
     setPayMethod(id)
   }
 
@@ -227,7 +210,7 @@ export default function RentForm(props) {
         <PaymentMethodsContainer>
           {paymentMethods ? (
             paymentMethods.map(method => {
-              console.log(method)
+              // console.log(method)
               return (
                 <PaymentMethod key={method.id}>
                   <PaymentMethodName>
@@ -253,7 +236,22 @@ export default function RentForm(props) {
             Add payment method <IconPlus />
           </AddPayment>
         </PaymentMethodsContainer>
-        <SubmitButton onClick={handleClick}>Reservar</SubmitButton>
+        <SubmitButton
+          disabled={
+            !dates?.from || !dates?.to
+              ? true
+              : !rentals?.every(e =>
+                  compareDates(
+                    e.start_date,
+                    e.final_date,
+                    dates.from,
+                    dates.to,
+                  ),
+                )
+          }
+          onClick={handleClick}>
+          Reserve
+        </SubmitButton>
       </Form>
     </Container>
   )
