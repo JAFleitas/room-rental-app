@@ -88,15 +88,9 @@ export default function Details() {
 
       <Services>
         <h1>What services does the place offer?</h1>
-
         {property.services ? (
-
-      
- 
-
           property.services.map(e => (
             <ServicesSt key={e.id}>
->
               {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
             </ServicesSt>
           ))
