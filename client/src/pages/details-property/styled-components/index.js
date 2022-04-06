@@ -36,7 +36,7 @@ export const DescriptionContainer = styled.div`
     padding-bottom: 10px;
   }
   & p {
-    color: #8f8f8f;
+    color: black;
     padding-bottom: 60px;
   }
   @media screen and (max-width: 740px) {

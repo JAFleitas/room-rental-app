@@ -22,9 +22,12 @@ export const PageContainer = styled.div`
   grid-template-columns: repeat(10, 10%);
   grid-template-rows: repeat(21, 10vh);
 
-  /* @media (max-width: 1080px) {
-    grid-template-rows: repeat(21, 8vh);
-  } */
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0.5rem;
+  }
 `
 export const WelcomeTitle = styled.h1`
   grid-column: 4/8;
@@ -120,6 +123,11 @@ export const WelcomeDesignContainer = styled.div`
   @media (max-width: 580px) {
     height: 55%;
     width: 90%;
+  }
+  @media (max-width: 500px) {
+    margin: 0;
+    padding: 0.5rem;
+    max-width: 80%;
   }
 `
 export const Design = styled.img`
@@ -247,13 +255,4 @@ export const Image = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 30px;
-  /* @media (max-width: 1280px) {
-    width: 90%;
-  }
-  @media (max-width: 980px) {
-    width: 90%;
-  }
-  @media (max-width: 980px) {
-    width: 70%;
-  } */
 `
