@@ -122,7 +122,7 @@ export default function Profile() {
       ) : (
         <NotLogIn>
           <Message>Aún no tiene una cuenta</Message>
-          <LinkLogIn to="/register">Create account</LinkLogIn>
+          <LinkLogIn to="/signUp">Create account</LinkLogIn>
         </NotLogIn>
       )}
     </PageContainer>
