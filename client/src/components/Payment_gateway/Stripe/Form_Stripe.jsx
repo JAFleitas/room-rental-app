@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import axios from "axios"
 const api = import.meta.env.VITE_APP_API_URL
@@ -13,9 +13,11 @@ const Form_Stripe = () => {
   const elements = useElements()
   const form = useSelector(state => state.formRentalProperty)
   const navigate = useNavigate()
+  const [loadingPay, setLoadingPay] = useState(false)
 
   const handleSubmit = async e => {
     e.preventDefault()
+    setLoadingPay(true)
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
@@ -36,7 +38,10 @@ const Form_Stripe = () => {
             title: "Success",
             text: data.message,
             icon: "success",
-          }).then(() => navigate("/home"))
+          }).then(() => {
+            setLoadingPay(false)
+            navigate("/home")
+          })
         } else {
           swal({
             title: "Error!",
@@ -44,6 +49,7 @@ const Form_Stripe = () => {
             icon: "error",
             dangerMode: true,
           })
+          setLoadingPay(false)
         }
       } catch (error) {
         swal({
@@ -52,6 +58,7 @@ const Form_Stripe = () => {
           icon: "error",
           dangerMode: true,
         })
+        setLoadingPay(false)
       }
     } else {
       swal({
@@ -60,6 +67,7 @@ const Form_Stripe = () => {
         icon: "error",
         dangerMode: true,
       })
+      setLoadingPay(false)
     }
   }
   return (
@@ -67,10 +75,20 @@ const Form_Stripe = () => {
       <form onSubmit={handleSubmit}>
         <CardElement />
         <br />
-        <InputSubmit>
-          <input type="submit" />
-        </InputSubmit>
+        {loadingPay === false ? (
+          <InputSubmit>
+            <input type="submit" value="Pay" />
+          </InputSubmit>
+        ) : null}
       </form>
+      {loadingPay ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/54/Ajux_loader.gif"
+            style={{ width: "130px", height: "130px" }}
+          />
+        </div>
+      ) : null}
     </>
   )
 }
