@@ -8,7 +8,7 @@ export const Container = styled.div`
   width: ${({ width }) => width ?? "46%"};
 
   justify-content: space-around;
-  /* width: 46%; */
+
   height: 250px;
   margin: 1rem 0.3rem;
   border-radius: 15px;
@@ -23,8 +23,9 @@ export const Container = styled.div`
     box-shadow: 0 0 10px #d8d8d8;
     cursor: pointer;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
+    height: 300px;
   } ;
 `
 
@@ -68,7 +69,10 @@ export const ImageContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 180px;
-  border-radius: 1rem;
+  border-radius: 8px;
+  @media screen and (max-width: 850px) {
+    height: 200xp;
+  }
 `
 
 export const Title = styled.p`

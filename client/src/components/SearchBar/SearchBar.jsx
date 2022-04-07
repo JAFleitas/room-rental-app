@@ -8,6 +8,9 @@ import {
   Container,
   Label,
   Box,
+  ButtonFilterShowMovil,
+  ContainerButtons,
+  ButtonFilterShow,
 } from "./styled"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -80,14 +83,21 @@ function SearchBar() {
               onChange={date => setEndDate(date)}
             />
           </Box>
-          <SearchButton onClick={handleSearch} type="submit">
-            <FiSearch />
-          </SearchButton>
+
+          <ContainerButtons>
+            <SearchButton onClick={handleSearch} type="submit">
+              <FiSearch />
+            </SearchButton>
+            <ButtonFilterShowMovil onClick={() => setOpenFilters(!openFilters)}>
+              <FilterAltIcon />
+              {openFilters ? "Close" : "Open"} filters
+            </ButtonFilterShowMovil>
+          </ContainerButtons>
         </ContainerSearchBar>
-        <button onClick={() => setOpenFilters(!openFilters)}>
+        <ButtonFilterShow onClick={() => setOpenFilters(!openFilters)}>
           <FilterAltIcon />
           {openFilters ? "Close" : "Open"} filters
-        </button>
+        </ButtonFilterShow>
         {openFilters && <Filters />}
       </Container>
       <Sorters />

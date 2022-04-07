@@ -21,6 +21,7 @@ export const DivStar = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-left: 30px;
   svg {
     width: 100px;
     height: 100px;

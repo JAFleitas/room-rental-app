@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { validateFormAddProperty } from "../../utilities/validateForm"
 import MapForm from "./mapContainer"
 import { getAllCategories, getAllServices } from "../../redux/actions"
+import { useNavigate } from "react-router-dom"
 import {
   ButtonSt,
   Container,
@@ -14,6 +15,9 @@ import {
   TextDescription,
   TitleSt,
   FormPropertyContainer,
+  ContainerImages,
+  BtnDeleteImage,
+  CardImage,
 } from "./styles"
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
@@ -41,6 +45,7 @@ export default function FormAddProperty(props) {
   const coordinates = useSelector(state => state.coordinates)
   const [formData, setFormData] = useState(initialStateForm)
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
 
   const handleInputChange = e => {
     const { name, value } = e.target
@@ -58,17 +63,37 @@ export default function FormAddProperty(props) {
     if (localStorage.getItem("tokenRentalApp")) {
       if (props.id) {
         formData.idProperty = props.id
-        await axios
-          .put(
-            `${api}/properties/editProperty`,
-            { data: formData },
-            getHeaderToken(),
-          )
-          .then(res => {
-            setFormData(initialStateForm)
-            // console.log(res)
-          })
-          .catch(err => console.log(err))
+        swal({
+          title: "Are you sure?",
+          text: "Data will be updated",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then(async willUpdated => {
+          if (willUpdated) {
+            await axios
+              .put(
+                `${api}/properties/editProperty`,
+                { data: formData },
+                getHeaderToken(),
+              )
+              .then(res => {
+                setFormData(initialStateForm)
+                window.scroll(0, 0)
+                swal({
+                  title: "Successful",
+                  text: res.data,
+                  icon: "success",
+                })
+                navigate("/profile/myProperties")
+              })
+              .catch(err => console.log(err))
+          } else {
+            swal("Your Property data is safe!")
+            navigate("/profile/myProperties")
+            window.scroll(0, 0)
+          }
+        })
       } else {
         await axios
           .post(
@@ -77,6 +102,7 @@ export default function FormAddProperty(props) {
             getHeaderToken(),
           )
           .then(res => {
+            window.scroll(0, 0)
             swal({
               title: "Successful",
               text: res.data.message,
@@ -263,88 +289,76 @@ export default function FormAddProperty(props) {
             <LabelSt error={true}>{errors.description}</LabelSt>
           )}
         </FormContainer>
-        <ContainerImgAndMap>
-          <div>
-            {errors.coordinates ? (
-              <LabelSt error={true}>{errors.coordinates}</LabelSt>
-            ) : (
-              <>
-                <LabelSt>Coordinates </LabelSt>
-                <LabelSt>
-                  {formData.coordinates.length ? formData.coordinates : null}{" "}
-                </LabelSt>
-              </>
-            )}
-          </div>
-          <ContainerMap>
-            <MapForm />
-          </ContainerMap>
+        <FormContainer>
+          <ContainerImgAndMap>
+            <div>
+              {errors.coordinates ? (
+                <LabelSt error={true}>{errors.coordinates}</LabelSt>
+              ) : (
+                <>
+                  <LabelSt>Coordinates </LabelSt>
+                  <LabelSt>
+                    {formData.coordinates.length ? formData.coordinates : null}{" "}
+                  </LabelSt>
+                </>
+              )}
+            </div>
+            <ContainerMap>
+              <MapForm />
+            </ContainerMap>
 
-          <FormContainer>
-            <LabelSt>Images</LabelSt>
-            {formData.image
-              ? formData.image.map((elem, index) => (
-                  <div key={index} style={{ width: "100px", height: "100px" }}>
-                    <div
-                      style={{
-                        background: "red",
-                        textAlign: "right",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => removeImg(index)}>
-                      X
-                    </div>
-                    <img
-                      src={elem}
-                      style={{ width: "100%", height: "100%" }}
-                      alt="not found"
+            <FormContainer>
+              <LabelSt>Images</LabelSt>
+              <ContainerImages>
+                {formData.image
+                  ? formData.image.map((elem, index) => (
+                      <CardImage key={index} photo={elem}>
+                        <BtnDeleteImage onClick={() => removeImg(index)} />
+                      </CardImage>
+                    ))
+                  : null}
+              </ContainerImages>
+              {errors.image && <LabelSt error={true}>{errors.image}</LabelSt>}
+              <input
+                type="file"
+                name="file"
+                id="FileImage"
+                multiple="multiple"
+                onChange={handleFileChange}
+              />
+              <LabelSt>Type of property</LabelSt>
+              <SelectSt
+                name="typePropertyID"
+                value={formData.typePropertyID}
+                onChange={handleInputChange}>
+                <option value=""></option>
+                {typeProperty &&
+                  typeProperty.map(e => (
+                    <option value={e.id} key={e.id}>
+                      {e.name}
+                    </option>
+                  ))}
+              </SelectSt>
+
+              {errors.typePropertyID && (
+                <LabelSt error={true}>{errors.typePropertyID}</LabelSt>
+              )}
+              <LabelSt>Services</LabelSt>
+              {servicesData &&
+                servicesData.map((elem, index) => (
+                  <label key={index}>
+                    <input
+                      type="checkbox"
+                      id={elem.id}
+                      value={elem.id}
+                      onChange={validateService}
                     />
-                  </div>
-                ))
-              : null}
-            {errors.image && <LabelSt error={true}>{errors.image}</LabelSt>}
-            <input
-              type="file"
-              name="file"
-              id="FileImage"
-              multiple="multiple"
-              onChange={handleFileChange}
-            />
-
-            <LabelSt>Type of property</LabelSt>
-            <SelectSt
-              name="typePropertyID"
-              value={formData.typePropertyID}
-              onChange={handleInputChange}>
-              <option value=""></option>
-              {typeProperty &&
-                typeProperty.map(e => (
-                  <option value={e.id} key={e.id}>
-                    {e.name}
-                  </option>
+                    {elem.name}
+                  </label>
                 ))}
-            </SelectSt>
-
-            {errors.typePropertyID && (
-              <LabelSt error={true}>{errors.typePropertyID}</LabelSt>
-            )}
-          </FormContainer>
-          <FormContainer>
-            <LabelSt>Services</LabelSt>
-            {servicesData &&
-              servicesData.map((elem, index) => (
-                <label key={index}>
-                  <input
-                    type="checkbox"
-                    id={elem.id}
-                    value={elem.id}
-                    onChange={validateService}
-                  />
-                  {elem.name}
-                </label>
-              ))}
-          </FormContainer>
-        </ContainerImgAndMap>
+            </FormContainer>
+          </ContainerImgAndMap>
+        </FormContainer>
       </Container>
       <TitleSt>
         <ButtonSt

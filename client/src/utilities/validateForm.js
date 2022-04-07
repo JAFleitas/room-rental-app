@@ -7,8 +7,7 @@ export function validateFormAddProperty(data) {
     services: "Enter services, example 'WIFI,TV,...' ",
     description: "Enter description",
     typePropertyID: "Enter type property",
-    coordinates:
-      "Enter the approximate location on the map to get the coordinates",
+    coordinates: "Enter the approximate location on the map",
   }
 
   for (const property in data) {
