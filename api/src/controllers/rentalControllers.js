@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+const { sendEmail } = require("../utilities/sendEmail.js")
 const { PropertyRental, Property, User, sequelize } = require("../db/index.js")
 
 const addRental = async (req, res) => {
@@ -16,6 +17,50 @@ const addRental = async (req, res) => {
       })
 
       if (newRental) {
+        try {
+          const guest = await User.findByPk(userID)
+          const host = await Property.findOne({
+            where: { id: propertyID },
+            include: [{ model: User }],
+          })
+
+          // console.log({ guest, host })
+          const htmlGuest = `<h2 style="text-align: center; color: rgb(139, 37, 255);">Renta exitosa</h2>
+          <div style="text-align: justify; padding: 7px;">
+            <p style="width: 90%; margin: 1rem auto;">Se ha registrado tu renta de forma exitosa! Disfruta tu estancia <3</p>
+            <p>Si necesitas más información del usuario hospedador, puedes comunicarte a su email ${host.dataValues.user.email}</p>
+          </div>
+          <div>
+            <a href="https://room-rental-app.vercel.app" style="background: rgb(139, 37, 255); border-radius: 12px; padding: 10px; color: white;text-decoration: none; display: block; width: 70px; text-align: center; margin: 1rem auto;">Ver en app</a>
+          </div> `
+
+          const htmlHost = `<h2 style="text-align: center; color: rgb(139, 37, 255);">Enhorabuena! Alguien ha rentado tu propiedad</h2>
+          <div style="text-align: justify; padding: 7px;">
+            <p style="width: 90%; margin: 1rem auto;">Tu propiedad ${host.dataValues.name} ha sido rentada desde el ${start_date} hasta el ${final_date}! Si necesitas más información del usuario que la ha rentado puedes comunicarte a su email ${guest.dataValues.email}</p>
+          </div>
+          <div>
+            <a href="https://room-rental-app.vercel.app" style="background: rgb(139, 37, 255); border-radius: 12px; padding: 10px; color: white;text-decoration: none; display: block; width: 70px; text-align: center; margin: 1rem auto;">Ver en app</a>
+          </div> `
+
+          await sendEmail(
+            "Alguien rentó tu propiedad!",
+            false,
+            false,
+            host.dataValues.user.email,
+            htmlHost,
+          )
+
+          await sendEmail(
+            "Has rentado una propiedad",
+            false,
+            false,
+            guest.dataValues.email,
+            htmlGuest,
+          )
+        } catch (error) {
+          console.log(error)
+        }
+
         res.status(201).json({ message: "Created new rental", data: newRental })
       } else {
         res.status(500).json({ message: "Rental not Created" })
