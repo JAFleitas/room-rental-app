@@ -14,6 +14,9 @@ import {
   TextDescription,
   TitleSt,
   FormPropertyContainer,
+  ContainerImages,
+  BtnDeleteImage,
+  CardImage,
 } from "./styles"
 import { SelectSt } from "../Filters/styles/index.sort"
 import axios from "axios"
@@ -263,88 +266,79 @@ export default function FormAddProperty(props) {
             <LabelSt error={true}>{errors.description}</LabelSt>
           )}
         </FormContainer>
-        <ContainerImgAndMap>
-          <div>
-            {errors.coordinates ? (
-              <LabelSt error={true}>{errors.coordinates}</LabelSt>
-            ) : (
-              <>
-                <LabelSt>Coordinates </LabelSt>
-                <LabelSt>
-                  {formData.coordinates.length ? formData.coordinates : null}{" "}
-                </LabelSt>
-              </>
-            )}
-          </div>
-          <ContainerMap>
-            <MapForm />
-          </ContainerMap>
+        <FormContainer>
+          <ContainerImgAndMap>
+            <div>
+              {errors.coordinates ? (
+                <LabelSt error={true}>{errors.coordinates}</LabelSt>
+              ) : (
+                <>
+                  <LabelSt>Coordinates </LabelSt>
+                  <LabelSt>
+                    {formData.coordinates.length ? formData.coordinates : null}{" "}
+                  </LabelSt>
+                </>
+              )}
+            </div>
+            <ContainerMap>
+              <MapForm />
+            </ContainerMap>
 
-          <FormContainer>
-            <LabelSt>Images</LabelSt>
-            {formData.image
-              ? formData.image.map((elem, index) => (
-                  <div key={index} style={{ width: "100px", height: "100px" }}>
-                    <div
-                      style={{
-                        background: "red",
-                        textAlign: "right",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => removeImg(index)}>
-                      X
-                    </div>
-                    <img
-                      src={elem}
-                      style={{ width: "100%", height: "100%" }}
-                      alt="not found"
+            <FormContainer>
+              <LabelSt>Images</LabelSt>
+              <ContainerImages>
+                {formData.image
+                  ? formData.image.map((elem, index) => (
+                      <CardImage key={index} photo={elem}>
+                        <BtnDeleteImage onClick={() => removeImg(index)} />
+                      </CardImage>
+                    ))
+                  : null}
+              </ContainerImages>
+              {errors.image && <LabelSt error={true}>{errors.image}</LabelSt>}
+              <input
+                type="file"
+                name="file"
+                id="FileImage"
+                multiple="multiple"
+                onChange={handleFileChange}
+              />
+
+              <LabelSt>Type of property</LabelSt>
+              <SelectSt
+                name="typePropertyID"
+                value={formData.typePropertyID}
+                onChange={handleInputChange}>
+                <option value=""></option>
+                {typeProperty &&
+                  typeProperty.map(e => (
+                    <option value={e.id} key={e.id}>
+                      {e.name}
+                    </option>
+                  ))}
+              </SelectSt>
+
+              {errors.typePropertyID && (
+                <LabelSt error={true}>{errors.typePropertyID}</LabelSt>
+              )}
+            </FormContainer>
+            <FormContainer>
+              <LabelSt>Services</LabelSt>
+              {servicesData &&
+                servicesData.map((elem, index) => (
+                  <label key={index}>
+                    <input
+                      type="checkbox"
+                      id={elem.id}
+                      value={elem.id}
+                      onChange={validateService}
                     />
-                  </div>
-                ))
-              : null}
-            {errors.image && <LabelSt error={true}>{errors.image}</LabelSt>}
-            <input
-              type="file"
-              name="file"
-              id="FileImage"
-              multiple="multiple"
-              onChange={handleFileChange}
-            />
-
-            <LabelSt>Type of property</LabelSt>
-            <SelectSt
-              name="typePropertyID"
-              value={formData.typePropertyID}
-              onChange={handleInputChange}>
-              <option value=""></option>
-              {typeProperty &&
-                typeProperty.map(e => (
-                  <option value={e.id} key={e.id}>
-                    {e.name}
-                  </option>
+                    {elem.name}
+                  </label>
                 ))}
-            </SelectSt>
-
-            {errors.typePropertyID && (
-              <LabelSt error={true}>{errors.typePropertyID}</LabelSt>
-            )}
-          </FormContainer>
-          <FormContainer>
-            <LabelSt>Services</LabelSt>
-            {servicesData &&
-              servicesData.map((elem, index) => (
-                <label key={index}>
-                  <input
-                    type="checkbox"
-                    id={elem.id}
-                    value={elem.id}
-                    onChange={validateService}
-                  />
-                  {elem.name}
-                </label>
-              ))}
-          </FormContainer>
-        </ContainerImgAndMap>
+            </FormContainer>
+          </ContainerImgAndMap>
+        </FormContainer>
       </Container>
       <TitleSt>
         <ButtonSt

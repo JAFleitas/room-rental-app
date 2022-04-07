@@ -2,12 +2,16 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
   width: 100%;
   justify-content: space-around;
-  align-items: flex-start;
-  right: 0;
-  left: 0;
+  margin-top: 2em;
+  align-items: start;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  @media (max-width: 1150px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const ContainerMap = styled.div`
@@ -19,12 +23,12 @@ export const ContainerMap = styled.div`
 `
 
 export const FormContainer = styled.form`
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
   max-width: 600px;
-  padding-bottom: 60px;
   min-width: 400px;
+  padding-bottom: 60px;
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -89,7 +93,50 @@ export const ButtonSt = styled.button`
 export const FormPropertyContainer = styled.div`
   width: 100%;
   height: 100%;
+  align-items: center;
   padding-bottom: 50px;
   padding-left: 100px;
   padding-right: 100px;
+`
+export const ContainerImages = styled.div`
+  background-color: #fff;
+  border-bottom: rgb(226, 225, 223) 2px solid;
+  border-left: rgb(226, 225, 223) 1px solid;
+  border-right: rgb(226, 225, 223) 1px solid;
+  border-radius: 10px;
+  display: flex;
+  height: auto;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  max-width: 411px;
+  justify-content: center;
+`
+
+export const BtnDeleteImage = styled.div`
+  background-image: url(https://icon-library.com/images/delete-icon-png/delete-icon-png-16.jpg);
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  right: 5px;
+`
+
+export const CardImage = styled.div`
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-image: url(${props => (props.photo ? props.photo : null)});
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 5;
 `
