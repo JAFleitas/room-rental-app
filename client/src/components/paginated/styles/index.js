@@ -19,8 +19,8 @@ export const ContainerPaginated = styled.div`
 export const ButtonPage = styled.button`
   border: none;
   border-radius: none;
-  color: #2b2929;
-  background: ${({ disabled }) => (disabled ? "#ddd" : "none")};
+  color: ${({ disabled }) => (disabled ? "#d0d0d0" : "#2b2929")};
+  background: ${({ disabled }) => (disabled ? "#59488ecc" : "none")};
   padding: 10px;
   height: 50%;
   width: 120px;
@@ -31,7 +31,7 @@ export const ButtonPage = styled.button`
   &:hover {
     cursor: ${({ disabled }) => (disabled ? null : "pointer")};
     background: ${({ disabled }) =>
-      disabled ? null : "linear-gradient(to bottom, #b5b4b832, #ddd)"};
+      disabled ? null : "linear-gradient(to bottom, #59487eaa, transparent)"};
   }
 `
 
