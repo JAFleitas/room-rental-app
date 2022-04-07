@@ -15,6 +15,7 @@ const CardStripe = () => {
       <Elements stripe={stripePromise}>
         <div>
           <img src={imgCreditCard} />
+          <br />
           <Form_Stripe />
         </div>
       </Elements>
