@@ -12,6 +12,7 @@ import {
   ServicesSt,
   DivReview,
   Services,
+  PeopleAndRooms,
 } from "./styled-components"
 import {
   ContainerMap,
@@ -57,15 +58,18 @@ export default function Details() {
     <ContainerPageDetails>
       <ContainerMapAndTitle>
         <DescriptionContainer>
-          <BotonBack>
-            <button onClick={() => navigate("/home")}>
+          <BotonBack onClick={() => navigate("/home")}>
+            <button>
               <IoChevronBackSharp />
             </button>
           </BotonBack>
           <div>
             <h2>{property.name}</h2>
           </div>
-
+          <PeopleAndRooms>
+            <h4>Rooms: {property.numberOfRooms}</h4>
+            <h4>Max people: {property.maxNumberOfPeople}</h4>
+          </PeopleAndRooms>
           <StarRating>
             <Reviews
               rating={property.rating}

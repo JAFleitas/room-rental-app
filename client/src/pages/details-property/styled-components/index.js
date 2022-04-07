@@ -74,14 +74,15 @@ export const BotonBack = styled.div`
   margin-top: 20px;
   flex-direction: column;
   margin-bottom: 10px;
+  transition: 1s;
+  :hover {
+    background-color: #6f5fcaaa;
+  }
   & button {
     position: relative;
     width: 26px;
     height: 30px;
     font-size: 20px;
-    &:hover {
-      left: -8px;
-    }
   }
 `
 
@@ -89,7 +90,7 @@ export const ServicesSt = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  width: 40%;
   flex-wrap: wrap;
   font-size: 16px;
   font-weight: 600;
@@ -111,7 +112,9 @@ export const ServicesSt = styled.div`
   }
   &:hover {
     color: black;
-    padding: 7px;
+  }
+  @media screen and (max-width: 470px) {
+    width: 100%;
   }
 `
 export const DivReview = styled.div`
@@ -126,10 +129,10 @@ export const DivReview = styled.div`
 export const Services = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: 1rem;
-  flex-direction: column;
-  width: 25vw;
+  flex-direction: row;
+  width: 90%;
   padding-top: 20px;
   padding-bottom: 40px;
   border-bottom: 0.5px solid #aaaaaaaa;
@@ -140,5 +143,21 @@ export const Services = styled.div`
     font-weight: 900;
     color: #6f5fcacc;
     padding-bottom: 10px;
+    width: 100%;
+  }
+`
+export const PeopleAndRooms = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  h4 {
+    color: #0a0a0a88;
+    font-weight: 900;
+  }
+  @media screen and (min-width: 750px) {
+    flex-direction: column;
+    color: #0a0a0a;
+    font-weight: 900;
   }
 `
