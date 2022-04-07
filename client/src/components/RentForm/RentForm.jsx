@@ -122,8 +122,8 @@ export default function RentForm(props) {
   }
 
   const calendaryWidth = () => {
-    if (window.innerWidth > 750) setMonthsInCalendary(2)
-    if (window.innerWidth < 750) setMonthsInCalendary(1)
+    if (window.innerWidth > 650) setMonthsInCalendary(2)
+    if (window.innerWidth < 650) setMonthsInCalendary(1)
   }
   useEffect(() => {
     window.addEventListener("resize", calendaryWidth)
