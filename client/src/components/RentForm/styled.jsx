@@ -25,6 +25,7 @@ export const Container = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
+    border-radius: 0;
   }
 `
 
