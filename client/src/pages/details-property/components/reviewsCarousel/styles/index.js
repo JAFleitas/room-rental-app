@@ -9,6 +9,9 @@ export const ContainerAll = styled.div`
   padding: 16px;
   margin: 1rem;
   width: 90%;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `
 
 export const Star = styled(AiFillStar)`
