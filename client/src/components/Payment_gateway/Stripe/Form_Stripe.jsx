@@ -77,7 +77,7 @@ const Form_Stripe = () => {
         <br />
         {loadingPay === false ? (
           <InputSubmit>
-            <input type="submit" value="Pay" />
+            <input type="submit" value="Pay Now" />
           </InputSubmit>
         ) : null}
       </form>

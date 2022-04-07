@@ -107,17 +107,33 @@ export default function FormAddProperty(props) {
               title: "Successful",
               text: res.data.message,
               icon: "success",
-            })
-            servicesData.map(elem => {
-              document.getElementById(elem.id).checked = false
-            })
-            document.getElementById("FileImage").value = ""
-            setFormData(prev => {
-              return {
-                ...initialStateForm,
-                image: [],
-                services: [],
-                coordinates: [],
+              buttons: {
+                Continue: true,
+                Exit: true,
+              },
+              dangerMode: true,
+            }).then(value => {
+              switch (value) {
+                case "Continue":
+                  servicesData.map(elem => {
+                    document.getElementById(elem.id).checked = false
+                  })
+                  document.getElementById("FileImage").value = ""
+                  setFormData(prev => {
+                    return {
+                      ...initialStateForm,
+                      image: [],
+                      services: [],
+                      coordinates: [],
+                    }
+                  })
+                  break
+
+                case "Exit":
+                  navigate("/home")
+                  break
+                default:
+                  navigate("/home")
               }
             })
           })

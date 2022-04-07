@@ -28,6 +28,7 @@ export const ButtonPayment = styled.div`
   align-items: center;
   justify-content: center;
   color: #fff;
+  cursor: pointer;
   :hover {
     background-color: #4545d8;
   }
@@ -46,6 +47,7 @@ export const InputSubmit = styled.div`
     background-color: #58ae29;
     padding: 10px;
     color: #fff;
+    border-radius: 5px;
   }
   input: hover {
     background-color: #5549;
