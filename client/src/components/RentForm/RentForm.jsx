@@ -127,6 +127,9 @@ export default function RentForm(props) {
   }
   useEffect(() => {
     window.addEventListener("resize", calendaryWidth)
+    if (window.document.body.offsetWidth < 700) {
+      setMonthsInCalendary(1)
+    }
 
     return () => window.removeEventListener("resize", calendaryWidth)
   }, [])
