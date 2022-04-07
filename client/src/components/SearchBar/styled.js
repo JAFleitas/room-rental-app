@@ -35,12 +35,10 @@ export const ContainerSearchBar = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
 
-  @media screen and (max-width: 525px) {
+  @media screen and (max-width: 775px) {
     flex-direction: column;
-
-    div {
-      width: 95%;
-    }
+    margin-bottom: 4px;
+    align-items: center;
   } ;
 `
 
@@ -68,6 +66,12 @@ export const Box = styled.div`
   transition: 0.5s;
   &:hover {
     background-color: #a455ff;
+  }
+  @media screen and (max-width: 775px) {
+    width: 90%;
+    margin-bottom: 8px;
+    padding: 4px;
+    height: 100px;
   }
 `
 
@@ -111,5 +115,25 @@ export const SearchButton = styled.button`
     background-color: #6e5fcb;
     border-color: black;
     color: #000;
+  }
+`
+export const ContainerButtons = styled.div`
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 775px) {
+    width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    padding: 4px;
+  }
+`
+export const ButtonFilterShowMovil = styled.button`
+  @media screen and (min-width: 775px) {
+    display: none;
+  }
+`
+export const ButtonFilterShow = styled.button`
+  @media screen and (max-width: 775px) {
+    display: none;
   }
 `

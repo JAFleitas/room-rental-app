@@ -21,7 +21,7 @@ export default function ReviewContainer({ rating = 0 }) {
         <ContainerAll>
           <ContainerRating>
             <DivStar>
-              <h1>
+              <h1 style={{ fontSize: "50px" }}>
                 {rating}
                 {rating % 1 === 0 ? ".0" : null}
               </h1>
