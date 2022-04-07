@@ -127,7 +127,7 @@ const editProperty = async (req, res) => {
       { where: { [Op.and]: [{ id: idProperty }, { userID: id }] } },
     )
   }
-  res.send("Datos recibidos con éxito")
+  res.send("Property successful update")
 }
 
 const getAll = async (req, res, next) => {

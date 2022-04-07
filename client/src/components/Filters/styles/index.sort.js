@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
 `
 export const SelectSt = styled.select`
-  height: fit-content;
+  width: 300px;
   color: white;
   background: rgb(139, 37, 255);
   background: linear-gradient(
