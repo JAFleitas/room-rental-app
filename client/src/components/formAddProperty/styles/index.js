@@ -23,12 +23,12 @@ export const ContainerMap = styled.div`
 `
 
 export const FormContainer = styled.form`
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   max-width: 600px;
   min-width: 400px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -41,7 +41,7 @@ export const LabelSt = styled.label`
   font-size: 16px;
   font-weight: 600;
   font-family: "Times New Roman", Times, serif;
-  margin: 4px;
+  margin: 10px 4px;
 `
 export const InputSt = styled.input`
   border: 1px solid #aaaaaa;
@@ -139,4 +139,9 @@ export const CardImage = styled.div`
   background-size: cover;
   position: relative;
   z-index: 5;
+  -webkit-transition: 1s linear;
+  transition: 1s linear;
+  :hover {
+    -webkit-box-shadow: 4px 4px 2px 1px;
+  }
 `

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { validateFormAddProperty } from "../../utilities/validateForm"
 import MapForm from "./mapContainer"
 import { getAllCategories, getAllServices } from "../../redux/actions"
+import { useNavigate } from "react-router-dom"
 import {
   ButtonSt,
   Container,
@@ -44,6 +45,7 @@ export default function FormAddProperty(props) {
   const coordinates = useSelector(state => state.coordinates)
   const [formData, setFormData] = useState(initialStateForm)
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
 
   const handleInputChange = e => {
     const { name, value } = e.target
@@ -61,17 +63,37 @@ export default function FormAddProperty(props) {
     if (localStorage.getItem("tokenRentalApp")) {
       if (props.id) {
         formData.idProperty = props.id
-        await axios
-          .put(
-            `${api}/properties/editProperty`,
-            { data: formData },
-            getHeaderToken(),
-          )
-          .then(res => {
-            setFormData(initialStateForm)
-            // console.log(res)
-          })
-          .catch(err => console.log(err))
+        swal({
+          title: "Are you sure?",
+          text: "Data will be updated",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then(async willUpdated => {
+          if (willUpdated) {
+            await axios
+              .put(
+                `${api}/properties/editProperty`,
+                { data: formData },
+                getHeaderToken(),
+              )
+              .then(res => {
+                setFormData(initialStateForm)
+                window.scroll(0, 0)
+                swal({
+                  title: "Successful",
+                  text: res.data,
+                  icon: "success",
+                })
+                navigate("/profile/myProperties")
+              })
+              .catch(err => console.log(err))
+          } else {
+            swal("Your Property data is safe!")
+            navigate("/profile/myProperties")
+            window.scroll(0, 0)
+          }
+        })
       } else {
         await axios
           .post(
@@ -80,6 +102,7 @@ export default function FormAddProperty(props) {
             getHeaderToken(),
           )
           .then(res => {
+            window.scroll(0, 0)
             swal({
               title: "Successful",
               text: res.data.message,
@@ -303,7 +326,6 @@ export default function FormAddProperty(props) {
                 multiple="multiple"
                 onChange={handleFileChange}
               />
-
               <LabelSt>Type of property</LabelSt>
               <SelectSt
                 name="typePropertyID"
@@ -321,8 +343,6 @@ export default function FormAddProperty(props) {
               {errors.typePropertyID && (
                 <LabelSt error={true}>{errors.typePropertyID}</LabelSt>
               )}
-            </FormContainer>
-            <FormContainer>
               <LabelSt>Services</LabelSt>
               {servicesData &&
                 servicesData.map((elem, index) => (
