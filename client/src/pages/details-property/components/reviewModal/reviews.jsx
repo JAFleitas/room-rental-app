@@ -8,7 +8,7 @@ export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
   const comments = useSelector(state => state.detailsOfProperty.comments)
 
   return (
-    <>
+    <div style={{display:"flex",alignItems:"center"}}>
       <AiFillStarSt />
       <h5>
         {rating}
@@ -28,6 +28,6 @@ export default function Reviews({ rating, AiFillStarSt, numberOfReviews }) {
           <ReviewCard key={i} comment={comment} />
         ))}
       </Modal>
-    </>
+    </div>
   )
 }

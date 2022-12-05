@@ -130,10 +130,10 @@ export default function FormAddProperty(props) {
                   break
 
                 case "Exit":
-                  navigate("/home")
+                  navigate("/")
                   break
                 default:
-                  navigate("/home")
+                  navigate("/")
               }
             })
           })

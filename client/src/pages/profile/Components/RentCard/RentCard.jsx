@@ -11,9 +11,10 @@ import {
   Image,
   Button,
   ButtonsContainer,
+  NotRental,
 } from "./styled"
 import { cancelRental } from "../../../../redux/actions/index"
-import { Title } from "../Acount/styled"
+import { Title } from "../../../../styles/global.css"
 import { useNavigate } from "react-router-dom"
 
 export default function RentCard() {
@@ -41,7 +42,11 @@ export default function RentCard() {
   return (
     <Container>
       <Title>My history</Title>
-      {userRentals?.length === 0 ? <div style={{width: "46%", margin: "2rem"}}>No rentals yet</div> :userRentals?.map(rent => {
+      {userRentals?.length === 0 ? <NotRental>
+            <h2>
+            No rentals yet
+            </h2>
+          </NotRental> :userRentals?.map(rent => {
         return (
           <CardContainer key={rent.id}>
             <ImageContainer>

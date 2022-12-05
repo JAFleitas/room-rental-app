@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import {
-  SubMenu,
   FullName,
   Info,
   InfoContainer,
   Label,
   ButtonEdit,
+  ContainerLabel,
 } from "./styled"
+import { SubMenu } from "../../../../styles/global.css"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 const api = import.meta.env.VITE_APP_API_URL
@@ -89,18 +90,19 @@ export default function ProfileInfo() {
 
   return (
     <SubMenu>
-      <FullName>{dataUser.name ? dataUser.name : "Name"}</FullName>
+      <FullName>{dataUser.name ? `${dataUser.name} ${dataUser.lastname}` : "Name"}</FullName>
       <InfoContainer>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ display: "flex", justifyContent: "center",padding:"20px" }}>
           {editStatus ? (
-            <>
-              <ButtonEdit onClick={sendDataEdit}>Save</ButtonEdit>
+            <div style={{display:"flex",gap:"10px"}}>
+              <ButtonEdit bgColor={false} onClick={sendDataEdit} >Save</ButtonEdit>
               <ButtonEdit bgColor={true} onClick={cancelEditData}>
                 Cancel
               </ButtonEdit>
-            </>
+            </div>
           ) : (
             <ButtonEdit
+            bgColor={false}
               onClick={() => {
                 setEditStatus(true)
               }}>
@@ -108,64 +110,74 @@ export default function ProfileInfo() {
             </ButtonEdit>
           )}
         </div>
-        <Label>Name</Label>
-        {user.name && editStatus ? (
-          <Info>
-            <input
-              type="text"
-              name="name"
-              value={dataUser.name}
-              onChange={handleChangeInfo}
-            />
-          </Info>
-        ) : (
-          <Info>{user.name ? user.name : "Incomplete"}</Info>
-        )}
-        <Label>Lastname</Label>
-        {user.lastname && editStatus ? (
-          <Info>
-            <input
-              type="text"
-              value={dataUser.lastname}
-              name="lastname"
-              onChange={handleChangeInfo}
-            />
-          </Info>
-        ) : (
-          <Info>{user.lastname ? user.lastname : "Incomplete"}</Info>
-        )}
-        <Label>Email</Label>
+        <ContainerLabel>
+          <Label>Name</Label>
+          {user.name && editStatus ? (
+            <Info>
+              <input
+                type="text"
+                name="name"
+                value={dataUser.name}
+                onChange={handleChangeInfo}
+                autoFocus
+              />
+            </Info>
+          ) : (
+            <Info>{user.name ? user.name : "Incomplete"}</Info>
+          )}
+        </ContainerLabel>
+        <ContainerLabel>
+          <Label>Lastname</Label>
+          {user.lastname && editStatus ? (
+            <Info>
+              <input
+                type="text"
+                value={dataUser.lastname}
+                name="lastname"
+                onChange={handleChangeInfo}
+              />
+            </Info>
+          ) : (
+            <Info>{user.lastname ? user.lastname : "Incomplete"}</Info>
+          )}
+        </ContainerLabel>
+        <ContainerLabel>
+          <Label>Country</Label>
+          {user.country && editStatus ? (
+            <Info>
+              <input
+                type="text"
+                value={dataUser.country}
+                name="country"
+                onChange={handleChangeInfo}
+              />
+            </Info>
+          ) : (
+            <Info>{user.country ? user.country : "Incomplete"}</Info>
+          )}
+        </ContainerLabel>
+        <ContainerLabel>
+          <Label>Email</Label>
 
-        <Info>{user.email ? user.email : "Incomplete"}</Info>
-
-        <Label>Country</Label>
-        {user.country && editStatus ? (
-          <Info>
-            <input
-              type="text"
-              value={dataUser.country}
-              name="country"
-              onChange={handleChangeInfo}
-            />
-          </Info>
-        ) : (
-          <Info>{user.country ? user.country : "Incomplete"}</Info>
-        )}
-        <Label>Account number</Label>
-        {user.account_number && editStatus ? (
-          <Info>
-            <input
-              type="text"
-              value={dataUser.account_number}
-              name="account_number"
-              onChange={handleChangeInfo}
-            />
-          </Info>
-        ) : (
-          <Info>
-            {user.account_number ? user.account_number : "Incomplete"}
-          </Info>
-        )}
+          <Info>{user.email ? user.email : "Incomplete"}</Info>
+        </ContainerLabel>
+        <ContainerLabel>
+          <Label>Account number</Label>
+          {user.account_number && editStatus ? (
+            <Info>
+              <input
+                type="text"
+                value={dataUser.account_number}
+                name="account_number"
+                onChange={handleChangeInfo}
+              />
+            </Info>
+          ) : (
+            <Info>
+              {user.account_number ? user.account_number : "Incomplete"}
+            </Info>
+          )}
+        </ContainerLabel>
       </InfoContainer>
     </SubMenu>
   )

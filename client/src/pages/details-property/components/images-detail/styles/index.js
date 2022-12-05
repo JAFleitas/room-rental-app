@@ -4,21 +4,17 @@ export const ContainerImages = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 100%;
-  box-shadow: 10px 10px 3px #6f5fca55;
-
-  background-color: #fff;
-  width: 80vw;
-  height: 30vw;
-
+  width: 100%;
+  max-height: 400px;
   border-radius: 16px;
-  padding: 10px;
+  padding: 40px 0px;
+ 
   @media screen and (max-width: 740px) {
     width: 100%;
-    border-radius: 0;
+    
     display: flex;
-    height: 50vw;
-    box-shadow: none;
-    background-color: transparent;
+    
+    
   }
 `
 

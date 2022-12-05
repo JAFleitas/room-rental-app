@@ -1,32 +1,28 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  background-color: white;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  width: ${({ width }) => width ?? "46%"};
+  width: ${({ width }) => width ?? "260px"};
 
-  justify-content: space-around;
-
-  height: 250px;
-  margin: 1rem 0.3rem;
-  border-radius: 15px;
+   h1, h2,div {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #ddd;
+  } 
+  
+  border-radius: 4px;
   align-items: center;
   justify-items: center;
-  box-shadow: 0 5px 5px rgba(0, e, e, 0.2);
-  overflow: hidden;
+ 
+ 
 
   transition: all 0.2s ease-in-out;
   &:hover {
-    transform: scale(1.01, 1.01);
-    box-shadow: 0 0 10px #d8d8d8;
+    transform: scale(1.05, 1.05);
+ 
     cursor: pointer;
   }
-  @media screen and (max-width: 850px) {
-    width: 100%;
-    height: 300px;
-  } ;
+ 
 `
 
 export const FavoriteContainer = styled.div`
@@ -62,50 +58,63 @@ export const FavoriteImage = styled.img`
 
 export const ImageContainer = styled.div`
   height: 100%;
-  width: 40%;
+  width: 100%;
   padding: 5px;
+  border-radius: 16px;
+  div{
+    border-radius: 16px;
+  ul{
+    li{
+     .slick-active button::before{
+      color:#ddd
+     }
+    }
+  }
+  }
+  
 `
 
 export const Image = styled.img`
   width: 100%;
-  height: 180px;
-  border-radius: 8px;
+  height: 240px;
+  border-radius: 16px;
+  object-fit: fill;
   @media screen and (max-width: 850px) {
     height: 200xp;
   }
 `
 
-export const Title = styled.p`
-  width: 50%;
-  padding-left: 5px;
-  padding-right: 5px;
+export const Title = styled.h1`
+  width: 100%;
+  min-height: 40px;
   color: black;
-  font-size: medium;
+  font-size: small;
   font-weight: bold;
+  
 `
 export const Info = styled.p`
-  width: 40%;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: black;
-  font-family: "Times New Roman", Times, serif;
+  width: 100%;
+  color:#ddd;
   font-size: small;
   display: flex;
   align-items: center;
   justify-content: left;
+  margin-top: 6px;
 `
 export const DivPyR = styled.div`
   display: flex;
-  width: 40%;
+  width: 100%;
   align-items: center;
-  justify-content: center;
-  gap: 20%;
+  justify-content: space-between;
+  padding-top: 6px;
+ 
 `
 export const Price = styled.p`
-  color: black;
-  font-size: small;
+  font-size:20px;
+  font-size: 800;
+  color: #a455ff;
 
-  padding: 1rem;
+
 `
 export const PriceFavorite = styled.div`
   color: black;
@@ -122,6 +131,7 @@ export const Location = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 1.5rem;
+  gap:4px;
 `
 
 export const Rating = styled.div`
@@ -133,8 +143,15 @@ export const Rating = styled.div`
   align-items: center;
 `
 export const RatingNumber = styled.p`
-  color: black;
-  font-size: small;
+  
+  font-size: 20px;
   text-align: center;
   margin-left: 5px;
+  font-weight: 600;
+`
+export const HeartContainer = styled.div`
+  position: relative;
+  top:60px;
+  left: 100px;
+  z-index: 1;
 `

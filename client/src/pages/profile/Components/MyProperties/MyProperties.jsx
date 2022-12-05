@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react"
 import {
-  Title,
   CardContainer,
   Card,
   RedButton,
-  WhiteButton,
   ContainerButtons,
   EditButton,
 } from "./styled"
+import { SubMenu, Title } from "../../../../styles/global.css"
 import { useSelector, useDispatch } from "react-redux"
 import PropertyCard from "../../../../components/PropertyCard/PropertyCard"
 import {
@@ -36,14 +35,15 @@ export default function MyProperties() {
   }
 
   return (
-    <Container>
+    <SubMenu>
       <Title>My properties</Title>
       <CardContainer>
+        
         {MyProperties?.map(property => {
           return (
             <Card key={property.id}>
               <PropertyCard
-                width={"90%"}
+
                 id={property.id}
                 name={property.name}
                 location={property.location}
@@ -69,7 +69,8 @@ export default function MyProperties() {
             </Card>
           )
         })}
+      
       </CardContainer>
-    </Container>
+    </SubMenu>
   )
 }

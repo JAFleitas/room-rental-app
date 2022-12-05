@@ -1,7 +1,9 @@
 import React from "react"
-import { SubMenu, Title } from "./styled"
+import { SubMenu, Title } from "../../../../styles/global.css"
 import { useSelector } from "react-redux"
 import FavoriteCard from "../../../../components/PropertyCard/FavoriteCard"
+import PropertyCard from "../../../../components/PropertyCard/PropertyCard"
+import { Card, CardContainer } from "../MyProperties/styled"
 
 export default function Favoritos() {
   const favorites = useSelector(state => state.listFavorites)
@@ -13,7 +15,10 @@ export default function Favoritos() {
     )
     return (
       findedProperty && (
-        <FavoriteCard key={findedProperty.id} property={findedProperty} />
+        <Card key={findedProperty.id}>
+        <PropertyCard  {...findedProperty} />
+
+        </Card>
       )
     )
   })
@@ -21,7 +26,9 @@ export default function Favoritos() {
   return (
     <SubMenu>
       <Title>My Favorites</Title>
-      {propertiesDOM.length > 0 ? propertiesDOM?.filter(prop => prop) : <h3>You have not saved favorites yet</h3>}
+      <CardContainer>
+      {propertiesDOM?.length > 0 ? propertiesDOM?.filter(prop => prop) : <h3>You have not saved favorites yet</h3>}
+    </CardContainer>
     </SubMenu>
   )
 }

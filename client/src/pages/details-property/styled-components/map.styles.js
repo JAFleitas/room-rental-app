@@ -6,17 +6,17 @@ export const ContainerMapAndTitle = styled.div`
   gap: 20px;
   padding-top: 10px;
   z-index: 1;
-
-  @media screen and (max-width: 550px) {
+  width:100%;
+  @media screen and (max-width: 580px) {
     flex-direction: column;
     align-items: center;
   }
 `
 export const ContainerMap = styled.div`
-  width: 80%;
+  width: 100%;
   max-width: 400px;
-  height: 200px;
-
+  height: 261px;
+  margin-top: 27px;
   position: sticky;
   border-radius: 4px;
   @media screen and (max-width: 550px) {

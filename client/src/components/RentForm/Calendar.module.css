@@ -1,10 +1,17 @@
 .link {
-  background-color: #d722fc;
   padding: 5px;
-  color: white;
+  align-self: center;
+  padding: 4px 16px;
+  background: linear-gradient(35deg, #5b04be 75%, #1a0038b1);
+
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 12px;
+
   border-radius: 15px;
 }
-.calendarContainer{
+
+.calendarContainer {
   width: 100%;
 }
 
@@ -17,28 +24,33 @@
   align-items: center;
   flex-direction: column;
 }
-.RangeExample h3{
+.RangeExample h3 {
   margin-left: 0;
 }
-.today{
-  color:red
+.RangeExample p {
+  min-height: 40px;
 }
-.Total {
-  width: 40%;
-  margin-left: 30%;
-  margin-bottom: 5px;
-  border-radius: 20px;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
-  font-size: 25px;
-  background-color: white;
-  color: #d722fc;
+.today {
+  background: #6504d4;
+}
+.today:hover:not([disabled]):not(.rdp-day_selected) {
+  background: #6504d4;
 }
 
-.Selectable{
-  background-color: rgb(139, 37, 255);
-  color:white;
+.Total {
+  text-align: center;
+  font-size: 25px;
 }
-  
+
+.Selectable {
+  background-color: #6504d4;
+  color: white;
+}
+.button:hover {
+  background: #6504d4;
+}
+
+.Selectable:hover:not([disabled]):not(.rdp-day_selected) {
+  background: #6504d4;
+  color: #f0f0f0;
+}

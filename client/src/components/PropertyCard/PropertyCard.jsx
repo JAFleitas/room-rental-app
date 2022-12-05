@@ -15,6 +15,7 @@ import {
   DivPyR,
   Location,
   RatingNumber,
+  HeartContainer,
 } from "./styled"
 
 import Slider from "react-slick"
@@ -25,7 +26,7 @@ import { IoLocationOutline } from "react-icons/io5"
 function PropertyCard(props) {
   const settings = {
     dots: true,
-    fade: true,
+    fade: false,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
@@ -50,22 +51,26 @@ function PropertyCard(props) {
 
   return (
     <Container width={props.width}>
+      <HeartContainer>
+          <Heart id={props.id} liked={liked} />
+        </HeartContainer>
       <ImageContainer onClick={() => handleClick()}>
-        <Slider {...settings}>
+        <Slider cssEase="" {...settings} arrows={false}>
           {props.image &&
             props.image.map((image, i) => {
               return <Image key={i} src={image}></Image>
             })}
         </Slider>
         <Location>
-          <IoLocationOutline />
+          <IoLocationOutline  />
           {`${props.location}`}
         </Location>
+        
       </ImageContainer>
       <Title onClick={() => handleClick()}>{props.name}</Title>
       <Info>{`${props.numberOfRooms} rooms -  ${props.maxNumberOfPeople} guests`}</Info>
       <DivPyR>
-        <Price>${props.price}/ night </Price>
+        <Price>${props.price} / night </Price>
         <Rating>
           <AiFillStar color="yellow" fontSize={"1.5rem"} />
           <RatingNumber>
@@ -74,7 +79,7 @@ function PropertyCard(props) {
           </RatingNumber>
         </Rating>
       </DivPyR>
-      <Heart id={props.id} liked={liked} />
+      
     </Container>
   )
 }

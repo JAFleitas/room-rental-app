@@ -25,8 +25,8 @@ const UserRoutes = () => {
       <Nav />
       <ToastContainer limit={3} />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route exact path="/home" element={<Home />}></Route>
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route exact path="/" element={<Home />}></Route>
         <Route path="/logIn" element={<Login />} />
         <Route path="/property-info/:id" element={<Details />} />
         <Route exact path="/about-us" element={<AboutUs />} />

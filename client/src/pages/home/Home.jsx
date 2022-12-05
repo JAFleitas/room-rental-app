@@ -27,11 +27,11 @@ export default function Home() {
   }, [isAuthenticated])
   
   return (
-    <div>
+    <>
       <SearchBar />
       <AllPropertyCard />
       <Paginated />
       <ToastContainer limit={3}/>
-    </div>
+    </>
   )
 }

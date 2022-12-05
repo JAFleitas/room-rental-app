@@ -2,16 +2,14 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { changePassword } from "../../../../redux/actions"
 import { useAuth0 } from "@auth0/auth0-react"
-
+import { SubMenu } from "../../../../styles/global.css"
 import {
-  SubMenu,
-  Title,
   Input,
   Button,
   ChangePassword,
   PasswordError,
 } from "./styled"
-
+import { Title } from "../../../../styles/global.css"
 export default function Settings() {
   const dispatch = useDispatch()
   const [compare, setCompare] = useState("")
@@ -56,6 +54,7 @@ export default function Settings() {
       ) : (
         <ChangePassword>
           <Input
+          autoFocus
             type={"password"}
             placeholder="Old Password"
             name="oldPassword"

@@ -40,7 +40,7 @@ const Form_Stripe = () => {
             icon: "success",
           }).then(() => {
             setLoadingPay(false)
-            navigate("/home")
+            navigate("/")
           })
         } else {
           swal({

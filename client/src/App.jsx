@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     if (auth && admin) {
       if (admin === "NORMAL") {
-        return navigate("/home", { scroll: { x: 0, y: 0 } })
+        return navigate("/", { scroll: { x: 0, y: 0 } })
       } else {
         return navigate("/dashboard")
       }

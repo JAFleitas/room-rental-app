@@ -58,13 +58,8 @@ export default function Details() {
     <ContainerPageDetails>
       <ContainerMapAndTitle>
         <DescriptionContainer>
-          <BotonBack onClick={() => navigate("/home")}>
-            <button>
-              <IoChevronBackSharp />
-            </button>
-          </BotonBack>
           <div>
-            <h2>{property.name}</h2>
+            <h1 style={{fontSize:"24px",paddingBottom:"24px"}}>{property.name}</h1>
           </div>
           <PeopleAndRooms>
             <h4>Rooms: {property.numberOfRooms}</h4>
@@ -76,6 +71,9 @@ export default function Details() {
               AiFillStarSt={AiFillStarSt}
               numberOfReviews={property.countReviews}
             />
+           <BotonBack onClick={() => navigate("/")}>
+             Return
+          </BotonBack>
           </StarRating>
         </DescriptionContainer>
 
@@ -107,7 +105,7 @@ export default function Details() {
       </DescriptionContainer>
       <DescriptionContainer>
         <DivReview>
-          <AiFillStarSt />
+          <AiFillStarSt mb={"6px"} />
           <h2>Reviews</h2>
         </DivReview>
         {property?.comments?.length === 0 && property?.rating === 0 ? (

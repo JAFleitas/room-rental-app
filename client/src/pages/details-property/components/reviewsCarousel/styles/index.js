@@ -4,14 +4,12 @@ import { AiFillStar } from "react-icons/ai"
 export const ContainerAll = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  
   border-radius: 10px;
-  padding: 16px;
-  margin: 1rem;
-  width: 90%;
-  @media screen and (max-width: 500px) {
-    width: 100%;
-  }
+  padding: 16px 0px;
+
+  width: 100%;
+ 
 `
 
 export const Star = styled(AiFillStar)`
@@ -21,13 +19,13 @@ export const DivStar = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 30px;
+  gap:20px;
   svg {
     width: 100px;
     height: 100px;
   }
   h1 {
-    color: black;
+    padding: 0;
     font-size: 120px;
     font-weight: 100;
   }
@@ -35,6 +33,8 @@ export const DivStar = styled.div`
 export const ContainerRating = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  
   @media screen and (max-width: 600px) {
     flex-direction: column;
     align-items: center;

@@ -1,26 +1,14 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  width: 65%;
-  margin: 2.5%;
-  margin-top: 4%;
+  width: 100%;
   height: fit-content;
   border-radius: 10px;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border: 1px solid #d822fc3f;
-  padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   @media screen and (max-width: 700px) {
-    width: 90%;
+    
   } ;
 `
 
@@ -125,4 +113,19 @@ export const Button = styled.button`
   &:hover {
     background-color: #64075cdd;
   }
+`
+export const NotRental = styled.div`
+  
+        display:flex;
+        justify-content:center;
+        align-content:center;
+        width:100%;
+        height:500px;
+        h2{
+          display: flex;
+          align-items: center;
+        }
+
+        
+
 `

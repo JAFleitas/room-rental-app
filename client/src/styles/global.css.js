@@ -1,6 +1,33 @@
-import { createGlobalStyle } from "styled-components"
+import styled ,{ createGlobalStyle } from "styled-components"
 
 export const Globalcss = createGlobalStyle`
+#root{
+    font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+	font-weight: lighter;
+	color:  #e9e0e0ee;
+    width: 100%;
+    max-width:1224px;
+    display: flex;
+    flex-direction: column;
+    margin:auto;
+    min-height:100vh;
+    padding: 0px 40px;
+   p, h4{
+    color:  #e9e0e0ee;
+   }
+   .rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #0000ff;
+  --rdp-background-color: #6504d4;
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
+
+  margin: 1em;
+}
+}
 *{
   box-sizing: border-box;
 }
@@ -30,13 +57,37 @@ export const Globalcss = createGlobalStyle`
     display: none;
 }
 body {
-    font-family: 'Open Sans', sans-serif;
-	font-size: 15px;
-	font-weight: lighter;
-	color: #242323dd;
-    min-height:100vh;
-    background: rgb(199,250,255);
-    background: linear-gradient(135deg, rgba(199,250,255,1) 0%, rgba(199,240,255,1) 15%, rgba(199,230,255,1) 30%, rgba(199,214,255,1) 45%, rgba(199,202,255,1) 60%, rgba(206,199,255,1) 75%, rgba(215,199,255,1) 90%, rgba(235,199,255,1) 100%);
-  }
+    display: flex;
+    margin: auto;
+    background: #dfdfdf;
+    background: linear-gradient(180deg,#101010,#000000);
+}
+  
+`
 
+export const Title = styled.h1`
+  width: 100%;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  border: 1px #a455ff solid;
+  text-align: center;
+  color:transparent;
+   background: #ccc;
+   background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  @media (max-width: 600px) {
+    font-size: 2rem;
+  }
+`
+export const SubMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 70%;
+  gap:20px;
+  @media (max-width: 720px) {
+    width: 60%;
+  }
 `
