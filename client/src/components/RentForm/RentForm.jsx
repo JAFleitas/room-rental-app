@@ -10,12 +10,7 @@ import {
   FormSelect,
   FormLabel,
   SubmitButton,
-  PaymentMethodsContainer,
-  PaymentMethod,
-  PaymentMethodCheck,
-  PaymentMethodName,
-  AddPayment,
-  IconPlus,
+  
 } from "./styled"
 
 import { DayPicker } from "react-day-picker"
@@ -140,7 +135,7 @@ export default function RentForm(props) {
         <Price>{props.price ? props.price : "185"}$</Price>
         <Stars>
           <IconStar />
-          {props.rating}
+          {`${props.rating}.0 `}
         </Stars>
       </Header>
       <Form>
@@ -173,6 +168,7 @@ export default function RentForm(props) {
 
             <DayPicker
               defaultMonth={new Date()}
+              
               numberOfMonths={monthsInCalendary}
               mode="range"
               selected={dates}
@@ -193,19 +189,29 @@ export default function RentForm(props) {
               modifiersClassNames={{
                 selected: styles.Selectable,
                 today: styles.today,
+                
+                
+                
               }}
             />
-            {restaFechas(dates?.from, dates?.to) >= 1 ? (
-              <h3 className={styles.Total}>
-                El total es: {restaFechas(dates?.from, dates?.to) * props.price}
-                $
-              </h3>
-            ) : (
-              ""
-            )}
+            <div
+              style={{
+                minHeight: "100px",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                background: "transparent",
+              }}>
+              {restaFechas(dates?.from, dates?.to) >= 1 && (
+                <h3 className={styles.Total}>
+                  El total es:{" "}
+                  {restaFechas(dates?.from, dates?.to) * props.price}$
+                </h3>
+              )}
+            </div>
           </div>
         </FormField>
-        <PaymentMethodsContainer>
+        {/*     <PaymentMethodsContainer>
           {paymentMethods ? (
             paymentMethods.map(method => {
               // console.log(method)
@@ -233,7 +239,7 @@ export default function RentForm(props) {
           <AddPayment to="/profile/payment-methods">
             Add payment method <IconPlus />
           </AddPayment>
-        </PaymentMethodsContainer>
+        </PaymentMethodsContainer> */}
         <SubmitButton
           disabled={
             !dates?.from || !dates?.to

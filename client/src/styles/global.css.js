@@ -13,10 +13,20 @@ export const Globalcss = createGlobalStyle`
     margin:auto;
     min-height:100vh;
     padding: 0px 40px;
-   p {
+   p, h4{
     color:  #e9e0e0ee;
    }
+   .rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #0000ff;
+  --rdp-background-color: #6504d4;
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
 
+  margin: 1em;
+}
 }
 *{
   box-sizing: border-box;

@@ -32,7 +32,7 @@ export default function ReviewContainer({ rating = 0 }) {
             {comments.slice(0, 3).map(comment => (
               <ReviewCard key={comment.id} comment={comment} />
             ))}
-            <div>
+            <div style={{alignSelf:"center",paddingTop:"20px"}}>
               <ButtonSt onClick={() => setModalShow(true)}>
                 See all reviews
               </ButtonSt>

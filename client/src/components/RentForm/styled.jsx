@@ -5,28 +5,18 @@ import { Link } from "react-router-dom"
 import { BsFillPlusCircleFill } from "react-icons/bs"
 
 export const Container = styled.div`
-  width: 90%;
+  width: 100%;
 
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border: 1px solid #d822fc3f;
+
+  border: 1px solid #a455ff;
 
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 5%;
+  margin: 40px 0px;
 
-  @media (max-width: 800px) {
-    width: 100%;
-    border-radius: 0;
-  }
+
 `
 
 export const Header = styled.span`
@@ -35,7 +25,7 @@ export const Header = styled.span`
   justify-content: center;
   align-items: center;
   margin-top: 2%;
-  border: 1px solid #d722fc;
+  border: 1px solid #a455ff;
   border-radius: 10px;
 `
 
@@ -46,7 +36,8 @@ export const Price = styled.h3`
 
 export const IconStar = styled(AiFillStar)`
   font-size: 28px;
-  color: #d722fc;
+  color:#43048a;
+ 
 `
 
 export const Stars = styled.h3`
@@ -78,9 +69,14 @@ export const FormField = styled.div`
 `
 
 export const FormSelect = styled.select`
-  padding: 5px;
+  padding: 10px;
   border-radius: 15px;
-  border: 1px solid transparent;
+  outline: 0;
+  background: #000000;
+  border:.5px solid #101010;
+  option{
+   
+  }
 `
 export const FormInput = styled.input`
   padding: 5px;
@@ -91,8 +87,8 @@ export const FormInput = styled.input`
 export const FormLabel = styled.label`
   font-size: 18px;
   padding: 5px;
-  color: #d722fc;
-  background-color: white;
+  
+  background: transparent;
   border-radius: 10px;
   margin-right: 50px;
 `
@@ -101,26 +97,25 @@ export const DateManager = styled(DatePicker)`
   padding: 5px;
 `
 export const SubmitButton = styled.button`
-  width: 30%;
+  width: 200px;
   padding: 5px;
   align-self: center;
-  margin-top: 3%;
-  background-color: ${({ disabled }) => (disabled ? "#aaa" : "#d722fc")};
+  
+  background: ${({ disabled }) => (disabled ? "#aaa"  :  "linear-gradient(35deg,#5b04be 75% ,#1a0038b1)")};
+
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 20px;
+  font-family: cursive;
   border-radius: 15px;
-  border: 1px solid transparent;
-  color: white;
-  margin-left: -5px;
+  
 
   &:hover {
     border-radius: 16.5px;
     background: ${({ disabled }) =>
-      disabled ? "#aaa" : "linear-gradient(145deg, #c21fe3, #e624ff)"};
+      disabled ? "#aaa": "linear-gradient(35deg,#6504d4 75% ,#380275b0)"};
   }
-  &:focus {
-    border-radius: 18px;
-    background: #d722fc;
-    box-shadow: inset 5px 5px 10px #b71dd6, inset -5px -5px 10px #f727ff;
-  }
+
 `
 export const PaymentMethodsContainer = styled.div`
   /* width: 80%; */
