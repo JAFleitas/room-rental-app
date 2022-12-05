@@ -66,6 +66,9 @@ export const Title = styled.h1`
    background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
+  @media (max-width: 600px) {
+    font-size: 2rem;
+  }
 `
 export const SubMenu = styled.div`
   display: flex;

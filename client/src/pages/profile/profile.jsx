@@ -1,3 +1,4 @@
+import {useLocation} from "react-router-dom"
 import {
   PageContainer,
   MenuContainer,
@@ -23,6 +24,7 @@ export default function Profile() {
   const photo = useSelector(state => state.user?.photo)
   const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
+  const { pathname } = useLocation()
 
   const changeImageProfile = async e => {
     if (localStorage.getItem("tokenRentalApp")) {
@@ -95,25 +97,25 @@ export default function Profile() {
             </ContentPhoto>
             <MenuOptions>
               <Link to="/profile">
-                <MenuOption>My profile</MenuOption>
+                <MenuOption clicked={pathname==="/profile"} >My profile</MenuOption>
               </Link>
               <Link to="/profile/settings">
-                <MenuOption>Settings</MenuOption>
+                <MenuOption clicked={pathname==="/profile/settings"} >Settings</MenuOption>
               </Link>
               <Link to="/profile/account">
-                <MenuOption>Account</MenuOption>
+                <MenuOption clicked={pathname==="/profile/account"} >Account</MenuOption>
               </Link>
               {/* <Link to="/profile/payment-methods">
                 <MenuOption>Payment Methods</MenuOption>
               </Link> */}
               <Link to="/profile/myProperties">
-                <MenuOption>My properties</MenuOption>
+                <MenuOption clicked={pathname==="/profile/myProperties"}>My properties</MenuOption>
               </Link>
               <Link to="/profile/history">
-                <MenuOption>My history</MenuOption>
+                <MenuOption clicked={pathname==="/profile/history"}>My history</MenuOption>
               </Link>
               <Link to="/profile/favorites">
-                <MenuOption>My favorites</MenuOption>
+                <MenuOption clicked={pathname==="/profile/favorites"}>My favorites</MenuOption>
               </Link>
             </MenuOptions>
           </MenuContainer>

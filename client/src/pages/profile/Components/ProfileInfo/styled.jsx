@@ -22,7 +22,9 @@ export const FullName = styled.h1`
   background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
-
+  @media (max-width: 600px) {
+    font-size: 2rem;
+  }
 `
 
 export const InfoContainer = styled.div`
@@ -52,23 +54,29 @@ export const Info = styled.h3`
     color :#fff
 
   }
+  @media (max-width: 720px){
+    input{
+      text-align:center;
+    }
+    text-align: center;
+  }
  
 `
 
 export const ButtonEdit = styled.div`
   
-  text-align: right;
+  text-align: center;
   padding: 5px;
-  color: #101010;
+  
   cursor: pointer;
   border-radius: 5px;
-  background: ${props => (props.bgColor ? "#8325a0" :  "linear-gradient(45deg,#a455ffb0 60% ,#c99affb2) ")};
-  font-size: 16px;
-  font-weight: 600;
+  background: ${props => (props.bgColor ? "#8325a0" :  "linear-gradient(35deg,#5b04be 75% ,#1a0038b1)")};
+  font-size: 14px;
+  font-weight: 500;
   padding: 6px 20px;
-  
+  font-family: cursive;
   :hover {
-    background: ${props => (props.bgColor ? "#cc25ff" : "linear-gradient(45deg,#a455ff 60% ,#c99aff) ")};
+    background: ${props => (props.bgColor ? "#cc25ff" : "linear-gradient(35deg,#6504d4 75% ,#380275b0)")};
   }
   transition: background .3s ease-in-out;
 `
@@ -77,5 +85,10 @@ export const ContainerLabel = styled.article`
   display: flex;
   justify-content: space-between;
   gap:20px;
+  @media (max-width:720px){
+    flex-direction: column;
+    align-items: center;
+    gap:10px
+  }
 
 `

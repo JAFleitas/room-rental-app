@@ -18,9 +18,10 @@ export const MenuContainer = styled.div`
   border-radius: 15px;
   flex-direction: column;
   align-content: center;
+  min-height: 682px;
 
   @media (max-width: 720px) {
-    width: 100%;
+    width: 170px;
   
   }
 `
@@ -34,11 +35,13 @@ export const MenuOptions = styled.div`
 export const MenuOption = styled.h3`
   font-size: 1rem;
   width: 100%;
-  padding: 4px;
+  padding: 8px;
   text-align: center;
-  
+  background: ${(props)=>props.clicked? "linear-gradient(45deg,#5b04be 60% ,#1a0038b1)":"transparent"};
+  transition: all .6s;
   &:hover {
-   color:#a455ff
+   background:#a455ff;
+   background: linear-gradient(45deg,#5b04be 60% ,#1a0038b1);
   }
 `
 
@@ -117,8 +120,8 @@ export const ContentPhoto = styled.div`
   background-position: center;
   background-size: cover;
   margin:3vw;
-  min-height:100px;
-  min-width:100px;
+  min-height:108px;
+  min-width:108px;
   
   position: relative;
   /* left: 20px; */
