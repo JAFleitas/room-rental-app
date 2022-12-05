@@ -2,21 +2,21 @@ import styled ,{ createGlobalStyle } from "styled-components"
 
 export const Globalcss = createGlobalStyle`
 #root{
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
 	font-weight: lighter;
 	color:  #e9e0e0ee;
-    width: 100%;
-    max-width:1224px;
-    display: flex;
-    flex-direction: column;
-    margin:auto;
-    min-height:100vh;
-    padding: 0px 40px;
-   p, h4{
+  width: 100%;
+  max-width:1224px;
+  display: flex;
+  flex-direction: column;
+  margin:auto;
+  min-height:100vh;
+  padding: 0px 40px;
+  p, h4{
     color:  #e9e0e0ee;
-   }
-   .rdp {
+  }
+  .rdp {
   --rdp-cell-size: 40px;
   --rdp-accent-color: #0000ff;
   --rdp-background-color: #6504d4;
@@ -26,7 +26,12 @@ export const Globalcss = createGlobalStyle`
   --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
 
   margin: 1em;
+
+  
 }
+@media (max-width: 520px){
+    padding: 0px 15px;
+  }
 }
 *{
   box-sizing: border-box;

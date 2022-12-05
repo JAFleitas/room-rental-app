@@ -6,6 +6,7 @@ import { ContainerPaginated, ButtonPage, LabelPage, OutOf } from "./styles"
 export default function Paginated() {
   const totalPages = useSelector(state => state.AllProperties.totalPages)
 
+  const propertyRef = document.querySelector("#property")
   const [currentPage, setCurrentPage] = useState(1)
   const filters = useSelector(state => state.filters)
   const dates = useSelector(state => state.dates)
@@ -16,6 +17,9 @@ export default function Paginated() {
     dispatch(getAllProperties(filters, currentPage, dates))
     return () => {
       window.scroll(0, 0)
+      setTimeout(() => {
+        propertyRef?.scrollIntoView({ behavior: "smooth", block: "start" })
+      }, 500)
     }
   }, [currentPage])
   useEffect(() => {

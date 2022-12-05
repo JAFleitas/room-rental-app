@@ -68,6 +68,7 @@ export const Container = styled.div`
      box-shadow: none;
      background: transparent;
      width: 100%;
+     margin-bottom:400px;
     }
  
 `
@@ -168,6 +169,9 @@ export const Article = styled.section`
  }
  @media screen and (max-width: 768px){
   align-items: center;
+  h2{
+    padding-top :100px;
+  }
     }
 
 

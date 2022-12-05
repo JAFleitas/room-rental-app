@@ -8,6 +8,7 @@ export const ContainerPaginated = styled.div`
   align-items: center;
   color: #2b2929;
   background-color: transparent;
+  margin-top: 150px;
   /* background: rgb(255, 255, 255);
   background: linear-gradient(
     0deg,
@@ -19,9 +20,9 @@ export const ContainerPaginated = styled.div`
 export const ButtonPage = styled.button`
   border: none;
   border-radius: none;
-  color: ${({ disabled }) => (disabled ? "#d0d0d0" : "#2b2929")};
-  background: ${({ disabled }) => (disabled ? "#59488ecc" : "none")};
-  padding: 10px;
+  color: ${({ disabled }) => (disabled ? "#101010" : "#a455ff")};
+  background: ${({ disabled }) => (disabled ? "#202020" : "none")};
+  padding: 0px;
   height: 50%;
   width: 120px;
   border: 1px solid #2b2929;
@@ -44,10 +45,11 @@ export const LabelPage = styled.label`
   height: 50%;
   text-align: center;
   align-self: center;
-  padding: 10px;
   width: 40px;
-  padding-bottom: 10px;
-  padding-top: 13px;
+  color: #a455ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const OutOf = styled.div`
@@ -57,7 +59,8 @@ export const OutOf = styled.div`
   border-right: ${({ right }) => (right ? right : "none")};
   border-radius: none;
   height: 50%;
-  text-align: center;
-  padding: 10px;
-  padding-top: 13px;
+  color:#a455ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

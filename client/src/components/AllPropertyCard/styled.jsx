@@ -4,10 +4,13 @@ export const Card = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 270px));
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 500px;
   @media screen and (max-width:624px) {
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+align-items: center;
+    
   }
  
 `
