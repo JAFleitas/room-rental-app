@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 
 
-export const Label = styled.h3`
+export const Label = styled.label`
   font-size: 17px;
   font-weight: bold;
   color: #a455ff;
@@ -25,6 +25,9 @@ export const FullName = styled.h1`
   @media (max-width: 600px) {
     font-size: 2rem;
   }
+    @media (max-width: 400px) {
+    font-size: 1.5rem;
+  }
 `
 
 export const InfoContainer = styled.div`
@@ -44,6 +47,7 @@ export const Info = styled.h3`
   border: 1px solid #a455ff;
   border-radius:6px;
   width: 160px;
+  overflow: hidden;
 
   input {
     background: transparent;
@@ -79,6 +83,9 @@ export const ButtonEdit = styled.div`
     background: ${props => (props.bgColor ? "#cc25ff" : "linear-gradient(35deg,#6504d4 75% ,#380275b0)")};
   }
   transition: background .3s ease-in-out;
+  @media (max-width: 720px){
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
 `
 
 export const ContainerLabel = styled.article`

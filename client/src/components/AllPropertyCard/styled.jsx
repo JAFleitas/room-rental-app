@@ -8,6 +8,7 @@ export const Card = styled.div`
   min-height: 500px;
   @media screen and (max-width:624px) {
     justify-content: center;
+    
   }
  
 `

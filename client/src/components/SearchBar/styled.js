@@ -168,6 +168,9 @@ export const Article = styled.section`
  }
  @media screen and (max-width: 768px){
   align-items: center;
+  h2{
+    padding-top :100px;
+  }
     }
 
 
