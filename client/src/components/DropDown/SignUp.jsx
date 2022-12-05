@@ -60,6 +60,7 @@ const SignUp = () => {
         <Field>
           <Label>Name: </Label>
           <Input
+            autoFocus
             type="text"
             name="name"
             value={signUpForm.name}

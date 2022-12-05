@@ -22,7 +22,7 @@ export default function DropDown({ open }) {
               {/* Deberia haber una autenticacion para solo mostrar esta opcion si el usuario esta loggeado */}
               Add Property
             </DropDownItem>
-            <hr />
+            <hr style={{ marginTop: "10px", marginBottom: "10px" }} />
             <DropDownItem>
               <Logout />
             </DropDownItem>

@@ -44,6 +44,7 @@ const Login = () => {
         <Field>
           <Label>Email: </Label>
           <Input
+            autoFocus
             type="text"
             name="email"
             value={logInForm.email}

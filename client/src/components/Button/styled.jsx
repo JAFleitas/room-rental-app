@@ -4,48 +4,35 @@ export const Container = styled.div`
   display: flex;
   justify-content: right;
   align-items: center;
-  height: 20px;
-  width: 80px;
+  width: 90px;
   min-width: 80px;
   min-height: 40px;
-  
+  border: 2px solid #370a69;
   z-index: 150;
- 
-
-  border:none;
-
-
+  border-radius: 20px;
+  padding: 3px 6px;
   svg {
-     color: #e9e0e0ee;
+    color: #e9e0e0ee;
   }
   transition: all 1s;
   &:hover {
-   svg{
-    color:#f0f0f0
-   }
-  }
-
-  &:active {
-    border-radius: 21px;
-    
-    box-shadow: inset 5px 5px 10px #d18de0, inset -5px -5px 10px #ffb3ff;
+    svg {
+      color: #f0f0f0;
+    }
   }
 `
 
 export const Icon = styled.div`
-  color: black;
-  font-size: 3.5vh;
+  font-size: 30px;
   min-height: 20px;
   font-weight: 800;
-  margin-left: 0.3vw;
+  margin-left: 8px;
 `
 
 export const ImageContainer = styled.div`
   height: 40px;
   width: 40px;
-  margin-left: 2px;
-  color: black;
-  background-color: white;
+
   border-radius: 50px;
 `
 export const ProfileImage = styled.img`
