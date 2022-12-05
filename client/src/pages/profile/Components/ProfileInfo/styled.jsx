@@ -1,90 +1,81 @@
 import styled from "styled-components"
 
-export const SubMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  margin-left: 5%;
-  margin-top: 7%;
-  padding: 10px;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border: 1px solid #d822fc3f;
-  border-radius: 15px;
-  height: fit-content;
-  @media (max-width: 720px) {
-    margin: 1rem;
-    width: 90%;
-  }
-`
+
 
 export const Label = styled.h3`
   font-size: 17px;
   font-weight: bold;
-  padding-left: 10px;
+  color: #a455ff;
+  padding: 4px;
+  overflow: hidden;
+
 `
 
 export const FullName = styled.h1`
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 2.5%;
-  margin-bottom: 2.5%;
+  width: 100%;
   font-size: 2.5rem;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
   border-radius: 15px;
-  border: 2px #d0a6ff solid;
+  border: 1px #a455ff solid;
   text-align: center;
+  color:transparent;
+  background: #ccc;
+  background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+
 `
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin-left: 5%;
-  margin-top: 2%;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border-radius: 15px;
-  border: 2px #d0a6ff solid;
+  width: 100%;
+  gap:20px;
+  padding: 4px;
+ 
+
 `
 
 export const Info = styled.h3`
   font-size: 16px;
-  margin: 10px 20px;
+  font-weight: bold;
+  padding: 4px 20px;
+  border: 1px solid #a455ff;
+  border-radius:6px;
+  width: 160px;
+
+  input {
+    background: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    max-width: 160px;
+    color :#fff
+
+  }
+ 
 `
 
 export const ButtonEdit = styled.div`
-  background-color: ${props => (props.bgColor ? "#F1564E" : "#579AF1")};
+  
   text-align: right;
   padding: 5px;
-  color: #fff;
+  color: #101010;
   cursor: pointer;
   border-radius: 5px;
-  margin: 5px;
-
+  background: ${props => (props.bgColor ? "#8325a0" :  "linear-gradient(45deg,#a455ffb0 60% ,#c99affb2) ")};
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 20px;
+  
   :hover {
-    background-color: ${props => (props.bgColor ? "#F0241A" : "#267EF0")};
+    background: ${props => (props.bgColor ? "#cc25ff" : "linear-gradient(45deg,#a455ff 60% ,#c99aff) ")};
   }
+  transition: background .3s ease-in-out;
+`
+
+export const ContainerLabel = styled.article`
+  display: flex;
+  justify-content: space-between;
+  gap:20px;
+
 `

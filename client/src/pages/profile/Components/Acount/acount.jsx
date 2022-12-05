@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import Modal from "../../../../components/modal/modal"
 import { deleteUser } from "../../../../redux/actions"
-import { RedButtonn, RedButton, SubMenu, Title, WhiteButton } from "./styled"
+import { Title,SubMenu } from "../../../../styles/global.css"
+import { RedButton, WhiteButton } from "./styled"
 
 export default function Account() {
   const [open, setOpen] = useState(false)
@@ -12,27 +13,39 @@ export default function Account() {
   const id = useSelector(state => state.user.id)
   function handleSubmit(e) {
     dispatch(deleteUser(id))
-    navigate("/home")
+    navigate("/")
   }
 
   return (
     <SubMenu>
       <Title>Delete Account</Title>
-      <RedButton
-        onClick={() => {
-          setOpen(!open)
-        }}>
-        Delete
-      </RedButton>
+
+      <div style={{display:"flex",width:"100%", height:"100%",justifyContent:"center"}}>
+        <RedButton
+          onClick={() => {
+            setOpen(!open)
+          }}>
+          Delete
+        </RedButton>
+      </div>
       {open && (
         <Modal
           modalShow={open}
           overlayShow={true}
           outButton={false}
           setModalShow={setOpen}>
+          <div style={{
+            display:"flex",
+            width:"100#",
+            justifyContent:"center",
+            alignItems:"center",
+            flexDirection:"column",
+            gap:"20px"
+          }}>
           <Title>Are you sure?</Title>
-          <RedButtonn onClick={e => handleSubmit(e)}>Delete</RedButtonn>
+          <RedButton onClick={e => handleSubmit(e)}>Delete</RedButton>
           <WhiteButton onClick={() => setOpen(!open)}>Close</WhiteButton>
+          </div>
         </Modal>
       )}
     </SubMenu>

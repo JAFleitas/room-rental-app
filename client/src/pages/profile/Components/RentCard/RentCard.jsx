@@ -13,7 +13,7 @@ import {
   ButtonsContainer,
 } from "./styled"
 import { cancelRental } from "../../../../redux/actions/index"
-import { Title } from "../Acount/styled"
+import { Title } from "../../../../styles/global.css"
 import { useNavigate } from "react-router-dom"
 
 export default function RentCard() {

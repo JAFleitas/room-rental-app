@@ -6,14 +6,14 @@ export const LinkGithubProject = styled.a`
 
 export const Container = styled.div`
   color: #e9e0e0ee;
-  background-color: #0f1111;
   padding-top: 15px;
   padding-bottom: 15px;
+  margin-top: 200px;
 `
 
 export const SubWrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(210px, 1000px);
+  grid-template-columns: minmax(210px, 950px);
   justify-content: center;
 `
 

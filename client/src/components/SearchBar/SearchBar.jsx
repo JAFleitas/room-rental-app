@@ -11,6 +11,10 @@ import {
   ButtonFilterShowMovil,
   ContainerButtons,
   ButtonFilterShow,
+  Article,
+  ImageContainer,
+  ImageSearch,
+  Section,
 } from "./styled"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -24,6 +28,7 @@ import Filters from "../Filters/Filters"
 import Sorters from "../Filters/Sorters"
 import FilterAltIcon from "@mui/icons-material/FilterAlt"
 
+import image1 from "../../assets/Background-images/bckgr01.jpg"
 function SearchBar() {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -57,7 +62,11 @@ function SearchBar() {
   }, [])
 
   return (
-    <div>
+    <Section>
+    <Article id="container">
+      <ImageContainer>
+        <ImageSearch src={image1}/>
+      </ImageContainer>
       <Container>
         <ContainerSearchBar>
           <Box>
@@ -67,41 +76,45 @@ function SearchBar() {
               onChange={handleChange}
               placeholder="Where?"></Input>
           </Box>
-          <Box>
-            <Label>Check in</Label>
-            <DatePicker
-              customInput={<Input />}
-              selected={startDate}
-              onChange={date => setStartDate(date)}
-            />
-          </Box>
-          <Box>
-            <Label>Check-Out</Label>
-            <DatePicker
-              customInput={<Input />}
-              selected={endDate}
-              onChange={date => setEndDate(date)}
-            />
-          </Box>
+          <div style={{display:"flex",gap:"8px" }}>
+            <Box>
+              <Label>Check in</Label>
+              <DatePicker
+                customInput={<Input />}
+                selected={startDate}
+                onChange={date => setStartDate(date)}
+              />
+            </Box>
+            <Box>
+              <Label>Check-Out</Label>
+              <DatePicker
+                customInput={<Input />}
+                selected={endDate}
+                onChange={date => setEndDate(date)}
+              />
+            </Box>
+          </div>
 
           <ContainerButtons>
             <SearchButton onClick={handleSearch} type="submit">
-              <FiSearch />
+              Search <FiSearch />
             </SearchButton>
-            <ButtonFilterShowMovil onClick={() => setOpenFilters(!openFilters)}>
+           {/*  <ButtonFilterShowMovil onClick={() => setOpenFilters(!openFilters)}>
               <FilterAltIcon />
               {openFilters ? "Close" : "Open"} filters
-            </ButtonFilterShowMovil>
+            </ButtonFilterShowMovil> */}
           </ContainerButtons>
         </ContainerSearchBar>
-        <ButtonFilterShow onClick={() => setOpenFilters(!openFilters)}>
+      </Container>
+      
+      {/*   <ButtonFilterShow onClick={() => setOpenFilters(!openFilters)}>
           <FilterAltIcon />
           {openFilters ? "Close" : "Open"} filters
         </ButtonFilterShow>
         {openFilters && <Filters />}
-      </Container>
-      <Sorters />
-    </div>
+      <Sorters /> */}
+    </Article>
+    </Section>
   )
 }
 

@@ -103,9 +103,9 @@ export default function Profile() {
               <Link to="/profile/account">
                 <MenuOption>Account</MenuOption>
               </Link>
-              <Link to="/profile/payment-methods">
+              {/* <Link to="/profile/payment-methods">
                 <MenuOption>Payment Methods</MenuOption>
-              </Link>
+              </Link> */}
               <Link to="/profile/myProperties">
                 <MenuOption>My properties</MenuOption>
               </Link>

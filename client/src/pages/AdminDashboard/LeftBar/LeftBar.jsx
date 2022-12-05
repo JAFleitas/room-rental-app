@@ -89,7 +89,7 @@ export default function LeftBar() {
           button
           onClick={() => {
             dispatch(actionLogout())
-            navigate("/home")
+            navigate("/")
           }}>
           <ListItemIcon>
             <LogoutIcon />

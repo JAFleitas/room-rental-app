@@ -4,56 +4,41 @@ import styled from "styled-components"
 export const PageContainer = styled.div`
   width: 100%;
   display: flex;
-
-  @media (max-width: 720px) {
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
+  gap:40px;
+  margin-top: 30px;
+  @media (max-width:720px) {
+   gap:20px 
+  } 
 `
 export const MenuContainer = styled.div`
   display: flex;
-  width: 300px;
-  height: fit-content;
-  margin-top: 4%;
-  margin-bottom: 5%;
-  margin-left: 5%;
+  width:25%;
   padding: 10px;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border: 1px solid #d822fc3f;
+  border: 1px solid #a455ff;
   border-radius: 15px;
   flex-direction: column;
   align-content: center;
 
   @media (max-width: 720px) {
-    width: 80%;
-    margin: 1rem;
+    width: 100%;
+  
   }
 `
 export const MenuOptions = styled.div`
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  
 `
 export const MenuOption = styled.h3`
   font-size: 1rem;
-  width: 50%;
-  color: black;
-  padding: 5px;
-  margin-bottom: 5px;
-  border-radius: 10px;
-  border-bottom: 2px solid #d0a6ff;
+  width: 100%;
+  padding: 4px;
+  text-align: center;
+  
   &:hover {
-    background-color: #d0a6ff;
-    border-bottom: 2px solid #be86ff;
-    transition: 500ms;
+   color:#a455ff
   }
 `
 
@@ -119,23 +104,28 @@ export const UserProperties = styled.div`
 `
 
 export const ContentPhoto = styled.div`
-  background-image: url(${props =>
+  background-image: ${props =>
     props.photo
-      ? props.photo
-      : "https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"});
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-  height: 200px;
-  width: 200px;
+      ? `url(${props.photo})`
+      : "url('https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg')"};
+ 
+  width:15vw;
+  height:15vw;
+  max-height: 200px;
+  max-width: 200px;
   border-radius: 50%;
   background-position: center;
   background-size: cover;
-  margin-left: 40px;
-  margin-right: 40px;
-
+  margin:3vw;
+  min-height:100px;
+  min-width:100px;
+  
   position: relative;
   /* left: 20px; */
+  @media screen and (min-width: 1280px) {
+    margin:38px
+  }
+ 
 `
 
 export const ChangeImage = styled.div`

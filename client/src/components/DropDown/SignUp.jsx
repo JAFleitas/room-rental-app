@@ -47,7 +47,7 @@ const SignUp = () => {
     } else {
       dispatch(postNewUser(signUpForm))
       dispatch(loadUser())
-      navigate("/home")
+      navigate("/")
     }
 
     //function handleLogin() {

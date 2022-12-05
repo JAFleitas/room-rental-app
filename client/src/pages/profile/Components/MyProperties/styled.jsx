@@ -1,85 +1,34 @@
 import styled from "styled-components"
 
-export const SubMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 65%;
-  margin-left: 5%;
-  margin-top: 4%;
-  margin-bottom: 4%;
-  padding: 10px;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border: 1px solid #d822fc3f;
-  border-radius: 15px;
-  height: fit-content;
-  @media (max-width: 720px) {
-    margin: 1rem;
-    width: 90%;
-  }
-`
-export const Title = styled.h1`
-  width: 70%;
-  align-self: center;
-  justify-self: center;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 2.5%;
-  margin-bottom: 2.5%;
-  font-size: 2.5rem;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
-  border-radius: 15px;
-  border: 2px #d0a6ff solid;
-  text-align: center;
-  margin: 0 auto;
-`
+
+
 
 export const CardContainer = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  border-radius: 15px;
-  /* border: 2px #d0a6ff solid; */
-  margin-top: 2%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap:40px;
+  height: 600px;
+  max-width: 800px;
+  padding: 0px 10px;
 `
 
 export const RedButton = styled.button`
-  color: #ffffff;
+  
   justify-self: center;
   align-self: center;
   text-justify: center;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  box-shadow: rgba(27, 31, 36, 0.1);
-  width: 30%;
-  min-height: 30px;
+  border-radius: 6px;
   background-color: #cf222e;
   font-size: large;
   font-weight: normal;
   font-family: sans-serif;
-  margin: 1rem 0;
-
   transition: 0.2s;
-
+  padding: 8px;
   &:hover {
-    background-color: #ffffff;
-    color: #cf222e;
+    background-color:#69151b;;
+   
   }
 `
 export const WhiteButton = styled.button`
@@ -109,27 +58,36 @@ export const WhiteButton = styled.button`
 `
 
 export const Card = styled.div`
-  width: 90%;
-  border-radius: 15px;
-  margin-top: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #d722fc;
+  gap:12px;
+  
+  
 `
 export const ContainerButtons = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 90%;
-  &button {
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 270px;
+  gap:16px;
+  button {
     width: 100%;
   }
 `
 export const EditButton = styled(RedButton)`
-  background: #00bb2d;
-  &:hover {
-    background: #00bb2daa;
-    color: #fff;
+  
+  padding: 5px;
+  
+  cursor: pointer;
+  border-radius: 5px;
+  background:  linear-gradient(45deg,#a455ffb0 60% ,#c99affb2) ;
+ 
+  padding: 8px 20px;
+  transition: all .5s ease-in-out;
+  
+  :hover {
+    background: linear-gradient(45deg,#a455ff 60% ,#c99aff) ;
   }
 `

@@ -1,38 +1,33 @@
 import styled from "styled-components"
 
-export const Container = styled.button`
+export const Container = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: right;
   align-items: center;
   height: 20px;
   width: 80px;
   min-width: 80px;
   min-height: 40px;
-  margin-top: 1vh;
-  margin-left: 1vw;
-  padding: 4px;
+  
   z-index: 150;
-  margin-right: 20px;
+ 
 
-  border: 1px solid #d822fc3f;
-  border-radius: 21px;
-  background: #e2c8ff;
+  border:none;
+
+
   svg {
-    color: #000000;
+     color: #e9e0e0ee;
   }
   transition: all 1s;
   &:hover {
-    /* border-radius: 21px;
-    background: #be86ff; */
-    background-color: #eea0fe;
-    transition: background-color 1s;
+   svg{
+    color:#f0f0f0
+   }
   }
 
   &:active {
     border-radius: 21px;
-    /* background: #be4eff;
-    box-shadow: inset 6px 6px 12px #8d3abd, inset -6px -6px 12px #ef62ff; */
-    background: #eea0fe;
+    
     box-shadow: inset 5px 5px 10px #d18de0, inset -5px -5px 10px #ffb3ff;
   }
 `

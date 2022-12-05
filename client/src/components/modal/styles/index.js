@@ -12,7 +12,6 @@ export const Overlay = styled.div`
   display: flex;
   align-items: ${({ positionModalY }) => positionModalY ?? "center"};
   justify-content: ${({ positionModalX }) => positionModalX ?? "center"};
-
   z-index: 200;
 `
 
@@ -20,13 +19,13 @@ export const ContainerModal = styled.div`
   width: ${({ width }) => width ?? "500px"};
   min-height: 100px;
   max-height: 90vh;
-  background: #fff;
+  background: #001010;
   position: relative;
   border-radius: 10px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: ${({ padding }) => padding ?? "20px"};
+  
+  padding: ${({ padding }) => padding ?? "60px"};
   overflow: auto;
-
+  
   @media screen and (max-width: 740px) {
     ::-webkit-scrollbar {
       display: none;

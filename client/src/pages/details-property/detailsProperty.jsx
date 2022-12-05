@@ -58,7 +58,7 @@ export default function Details() {
     <ContainerPageDetails>
       <ContainerMapAndTitle>
         <DescriptionContainer>
-          <BotonBack onClick={() => navigate("/home")}>
+          <BotonBack onClick={() => navigate("/")}>
             <button>
               <IoChevronBackSharp />
             </button>
