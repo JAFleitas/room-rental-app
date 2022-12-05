@@ -7,7 +7,7 @@ export const ContainerMapAndTitle = styled.div`
   padding-top: 10px;
   z-index: 1;
   width:100%;
-  @media screen and (max-width: 550px) {
+  @media screen and (max-width: 580px) {
     flex-direction: column;
     align-items: center;
   }

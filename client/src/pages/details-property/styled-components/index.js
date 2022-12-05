@@ -73,7 +73,7 @@ export const AiFillStarSt = styled(AiFillStar)`
   
 `
 export const BotonBack = styled.div`
-  width: 30%;
+  width: 100%;
   padding: 5px;
   align-self: center;
 
@@ -103,7 +103,7 @@ export const ServicesSt = styled.div`
   color:  #a455ff;
   justify-content: center;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 700;
   
   
   
