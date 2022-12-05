@@ -31,20 +31,7 @@ function AllPropertyCard() {
             />
           )
         })}
-        {
-          [1,2,3,4,5,6,7,8,9,0,10,11,12,14,15].map((e,i)=><PropertyCard
-              id={1}
-              key={i}
-              name={"probando"}
-              location={"probando"}
-              price={15}
-              numberOfRooms={2}
-              maxNumberOfPeople={5}
-              description={"probandoprobandoprobandoprobandoprobandoprobandoprobandoprobandoprobandoprobando"}
-              rating={5}
-              image={[img1,img2,img3,img4]}
-            />)
-        }
+       
     </Card>
   )
 }

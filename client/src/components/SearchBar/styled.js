@@ -68,6 +68,7 @@ export const Container = styled.div`
      box-shadow: none;
      background: transparent;
      width: 100%;
+     margin-bottom:400px;
     }
  
 `

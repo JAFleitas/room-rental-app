@@ -46,7 +46,7 @@ export const Info = styled.h3`
   padding: 4px 20px;
   border: 1px solid #a455ff;
   border-radius:6px;
-  width: 160px;
+  width: 300px;
   overflow: hidden;
 
   input {
@@ -63,6 +63,9 @@ export const Info = styled.h3`
       text-align:center;
     }
     text-align: center;
+  }
+  @media (max-width: 760px){
+    width: 170px;
   }
  
 `

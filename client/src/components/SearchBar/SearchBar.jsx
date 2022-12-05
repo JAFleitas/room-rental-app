@@ -117,7 +117,7 @@ function SearchBar() {
         </ButtonFilterShow>
         {openFilters && <Filters />}
       <Sorters /> */}
-      <h2 ref={search}>ALL PROPERTIES:</h2>
+      <h2 ref={search} id="property">ALL PROPERTIES:</h2>
       {searched.length>0 && <h3 style={{fontSize:"16px",fontWeight:"600",color:"#9238fa"}} > search result with "{searched}"</h3>}
     </Article>
     </Section>

@@ -23,7 +23,7 @@ export const Container = styled.div`
     cursor: pointer;
   }
   @media screen and (max-width:624px) {
-    width: 280px;
+    width: 330px;
     
   }
  
