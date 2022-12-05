@@ -154,6 +154,18 @@ export const Article = styled.section`
  width: 100%;
  align-items: flex-start;
  justify-content: center;
+ h2{
+   text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: #6f5fcacc;
+    padding-bottom: 10px;
+    color:transparent;
+    background: #ccc;
+    background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+ }
  @media screen and (max-width: 768px){
   align-items: center;
     }
