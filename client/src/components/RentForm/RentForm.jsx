@@ -10,7 +10,6 @@ import {
   FormSelect,
   FormLabel,
   SubmitButton,
-  
 } from "./styled"
 
 import { DayPicker } from "react-day-picker"
@@ -132,10 +131,11 @@ export default function RentForm(props) {
   return (
     <Container>
       <Header>
-        <Price>{props.price ? props.price : "185"}$</Price>
+        <Price>{props.price ? `${props.price} $` : ""}</Price>
         <Stars>
           <IconStar />
-          {`${props.rating}.0 `}
+          {props.rating}
+          {props.rating % 1 === 0 ? ".0" : null}
         </Stars>
       </Header>
       <Form>
@@ -168,7 +168,6 @@ export default function RentForm(props) {
 
             <DayPicker
               defaultMonth={new Date()}
-              
               numberOfMonths={monthsInCalendary}
               mode="range"
               selected={dates}
@@ -189,9 +188,6 @@ export default function RentForm(props) {
               modifiersClassNames={{
                 selected: styles.Selectable,
                 today: styles.today,
-                
-                
-                
               }}
             />
             <div

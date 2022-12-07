@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { ErrorAlert, SuccessAlert, WarningAlert } from "../../utilities/alerts"
 import styles from "../ForgotPassword/styles.module.css"
 const api = import.meta.env.VITE_APP_API_URL
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from "react-toastify"
 
 const initialForm = {
   email: "",
@@ -49,7 +49,7 @@ const Help = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Help</h2>
+      <h1 className={styles.title}>Help</h1>
       <p>
         If you have a problem with our application and you cannot solve it on
         your own, you can contact our support. We will be happy to help you

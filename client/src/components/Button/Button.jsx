@@ -18,7 +18,7 @@ export default function Button() {
   }
 
   return (
-    <Container border={user ? true : false} onClick={handleClick}>
+    <Container onClick={handleClick}>
       {user ? (
         <ImageContainer>
           <ProfileImage src={user && user.picture} />

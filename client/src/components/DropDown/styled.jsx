@@ -7,7 +7,7 @@ export const DropDownMenu = styled.div`
   right: -2vw;
   width: 300px;
   transform: translateX(-45%);
-  background: linear-gradient(145deg, #101020, #101010);
+  background: linear-gradient(145deg, #100020, #101010);
   border-radius: 17px;
   padding: 1rem;
   overflow: hidden;

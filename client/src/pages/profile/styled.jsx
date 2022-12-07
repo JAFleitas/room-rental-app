@@ -4,15 +4,15 @@ import styled from "styled-components"
 export const PageContainer = styled.div`
   width: 100%;
   display: flex;
-  gap:40px;
+  gap: 40px;
   margin-top: 30px;
-  @media (max-width:720px) {
-   gap:20px 
-  } 
+  @media (max-width: 720px) {
+    gap: 20px;
+  }
 `
 export const MenuContainer = styled.div`
   display: flex;
-  width:25%;
+  width: 25%;
   padding: 10px;
   border: 1px solid #a455ff;
   border-radius: 15px;
@@ -22,26 +22,27 @@ export const MenuContainer = styled.div`
 
   @media (max-width: 720px) {
     width: 170px;
-  
   }
 `
 export const MenuOptions = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap:20px;
-  
+  gap: 20px;
 `
 export const MenuOption = styled.h3`
   font-size: 1rem;
   width: 100%;
   padding: 8px;
   text-align: center;
-  background: ${(props)=>props.clicked? "linear-gradient(45deg,#5b04be 60% ,#1a0038b1)":"transparent"};
-  transition: all .6s;
+  background: ${props =>
+    props.clicked
+      ? "linear-gradient(45deg,#5b04be 60% ,#1a0038b1)"
+      : "transparent"};
+  transition: all 0.6s;
   &:hover {
-   background:#a455ff;
-   background: linear-gradient(45deg,#5b04be 60% ,#1a0038b1);
+    background: #a455ff;
+    background: linear-gradient(45deg, #5b04be 60%, #1a0038b1);
   }
 `
 
@@ -111,24 +112,23 @@ export const ContentPhoto = styled.div`
     props.photo
       ? `url(${props.photo})`
       : "url('https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg')"};
- 
-  width:15vw;
-  height:15vw;
+
+  width: 15vw;
+  height: 15vw;
   max-height: 200px;
   max-width: 200px;
   border-radius: 50%;
   background-position: center;
   background-size: cover;
-  margin:3vw;
-  min-height:108px;
-  min-width:108px;
-  
+  margin: 3vw;
+  min-height: 108px;
+  min-width: 108px;
+
   position: relative;
   /* left: 20px; */
   @media screen and (min-width: 1280px) {
-    margin:38px
+    margin: 38px;
   }
- 
 `
 
 export const ChangeImage = styled.div`
@@ -165,14 +165,7 @@ export const NotLogIn = styled.div`
   height: 257.5px;
   margin: 20px;
   margin-left: 25%;
-  background: rgb(226, 200, 255);
-  background: linear-gradient(
-    330deg,
-    rgba(226, 200, 255, 1) 17%,
-    rgba(233, 213, 255, 1) 39%,
-    rgba(239, 226, 255, 1) 66%,
-    rgba(244, 235, 255, 1) 100%
-  );
+
   border-radius: 20px;
   display: flex;
   flex-direction: column;

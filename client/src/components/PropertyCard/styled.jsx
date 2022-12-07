@@ -5,28 +5,27 @@ export const Container = styled.div`
   flex-direction: column;
   width: ${({ width }) => width ?? "260px"};
 
-   h1, h2,div {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  h1,
+  h2,
+  div {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     color: #ddd;
-  } 
-  
+  }
+
   border-radius: 4px;
   align-items: center;
   justify-items: center;
- 
- 
 
   transition: all 0.2s ease-in-out;
   &:hover {
     transform: scale(1.05, 1.05);
- 
+
     cursor: pointer;
   }
-  @media screen and (max-width:624px) {
+  @media screen and (max-width: 624px) {
     width: 330px;
-    
   }
- 
 `
 
 export const FavoriteContainer = styled.div`
@@ -65,17 +64,16 @@ export const ImageContainer = styled.div`
   width: 100%;
   padding: 5px;
   border-radius: 16px;
-  div{
+  div {
     border-radius: 16px;
-  ul{
-    li{
-     .slick-active button::before{
-      color:#ddd
-     }
+    ul {
+      li {
+        .slick-active button::before {
+          color: #ddd;
+        }
+      }
     }
   }
-  }
-  
 `
 
 export const Image = styled.img`
@@ -94,11 +92,10 @@ export const Title = styled.h1`
   color: black;
   font-size: small;
   font-weight: bold;
-  
 `
 export const Info = styled.p`
   width: 100%;
-  color:#ddd;
+  color: #ddd;
   font-size: small;
   display: flex;
   align-items: center;
@@ -111,14 +108,11 @@ export const DivPyR = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-top: 6px;
- 
 `
 export const Price = styled.p`
-  font-size:20px;
+  font-size: 20px;
   font-size: 800;
   color: #a455ff;
-
-
 `
 export const PriceFavorite = styled.div`
   color: black;
@@ -135,7 +129,7 @@ export const Location = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 1.5rem;
-  gap:4px;
+  gap: 4px;
 `
 
 export const Rating = styled.div`
@@ -147,7 +141,6 @@ export const Rating = styled.div`
   align-items: center;
 `
 export const RatingNumber = styled.p`
-  
   font-size: 20px;
   text-align: center;
   margin-left: 5px;
@@ -155,7 +148,10 @@ export const RatingNumber = styled.p`
 `
 export const HeartContainer = styled.div`
   position: relative;
-  top:60px;
+  top: 60px;
   left: 100px;
   z-index: 1;
+  @media (max-width: 621px) {
+    left: 130px;
+  }
 `

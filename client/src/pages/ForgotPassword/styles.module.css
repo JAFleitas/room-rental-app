@@ -5,15 +5,20 @@
   max-width: 550px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: whitesmoke;
   border-radius: 15px;
+  gap: 20px;
 }
 
 .title {
-  color: #64075cdd;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 2.4rem;
   margin: 1rem auto;
+  font-weight: 800;
+  color: transparent;
+  background: #ccc;
+  background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .form {
@@ -22,28 +27,29 @@
 }
 
 .form button {
-  width: 90%;
-  background-color: #64075cdd;
-  color: white;
+  background-color: #a455ff;
   border-radius: 10px;
   align-self: center;
-  margin: 1rem;
-  height: 30px;
+  margin-top: 60px;
+  font-weight: 700;
+  padding: 10px;
 }
 
 .form label {
   margin-top: 1rem;
   font-size: 14px;
-  color: #64075cdd;
+  color: #a455ff;
   font-weight: bold;
 }
 
 .form input,
 .form textarea {
-  height: 35px;
-  border: 2px solid slategray;
+  margin-top: 10px;
   border-radius: 6px;
   padding: 5px;
+  background: transparent;
+  border: 1px solid #64075cdd;
+  outline: none;
 }
 
 .form textarea {

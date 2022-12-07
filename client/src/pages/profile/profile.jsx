@@ -1,4 +1,4 @@
-import {useLocation} from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import {
   PageContainer,
   MenuContainer,
@@ -97,25 +97,37 @@ export default function Profile() {
             </ContentPhoto>
             <MenuOptions>
               <Link to="/profile">
-                <MenuOption clicked={pathname==="/profile"} >My profile</MenuOption>
+                <MenuOption clicked={pathname === "/profile"}>
+                  My profile
+                </MenuOption>
               </Link>
               <Link to="/profile/settings">
-                <MenuOption clicked={pathname==="/profile/settings"} >Settings</MenuOption>
+                <MenuOption clicked={pathname === "/profile/settings"}>
+                  Settings
+                </MenuOption>
               </Link>
               <Link to="/profile/account">
-                <MenuOption clicked={pathname==="/profile/account"} >Account</MenuOption>
+                <MenuOption clicked={pathname === "/profile/account"}>
+                  Account
+                </MenuOption>
               </Link>
               {/* <Link to="/profile/payment-methods">
                 <MenuOption>Payment Methods</MenuOption>
               </Link> */}
               <Link to="/profile/myProperties">
-                <MenuOption clicked={pathname==="/profile/myProperties"}>My properties</MenuOption>
+                <MenuOption clicked={pathname === "/profile/myProperties"}>
+                  My properties
+                </MenuOption>
               </Link>
               <Link to="/profile/history">
-                <MenuOption clicked={pathname==="/profile/history"}>My history</MenuOption>
+                <MenuOption clicked={pathname === "/profile/history"}>
+                  My history
+                </MenuOption>
               </Link>
               <Link to="/profile/favorites">
-                <MenuOption clicked={pathname==="/profile/favorites"}>My favorites</MenuOption>
+                <MenuOption clicked={pathname === "/profile/favorites"}>
+                  My favorites
+                </MenuOption>
               </Link>
             </MenuOptions>
           </MenuContainer>

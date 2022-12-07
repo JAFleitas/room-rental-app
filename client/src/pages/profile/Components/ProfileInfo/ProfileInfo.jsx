@@ -90,19 +90,28 @@ export default function ProfileInfo() {
 
   return (
     <SubMenu>
-      <FullName>{dataUser.name ? `${dataUser.name} ${dataUser.lastname}` : "Name"}</FullName>
+      <FullName>
+        {dataUser.name ? `${dataUser.name} ${dataUser.lastname}` : "Name"}
+      </FullName>
       <InfoContainer>
-        <div style={{ display: "flex", justifyContent: "center",padding:"20px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "20px",
+          }}>
           {editStatus ? (
-            <div style={{display:"flex",gap:"10px"}}>
-              <ButtonEdit bgColor={false} onClick={sendDataEdit} >Save</ButtonEdit>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <ButtonEdit bgColor={false} onClick={sendDataEdit}>
+                Save
+              </ButtonEdit>
               <ButtonEdit bgColor={true} onClick={cancelEditData}>
                 Cancel
               </ButtonEdit>
             </div>
           ) : (
             <ButtonEdit
-            bgColor={false}
+              bgColor={false}
               onClick={() => {
                 setEditStatus(true)
               }}>

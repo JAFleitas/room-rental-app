@@ -1,28 +1,28 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import styles from "./styles.module.css";
-import { ToastContainer} from 'react-toastify';
+import axios from "axios"
+import React, { useState } from "react"
+import styles from "./styles.module.css"
+import { ToastContainer } from "react-toastify"
 import { WarningAlert, SuccessAlert, ErrorAlert } from "../../utilities/alerts"
 const api = import.meta.env.VITE_APP_API_URL
 
 const Forgotpassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("")
 
-  const handleChange = (e) => {
-    const {value} = e.target;
+  const handleChange = e => {
+    const { value } = e.target
 
-    setEmail(value);
+    setEmail(value)
   }
 
   const handleSubmit = async e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if(!email) return WarningAlert("Complete email field");
+    if (!email) return WarningAlert("Complete email field")
     try {
       await axios.post(`${api}/users/forgot-password`, {
         email,
       })
-      setEmail("");
+      setEmail("")
       SuccessAlert("Check your email")
     } catch (error) {
       ErrorAlert(
@@ -31,20 +31,19 @@ const Forgotpassword = () => {
           : error.response.data?.message) || "Something went wrong :(",
       )
     }
-
   }
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Did you forget your password?</h3>
       <p>Don't worry, we will send you a temporary password to your email.</p>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label>Email address</label>
+        <label>Email:</label>
         <input
           type="email"
           name="email"
           value={email}
           onChange={handleChange}
-          placeholder="Email address"
+          placeholder="Insert you email..."
         />
         <button>Reset password</button>
       </form>
@@ -53,4 +52,4 @@ const Forgotpassword = () => {
   )
 }
 
-export default Forgotpassword;
+export default Forgotpassword

@@ -65,7 +65,7 @@ body {
     display: flex;
     margin: auto;
     background: #dfdfdf;
-    background: linear-gradient(180deg,#101010,#000000);
+    background: linear-gradient(180deg,#100010 ,#000000);
 }
   
 `
@@ -76,6 +76,7 @@ export const Title = styled.h1`
   border-radius: 15px;
   border: 1px #a455ff solid;
   text-align: center;
+  font-weight: 800;
   color:transparent;
    background: #ccc;
    background: linear-gradient(90deg, #43048a, #b574ff, #43048a);
