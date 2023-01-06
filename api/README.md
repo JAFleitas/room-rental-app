@@ -90,6 +90,8 @@ Se puede realizar filtrados pasandole las siguientes queries:
    Que acepten de 3 a 4 personas: http://localhost:5000/api/properties/getProperties?maxpeople=4&minpeople=3
 
 
-Se pueden combinar todas las querys para lograr una búsqueda más compleja, sin embargo, si se coloca por ejemplo la query attributes y exclude en la misma consulta, se ignorará la segunda, solo se puede usar una de esas querys en la misma consulta.
+Se pueden combinar todas las querys para lograr una búsqueda más compleja, sin embargo, si se coloca por ejemplo la query attributes y exclude en la misma consulta,
+
+se ignorará la segunda, solo se puede usar una de esas querys en la misma consulta.
 
 http://localhost:5000/api/properties/getProperties?maxpeople=4&minpeople=3&attributes=name%20id%20price%20rating&orderBy=rating&location=ecuad
